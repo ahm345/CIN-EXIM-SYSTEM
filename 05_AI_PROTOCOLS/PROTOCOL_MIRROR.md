@@ -1,6 +1,6 @@
 # SYS-009 Protokol Yansıması
 
-> **Bu dosya bir yansımadır, kaynak değildir.** Protokolün tek kaynağı Baserow `SYS-009` (`AI-BOOT-EXIT-001`) kaydıdır. Çelişki olursa SYS-009 geçerlidir. Yansıma, canlı SYS-009 kaydından **2026-11-06** tarihinde (protokol sürümü **1.4**, son gözden geçirme 2026-11-05) salt okunur okunarak çıkarılmıştır. Sürüm değiştiyse bu dosya eskidir: SYS-009'u oku ve bu dosyayı güncelle.
+> **Bu dosya bir yansımadır, kaynak değildir.** Protokolün tek kaynağı Baserow `SYS-009` (`AI-BOOT-EXIT-001`) kaydıdır. Çelişki olursa SYS-009 geçerlidir. Yansıma, canlı SYS-009 kaydından çıkarılmıştır (v1.4 çıkarımı 2026-11-06 salt okunur; **v1.5 eki 2026-11-06 aynı gün SYS-009'a yazıldı, SYS-004 `CHG-SYS-013`**). Güncel protokol sürümü **1.5**. Sürüm değiştiyse bu dosya eskidir: SYS-009'u oku ve bu dosyayı güncelle.
 
 **Protokol adı:** CIN EXIM AI Giriş, Çalışma, Kayıt ve Devir Protokolü  
 **Durum (kayıttaki):** Kullanıcı onayladı – Baserow'a uygulandı; platformlar arası test bekliyor
@@ -59,3 +59,9 @@ SYS-009 → SYS-001 → SYS-010 (en son oturum/devir) → SYS-008 → SYS-005 �
 ## SYS-001'deki başlangıç talimatı (özet)
 
 SYS-001 `AI Başlangıç Talimatı` alanı SYS-009'u tek kaynak olarak işaret eder; çalışma döngüsü **ANALİZ → BULGULAR → ÖNERİ → KULLANICI ONAYI → UYGULAMA → TEST → SYS KAYDI**. Canlı Baserow şeması geçmiş raporlara göre önceliklidir.
+
+## v1.5 eki — Eksik bilgi: toplu soru kuralı
+
+Belge, rapor, model veya başka bir çıktı üretmeden önce AI eksik bilgilerin **tamamını tek seferde, tek listede** sorar; parça parça sormaz. Liste üç gruba ayrılır: **(A)** yalnızca kullanıcının bilebileceği, **(B)** kullanıcının dış kaynaktan (ör. Perplexity) bulabileceği — bunlar için hazır araştırma promptu yazılır, **(C)** AI'nın kayıtlardan kendisinin bulabileceği — sorulmaz. Cevaplanmayan bilgi uydurulmaz; çıktıda `Bilinmiyor / Doğrulanmadı` yazılır. Ayrıntı ve şablon: `INFO_GAP_PROTOCOL.md`.
+
+> Not: Baserow SYS-009 `Girişte Zorunlu Adımlar` alanı hâlâ "v1.4'ü oku" diyor (güncellenmedi, kullanıcıya bildirildi).
