@@ -1,0 +1,1230 @@
+{
+ "edges": [
+  {
+   "from": "Bakım ve Yedek Parça.Bakım Kontrolü",
+   "to": "Bakım ve Yedek Parça.Durum",
+   "kind": "field"
+  },
+  {
+   "from": "Bakım ve Yedek Parça.Bakım Kontrolü",
+   "to": "Bakım ve Yedek Parça.Makine",
+   "kind": "field"
+  },
+  {
+   "from": "Bakım ve Yedek Parça.Bakım Kontrolü",
+   "to": "Bakım ve Yedek Parça.Tarih",
+   "kind": "field"
+  },
+  {
+   "from": "Bakım ve Yedek Parça.Bakım Kontrolü",
+   "to": "Bakım ve Yedek Parça.Toplam USD",
+   "kind": "field"
+  },
+  {
+   "from": "Bakım ve Yedek Parça.Toplam USD",
+   "to": "Bakım ve Yedek Parça.Birim Maliyet USD",
+   "kind": "field"
+  },
+  {
+   "from": "Bakım ve Yedek Parça.Toplam USD",
+   "to": "Bakım ve Yedek Parça.Miktar",
+   "kind": "field"
+  },
+  {
+   "from": "Belgeler.Dosya Kontrolü",
+   "to": "Belgeler.Dosya",
+   "kind": "field"
+  },
+  {
+   "from": "Belgeler.Dosya Kontrolü",
+   "to": "Belgeler.Durum",
+   "kind": "field"
+  },
+  {
+   "from": "Belgeler.Gerekli Eksik",
+   "to": "Belgeler.Dosya",
+   "kind": "field"
+  },
+  {
+   "from": "Belgeler.Gerekli Eksik",
+   "to": "Belgeler.Durum",
+   "kind": "field"
+  },
+  {
+   "from": "Belgeler.Gerekli Eksik",
+   "to": "Belgeler.Geçerli mi",
+   "kind": "field"
+  },
+  {
+   "from": "Belgeler.Gerekli Sayı",
+   "to": "Belgeler.Geçerli mi",
+   "kind": "field"
+  },
+  {
+   "from": "Belgeler.Gerekli Tamam",
+   "to": "Belgeler.Dosya",
+   "kind": "field"
+  },
+  {
+   "from": "Belgeler.Gerekli Tamam",
+   "to": "Belgeler.Durum",
+   "kind": "field"
+  },
+  {
+   "from": "Belgeler.Gerekli Tamam",
+   "to": "Belgeler.Geçerli mi",
+   "kind": "field"
+  },
+  {
+   "from": "Belgeler.Geçerli mi",
+   "to": "Belgeler.Geçerli Incoterm",
+   "kind": "field"
+  },
+  {
+   "from": "Belgeler.Geçerli mi",
+   "to": "Belgeler.Geçerli Çıkış Modeli",
+   "kind": "field"
+  },
+  {
+   "from": "Belgeler.Geçerli mi",
+   "to": "Belgeler.Geçerli Ödeme Yöntemi",
+   "kind": "field"
+  },
+  {
+   "from": "Belgeler.Geçerli mi",
+   "to": "Belgeler.Proje Incoterm",
+   "kind": "field"
+  },
+  {
+   "from": "Belgeler.Geçerli mi",
+   "to": "Belgeler.Proje Çıkış Modeli",
+   "kind": "field"
+  },
+  {
+   "from": "Belgeler.Geçerli mi",
+   "to": "Belgeler.Proje Ödeme Yöntemi",
+   "kind": "field"
+  },
+  {
+   "from": "Ekipman Lotları.Lot Operasyon Kontrolü",
+   "to": "Ekipman Lotları.Proje",
+   "kind": "field"
+  },
+  {
+   "from": "Ekipman Lotları.Lot Operasyon Kontrolü",
+   "to": "Ekipman Lotları.Tedarikçi",
+   "kind": "field"
+  },
+  {
+   "from": "Ekipman Lotları.Lot Operasyon Kontrolü",
+   "to": "Ekipman Lotları.Teslim Tarihi",
+   "kind": "field"
+  },
+  {
+   "from": "Ekipman Lotları.Lot Operasyon Kontrolü",
+   "to": "Ekipman Lotları.İmalat ve Tedarik",
+   "kind": "field"
+  },
+  {
+   "from": "Ekipman Lotları.Lot Operasyon Kontrolü",
+   "to": "Ekipman Lotları.İpotek Tescil Edildi",
+   "kind": "field"
+  },
+  {
+   "from": "Ekipman Lotları.Toplam USD",
+   "to": "Ekipman Lotları.Adet",
+   "kind": "field"
+  },
+  {
+   "from": "Ekipman Lotları.Toplam USD",
+   "to": "Ekipman Lotları.Birim Fiyat USD",
+   "kind": "field"
+  },
+  {
+   "from": "Gelir Gider Dengesi.Borç Servisi USD",
+   "to": "Gelir Gider Dengesi.Geri Ödeme Satırları",
+   "kind": "field"
+  },
+  {
+   "from": "Gelir Gider Dengesi.Borç Servisi USD",
+   "to": "Gelir Gider Dengesi.Geri Ödeme Satırları",
+   "kind": "link"
+  },
+  {
+   "from": "Gelir Gider Dengesi.Borç Servisi USD",
+   "to": "Gelir Gider Dengesi.Kredi Taksiti USD (elle, plan yoksa)",
+   "kind": "field"
+  },
+  {
+   "from": "Gelir Gider Dengesi.Borç Servisi USD",
+   "to": "Geri Ödeme Planı.Taksit USD",
+   "kind": "lookup"
+  },
+  {
+   "from": "Gelir Gider Dengesi.CFADS USD",
+   "to": "Gelir Gider Dengesi.SPC Net USD",
+   "kind": "field"
+  },
+  {
+   "from": "Gelir Gider Dengesi.CFADS USD",
+   "to": "Gelir Gider Dengesi.SPC İşletme Gideri USD",
+   "kind": "field"
+  },
+  {
+   "from": "Gelir Gider Dengesi.DSCR",
+   "to": "Gelir Gider Dengesi.Borç Servisi USD",
+   "kind": "field"
+  },
+  {
+   "from": "Gelir Gider Dengesi.DSCR",
+   "to": "Gelir Gider Dengesi.CFADS USD",
+   "kind": "field"
+  },
+  {
+   "from": "Gelir Gider Dengesi.DSCR",
+   "to": "Gelir Gider Dengesi.Dönem",
+   "kind": "field"
+  },
+  {
+   "from": "Gelir Gider Dengesi.Net Nakit USD",
+   "to": "Gelir Gider Dengesi.Borç Servisi USD",
+   "kind": "field"
+  },
+  {
+   "from": "Gelir Gider Dengesi.Net Nakit USD",
+   "to": "Gelir Gider Dengesi.CFADS USD",
+   "kind": "field"
+  },
+  {
+   "from": "Gelir Gider Dengesi.SPC Net USD",
+   "to": "Gelir Gider Dengesi.Stopaj USD",
+   "kind": "field"
+  },
+  {
+   "from": "Gelir Gider Dengesi.SPC Net USD",
+   "to": "Gelir Gider Dengesi.TOO SPC Ödemesi",
+   "kind": "field"
+  },
+  {
+   "from": "Gelir Gider Dengesi.Stopaj USD",
+   "to": "Gelir Gider Dengesi.Stopaj Oranı",
+   "kind": "field"
+  },
+  {
+   "from": "Gelir Gider Dengesi.Stopaj USD",
+   "to": "Gelir Gider Dengesi.TOO SPC Ödemesi",
+   "kind": "field"
+  },
+  {
+   "from": "Gelir Gider Dengesi.TOO Net Ödeme Gücü USD",
+   "to": "Gelir Gider Dengesi.TOO Operasyon Gideri",
+   "kind": "field"
+  },
+  {
+   "from": "Gelir Gider Dengesi.TOO Net Ödeme Gücü USD",
+   "to": "Gelir Gider Dengesi.TOO SPC Ödemesi",
+   "kind": "field"
+  },
+  {
+   "from": "Gelir Gider Dengesi.TOO Net Ödeme Gücü USD",
+   "to": "Gelir Gider Dengesi.ÖMG Hizmet Geliri",
+   "kind": "field"
+  },
+  {
+   "from": "Gelir Gider Dengesi.Uyarı",
+   "to": "Gelir Gider Dengesi.Borç Servisi USD",
+   "kind": "field"
+  },
+  {
+   "from": "Gelir Gider Dengesi.Uyarı",
+   "to": "Gelir Gider Dengesi.DSCR",
+   "kind": "field"
+  },
+  {
+   "from": "Gelir Gider Dengesi.Uyarı",
+   "to": "Gelir Gider Dengesi.Dönem",
+   "kind": "field"
+  },
+  {
+   "from": "Geri Ödeme Planı.Taksit USD",
+   "to": "Geri Ödeme Planı.Anapara USD",
+   "kind": "field"
+  },
+  {
+   "from": "Geri Ödeme Planı.Taksit USD",
+   "to": "Geri Ödeme Planı.Faiz USD",
+   "kind": "field"
+  },
+  {
+   "from": "Giderler ve Vergiler.USD Karşılığı",
+   "to": "Giderler ve Vergiler.Kur Çarpanı (USD)",
+   "kind": "field"
+  },
+  {
+   "from": "Giderler ve Vergiler.USD Karşılığı",
+   "to": "Giderler ve Vergiler.Para Birimi",
+   "kind": "field"
+  },
+  {
+   "from": "Giderler ve Vergiler.USD Karşılığı",
+   "to": "Giderler ve Vergiler.Tutar",
+   "kind": "field"
+  },
+  {
+   "from": "Gümrük İşlemleri.KDV Maliyeti USD",
+   "to": "Gümrük İşlemleri.Net KDV Tahakkuk USD",
+   "kind": "field"
+  },
+  {
+   "from": "Gümrük İşlemleri.KDV Maliyeti USD",
+   "to": "Gümrük İşlemleri.İndirilebilir KDV USD",
+   "kind": "field"
+  },
+  {
+   "from": "Gümrük İşlemleri.KDV USD",
+   "to": "Gümrük İşlemleri.Net KDV Tahakkuk USD",
+   "kind": "field"
+  },
+  {
+   "from": "Gümrük İşlemleri.Net Gümrük Vergisi USD",
+   "to": "Gümrük İşlemleri.Gümrük Vergisi Muafiyet USD",
+   "kind": "field"
+  },
+  {
+   "from": "Gümrük İşlemleri.Net Gümrük Vergisi USD",
+   "to": "Gümrük İşlemleri.Gümrük Vergisi USD",
+   "kind": "field"
+  },
+  {
+   "from": "Gümrük İşlemleri.Net KDV Matrahı USD",
+   "to": "Gümrük İşlemleri.Gümrük Matrahı USD",
+   "kind": "field"
+  },
+  {
+   "from": "Gümrük İşlemleri.Net KDV Matrahı USD",
+   "to": "Gümrük İşlemleri.Net Gümrük Vergisi USD",
+   "kind": "field"
+  },
+  {
+   "from": "Gümrük İşlemleri.Net KDV Tahakkuk USD",
+   "to": "Gümrük İşlemleri.KDV Muafiyet USD",
+   "kind": "field"
+  },
+  {
+   "from": "Gümrük İşlemleri.Net KDV Tahakkuk USD",
+   "to": "Gümrük İşlemleri.KDV Oranı",
+   "kind": "field"
+  },
+  {
+   "from": "Gümrük İşlemleri.Net KDV Tahakkuk USD",
+   "to": "Gümrük İşlemleri.Net KDV Matrahı USD",
+   "kind": "field"
+  },
+  {
+   "from": "Gümrük İşlemleri.Net Vergi USD",
+   "to": "Gümrük İşlemleri.Net Gümrük Vergisi USD",
+   "kind": "field"
+  },
+  {
+   "from": "Gümrük İşlemleri.Net Vergi USD",
+   "to": "Gümrük İşlemleri.Net KDV Tahakkuk USD",
+   "kind": "field"
+  },
+  {
+   "from": "Gümrük İşlemleri.Toplam Vergi USD",
+   "to": "Gümrük İşlemleri.Net Vergi USD",
+   "kind": "field"
+  },
+  {
+   "from": "Hizmet Kayıtları.Tutar USD",
+   "to": "Hizmet Kayıtları.Birim Ücret USD",
+   "kind": "field"
+  },
+  {
+   "from": "Hizmet Kayıtları.Tutar USD",
+   "to": "Hizmet Kayıtları.Saat veya Km",
+   "kind": "field"
+  },
+  {
+   "from": "Kira ve Tahsilat Planı.Borç Servisi USD",
+   "to": "Geri Ödeme Planı.Taksit USD",
+   "kind": "lookup"
+  },
+  {
+   "from": "Kira ve Tahsilat Planı.Borç Servisi USD",
+   "to": "Kira ve Tahsilat Planı.Geri Ödeme Dönemleri",
+   "kind": "link"
+  },
+  {
+   "from": "Kira ve Tahsilat Planı.CFADS USD",
+   "to": "Kira ve Tahsilat Planı.SPC İşletme Gideri USD",
+   "kind": "field"
+  },
+  {
+   "from": "Kira ve Tahsilat Planı.DSCR",
+   "to": "Kira ve Tahsilat Planı.Borç Servisi USD",
+   "kind": "field"
+  },
+  {
+   "from": "Kira ve Tahsilat Planı.DSCR",
+   "to": "Kira ve Tahsilat Planı.CFADS USD",
+   "kind": "field"
+  },
+  {
+   "from": "Kira ve Tahsilat Planı.DSCR Uyarısı",
+   "to": "Kira ve Tahsilat Planı.Borç Servisi USD",
+   "kind": "field"
+  },
+  {
+   "from": "Kira ve Tahsilat Planı.DSCR Uyarısı",
+   "to": "Kira ve Tahsilat Planı.DSCR",
+   "kind": "field"
+  },
+  {
+   "from": "Kira ve Tahsilat Planı.Kalan USD",
+   "to": "Kira ve Tahsilat Planı.SPC Kira Payı USD",
+   "kind": "field"
+  },
+  {
+   "from": "Kira ve Tahsilat Planı.Kalan USD",
+   "to": "Kira ve Tahsilat Planı.Tahsil Edilen USD",
+   "kind": "field"
+  },
+  {
+   "from": "Kira ve Tahsilat Planı.Net SPC'ye USD",
+   "to": "Kira ve Tahsilat Planı.SPC Kira Payı USD",
+   "kind": "field"
+  },
+  {
+   "from": "Kira ve Tahsilat Planı.Net SPC'ye USD",
+   "to": "Kira ve Tahsilat Planı.Stopaj USD",
+   "kind": "field"
+  },
+  {
+   "from": "Kira ve Tahsilat Planı.Stopaj USD",
+   "to": "Kira ve Tahsilat Planı.Proje",
+   "kind": "link"
+  },
+  {
+   "from": "Kira ve Tahsilat Planı.Stopaj USD",
+   "to": "Kira ve Tahsilat Planı.SPC Kira Payı USD",
+   "kind": "field"
+  },
+  {
+   "from": "Kira ve Tahsilat Planı.Stopaj USD",
+   "to": "Projeler.Etkin Stopaj Oranı",
+   "kind": "lookup"
+  },
+  {
+   "from": "Krediler.Anapara Mutabakatı",
+   "to": "Krediler.Planlanan Anapara Toplamı USD",
+   "kind": "field"
+  },
+  {
+   "from": "Krediler.Anapara Mutabakatı",
+   "to": "Krediler.Tutar USD",
+   "kind": "field"
+  },
+  {
+   "from": "Krediler.Belge Sayısı",
+   "to": "Krediler.Belgeler",
+   "kind": "field"
+  },
+  {
+   "from": "Krediler.Eksik Belge",
+   "to": "Belgeler.Durum",
+   "kind": "lookup"
+  },
+  {
+   "from": "Krediler.Eksik Belge",
+   "to": "Krediler.Belgeler",
+   "kind": "link"
+  },
+  {
+   "from": "Krediler.Nakit Rehni USD",
+   "to": "Krediler.Teminatlar",
+   "kind": "link"
+  },
+  {
+   "from": "Krediler.Nakit Rehni USD",
+   "to": "Teminatlar.Tutar USD",
+   "kind": "lookup"
+  },
+  {
+   "from": "Krediler.Nakit Rehni USD",
+   "to": "Teminatlar.Tür",
+   "kind": "lookup"
+  },
+  {
+   "from": "Krediler.Planlanan Anapara Toplamı USD",
+   "to": "Geri Ödeme Planı.Anapara USD",
+   "kind": "lookup"
+  },
+  {
+   "from": "Krediler.Planlanan Anapara Toplamı USD",
+   "to": "Krediler.Geri Ödeme Planı",
+   "kind": "link"
+  },
+  {
+   "from": "Krediler.Planlanan Faiz Toplamı USD",
+   "to": "Geri Ödeme Planı.Faiz USD",
+   "kind": "lookup"
+  },
+  {
+   "from": "Krediler.Planlanan Faiz Toplamı USD",
+   "to": "Krediler.Geri Ödeme Planı",
+   "kind": "link"
+  },
+  {
+   "from": "Krediler.Planlanan Toplam Borç Servisi USD",
+   "to": "Geri Ödeme Planı.Taksit USD",
+   "kind": "lookup"
+  },
+  {
+   "from": "Krediler.Planlanan Toplam Borç Servisi USD",
+   "to": "Krediler.Geri Ödeme Planı",
+   "kind": "link"
+  },
+  {
+   "from": "Krediler.Teminat Sayısı",
+   "to": "Krediler.Teminatlar",
+   "kind": "field"
+  },
+  {
+   "from": "Krediler.İpotek / Kredi Oranı",
+   "to": "Krediler.Tutar USD",
+   "kind": "field"
+  },
+  {
+   "from": "Krediler.İpotek / Kredi Oranı",
+   "to": "Krediler.İpotek Teminatı USD",
+   "kind": "field"
+  },
+  {
+   "from": "Krediler.İpotek Teminatı USD",
+   "to": "Krediler.Teminatlar",
+   "kind": "link"
+  },
+  {
+   "from": "Krediler.İpotek Teminatı USD",
+   "to": "Teminatlar.Tutar USD",
+   "kind": "lookup"
+  },
+  {
+   "from": "Krediler.İpotek Teminatı USD",
+   "to": "Teminatlar.Tür",
+   "kind": "lookup"
+  },
+  {
+   "from": "Makineler.Aktif Tahsis Sayısı",
+   "to": "Makineler.Tahsisler",
+   "kind": "link"
+  },
+  {
+   "from": "Makineler.Aktif Tahsis Sayısı",
+   "to": "Tahsisler.Durum",
+   "kind": "lookup"
+  },
+  {
+   "from": "Makineler.Geçerli Sigorta Sayısı",
+   "to": "Makineler.Sigortalar",
+   "kind": "link"
+  },
+  {
+   "from": "Makineler.Geçerli Sigorta Sayısı",
+   "to": "Sigortalar.Durum",
+   "kind": "lookup"
+  },
+  {
+   "from": "Makineler.Operasyon Kontrolü",
+   "to": "Makineler.Aktif Tahsis Sayısı",
+   "kind": "field"
+  },
+  {
+   "from": "Makineler.Operasyon Kontrolü",
+   "to": "Makineler.Fiili Kullanıcı",
+   "kind": "field"
+  },
+  {
+   "from": "Makineler.Operasyon Kontrolü",
+   "to": "Makineler.Geçerli Sigorta Sayısı",
+   "kind": "field"
+  },
+  {
+   "from": "Makineler.Operasyon Kontrolü",
+   "to": "Makineler.Hukuki Malik",
+   "kind": "field"
+  },
+  {
+   "from": "Makineler.Varlık Yaşam Döngüsü Kontrolü",
+   "to": "Makineler.Geri Alma Aşaması",
+   "kind": "field"
+  },
+  {
+   "from": "Makineler.Varlık Yaşam Döngüsü Kontrolü",
+   "to": "Makineler.Geri Alma Sonrası Durum",
+   "kind": "field"
+  },
+  {
+   "from": "Makineler.Varlık Yaşam Döngüsü Kontrolü",
+   "to": "Makineler.Geri Alma Teslim Belgesi",
+   "kind": "field"
+  },
+  {
+   "from": "Makineler.Varlık Yaşam Döngüsü Kontrolü",
+   "to": "Makineler.Geri Alma Teslim Tarihi",
+   "kind": "field"
+  },
+  {
+   "from": "Makineler.Varlık Yaşam Döngüsü Kontrolü",
+   "to": "Makineler.Hukuki Malik",
+   "kind": "field"
+  },
+  {
+   "from": "Makineler.Varlık Yaşam Döngüsü Kontrolü",
+   "to": "Makineler.Mülkiyet Devir Belgesi",
+   "kind": "field"
+  },
+  {
+   "from": "Makineler.Varlık Yaşam Döngüsü Kontrolü",
+   "to": "Makineler.Mülkiyet Durumu",
+   "kind": "field"
+  },
+  {
+   "from": "Makineler.Varlık Yaşam Döngüsü Kontrolü",
+   "to": "Makineler.Yeniden Tahsis Tarihi",
+   "kind": "field"
+  },
+  {
+   "from": "Projeler.Bakım ve Yedek Parça USD",
+   "to": "Bakım ve Yedek Parça.Toplam USD",
+   "kind": "lookup"
+  },
+  {
+   "from": "Projeler.Bakım ve Yedek Parça USD",
+   "to": "Projeler.Bakım ve Yedek Parça",
+   "kind": "link"
+  },
+  {
+   "from": "Projeler.Eksik Belge Sayısı",
+   "to": "Belgeler.Gerekli Eksik",
+   "kind": "lookup"
+  },
+  {
+   "from": "Projeler.Eksik Belge Sayısı",
+   "to": "Projeler.Belgeler",
+   "kind": "link"
+  },
+  {
+   "from": "Projeler.Etkin Stopaj Oranı",
+   "to": "Projeler.AIFC Muafiyeti Onaylandı (belge var)",
+   "kind": "field"
+  },
+  {
+   "from": "Projeler.Etkin Stopaj Oranı",
+   "to": "Projeler.Stopaj Oranı",
+   "kind": "field"
+  },
+  {
+   "from": "Projeler.Gerekli Adım",
+   "to": "Projeler.Süreç Adımları",
+   "kind": "link"
+  },
+  {
+   "from": "Projeler.Gerekli Adım",
+   "to": "Süreç Adımları.Geçerli Sayı",
+   "kind": "lookup"
+  },
+  {
+   "from": "Projeler.Gerekli Belge Sayısı",
+   "to": "Belgeler.Gerekli Sayı",
+   "kind": "lookup"
+  },
+  {
+   "from": "Projeler.Gerekli Belge Sayısı",
+   "to": "Projeler.Belgeler",
+   "kind": "link"
+  },
+  {
+   "from": "Projeler.Kira Planı SPC Payı USD",
+   "to": "Kira ve Tahsilat Planı.SPC Kira Payı USD",
+   "kind": "lookup"
+  },
+  {
+   "from": "Projeler.Kira Planı SPC Payı USD",
+   "to": "Projeler.Kira ve Tahsilat Planı",
+   "kind": "link"
+  },
+  {
+   "from": "Projeler.Kira Toplamı − Varlık Bedeli USD",
+   "to": "Projeler.Kira Planı SPC Payı USD",
+   "kind": "field"
+  },
+  {
+   "from": "Projeler.Kira Toplamı − Varlık Bedeli USD",
+   "to": "Projeler.Toplam Değer USD",
+   "kind": "field"
+  },
+  {
+   "from": "Projeler.Kredi Tutarı USD",
+   "to": "Projeler.Peşinat USD",
+   "kind": "field"
+  },
+  {
+   "from": "Projeler.Kredi Tutarı USD",
+   "to": "Projeler.Toplam Değer USD",
+   "kind": "field"
+  },
+  {
+   "from": "Projeler.Lot Toplamı USD",
+   "to": "Ekipman Lotları.Toplam USD",
+   "kind": "lookup"
+  },
+  {
+   "from": "Projeler.Lot Toplamı USD",
+   "to": "Projeler.Ekipman Lotları",
+   "kind": "link"
+  },
+  {
+   "from": "Projeler.Peşinat USD",
+   "to": "Projeler.Peşinat Oranı",
+   "kind": "field"
+  },
+  {
+   "from": "Projeler.Peşinat USD",
+   "to": "Projeler.Toplam Değer USD",
+   "kind": "field"
+  },
+  {
+   "from": "Projeler.Sevkiyat Sayısı",
+   "to": "Projeler.Sevkiyatlar",
+   "kind": "field"
+  },
+  {
+   "from": "Projeler.Süreç İlerleme",
+   "to": "Projeler.Gerekli Adım",
+   "kind": "field"
+  },
+  {
+   "from": "Projeler.Süreç İlerleme",
+   "to": "Projeler.Tamamlanan Adım",
+   "kind": "field"
+  },
+  {
+   "from": "Projeler.Tamamlanan Adım",
+   "to": "Projeler.Süreç Adımları",
+   "kind": "link"
+  },
+  {
+   "from": "Projeler.Tamamlanan Adım",
+   "to": "Süreç Adımları.Geçerli Tamam Sayı",
+   "kind": "lookup"
+  },
+  {
+   "from": "Projeler.Toplam Gider USD (vergisiz)",
+   "to": "Giderler ve Vergiler.USD Karşılığı",
+   "kind": "lookup"
+  },
+  {
+   "from": "Projeler.Toplam Gider USD (vergisiz)",
+   "to": "Projeler.Giderler ve Vergiler",
+   "kind": "link"
+  },
+  {
+   "from": "Projeler.Toplam Kredi USD",
+   "to": "Krediler.Tutar USD",
+   "kind": "lookup"
+  },
+  {
+   "from": "Projeler.Toplam Kredi USD",
+   "to": "Projeler.Krediler",
+   "kind": "link"
+  },
+  {
+   "from": "Projeler.Toplam Maliyet USD (vergi dahil)",
+   "to": "Projeler.Bakım ve Yedek Parça USD",
+   "kind": "field"
+  },
+  {
+   "from": "Projeler.Toplam Maliyet USD (vergi dahil)",
+   "to": "Projeler.Lot Toplamı USD",
+   "kind": "field"
+  },
+  {
+   "from": "Projeler.Toplam Maliyet USD (vergi dahil)",
+   "to": "Projeler.Toplam Gider USD (vergisiz)",
+   "kind": "field"
+  },
+  {
+   "from": "Projeler.Toplam Maliyet USD (vergi dahil)",
+   "to": "Projeler.Toplam Vergi USD (Gümrük)",
+   "kind": "field"
+  },
+  {
+   "from": "Projeler.Toplam Vergi USD (Gümrük)",
+   "to": "Projeler.Sevkiyatlar",
+   "kind": "link"
+  },
+  {
+   "from": "Projeler.Toplam Vergi USD (Gümrük)",
+   "to": "Sevkiyatlar.Toplam Vergi USD",
+   "kind": "lookup"
+  },
+  {
+   "from": "Senaryo Gelir Gider Akışı.Borç Servisi",
+   "to": "Senaryo Gelir Gider Akışı.Borç Servisi Satırları",
+   "kind": "link"
+  },
+  {
+   "from": "Senaryo Gelir Gider Akışı.Borç Servisi",
+   "to": "Senaryo Ödeme Planı.Toplam Borç Servisi",
+   "kind": "lookup"
+  },
+  {
+   "from": "Senaryo Gelir Gider Akışı.DSCR",
+   "to": "Senaryo Gelir Gider Akışı.Borç Servisi",
+   "kind": "field"
+  },
+  {
+   "from": "Senaryo Gelir Gider Akışı.DSCR",
+   "to": "Senaryo Gelir Gider Akışı.Net Nakit Akışı",
+   "kind": "field"
+  },
+  {
+   "from": "Senaryo Gelir Gider Akışı.Net Nakit Akışı",
+   "to": "Senaryo Gelir Gider Akışı.Toplam Gelir",
+   "kind": "field"
+  },
+  {
+   "from": "Senaryo Gelir Gider Akışı.Net Nakit Akışı",
+   "to": "Senaryo Gelir Gider Akışı.Toplam Gider",
+   "kind": "field"
+  },
+  {
+   "from": "Senaryo Gelir Gider Akışı.Toplam Gelir",
+   "to": "Senaryo Gelir Gider Akışı.Diğer Gelir",
+   "kind": "field"
+  },
+  {
+   "from": "Senaryo Gelir Gider Akışı.Toplam Gelir",
+   "to": "Senaryo Gelir Gider Akışı.Hizmet Geliri",
+   "kind": "field"
+  },
+  {
+   "from": "Senaryo Gelir Gider Akışı.Toplam Gelir",
+   "to": "Senaryo Gelir Gider Akışı.Kira Geliri",
+   "kind": "field"
+  },
+  {
+   "from": "Senaryo Gelir Gider Akışı.Toplam Gelir",
+   "to": "Senaryo Gelir Gider Akışı.Satış Geliri",
+   "kind": "field"
+  },
+  {
+   "from": "Senaryo Gelir Gider Akışı.Toplam Gider",
+   "to": "Senaryo Gelir Gider Akışı.Bakım Gideri",
+   "kind": "field"
+  },
+  {
+   "from": "Senaryo Gelir Gider Akışı.Toplam Gider",
+   "to": "Senaryo Gelir Gider Akışı.Diğer Gider",
+   "kind": "field"
+  },
+  {
+   "from": "Senaryo Gelir Gider Akışı.Toplam Gider",
+   "to": "Senaryo Gelir Gider Akışı.Lojistik ve Gümrük",
+   "kind": "field"
+  },
+  {
+   "from": "Senaryo Gelir Gider Akışı.Toplam Gider",
+   "to": "Senaryo Gelir Gider Akışı.Operasyon Gideri",
+   "kind": "field"
+  },
+  {
+   "from": "Senaryo Gelir Gider Akışı.Toplam Gider",
+   "to": "Senaryo Gelir Gider Akışı.Sigorta Gideri",
+   "kind": "field"
+  },
+  {
+   "from": "Senaryo Gelir Gider Akışı.Toplam Gider",
+   "to": "Senaryo Gelir Gider Akışı.Vergi ve Harç",
+   "kind": "field"
+  },
+  {
+   "from": "Senaryo Gelir Gider Akışı.Toplam Gider",
+   "to": "Senaryo Gelir Gider Akışı.Yatırım Harcaması",
+   "kind": "field"
+  },
+  {
+   "from": "Senaryo Ödeme Planı.Toplam Borç Servisi",
+   "to": "Senaryo Ödeme Planı.Anapara Ödemesi",
+   "kind": "field"
+  },
+  {
+   "from": "Senaryo Ödeme Planı.Toplam Borç Servisi",
+   "to": "Senaryo Ödeme Planı.Balloon Ödemesi",
+   "kind": "field"
+  },
+  {
+   "from": "Senaryo Ödeme Planı.Toplam Borç Servisi",
+   "to": "Senaryo Ödeme Planı.Faiz Ödemesi",
+   "kind": "field"
+  },
+  {
+   "from": "Senaryo Ödeme Planı.Toplam Borç Servisi",
+   "to": "Senaryo Ödeme Planı.Komisyon / Ücret",
+   "kind": "field"
+  },
+  {
+   "from": "Sevkiyatlar.Belge Sayısı",
+   "to": "Sevkiyatlar.Belgeler",
+   "kind": "field"
+  },
+  {
+   "from": "Sevkiyatlar.Eksik Belge",
+   "to": "Belgeler.Durum",
+   "kind": "lookup"
+  },
+  {
+   "from": "Sevkiyatlar.Eksik Belge",
+   "to": "Sevkiyatlar.Belgeler",
+   "kind": "link"
+  },
+  {
+   "from": "Sevkiyatlar.Gider Toplamı",
+   "to": "Giderler ve Vergiler.USD Karşılığı",
+   "kind": "lookup"
+  },
+  {
+   "from": "Sevkiyatlar.Gider Toplamı",
+   "to": "Sevkiyatlar.Giderler ve Vergiler",
+   "kind": "link"
+  },
+  {
+   "from": "Sevkiyatlar.Mal Değeri USD",
+   "to": "Ekipman Lotları.Toplam USD",
+   "kind": "lookup"
+  },
+  {
+   "from": "Sevkiyatlar.Mal Değeri USD",
+   "to": "Sevkiyatlar.Lotlar",
+   "kind": "link"
+  },
+  {
+   "from": "Sevkiyatlar.Otobüs Adedi",
+   "to": "Ekipman Lotları.Adet",
+   "kind": "lookup"
+  },
+  {
+   "from": "Sevkiyatlar.Otobüs Adedi",
+   "to": "Sevkiyatlar.Lotlar",
+   "kind": "link"
+  },
+  {
+   "from": "Sevkiyatlar.Sevkiyat Kontrolü",
+   "to": "Sevkiyatlar.Devir Dayanağı Belge",
+   "kind": "field"
+  },
+  {
+   "from": "Sevkiyatlar.Sevkiyat Kontrolü",
+   "to": "Sevkiyatlar.Durum",
+   "kind": "field"
+  },
+  {
+   "from": "Sevkiyatlar.Sevkiyat Kontrolü",
+   "to": "Sevkiyatlar.Eksik Belge",
+   "kind": "field"
+  },
+  {
+   "from": "Sevkiyatlar.Sevkiyat Kontrolü",
+   "to": "Sevkiyatlar.Lotlar",
+   "kind": "field"
+  },
+  {
+   "from": "Sevkiyatlar.Sevkiyat Kontrolü",
+   "to": "Sevkiyatlar.Mülkiyet Devir Tarihi",
+   "kind": "field"
+  },
+  {
+   "from": "Sevkiyatlar.Sevkiyat Kontrolü",
+   "to": "Sevkiyatlar.Proje",
+   "kind": "field"
+  },
+  {
+   "from": "Sevkiyatlar.Sevkiyat Kontrolü",
+   "to": "Sevkiyatlar.Taşıyıcı",
+   "kind": "field"
+  },
+  {
+   "from": "Sevkiyatlar.Sevkiyat Kontrolü",
+   "to": "Sevkiyatlar.Teslim Alım Tarihi",
+   "kind": "field"
+  },
+  {
+   "from": "Sevkiyatlar.Toplam Vergi USD",
+   "to": "Gümrük İşlemleri.Net Vergi USD",
+   "kind": "lookup"
+  },
+  {
+   "from": "Sevkiyatlar.Toplam Vergi USD",
+   "to": "Sevkiyatlar.Gümrük İşlemleri",
+   "kind": "link"
+  },
+  {
+   "from": "Sigortalar.Durum",
+   "to": "Sigortalar.Başlangıç",
+   "kind": "field"
+  },
+  {
+   "from": "Sigortalar.Durum",
+   "to": "Sigortalar.Bitiş",
+   "kind": "field"
+  },
+  {
+   "from": "Sigortalar.Sigorta Kontrolü",
+   "to": "Sigortalar.Başlangıç",
+   "kind": "field"
+  },
+  {
+   "from": "Sigortalar.Sigorta Kontrolü",
+   "to": "Sigortalar.Bitiş",
+   "kind": "field"
+  },
+  {
+   "from": "Sigortalar.Sigorta Kontrolü",
+   "to": "Sigortalar.Makine",
+   "kind": "field"
+  },
+  {
+   "from": "Sigortalar.Sigorta Kontrolü",
+   "to": "Sigortalar.Poliçe No",
+   "kind": "field"
+  },
+  {
+   "from": "Sigortalar.Sigorta Kontrolü",
+   "to": "Sigortalar.Sevkiyatlar",
+   "kind": "field"
+  },
+  {
+   "from": "Sözleşmeler.Alt Kiralama Kontrolü",
+   "to": "Sözleşmeler.Alt Kiralama / Yeniden Satış İzni Var",
+   "kind": "lookup"
+  },
+  {
+   "from": "Sözleşmeler.Alt Kiralama Kontrolü",
+   "to": "Sözleşmeler.Ana Sözleşme",
+   "kind": "link"
+  },
+  {
+   "from": "Sözleşmeler.Alt Kiralama Kontrolü",
+   "to": "Sözleşmeler.Tür",
+   "kind": "field"
+  },
+  {
+   "from": "Sözleşmeler.Sözleşme Kontrolü",
+   "to": "Sözleşmeler.Başlangıç",
+   "kind": "field"
+  },
+  {
+   "from": "Sözleşmeler.Sözleşme Kontrolü",
+   "to": "Sözleşmeler.Bitiş",
+   "kind": "field"
+  },
+  {
+   "from": "Sözleşmeler.Sözleşme Kontrolü",
+   "to": "Sözleşmeler.Durum",
+   "kind": "field"
+  },
+  {
+   "from": "Sözleşmeler.Sözleşme Kontrolü",
+   "to": "Sözleşmeler.Gerçek Veri",
+   "kind": "field"
+  },
+  {
+   "from": "Sözleşmeler.Sözleşme Kontrolü",
+   "to": "Sözleşmeler.Hukuki Doğrulama",
+   "kind": "field"
+  },
+  {
+   "from": "Süreç Adımları.Adım Kontrolü",
+   "to": "Süreç Adımları.Durum",
+   "kind": "field"
+  },
+  {
+   "from": "Süreç Adımları.Adım Kontrolü",
+   "to": "Süreç Adımları.Geçerli mi",
+   "kind": "field"
+  },
+  {
+   "from": "Süreç Adımları.Adım Kontrolü",
+   "to": "Süreç Adımları.Not",
+   "kind": "field"
+  },
+  {
+   "from": "Süreç Adımları.Geçerli Sayı",
+   "to": "Süreç Adımları.Geçerli mi",
+   "kind": "field"
+  },
+  {
+   "from": "Süreç Adımları.Geçerli Tamam Sayı",
+   "to": "Süreç Adımları.Durum",
+   "kind": "field"
+  },
+  {
+   "from": "Süreç Adımları.Geçerli Tamam Sayı",
+   "to": "Süreç Adımları.Geçerli mi",
+   "kind": "field"
+  },
+  {
+   "from": "Süreç Adımları.Geçerli mi",
+   "to": "Süreç Adımları.Geçerli Incoterm",
+   "kind": "field"
+  },
+  {
+   "from": "Süreç Adımları.Geçerli mi",
+   "to": "Süreç Adımları.Geçerli Çıkış Modeli",
+   "kind": "field"
+  },
+  {
+   "from": "Süreç Adımları.Geçerli mi",
+   "to": "Süreç Adımları.Geçerli Ödeme Yöntemi",
+   "kind": "field"
+  },
+  {
+   "from": "Süreç Adımları.Geçerli mi",
+   "to": "Süreç Adımları.Proje Incoterm",
+   "kind": "field"
+  },
+  {
+   "from": "Süreç Adımları.Geçerli mi",
+   "to": "Süreç Adımları.Proje Çıkış Modeli",
+   "kind": "field"
+  },
+  {
+   "from": "Süreç Adımları.Geçerli mi",
+   "to": "Süreç Adımları.Proje Ödeme Yöntemi",
+   "kind": "field"
+  },
+  {
+   "from": "Süreç Adımları.Varlık Olay Kontrolü",
+   "to": "Süreç Adımları.Durum",
+   "kind": "field"
+  },
+  {
+   "from": "Süreç Adımları.Varlık Olay Kontrolü",
+   "to": "Süreç Adımları.Kanıt Belgesi",
+   "kind": "field"
+  },
+  {
+   "from": "Süreç Adımları.Varlık Olay Kontrolü",
+   "to": "Süreç Adımları.Makine",
+   "kind": "field"
+  },
+  {
+   "from": "Süreç Adımları.Varlık Olay Kontrolü",
+   "to": "Süreç Adımları.Olay Tarihi",
+   "kind": "field"
+  },
+  {
+   "from": "Süreç Adımları.Varlık Olay Kontrolü",
+   "to": "Süreç Adımları.Varlık Olayı",
+   "kind": "field"
+  },
+  {
+   "from": "Tahsisler.Tahsis Kontrolü",
+   "to": "Tahsisler.Başlangıç",
+   "kind": "field"
+  },
+  {
+   "from": "Tahsisler.Tahsis Kontrolü",
+   "to": "Tahsisler.Bitiş",
+   "kind": "field"
+  },
+  {
+   "from": "Tahsisler.Tahsis Kontrolü",
+   "to": "Tahsisler.Durum",
+   "kind": "field"
+  },
+  {
+   "from": "Tahsisler.Tahsis Kontrolü",
+   "to": "Tahsisler.Kullanan Firma",
+   "kind": "field"
+  },
+  {
+   "from": "Tahsisler.Tahsis Kontrolü",
+   "to": "Tahsisler.Makine",
+   "kind": "field"
+  },
+  {
+   "from": "Tahsisler.Tahsis Kontrolü",
+   "to": "Tahsisler.Sözleşme",
+   "kind": "field"
+  },
+  {
+   "from": "Teminatlar.Teminat Kontrolü",
+   "to": "Teminatlar.Bitiş",
+   "kind": "field"
+  },
+  {
+   "from": "Teminatlar.Teminat Kontrolü",
+   "to": "Teminatlar.Durum",
+   "kind": "field"
+  },
+  {
+   "from": "Teminatlar.Teminat Kontrolü",
+   "to": "Teminatlar.Hukuki Doğrulama",
+   "kind": "field"
+  },
+  {
+   "from": "Teminatlar.Teminat Kontrolü",
+   "to": "Teminatlar.Lehtar",
+   "kind": "field"
+  },
+  {
+   "from": "Teminatlar.Teminat Kontrolü",
+   "to": "Teminatlar.Tür",
+   "kind": "field"
+  },
+  {
+   "from": "Teminatlar.Teminat Kontrolü",
+   "to": "Teminatlar.Veren",
+   "kind": "field"
+  },
+  {
+   "from": "İmalat ve Tedarik.Tedarik Kontrolü",
+   "to": "İmalat ve Tedarik.FAT Raporu",
+   "kind": "field"
+  },
+  {
+   "from": "İmalat ve Tedarik.Tedarik Kontrolü",
+   "to": "İmalat ve Tedarik.Kalite Kontrol Geçti",
+   "kind": "field"
+  },
+  {
+   "from": "İmalat ve Tedarik.Tedarik Kontrolü",
+   "to": "İmalat ve Tedarik.Planlanan Bitiş",
+   "kind": "field"
+  },
+  {
+   "from": "İmalat ve Tedarik.Tedarik Kontrolü",
+   "to": "İmalat ve Tedarik.Üretim Durumu",
+   "kind": "field"
+  },
+  {
+   "from": "İmalat ve Tedarik.Tedarik Kontrolü",
+   "to": "İmalat ve Tedarik.İmalatçı",
+   "kind": "field"
+  },
+  {
+   "from": "İmalat ve Tedarik.Üretim Süresi (Gün)",
+   "to": "İmalat ve Tedarik.Planlanan Bitiş",
+   "kind": "field"
+  },
+  {
+   "from": "İmalat ve Tedarik.Üretim Süresi (Gün)",
+   "to": "İmalat ve Tedarik.Sipariş Tarihi",
+   "kind": "field"
+  }
+ ],
+ "unresolved": []
+}
