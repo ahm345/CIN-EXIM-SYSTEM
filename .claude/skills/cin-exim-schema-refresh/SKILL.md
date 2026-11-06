@@ -5,14 +5,13 @@ description: Baserow şeması değiştiğinde (tablo, alan, ilişki, formül) ve
 
 # CIN EXIM — şema belgelerini yenileme
 
-`02_DATABASE_SCHEMA/` altındaki dört dosya **elle yazılmaz**, canlı Baserow şemasından üretilir:
+`02_DATABASE_SCHEMA/` altındaki dosyalar **elle yazılmaz**, canlı Baserow şemasından üretilir. Üç üretim aşaması vardır; **hepsi çalıştırılmazsa belgeler birbiriyle çelişir**:
 
-| Dosya | İçerik |
-|---|---|
-| `INVENTORY.json` | Makine okunur tam envanter (tablo, alan, tip, ilişki hedefi, formül, seçenekler) + `meta` sayıları |
-| `TABLES.md` | Tablo kartları |
-| `RELATION_MAP.md` | Mermaid ilişki haritası + tablo → komşu tablolar + firma rol alanları |
-| `FORMULAS.md` | Tüm formül metinleri |
+| Aşama | Araç | Ürettiği |
+|---|---|---|
+| 1. Envanter | `tools/build_schema_docs.py` | `INVENTORY.json` (makine okunur tam envanter + `meta` sayıları), `TABLES.md`, `RELATION_MAP.md`, `FORMULAS.md` |
+| 2. Röntgen | `tools/build_xray.py` | `XRAY_LEVEL0.md`, `IMPACT.md`, `DEPENDENCY_GRAPH.json`, `SCHEMA_VERSION.json` |
+| 3. Fark ve sözlük | `tools/schema_diff.py`, `tools/build_field_dictionary.py` | `04_CHANGE_HISTORY/SCHEMA_DIFFS.md` + `02_DATABASE_SCHEMA/history/` anlık görüntüsü; `FIELD_DICTIONARY.md` |
 
 Bu işlem Baserow'a **yazmaz**; yalnızca okur ve depodaki dosyaları üretir. Yine de Git'e commit ve push etmek için normal kuralları izle (dal + onay).
 
@@ -27,10 +26,17 @@ Bu işlem Baserow'a **yazmaz**; yalnızca okur ve depodaki dosyaları üretir. Y
    ```
    Çıktının son satırı `meta` JSON'udur (tablo/alan/ilişki/formül sayıları).
 4. **Yeni tablo uyarısı.** Betik çıkış kodu **2** ve "amacı tanımsız tablolar" uyarısı verirse, `tools/build_schema_docs.py` içindeki `META` sözlüğüne o tablo ID'si için `(grup, amaç)` ekle ve yeniden çalıştır. Yeni grup gerekiyorsa `GROUPS` sözlüğüne ekle.
-5. **Karşılaştır.** Önceki `INVENTORY.json meta` ile yeni sayıları karşılaştır (`git diff --stat`, `git diff 02_DATABASE_SCHEMA/INVENTORY.json | head`). Beklenmeyen fark varsa (silinmiş alan, yeni ilişki) kullanıcıya bildir; SYS-004 kaydı olup olmadığına bak.
-6. **Kontrol et.** `RELATION_MAP.md` Mermaid blokları sözdizimi açısından makul mü; tablo sayısı canlı `list_tables` ile aynı mı.
-7. **Güncelle.** `04_CHANGE_HISTORY/CHANGELOG.md` kaydı; `06_TASKS_AND_HANDOVER/CURRENT_STATE.md` sayıları; `01_SYSTEM_TREE/MODULES.md` yeni tablo/formül için; gerekirse `07_TESTS_AND_RELEASES/RELEASES.md`.
-8. **Commit.** Dal `ai/<model>/<görev-kodu>`; mesajda `SYS:` ve `Oturum:` satırları. Şema değişikliği Baserow'da bir AI tarafından yapıldıysa SYS-004/SYS-002 kaydının var olduğunu doğrula; yoksa kullanıcıya bildir.
+5. **Röntgen, fark, sözlük** (depo kökünden, bu sırayla):
+   ```bash
+   python3 -I tools/build_xray.py              # röntgen, etki analizi, bağımlılık grafiği, şema özeti
+   python3 -I tools/schema_diff.py             # önceki anlık görüntüyle farkı yazar + yeni anlık görüntü alır
+   python3 -I tools/build_field_dictionary.py  # alan sözlüğü
+   ```
+   `schema_diff.py` farkı `04_CHANGE_HISTORY/SCHEMA_DIFFS.md` en üstüne yazar (tablo/alan Baserow ID'siyle eşlenir; yeniden adlandırma, tür/ilişki/formül/seçenek değişikliği ve **olası formül etkisi** görünür). Şema değişmediyse hiçbir şey yazmaz. Güncel envanter son anlık görüntüden eskiyse hata verir; o zaman dur ve kullanıcıya bildir.
+6. **Karşılaştır.** `SCHEMA_DIFFS.md`'deki yeni kaydı oku. Beklenmeyen fark varsa (silinmiş alan, tür değişikliği, yeni ilişki) kullanıcıya bildir; SYS-004 kaydı olup olmadığına bak. `git diff --stat` ile de kontrol et.
+7. **Kontrol et.** `python3 -I tools/handover_check.py` (HATA bırakma); `RELATION_MAP.md` Mermaid blokları makul mü; tablo sayısı canlı `list_tables` ile aynı mı.
+8. **Güncelle.** `04_CHANGE_HISTORY/CHANGELOG.md` kaydı (**ne değişti + neden + onay**; fark dosyası yalnızca "ne"yi gösterir); `06_TASKS_AND_HANDOVER/CURRENT_STATE.md` sayıları; `01_SYSTEM_TREE/MODULES.md` yeni tablo/formül için; gerekirse `07_TESTS_AND_RELEASES/RELEASES.md`.
+9. **Commit.** Dal `ai/<model>/<görev-kodu>`; mesajda `SYS:` ve `Oturum:` satırları. Şema değişikliği Baserow'da bir AI tarafından yapıldıysa SYS-004/SYS-002 kaydının var olduğunu doğrula; yoksa kullanıcıya bildir.
 
 ## Sınırlar
 

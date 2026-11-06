@@ -6,10 +6,13 @@ Girdi : 02_DATABASE_SCHEMA/INVENTORY.json
         02_DATABASE_SCHEMA/DEPENDENCY_GRAPH.json formül bağımlılıkları (makine okur)
         02_DATABASE_SCHEMA/IMPACT.md             'bunu değiştirirsem ne etkilenir' özeti
         02_DATABASE_SCHEMA/SCHEMA_VERSION.json   kararlı şema özeti (hash) + tablo bazlı hash
-        04_CHANGE_HISTORY/SCHEMA_DIFFS.md        --prev verilirse önceki sürümle fark (eklenir)
+
+Şema FARKI ve sürüm geçmişi ayrı araçtadır: tools/schema_diff.py (anlık görüntü + 04_CHANGE_HISTORY/SCHEMA_DIFFS.md).
+`--prev` eski kullanım uyumu için durur; işi schema_diff.py'ye devreder.
 
 Kullanım:
   python3 -I tools/build_xray.py [--prev eski_INVENTORY.json]
+  python3 -I tools/build_xray.py --impact "Tablo.Alan"
 """
 import argparse, hashlib, json, os, re
 from collections import defaultdict
@@ -23,6 +26,11 @@ def load(p):
 
 def h(obj):
     return hashlib.sha256(json.dumps(obj, sort_keys=True, ensure_ascii=False).encode()).hexdigest()[:12]
+
+def esc(s):
+    """Markdown tablo hücresi için güvenli metin: '|' kaçırılır, satır sonları boşluğa çevrilir.
+    SYS tablolarının adı 'SYS-001 | Sistem Ana İndeksi' gibi '|' içerir; kaçırılmazsa sütun kayar."""
+    return str(s).replace("\\", "\\\\").replace("|", "\\|").replace("\r", " ").replace("\n", " ")
 
 def build_graph(inv):
     tabs = {t["name"]: t for t in inv["tables"]}
@@ -84,14 +92,14 @@ def level0(inv, edges):
             for f in t["fields"]:
                 if f["type"] == "link_row" and f["target"] != t["name"]:
                     cnt[f["target"]] += 1
-            nb = ", ".join(f"{k}×{v}" if v > 1 else k for k, v in sorted(cnt.items())) or "—"
+            nb = ", ".join(f"{esc(k)}×{v}" if v > 1 else esc(k) for k, v in sorted(cnt.items())) or "—"
             nf = sum(1 for f in t["fields"] if f["type"] == "formula")
             nl = sum(1 for f in t["fields"] if f["type"] == "link_row")
-            purpose = (t["purpose"] or "").replace("|", "/")
+            purpose = (t["purpose"] or "")
             if len(purpose) > 110:
                 purpose = purpose[:107] + "..."
-            fi = ", ".join(sorted(fin[t["name"]])) or "—"
-            out.append(f"| {t['id']} | {t['name']} | {purpose} | {t['field_count']}/{nl}/{nf} | {nb} | {fi} | {readby[t['name']]} |")
+            fi = ", ".join(esc(x) for x in sorted(fin[t["name"]])) or "—"
+            out.append(f"| {t['id']} | {esc(t['name'])} | {esc(purpose)} | {t['field_count']}/{nl}/{nf} | {nb} | {fi} | {readby[t['name']]} |")
         out.append("")
     hubs = sorted(inv["tables"], key=lambda t: (-readby[t["name"]], t["name"]))[:5]
     out += ["## Merkez tablolar (en çok okunan)", ""] + [f"- **{t['name']}** — {readby[t['name']]} çapraz formül referansı" for t in hubs if readby[t['name']]]
@@ -111,26 +119,10 @@ def impact_md(inv, edges):
            "kritik değişiklikte `FORMULAS.md` ile elle doğrula.", "",
            "| Alan | Etkilenen formül sayısı | Örnek etkilenenler |", "|---|---|---|"]
     for n, c in top:
-        ex = ", ".join(sorted(reverse_reach(edges, n))[:3])
-        out.append(f"| {n} | {c} | {ex} |")
+        ex = ", ".join(esc(x) for x in sorted(reverse_reach(edges, n))[:3])
+        out.append(f"| {esc(n)} | {c} | {ex} |")
     out += ["", "Tek alan için: `python3 -I tools/build_xray.py --impact \"Tablo.Alan\"`", ""]
     return "\n".join(out)
-
-def diff(old, new):
-    def idx(inv):
-        return {t["name"]: {f["name"]: f for f in t["fields"]} for t in inv["tables"]}
-    o, n = idx(old), idx(new)
-    lines = []
-    for t in sorted(set(n) - set(o)): lines.append(f"- Tablo eklendi: {t}")
-    for t in sorted(set(o) - set(n)): lines.append(f"- Tablo silindi: {t}")
-    for t in sorted(set(o) & set(n)):
-        for f in sorted(set(n[t]) - set(o[t])): lines.append(f"- {t}: alan eklendi `{f}` ({n[t][f]['type']})")
-        for f in sorted(set(o[t]) - set(n[t])): lines.append(f"- {t}: alan silindi `{f}`")
-        for f in sorted(set(o[t]) & set(n[t])):
-            a, b = o[t][f], n[t][f]
-            if a.get("type") != b.get("type"): lines.append(f"- {t}.{f}: tür {a.get('type')} → {b.get('type')}")
-            elif a.get("formula") != b.get("formula"): lines.append(f"- {t}.{f}: formül değişti")
-    return lines or ["- Yapısal fark yok."]
 
 def main():
     ap = argparse.ArgumentParser()
@@ -150,11 +142,12 @@ def main():
         {"edges": [{"from": x, "to": y, "kind": k} for x, y, k in edges],
          "unresolved": [{"from": s, "link": l, "target": t} for s, l, t in unres]}, ensure_ascii=False, indent=1) + "\n")
     w("02_DATABASE_SCHEMA/SCHEMA_VERSION.json", json.dumps(ver, ensure_ascii=False, indent=1, sort_keys=True) + "\n")
-    if a.prev:
-        old = load(a.prev)
-        with open(os.path.join(ROOT, "04_CHANGE_HISTORY/SCHEMA_DIFFS.md"), "a", encoding="utf-8") as f:
-            f.write(f"\n## {old['meta']['generated_at']} → {inv['meta']['generated_at']}\n\n" + "\n".join(diff(old, inv)) + "\n")
     print("edges", len(edges), "unresolved", len(unres), "hash", ver["schema_hash"])
+    if a.prev:
+        # Fark mantığı tek yerde: tools/schema_diff.py (ID eşlemeli, ilişki/seçenek/etki dahil)
+        import subprocess, sys
+        subprocess.run([sys.executable, "-I", os.path.join(ROOT, "tools", "schema_diff.py"),
+                        "diff", a.prev, os.path.join(SCH, "INVENTORY.json"), "--write"], check=False)
 
 if __name__ == "__main__":
     main()

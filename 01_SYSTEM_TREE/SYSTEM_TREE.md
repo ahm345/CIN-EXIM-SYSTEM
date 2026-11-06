@@ -50,13 +50,15 @@ CIN-EXIM-SYSTEM/
 ├── CLAUDE.md                      Claude Code için kısa talimat
 ├── 01_SYSTEM_TREE/                bu ağaç + MODULES.md (modül → tablo)
 ├── 02_DATABASE_SCHEMA/            INVENTORY.json · TABLES.md · RELATION_MAP.md · FORMULAS.md (otomatik)
+│                                  XRAY_LEVEL0.md · IMPACT.md · DEPENDENCY_GRAPH.json · SCHEMA_VERSION.json (röntgen, otomatik)
+│                                  FIELD_DICTIONARY.md · FIELD_MEANINGS.json (alan sözlüğü) · history/ (şema anlık görüntüleri)
 ├── 03_BUSINESS_RULES/             iş kuralları
-├── 04_CHANGE_HISTORY/             CHANGELOG.md · CHANGE_TEMPLATE.md
-├── 05_AI_PROTOCOLS/               PROTOCOL_MIRROR · SYS_GIT_LINKING · FEATURE_REQUEST_WORKFLOW · PLATFORM_SETUP
-├── 06_TASKS_AND_HANDOVER/         CURRENT_STATE.md · HANDOVER_TEMPLATE.md
+├── 04_CHANGE_HISTORY/             CHANGELOG.md · CHANGE_TEMPLATE.md · SCHEMA_DIFFS.md (otomatik şema farkı)
+├── 05_AI_PROTOCOLS/               PROTOCOL_MIRROR · INFO_GAP_PROTOCOL · LOG_ARCHIVE_RULE · SYS_GIT_LINKING · FEATURE_REQUEST_WORKFLOW · PLATFORM_SETUP
+├── 06_TASKS_AND_HANDOVER/         CURRENT_STATE.md · HANDOVER_TEMPLATE.md · BLOCKED_BY_MISSING_INFO.md · LOG_ARCHIVE/
 ├── 07_TESTS_AND_RELEASES/         KNOWN_ISSUES · TEST_CHECKLISTS · RELEASES
-├── tools/build_schema_docs.py     şema belgelerini yeniden üretir
-└── .claude/skills/                cin-exim · cin-exim-schema-refresh
+├── tools/                         build_schema_docs · build_xray · schema_diff · build_field_dictionary · handover_check · archive_log
+└── .claude/skills/                cin-exim · cin-exim-schema-refresh · cin-exim-handover-check
 ```
 
 ## Kim neyi tutar

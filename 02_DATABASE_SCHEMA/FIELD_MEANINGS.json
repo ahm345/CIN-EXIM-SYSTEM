@@ -1,0 +1,11 @@
+{
+ "_not": "Alan ANLAMLARI yalnızca depo belgelerinde/formüllerde kanıtı olanlardan yazılır. Kanıtı olmayan alan için buraya tahmin YAZILMAZ; sözlükte 'Bilinmiyor / Doğrulanmadı' kalır. Yeni anlam eklerken 'kaynak' zorunludur; kullanıcıdan gelen anlam için 'kaynak': 'Kullanıcı beyanı (tarih)' yaz. Üretici: tools/build_field_dictionary.py",
+ "Gerçek Veri": {
+  "anlam": "Kaydın DEMO mu gerçek mi olduğunu ayıran boolean işaret (DEMO / REFERENCE / REAL ayrımı). `false` = DEMO: Sözleşmeler `Sözleşme Kontrolü` formülü `Gerçek Veri = false` ise 'DEMO – HUKUKİ İNCELEME GEREKLİ' döndürür. REFERENCE kayıtların bu tek boolean ile nasıl ayrıldığı belgelenmemiştir: Doğrulanmadı.",
+  "kaynak": "03_BUSINESS_RULES/BUSINESS_RULES.md R-01; 02_DATABASE_SCHEMA/FORMULAS.md (Sözleşme Kontrolü)"
+ },
+ "Dosya Kontrolü": {
+  "anlam": "Belgeler tablosunda dosya eki ile durumun tutarlılığını gösteren formül: dosya yoksa 'DOSYA BEKLENİYOR' (Durum `Tamam` ise 'HATA: Tamam ama dosya yok'), dosya varsa 'OK' (Durum `Tamam` değilse 'DOSYA VAR – DURUM TAMAMLANMADI'). `OK` hukuki doğrulama demek değildir.",
+  "kaynak": "03_BUSINESS_RULES/BUSINESS_RULES.md R-05; 02_DATABASE_SCHEMA/FORMULAS.md (Dosya Kontrolü); 07_TESTS_AND_RELEASES/KNOWN_ISSUES.md KI-01, KI-02"
+ }
+}

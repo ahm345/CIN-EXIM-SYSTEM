@@ -11,7 +11,9 @@ Bu depo, CIN EXIM sisteminin **teknik hafızasıdır**. Hangi yapay zekâ ile ç
 1. [`AI_START.md`](AI_START.md) — başlangıç sırası, altın kurallar, devir. **İlk okunacak dosya.**
 2. [`01_SYSTEM_TREE/SYSTEM_TREE.md`](01_SYSTEM_TREE/SYSTEM_TREE.md) — sistemin ana haritası.
 3. [`06_TASKS_AND_HANDOVER/CURRENT_STATE.md`](06_TASKS_AND_HANDOVER/CURRENT_STATE.md) — tarihli durum özeti ve açık işler.
-4. [`01_SYSTEM_TREE/MODULES.md`](01_SYSTEM_TREE/MODULES.md) — "şu işi yapacağım, hangi tablolara bakmalıyım?"
+4. [`02_DATABASE_SCHEMA/XRAY_LEVEL0.md`](02_DATABASE_SCHEMA/XRAY_LEVEL0.md) — tek sayfa tablo haritası (röntgen).
+5. [`01_SYSTEM_TREE/MODULES.md`](01_SYSTEM_TREE/MODULES.md) — "şu işi yapacağım, hangi tablolara bakmalıyım?"
+6. [`02_DATABASE_SCHEMA/IMPACT.md`](02_DATABASE_SCHEMA/IMPACT.md) — "bu alanı değiştirirsem ne bozulur?" (değiştirmeden önce).
 
 Protokolün **tek kaynağı** Baserow'daki `SYS-009` kaydıdır; bu depodaki dosyalar onun yansıması ve tamamlayıcısıdır. Çelişki olursa SYS-009 geçerlidir.
 
@@ -20,14 +22,14 @@ Protokolün **tek kaynağı** Baserow'daki `SYS-009` kaydıdır; bu depodaki dos
 | Klasör | İçerik |
 |---|---|
 | [`01_SYSTEM_TREE/`](01_SYSTEM_TREE/) | Ana sistem ağacı, modül → tablo haritası |
-| [`02_DATABASE_SCHEMA/`](02_DATABASE_SCHEMA/) | 41 tablonun envanteri, tablo kartları, ilişki haritası (Mermaid), tüm formüller (otomatik üretilir) |
+| [`02_DATABASE_SCHEMA/`](02_DATABASE_SCHEMA/) | 41 tablonun envanteri, tablo kartları, ilişki haritası (Mermaid), tüm formüller, röntgen, etki analizi, alan sözlüğü, şema anlık görüntüleri (otomatik üretilir) |
 | [`03_BUSINESS_RULES/`](03_BUSINESS_RULES/) | İş kuralları ve hesap mantıkları (kanıtlı / karar bekleyen ayrımıyla) |
-| [`04_CHANGE_HISTORY/`](04_CHANGE_HISTORY/) | Değişiklik günlüğü ve kayıt şablonu |
-| [`05_AI_PROTOCOLS/`](05_AI_PROTOCOLS/) | SYS-009 yansıması, SYS ↔ Git bağlantı standardı, geliştirme isteği akışı, platform kurulum metni |
-| [`06_TASKS_AND_HANDOVER/`](06_TASKS_AND_HANDOVER/) | Güncel durum özeti, devir şablonu |
+| [`04_CHANGE_HISTORY/`](04_CHANGE_HISTORY/) | Değişiklik günlüğü, kayıt şablonu ve otomatik şema farkı (`SCHEMA_DIFFS.md`) |
+| [`05_AI_PROTOCOLS/`](05_AI_PROTOCOLS/) | SYS-009 yansıması, eksik bilgi protokolü, log arşiv kuralı (taslak), SYS ↔ Git bağlantı standardı, geliştirme isteği akışı, platform kurulum metni |
+| [`06_TASKS_AND_HANDOVER/`](06_TASKS_AND_HANDOVER/) | Güncel durum özeti, devir şablonu, bilgi yüzünden duran işler, log arşivi |
 | [`07_TESTS_AND_RELEASES/`](07_TESTS_AND_RELEASES/) | Bilinen sorunlar, test kontrol listeleri, sürüm politikası |
-| [`tools/`](tools/) | Şema belgelerini yeniden üreten betik |
-| [`.claude/skills/`](.claude/skills/) | Claude Code için CIN EXIM skill'leri |
+| [`tools/`](tools/) | Şema belgelerini üreten, şema farkını yazan, devri ve tutarlılığı kontrol eden, log arşivleyen betikler (komut listesi: `AI_START.md` bölüm 7) |
+| [`.claude/skills/`](.claude/skills/) | Claude Code için CIN EXIM skill'leri (başlangıç/devir, şema yenileme, devir doğrulama) |
 
 ## Üç katman, üç sorumluluk
 

@@ -11,7 +11,7 @@ CIN EXIM'in teknik hafızası bu depodur; canlı veri Baserow'dadır (`baserow`,
 
 1. Depoda `AI_START.md` dosyasını oku (bölüm 1 sırası).
 2. Baserow'da sırayla oku: **SYS-009 → SYS-001 → SYS-010 (en son kayıt) → SYS-008 → SYS-005**. Gerekirse SYS-002/006/004/003.
-3. Depoda `06_TASKS_AND_HANDOVER/CURRENT_STATE.md` (anlık görüntü) ve işe göre `01_SYSTEM_TREE/MODULES.md`.
+3. Depoda `06_TASKS_AND_HANDOVER/CURRENT_STATE.md` (anlık görüntü), `02_DATABASE_SCHEMA/XRAY_LEVEL0.md` (tek sayfa harita) ve işe göre `01_SYSTEM_TREE/MODULES.md`. Önceki AI'dan devir alıyorsan `cin-exim-handover-check` skill'ini çalıştır.
 4. `02_DATABASE_SCHEMA/INVENTORY.json` içindeki `meta` ile canlı şemayı karşılaştır (tablo sayısı + işle ilgili tablolar). Fark varsa canlı şema geçerlidir; kullanıcıya bildir.
 5. Kullanıcıya kısa başlangıç raporu ver: okunanlar, **erişilemeyenler**, mevcut durum, açık işler, devraldığın iş.
 
@@ -35,7 +35,8 @@ Ek kurallar:
 ## 3. Hızlı çalışma
 
 - Bütün veritabanını tarama; `01_SYSTEM_TREE/MODULES.md` ile ilgili tablolara git.
-- Alan/tip/ID: `INVENTORY.json` veya `TABLES.md`. Formül metni: `FORMULAS.md`. Komşu tablolar ve etki: `RELATION_MAP.md` bölüm 5. Firma rolleri: bölüm 6.
+- Alan/tip/ID: `INVENTORY.json` veya `TABLES.md`. Formül metni: `FORMULAS.md`. Komşu tablolar: `RELATION_MAP.md` bölüm 5. Firma rolleri: bölüm 6. Alan anlamı/değer listesi: `FIELD_DICTIONARY.md`. **Değiştirmeden önce etki:** `IMPACT.md`, `DEPENDENCY_GRAPH.json` (regex tabanlı, kaçırma olabilir).
+- Çıktı üretmeden önce eksik bilgiyi **tek listede** sor (`05_AI_PROTOCOLS/INFO_GAP_PROTOCOL.md`).
 - Satır verisi Git'te yok; ilgili tablodan gerektiği kadar canlı oku (`size`, `search`).
 
 ## 4. Geliştirme isteği
@@ -46,8 +47,8 @@ Ek kurallar:
 
 1. SYS-010'da oturum için **tek kayıt** aç/güncelle (`06_TASKS_AND_HANDOVER/HANDOVER_TEMPLATE.md`).
 2. SYS-004: yalnızca yapısal/riskli değişiklik. SYS-005: yalnızca kullanıcı onaylı kalıcı karar. SYS-008: yeni açık iş. SYS-011: yalnızca hata / geri alma / beklenmedik durum / kullanıcı talebi.
-3. Yapısal değişiklik yaptıysan `cin-exim-schema-refresh` skill'i ile şema belgelerini yenile.
-4. `CHANGELOG.md`, `CURRENT_STATE.md`, `KNOWN_ISSUES.md` güncelle.
+3. Yapısal değişiklik yaptıysan `cin-exim-schema-refresh` skill'i ile şema belgelerini yenile (envanter → röntgen → şema farkı → alan sözlüğü).
+4. `CHANGELOG.md`, `CURRENT_STATE.md`, `KNOWN_ISSUES.md` güncelle; devri bitirmeden `python3 -I tools/handover_check.py` çalıştır.
 5. Git: dal `ai/<model>/<görev-kodu>`, commit sonunda `SYS:` ve `Oturum:` satırları (`SYS_GIT_LINKING.md`). `main`'e birleştirme kullanıcı onayıyla.
 6. Yazdığın kayıtların tablo adını ve ID'sini kullanıcıya bildir. Yazma başarısızsa başarı iddia etme.
 7. Sonraki AI için somut ilk adımları yaz.

@@ -4,6 +4,26 @@ Bu dosya **bu deponun** teknik değişikliklerini kronolojik tutar. Baserow yap�
 
 ---
 
+## repo-v0.2.0 — 2026-11-07 — Röntgen eklerinin eksiklerini kapatma; şema farkı, devir doğrulama, log arşiv kuralı, alan sözlüğü
+
+| Alan | Değer |
+|---|---|
+| Ne vardı? | `repo-v0.1.0` üzerine, benden bağımsız oturumlarda "Add files via upload" ile eklenmiş dosyalar (kullanıcı beyanı: 8 commit, 31 dosya; bu oturumda yalnızca HEAD `661e220` ve dosya listesi doğrulandı): `XRAY_LEVEL0.md`, `IMPACT.md`, `DEPENDENCY_GRAPH.json`, `SCHEMA_VERSION.json`, `tools/build_xray.py`, `05_AI_PROTOCOLS/INFO_GAP_PROTOCOL.md`, `06_TASKS_AND_HANDOVER/BLOCKED_BY_MISSING_INFO.md`. Bu eklerin CHANGELOG kaydı yoktu. |
+| Ne eklendi? | `tools/schema_diff.py` + `02_DATABASE_SCHEMA/history/` (şema anlık görüntüleri) + `04_CHANGE_HISTORY/SCHEMA_DIFFS.md`; `tools/handover_check.py` + `.claude/skills/cin-exim-handover-check/`; `05_AI_PROTOCOLS/LOG_ARCHIVE_RULE.md` (**taslak**) + `tools/archive_log.py` + `06_TASKS_AND_HANDOVER/LOG_ARCHIVE/`; `tools/build_field_dictionary.py` + `02_DATABASE_SCHEMA/FIELD_DICTIONARY.md` + `FIELD_MEANINGS.json`; `.gitignore`. |
+| Ne değişti? | **`XRAY_LEVEL0.md` tablosu bozuktu: 48 satırın 12'sinde sütun sayısı yanlıştı** (SYS tablolarının adı `SYS-001 \| Sistem Ana İndeksi` gibi `\|` içerir; komşu listelerinde de geçer). `tools/build_xray.py` artık tüm hücreleri kaçırır (`esc`), röntgen yeniden üretildi (48/48 satır sağlam; şema özeti değişmedi `a8068f47e2bc`). `build_xray.py --prev` kendi eksik `diff()` kodunu bırakıp `schema_diff.py`'ye devreder. `AI_START.md` yeni belge ve araçlara yol gösterir (bölüm 1, 2, 3, 4, 5, 7), sürüm numarası artık yazılmaz. `cin-exim-schema-refresh` skill'i röntgen, fark ve sözlük aşamalarını anlatır (önceden yalnızca `build_schema_docs.py` vardı; şema yenilenince röntgen dosyaları eski kalıyordu). `CLAUDE.md`, `SYSTEM_TREE.md`, `PROTOCOL_MIRROR.md`, `CURRENT_STATE.md` (SYS-009 sürümü 1.5, SYS-010 kayıt sayısı 8) güncellendi. |
+| Ne kaldırıldı? | `build_xray.py` içindeki eski `diff()` fonksiyonu (yalnızca tür/formül farkı görüyor, ilişki hedefi ve seçenek listesi değişikliğini görmüyordu). Başka bir şey yok. |
+| Neden? | Kullanıcının, başka bir AI'nın yazdığı kontrol listesini doğrulatıp eksikleri düzelttirmesi (2026-11-06 18:54 "bunların çözümlerini bul düzelt"; 2026-11-07 00:20 "kaldığın yerden devam et"). |
+| Etkilenen Baserow tabloları / formülleri / ilişkileri | **Yalnızca SYS-009 ID 1, `Girişte Zorunlu Adımlar` alanı:** "1) SYS-009 v1.4'ü oku." → "1) SYS-009'u oku (güncel sürüm bu kaydın Protokol Sürümü alanındadır)."; diğer 11 alan aynen kaldı (canlı yeniden okunarak doğrulandı). Şema, ilişki, formül, görünüm değişmedi. **SYS-010 ID 4–7 ("Devam ediyor") değiştirilmedi:** kapatma kararı yalnızca kullanıcıdadır. |
+| Kim yaptı | Claude (Anthropic, Sonnet 5.5) — Claude Code oturumu |
+| Kullanıcı onayı | Evet — yukarıdaki iki mesaj (2026-11-06 18:54, 2026-11-07 00:20 +03:00). SYS-009 alanı düzeltmesi kullanıcının listesindeki madde 5'tir; kullanıcı "düzelt" dedi. |
+| Test | `schema_diff.py`: sentetik şema (formül değişti, seçenek eklendi/kaldırıldı, alan adı değişti, alan silindi, tablo eklendi) ayrı bir kopyada çalıştırıldı, 5 değişikliğin hepsi ve olası formül etkisi görüldü; ilk çalıştırma, tekrar çalıştırma ("değişmedi"), eski tarihli envanteri reddetme (çıkış kodu 3) ve `build_xray.py --prev` yönlendirmesi denendi. `archive_log.py`: arşivleme, aynı içerikte tekrar, farklı içerikte reddetme, "Devam ediyor" oturumu reddetme, kapsam dışı tablo reddetme, `verify` tam/eksik denendi (ayrı kopyada, gerçek SYS-011 satırıyla). `handover_check.py` depoya karşı çalıştırıldı. Tablo sütun sayısı XRAY, IMPACT ve FIELD_DICTIONARY'de doğrulandı (0 bozuk). Canlı Baserow ile: SYS-009 yazma sonrası yeniden okundu. **Yapılmadı:** `LOG_ARCHIVE_RULE.md` gerçek Baserow satırı silinerek denenmedi (silme yapılmadı); platform testleri (T-01/T-02) yapılmadı. |
+| GitHub commit / PR | Bu sürümün commit'i (dal `ai/claude/repo-v0.2.0`, `main`'e birleştirme kullanıcı onayıyla) |
+| Baserow'da uygulandı mı? | Yalnızca SYS-009 ID 1 tek alan düzeltmesi (yukarıda). |
+| SYS kaydı | **Yazılmadı** — bu oturum için SYS-010 kaydı açmak üzere SYS yazma izni ayrıca alınmadı (SYS-009). SYS-004'e de yazılmadı (yapısal değişiklik değil, metin düzeltmesi). |
+| Bilinen eksikler | `LOG_ARCHIVE_RULE.md` eşikleri öneridir, kullanıcı onayı bekler; KI-16 (3.000 satır limiti) bağımsız doğrulanmadı. `FIELD_DICTIONARY.md`'de 102 ortak alanın yalnızca 1'inin anlamı kaynaklı olarak yazılabildi (kalanı `Bilinmiyor / Doğrulanmadı`; kullanıcıdan tek listede sorulmalı). SYS-009 `Çalışma Sırasında Kayıt Kuralları` alanı "HAFİF KAYIT v1.4." etiketiyle başlıyor (kasten bırakıldı). Etki analizi regex tabanlıdır, kaçırma olabilir. |
+
+---
+
 ## repo-v0.1.0 — 2026-11-06 — Git teknik hafızasının ilk kurulumu
 
 | Alan | Değer |

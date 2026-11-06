@@ -66,29 +66,29 @@ Sütunlar: **Bağlı olduğu** = bu tablodan çıkan ilişki alanı sayısıyla 
 
 | ID | Tablo | Amaç | Alan/İlişki/Formül | Bağlı olduğu | Formül girdisi | Okunma |
 |---|---|---|---|---|---|---|
-| 1301798 | SYS-001 | Sistem Ana İndeksi | SYS-001 Sistem Ana İndeksi: aktif sürüm, AI başlangıç talimatı, yedekleme politikası. | 15/2/0 | SYS-002 | Sistem Sürüm Kayıtları, SYS-006 | Sistem Denetim ve Testleri | — | 0 |
-| 1301799 | SYS-002 | Sistem Sürüm Kayıtları | SYS-002 Sistem Sürüm Kayıtları: sürüm kodu, tablo/alan/ilişki/formül sayıları, eklenen/değişen/kaldırılan. | 24/8/0 | SYS-001 | Sistem Ana İndeksi, SYS-003 | Sistem Yedek Paketleri, SYS-004 | Sistem Değişiklik Günlüğü, SYS-005 | Sistem Karar Kayıtları, SYS-006 | Sistem Denetim ve Testleri, SYS-007 | Sistem Geri Yükleme ve Klonlama, SYS-008 | Sistem Görev ve Geliştirme Takibi, SYS-010 | AI Oturum ve Devir Kayıtları | — | 0 |
-| 1301800 | SYS-003 | Sistem Yedek Paketleri | SYS-003 Sistem Yedek Paketleri: yedek türü, konum, bütünlük ve geri yükleme testi. | 18/2/0 | SYS-002 | Sistem Sürüm Kayıtları, SYS-007 | Sistem Geri Yükleme ve Klonlama | — | 0 |
-| 1301801 | SYS-004 | Sistem Değişiklik Günlüğü | SYS-004 Sistem Değişiklik Günlüğü: yapısal / riskli değişikliklerin önceki-yeni durumu ve geri alma talimatı. | 17/3/0 | SYS-002 | Sistem Sürüm Kayıtları, SYS-005 | Sistem Karar Kayıtları, SYS-008 | Sistem Görev ve Geliştirme Takibi | — | 0 |
-| 1301802 | SYS-005 | Sistem Karar Kayıtları | SYS-005 Sistem Karar Kayıtları: kullanıcı onaylı kalıcı kararlar. | 16/4/0 | SYS-002 | Sistem Sürüm Kayıtları, SYS-004 | Sistem Değişiklik Günlüğü, SYS-008 | Sistem Görev ve Geliştirme Takibi, SYS-010 | AI Oturum ve Devir Kayıtları | — | 0 |
-| 1301803 | SYS-006 | Sistem Denetim ve Testleri | SYS-006 Sistem Denetim ve Testleri: denetim kapsamı, bulgu sayıları (P0-P3), rapor. | 21/5/0 | SYS-001 | Sistem Ana İndeksi, SYS-002 | Sistem Sürüm Kayıtları, SYS-008 | Sistem Görev ve Geliştirme Takibi, SYS-010 | AI Oturum ve Devir Kayıtları, Table | — | 0 |
-| 1301804 | SYS-007 | Sistem Geri Yükleme ve Klonlama | SYS-007 Geri Yükleme ve Klonlama: yedekten kurulum işlemleri ve doğrulama sonuçları. | 19/2/0 | SYS-002 | Sistem Sürüm Kayıtları, SYS-003 | Sistem Yedek Paketleri | — | 0 |
-| 1301805 | SYS-008 | Sistem Görev ve Geliştirme Takibi | SYS-008 Görev ve Geliştirme Takibi: öncelik, durum, sorumlu, tamamlanma kriteri. | 21/5/0 | SYS-002 | Sistem Sürüm Kayıtları, SYS-004 | Sistem Değişiklik Günlüğü, SYS-005 | Sistem Karar Kayıtları, SYS-006 | Sistem Denetim ve Testleri, SYS-010 | AI Oturum ve Devir Kayıtları | — | 0 |
-| 1301819 | SYS-009 | AI İşletim Protokolü | SYS-009 AI İşletim Protokolü: giriş, çalışma, çıkış, yasaklar. Protokolün TEK KAYNAĞI. | 13/0/0 | — | — | 0 |
-| 1301820 | SYS-010 | AI Oturum ve Devir Kayıtları | SYS-010 AI Oturum ve Devir Kayıtları: her oturum için tek kayıt; sonraki AI için talimat. | 24/5/0 | SYS-002 | Sistem Sürüm Kayıtları, SYS-005 | Sistem Karar Kayıtları, SYS-006 | Sistem Denetim ve Testleri, SYS-008 | Sistem Görev ve Geliştirme Takibi, SYS-011 | AI Çalışma ve Olay Günlüğü | — | 0 |
-| 1301821 | SYS-011 | AI Çalışma ve Olay Günlüğü | SYS-011 AI Çalışma ve Olay Günlüğü: yalnızca hata, geri alma, beklenmedik durum, kullanıcı talebi. | 18/1/0 | SYS-010 | AI Oturum ve Devir Kayıtları | — | 0 |
+| 1301798 | SYS-001 \| Sistem Ana İndeksi | SYS-001 Sistem Ana İndeksi: aktif sürüm, AI başlangıç talimatı, yedekleme politikası. | 15/2/0 | SYS-002 \| Sistem Sürüm Kayıtları, SYS-006 \| Sistem Denetim ve Testleri | — | 0 |
+| 1301799 | SYS-002 \| Sistem Sürüm Kayıtları | SYS-002 Sistem Sürüm Kayıtları: sürüm kodu, tablo/alan/ilişki/formül sayıları, eklenen/değişen/kaldırılan. | 24/8/0 | SYS-001 \| Sistem Ana İndeksi, SYS-003 \| Sistem Yedek Paketleri, SYS-004 \| Sistem Değişiklik Günlüğü, SYS-005 \| Sistem Karar Kayıtları, SYS-006 \| Sistem Denetim ve Testleri, SYS-007 \| Sistem Geri Yükleme ve Klonlama, SYS-008 \| Sistem Görev ve Geliştirme Takibi, SYS-010 \| AI Oturum ve Devir Kayıtları | — | 0 |
+| 1301800 | SYS-003 \| Sistem Yedek Paketleri | SYS-003 Sistem Yedek Paketleri: yedek türü, konum, bütünlük ve geri yükleme testi. | 18/2/0 | SYS-002 \| Sistem Sürüm Kayıtları, SYS-007 \| Sistem Geri Yükleme ve Klonlama | — | 0 |
+| 1301801 | SYS-004 \| Sistem Değişiklik Günlüğü | SYS-004 Sistem Değişiklik Günlüğü: yapısal / riskli değişikliklerin önceki-yeni durumu ve geri alma talimatı. | 17/3/0 | SYS-002 \| Sistem Sürüm Kayıtları, SYS-005 \| Sistem Karar Kayıtları, SYS-008 \| Sistem Görev ve Geliştirme Takibi | — | 0 |
+| 1301802 | SYS-005 \| Sistem Karar Kayıtları | SYS-005 Sistem Karar Kayıtları: kullanıcı onaylı kalıcı kararlar. | 16/4/0 | SYS-002 \| Sistem Sürüm Kayıtları, SYS-004 \| Sistem Değişiklik Günlüğü, SYS-008 \| Sistem Görev ve Geliştirme Takibi, SYS-010 \| AI Oturum ve Devir Kayıtları | — | 0 |
+| 1301803 | SYS-006 \| Sistem Denetim ve Testleri | SYS-006 Sistem Denetim ve Testleri: denetim kapsamı, bulgu sayıları (P0-P3), rapor. | 21/5/0 | SYS-001 \| Sistem Ana İndeksi, SYS-002 \| Sistem Sürüm Kayıtları, SYS-008 \| Sistem Görev ve Geliştirme Takibi, SYS-010 \| AI Oturum ve Devir Kayıtları, Table | — | 0 |
+| 1301804 | SYS-007 \| Sistem Geri Yükleme ve Klonlama | SYS-007 Geri Yükleme ve Klonlama: yedekten kurulum işlemleri ve doğrulama sonuçları. | 19/2/0 | SYS-002 \| Sistem Sürüm Kayıtları, SYS-003 \| Sistem Yedek Paketleri | — | 0 |
+| 1301805 | SYS-008 \| Sistem Görev ve Geliştirme Takibi | SYS-008 Görev ve Geliştirme Takibi: öncelik, durum, sorumlu, tamamlanma kriteri. | 21/5/0 | SYS-002 \| Sistem Sürüm Kayıtları, SYS-004 \| Sistem Değişiklik Günlüğü, SYS-005 \| Sistem Karar Kayıtları, SYS-006 \| Sistem Denetim ve Testleri, SYS-010 \| AI Oturum ve Devir Kayıtları | — | 0 |
+| 1301819 | SYS-009 \| AI İşletim Protokolü | SYS-009 AI İşletim Protokolü: giriş, çalışma, çıkış, yasaklar. Protokolün TEK KAYNAĞI. | 13/0/0 | — | — | 0 |
+| 1301820 | SYS-010 \| AI Oturum ve Devir Kayıtları | SYS-010 AI Oturum ve Devir Kayıtları: her oturum için tek kayıt; sonraki AI için talimat. | 24/5/0 | SYS-002 \| Sistem Sürüm Kayıtları, SYS-005 \| Sistem Karar Kayıtları, SYS-006 \| Sistem Denetim ve Testleri, SYS-008 \| Sistem Görev ve Geliştirme Takibi, SYS-011 \| AI Çalışma ve Olay Günlüğü | — | 0 |
+| 1301821 | SYS-011 \| AI Çalışma ve Olay Günlüğü | SYS-011 AI Çalışma ve Olay Günlüğü: yalnızca hata, geri alma, beklenmedik durum, kullanıcı talebi. | 18/1/0 | SYS-010 \| AI Oturum ve Devir Kayıtları | — | 0 |
 
 ## 07 Eski / Referans
 
 | ID | Tablo | Amaç | Alan/İlişki/Formül | Bağlı olduğu | Formül girdisi | Okunma |
 |---|---|---|---|---|---|---|
-| 620460 | Table | Eski AI denetim raporu kaydı (SYS-006 ile bağlı). Korunur, silinmez. | 8/1/0 | SYS-006 | Sistem Denetim ve Testleri | — | 0 |
+| 620460 | Table | Eski AI denetim raporu kaydı (SYS-006 ile bağlı). Korunur, silinmez. | 8/1/0 | SYS-006 \| Sistem Denetim ve Testleri | — | 0 |
 
 ## Merkez tablolar (en çok okunan)
 
 - **Geri Ödeme Planı** — 5 çapraz formül referansı
-- **Teminatlar** — 4 çapraz formül referansı
 - **Belgeler** — 4 çapraz formül referansı
+- **Teminatlar** — 4 çapraz formül referansı
 - **Ekipman Lotları** — 3 çapraz formül referansı
 - **Giderler ve Vergiler** — 2 çapraz formül referansı
 

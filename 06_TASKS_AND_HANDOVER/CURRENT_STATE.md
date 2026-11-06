@@ -2,6 +2,8 @@
 
 > **Bu bir anlık görüntüdür, kaynak değildir.** Görevlerin kaynağı Baserow `SYS-008`, oturumların kaynağı `SYS-010`'dur. Aşağıdaki bilgi **2026-11-06 13:45 (+03:00)** itibarıyla salt okunur okunmuştur. Yeni AI: önce canlı SYS-010 ve SYS-008'i oku; bu dosya bir kısayoldur.
 
+> **Güncelleme notu (2026-11-07 00:27 +03:00, Claude Code oturumu):** yalnızca şu satırlar canlı Baserow'dan yeniden okunarak düzeltildi: SYS-009 sürümü (1.5), SYS-010 kayıt sayısı (8), oturum tablosuna `CLAUDE-20261106-003`. Canlı sayılan satır sayıları: SYS-010 8, SYS-011 17, SYS-004 23, SYS-008 15. **Geri kalan içerik (açık görevler, kararlar, Makineler/Belgeler satır sayıları) 2026-11-06 anlık görüntüsüdür; bu oturumda yeniden doğrulanmadı.**
+
 ## Canlı doğrulanan sayılar
 
 | Konu | Değer |
@@ -9,8 +11,8 @@
 | Veritabanı | `baserow`, ID 263856 |
 | Tablo | 41 (23 operasyonel + 6 senaryo + 11 SYS + 1 eski `Table`) |
 | Alan / ilişki alanı / formül | 845 / 219 / 91 (`02_DATABASE_SCHEMA/INVENTORY.json`) |
-| SYS-009 protokol | v1.4 |
-| SYS-010 oturum kaydı | 7 (son: `CLAUDE-20261106-002`, durum "Devam ediyor") |
+| SYS-009 protokol | v1.5 (canlı doğrulandı 2026-11-07; `Girişte Zorunlu Adımlar` alanı sürüm numarası anmayacak şekilde düzeltildi, bkz. `PROTOCOL_MIRROR.md`) |
+| SYS-010 oturum kaydı | 8 (son: `CLAUDE-20261106-003`, durum "Tamamlandı"; ID 4, 5, 6, 7 hâlâ "Devam ediyor") |
 | SYS-008 görev | 15 |
 | Makineler / Belgeler satır | 57 / 52 |
 | SYS-007, Senaryolar | 0 satır (boş) |
@@ -26,8 +28,9 @@
 | GPT6-20261105-001 | ChatGPT / GPT-6 | SYS-009 v1.4 onayı ve uygulaması | Devam ediyor |
 | CLAUDE-20261106-001 | Claude | Aşama 1 canlı denetim, onaylı formül düzeltmeleri | Devam ediyor |
 | CLAUDE-20261106-002 | Claude | Giriş, yarım işlerin devri, SYS-008 durum alanları pilotu, Belgeler incelemesi | Devam ediyor |
+| CLAUDE-20261106-003 | Claude (Claude Code) | Git teknik hafızasının kurulması (`repo-v0.1.0`); kaydı claude.ai sohbeti yazdı | Tamamlandı – platform testi, yedek, formül işleri açık |
 
-"Devam ediyor" yazan oturumlar kapanmamıştır; yapılanları SYS-004/005/008 ile **doğrulayarak** devral. Bu kayıtlar yazan AI'ların beyanıdır.
+"Devam ediyor" yazan oturumlar (ID 4, 5, 6, 7) kapanmamıştır; yapılanları SYS-004/005/008 ile **doğrulayarak** devral (`cin-exim-handover-check` skill'i). Bu kayıtların hâlâ açık olup olmadığını yalnızca kullanıcı bilir; kullanıcı onayı olmadan kapatma. Bu kayıtlar yazan AI'ların beyanıdır.
 
 ## Açık görevler (SYS-008, kısa)
 
@@ -64,21 +67,7 @@ Hiçbir görevde hedef tarih yoktur; hedef tarihleri kullanıcı belirler. Ayrı
 
 ## Git deposu durumu
 
-`repo-v0.1.0` ile ilk kurulum yapıldı (bkz. `04_CHANGE_HISTORY/CHANGELOG.md`). Baserow'da **hiçbir değişiklik yapılmadı**. Bu kurulum için SYS kaydı **yazılmadı** (SYS yazma izni ayrıca alınmadı).
-
-## Önerilen SYS-010 kaydı (yazılmadı; izin verilirse kullanılabilir)
-
-| Alan | Önerilen içerik |
-|---|---|
-| Oturum Kodu | `CLAUDE-20261106-003` (kod çakışmasını SYS-010'da kontrol et) |
-| AI / Model | Claude (Anthropic) – Claude Code oturumu |
-| Kullanıcı Talebi ve Amaç | Git teknik hafızasının kurulması; AI devrinin kolaylaşması; tablo ilişki haritası |
-| Okunan SYS Kayıtları | SYS-009, SYS-001, SYS-010 (7), SYS-008 (15); şema: 41 tablo |
-| Yapılan İşler | Salt okunur şema okuma; `ahm345/CIN-EXIM-SYSTEM` içine `repo-v0.1.0` (commit SHA push sonrası) |
-| Değiştirilen Kayıtlar | Baserow'da yok |
-| Kaynak Sohbet / Dosya | `GIT: ahm345/CIN-EXIM-SYSTEM@<sha>` |
-| Tamamlanmayan İşler | Platform testleri, yedek testi, KI-01…KI-18 |
-| Sonraki AI İçin Talimat | `AI_START.md` sırası; canlı şemayı `INVENTORY.json meta` ile karşılaştır |
+`repo-v0.1.0` ile ilk kurulum yapıldı; ardından ayrı oturumlarda röntgen, etki analizi, şema özeti, eksik bilgi protokolü ve engelli işler listesi eklendi; `repo-v0.2.0` bu eklerin eksiklerini kapattı (bkz. `04_CHANGE_HISTORY/CHANGELOG.md`). Kurulum için SYS-010 kaydı **yazıldı**: `CLAUDE-20261106-003` (SYS-010 ID 8, claude.ai sohbeti, kullanıcı onayıyla). `repo-v0.2.0` çalışması için SYS-010 kaydı yazılmadı (SYS yazma izni ayrıca alınmadı); bu depo değişikliğinin Baserow'a yansımaları CHANGELOG'da listelidir.
 
 ## Sonraki en mantıklı adımlar (öneri, karar kullanıcıda)
 

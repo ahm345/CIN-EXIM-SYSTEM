@@ -10,7 +10,7 @@ Aşağıdaki sırayı izle. Her adımda okuduğunu ve okuyamadığını not al; 
 
 **A. Baserow (veritabanı `baserow`, ID 263856)**
 
-1. `SYS-009` — protokol (v1.4 ve sonrası).
+1. `SYS-009` — protokol. Güncel sürüm kaydın `Protokol Sürümü` alanındadır; bu dosyaya sürüm numarası yazılmaz (eskir).
 2. `SYS-001` — ana indeks.
 3. `SYS-010` — **en son** oturum / devir kaydı. "Devam ediyor" yazıyorsa o oturum kapanmamıştır; yapılanları SYS-004/005/008 ile karşılaştırarak doğrula.
 4. `SYS-008` — açık ve bekleyen görevler.
@@ -22,11 +22,16 @@ Aşağıdaki sırayı izle. Her adımda okuduğunu ve okuyamadığını not al; 
 1. Bu dosya.
 2. `01_SYSTEM_TREE/SYSTEM_TREE.md` — ana harita.
 3. `06_TASKS_AND_HANDOVER/CURRENT_STATE.md` — **tarihli** durum özeti. Bu bir anlık görüntüdür; canlı Baserow ile doğrula.
-4. İşin konusuna göre `01_SYSTEM_TREE/MODULES.md` → ilgili tablolar → `02_DATABASE_SCHEMA/RELATION_MAP.md` (etki analizi için "Tablo → bağlı olduğu tablolar" bölümü).
+4. `02_DATABASE_SCHEMA/XRAY_LEVEL0.md` — **tek sayfa röntgen**: her tablonun amacı, komşuları, formül girdisi ve "kaç formül bu tabloyu okuyor". Veritabanını hızlı anlamak için ilk bakılacak harita.
+5. İşin konusuna göre `01_SYSTEM_TREE/MODULES.md` → ilgili tablolar (`TABLES.md`) → `02_DATABASE_SCHEMA/RELATION_MAP.md` (komşu tablolar). Alan anlamı ve geçerli değer listeleri için `02_DATABASE_SCHEMA/FIELD_DICTIONARY.md`.
+6. **Bir alanı/formülü değiştirmeden önce** `02_DATABASE_SCHEMA/IMPACT.md` ("bunu değiştirirsem ne etkilenir") ve makine okunur `DEPENDENCY_GRAPH.json`. Tek alan için: `python3 -I tools/build_xray.py --impact "Tablo.Alan"`. Bağımlılıklar formül metninden regex ile çıkarılır; **kaçırma olabilir**, kritik değişiklikte `FORMULAS.md` ile elle doğrula.
+7. `06_TASKS_AND_HANDOVER/BLOCKED_BY_MISSING_INFO.md` — bilgi eksikliği yüzünden duran işler (anlık görüntü). Bir belge/rapor/model üretmeden önce `05_AI_PROTOCOLS/INFO_GAP_PROTOCOL.md`: eksik bilgiyi **tek listede** sor.
 
-**C. Güncellik kontrolü**
+**C. Güncellik ve devir kontrolü**
 
-`02_DATABASE_SCHEMA/INVENTORY.json` içindeki `meta` ile canlı Baserow'u karşılaştır (tablo sayısı, ilgili tabloların alanları). Fark varsa **canlı şema geçerlidir**; farkı kullanıcıya bildir ve `cin-exim-schema-refresh` adımlarıyla belgeleri yenilemeyi öner.
+`02_DATABASE_SCHEMA/INVENTORY.json` içindeki `meta` ile canlı Baserow'u karşılaştır (tablo sayısı, ilgili tabloların alanları); `SCHEMA_VERSION.json` içindeki `schema_hash` envanterin özetidir. Fark varsa **canlı şema geçerlidir**; farkı kullanıcıya bildir ve `cin-exim-schema-refresh` adımlarıyla belgeleri yenilemeyi öner.
+
+Devir beyanlarını doğrulamak için `cin-exim-handover-check` skill'ini çalıştır. Depo tarafını tek komut kontrol eder: `python3 -I tools/handover_check.py` (HATA varsa kullanıcıya bildir).
 
 **D. Kısa başlangıç raporu**
 
@@ -45,25 +50,29 @@ Aşağıdaki sırayı izle. Her adımda okuduğunu ve okuyamadığını not al; 
 9. **Saat uydurma.** Saat aracı varsa kullan; yoksa saat alanını boş bırak.
 10. Önceki AI'nın "tamamladım" beyanı kanıt değildir. Devir kaydındaki iddiaları gerçek işlemlerle (canlı şema, satır, commit) doğrula.
 11. Kontrol formüllerinin `OK` sonucu **hukuki veya belge doğrulaması anlamına gelmez** (bkz. `07_TESTS_AND_RELEASES/KNOWN_ISSUES.md`).
+12. **Eksik bilgi parça parça sorulmaz.** Çıktı üretmeden önce eksiklerin tamamı tek listede (A kullanıcı bilir · B dış kaynaktan bulunur, hazır araştırma promptuyla · C AI kendi bulur) sorulur; cevapsız bilgi uydurulmaz (`05_AI_PROTOCOLS/INFO_GAP_PROTOCOL.md`, SYS-009 `Eksik Bilgi Yönetimi`).
+13. `Devam ediyor` oturumu kullanıcı onayı olmadan kapatma veya "terk edilmiş" sayma; oturumun açık olup olmadığını yalnızca kullanıcı bilir.
 
 ## 3. Hızlı çalışma (token verimliliği)
 
 - Bütün veritabanını taramak yerine `MODULES.md` ile ilgili tablolara git.
-- Alan adı, tip ve ID için `02_DATABASE_SCHEMA/INVENTORY.json` veya `TABLES.md`; formül metni için `FORMULAS.md`; komşu tablolar için `RELATION_MAP.md`.
+- Önce `XRAY_LEVEL0.md` (tek sayfa harita), sonra gerekirse ayrıntı: alan adı, tip ve ID için `02_DATABASE_SCHEMA/INVENTORY.json` veya `TABLES.md`; formül metni için `FORMULAS.md`; komşu tablolar için `RELATION_MAP.md`; alan anlamı için `FIELD_DICTIONARY.md`; etki için `IMPACT.md`.
 - **Satır verisi** Git'te yoktur; yalnızca ilgili tablodan, gerektiği kadar (`size`, `search`) canlı oku.
 - Toplu işlemleri tek kayıtta tablo, kayıt ID aralığı ve adetle özetle.
 
 ## 4. Yeni geliştirme isteği geldiğinde
 
-Adımlar ve etki analizi şablonu: `05_AI_PROTOCOLS/FEATURE_REQUEST_WORKFLOW.md`. Özet: isteği anla → sistem ağacında modülü bul → mevcut yapıyı oku → etki analizi → öneri + test senaryoları → **onay** → uygula ve test et → SYS + Git kaydı → devir.
+Adımlar ve etki analizi şablonu: `05_AI_PROTOCOLS/FEATURE_REQUEST_WORKFLOW.md`. Özet: isteği anla → sistem ağacında modülü bul → mevcut yapıyı oku → etki analizi (`IMPACT.md`, `DEPENDENCY_GRAPH.json`) → eksik bilgi varsa tek listede sor (`INFO_GAP_PROTOCOL.md`) → öneri + test senaryoları → **onay** → uygula ve test et → SYS + Git kaydı → devir.
 
 ## 5. Bitirirken (devir)
 
 1. `SYS-010`'da bu oturum için **tek kayıt** aç/güncelle (şablon: `06_TASKS_AND_HANDOVER/HANDOVER_TEMPLATE.md`). İş sürüyorsa durum "Devam ediyor" kalır.
 2. SYS-004'e yalnızca **yapısal / riskli** değişiklik, SYS-005'e yalnızca kullanıcı onaylı **kalıcı karar**, SYS-008'e yeni açık iş yaz. SYS-011 yalnızca hata, geri alma, beklenmedik durum veya kullanıcı talebi içindir.
 3. Git'te yapılan değişikliği SYS kayıtlarına bağla (`05_AI_PROTOCOLS/SYS_GIT_LINKING.md`).
-4. Yapısal değişiklik yaptıysan `02_DATABASE_SCHEMA/` belgelerini yenile; `04_CHANGE_HISTORY/CHANGELOG.md` ve `06_TASKS_AND_HANDOVER/CURRENT_STATE.md` dosyalarını güncelle.
-5. Sonraki AI için ilk adımları açıkça yaz.
+4. Yapısal değişiklik yaptıysan `02_DATABASE_SCHEMA/` belgelerini `cin-exim-schema-refresh` skill'iyle yenile (envanter → röntgen → **şema farkı** `04_CHANGE_HISTORY/SCHEMA_DIFFS.md` → alan sözlüğü); `04_CHANGE_HISTORY/CHANGELOG.md` ve `06_TASKS_AND_HANDOVER/CURRENT_STATE.md` dosyalarını güncelle.
+5. Devri bitirmeden `python3 -I tools/handover_check.py` çalıştır; HATA bırakma, UYARI'yı raporla.
+6. Baserow satır limiti için log arşivi gerekiyorsa `05_AI_PROTOCOLS/LOG_ARCHIVE_RULE.md` (taslak; **arşivsiz ve onaysız silme yok**).
+7. Sonraki AI için ilk adımları açıkça yaz.
 
 ## 6. Git kuralları
 
@@ -75,3 +84,29 @@ Adımlar ve etki analizi şablonu: `05_AI_PROTOCOLS/FEATURE_REQUEST_WORKFLOW.md`
   ```
 - Git, Baserow'daki onayı veya kilidi zorlayamaz. Görev sahipliği bir **koordinasyon kuralıdır**: bir görevi almadan önce `SYS-008` `Sorumlu` alanına bak; başka AI'ya atanmış işi onun kaydını okumadan sürdürme.
 - Bu depoya gerçek şirket, müşteri, banka, ödeme veya sözleşme verisi **koyma**.
+
+## 7. Belge ve araç haritası (hangi iş için hangisi)
+
+| Dosya | Ne için |
+|---|---|
+| `02_DATABASE_SCHEMA/XRAY_LEVEL0.md` | Tek sayfa tablo haritası (otomatik) |
+| `02_DATABASE_SCHEMA/IMPACT.md`, `DEPENDENCY_GRAPH.json` | Formül bağımlılığı ve etki analizi (otomatik; regex tabanlı) |
+| `02_DATABASE_SCHEMA/SCHEMA_VERSION.json` | Şema özeti (hash) ve tablo bazlı özetler |
+| `02_DATABASE_SCHEMA/history/` | Her şema sürümünün anlık görüntüsü; farklar `04_CHANGE_HISTORY/SCHEMA_DIFFS.md` |
+| `02_DATABASE_SCHEMA/FIELD_DICTIONARY.md`, `FIELD_MEANINGS.json` | Ortak alanlar, tür tutarsızlıkları, seçmeli değerler; kaynaklı anlamlar |
+| `05_AI_PROTOCOLS/INFO_GAP_PROTOCOL.md` | Eksik bilgiyi tek listede sorma kuralı (SYS-009 `Eksik Bilgi Yönetimi`) |
+| `05_AI_PROTOCOLS/LOG_ARCHIVE_RULE.md` | Baserow satır limiti için log arşiv kuralı (**taslak**) |
+| `05_AI_PROTOCOLS/PLATFORM_SETUP.md` | AI platformlarının kalıcı talimatına konacak başlangıç metni |
+| `06_TASKS_AND_HANDOVER/BLOCKED_BY_MISSING_INFO.md` | Bilgi yüzünden duran işler (anlık görüntü) |
+| `06_TASKS_AND_HANDOVER/LOG_ARCHIVE/` | Arşivlenmiş log satırları |
+
+| Komut (depo kökünden) | Ne yapar |
+|---|---|
+| `python3 -I tools/build_schema_docs.py …` | Canlı şema dökümünden `INVENTORY.json`, `TABLES.md`, `RELATION_MAP.md`, `FORMULAS.md` üretir (`cin-exim-schema-refresh`) |
+| `python3 -I tools/build_xray.py` | Röntgen, etki analizi, bağımlılık grafiği, şema özeti üretir; `--impact "Tablo.Alan"` tek alanın etkisini yazar |
+| `python3 -I tools/schema_diff.py` | Son anlık görüntü ile güncel envanteri karşılaştırır, farkı yazar, yeni anlık görüntü alır |
+| `python3 -I tools/build_field_dictionary.py` | Alan sözlüğünü üretir |
+| `python3 -I tools/handover_check.py` | Depo tarafı tutarlılık/devir kontrolü (`cin-exim-handover-check` skill'inin parçası) |
+| `python3 -I tools/archive_log.py archive …` ve `… verify …` | SYS-010/011 satırlarını Git'e arşivler (`archive`) ve silmeden önce arşivin tam olduğunu doğrular (`verify`); **Baserow'dan silmez** |
+
+Skill'ler (`.claude/skills/`): `cin-exim` (başlangıç/çalışma/devir), `cin-exim-schema-refresh` (şema belgelerini yenileme), `cin-exim-handover-check` (devir doğrulama).
