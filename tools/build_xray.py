@@ -93,7 +93,7 @@ def level0(inv, edges):
             fi = ", ".join(sorted(fin[t["name"]])) or "—"
             out.append(f"| {t['id']} | {t['name']} | {purpose} | {t['field_count']}/{nl}/{nf} | {nb} | {fi} | {readby[t['name']]} |")
         out.append("")
-    hubs = sorted(inv["tables"], key=lambda t: -readby[t["name"]])[:5]
+    hubs = sorted(inv["tables"], key=lambda t: (-readby[t["name"]], t["name"]))[:5]
     out += ["## Merkez tablolar (en çok okunan)", ""] + [f"- **{t['name']}** — {readby[t['name']]} çapraz formül referansı" for t in hubs if readby[t['name']]]
     iso = [t["name"] for t in inv["tables"] if not any(f["type"] == "link_row" for f in t["fields"])]
     out += ["", "## Bağlantısız tablolar", ""] + [f"- {n}" for n in iso]
@@ -104,7 +104,7 @@ def impact_md(inv, edges):
     nodes = {b for _, b, _ in edges}
     for n in nodes:
         cnt[n] = len(reverse_reach(edges, n))
-    top = sorted(cnt.items(), key=lambda x: -x[1])[:25]
+    top = sorted(cnt.items(), key=lambda x: (-x[1], x[0]))[:25]
     out = ["# Etki Analizi Özeti", "",
            "> Otomatik üretildi. 'Etkilenen' = bu alanı doğrudan veya zincirleme okuyan formül alanı sayısı. "
            "Formül metninden regex ile çıkarılır; **text-based olduğu için kaçırma/yanlış eşleme olabilir**, "
