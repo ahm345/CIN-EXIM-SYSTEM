@@ -45,6 +45,28 @@ NEREDE KALDIK
 
 `Rapor Satırı` ve `Sıradaki Adım` CHAT-001'de tutulan **hazır, kısa** metinlerdir: AI bunları her `#kaydet` ve `#kapat` sonunda günceller (bölüm 3-4). Böylece açılışta her AI aynı hazır metni gösterir, kendi kafasına göre özet uydurmaz. *(Bu iki alan Baserow'da henüz yok, kullanıcı onayı bekliyor; eklenene kadar AI `Güncel Özet`in ilk iki cümlesini "Son durum", `Açık Noktalar`ın ilk maddesini "Sıradaki adım" olarak gösterir ve bunu raporda belirtir.)*
 
+**Yapılacaklar ve yarım kalanlar (açılış raporunda zorunlu).** Her açık/yarım konunun `Açık Noktalar` alanı **üç etiketli bölümden** oluşur; hiçbir AI başka biçim kullanmaz:
+
+```
+[SENDEN BEKLENEN]   kullanıcının karar/işlem vermesi gerekenler
+[YAPILACAK]         henüz başlanmamış işler
+[YARIM KALAN]       başlanmış ama bitmemiş işler
+```
+
+Her madde numaralı ve tek satırdır. Açılış raporu bu üç bölümü konu başına **aynen** gösterir (en çok 7 madde/bölüm; fazlaysa "+n madde daha"):
+
+```
+YAPILACAKLAR VE YARIM KALANLAR
+KONU-001 · <başlık>
+  SENDEN BEKLENEN: 1) … 2) …
+  YAPILACAK: 1) … 
+  YARIM KALAN: 1) …
+```
+
+Kurallar: (a) `#kaydet`/`#kapat` bu alanı **güncel** tutar; madde bitince `YAPILDI` diye `AI görüşü`/`Özet` notuna yazılıp alandan çıkarılır, **sessizce silinmez**. (b) Yeni konuşmada çıkan her "yapılacak" veya "yarım kalan" iş aynı gün alana eklenir. (c) Bölüm boşsa "yok" yazılır, başlık atlanmaz. (d) Sistem işleri (SYS-008, ör. P0 görevler) açılış raporunda **okunmaz** (token); kullanıcı "sistem işleri" derse AI SYS-008'den `Durum (Seçmeli)` açık olanları öncelik sırasıyla (P0, P1, P2) aynı üç etiketle özetler.
+
+**Standart:** Aşağıdaki başlıklar, sıra ve etiketler tüm AI'larda aynıdır: `CHAT RAPORU` → `AÇIK VE YARIM KONULAR` → `NEREDE KALDIK` → `YAPILACAKLAR VE YARIM KALANLAR` → `CEVAP BEKLEYEN SORULAR` → `SON ETKİNLİK` → `KOMUTLAR`. Başlık eklemek, çıkarmak, yeniden adlandırmak veya sıra değiştirmek hatadır.
+
 Rapor kullanıcı komutu olmadan geldiği için A) çıktısının sonundaki seçim cümlesi aynen kalır. Tablolara erişilemiyorsa rapor yerine tek cümle: "CHAT tablolarına erişemiyorum; okumadım." ve komut listesi yine gösterilir. `#chatrapor` yazılırsa aynı rapor (komut listesi hariç) istenildiği an yeniden verilir.
 
 **A) `#chatrapor` çıktısı** (CHAT-001 ve CHAT-003 okunduktan sonra):
