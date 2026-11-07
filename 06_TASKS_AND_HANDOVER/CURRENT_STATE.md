@@ -6,15 +6,17 @@
 
 > **Güncelleme notu 2 (2026-11-07, Claude Code):** SYS-005'e `DEC-SYS-003` (log arşiv kuralı kabulü, kullanıcı devri) yazıldı (SYS-005 3 karar); SYS-010 ID 4–7 kapatıldı; `GIT_ACCESS.md` eklendi; depo public durumda.
 
+> **Güncelleme notu 3 (2026-11-07, Claude Code; şema dökümü 15:09 +03:00):** Baserow'da **CHAT-001/002/003** tabloları (ID 1306063/64/65) claude.ai'deki Claude tarafından kuruldu (SYS-004 `CHG-SYS-014`, SYS-005 `DEC-SYS-004`, SYS-008 `TASK-CHAT-001/002`); canlı okunarak doğrulandı. Git tarafı (şema 44 tablo, `CHAT_PROTOCOL.md` taslağı, `tools/archive_chat.py`, `09_CHAT_ARCHIVE/`, `handover_check` CHAT kontrolleri) dalda `ai/claude/chat-v0.4.0`; **`main`'e alınmadı**. Komut seti kabul edildi (DEC-SYS-004), protokol metni SYS-009'a **işlenmedi**, platform talimatı **konmadı** (TASK-CHAT-002, kullanıcı).
+
 ## Canlı doğrulanan sayılar
 
 | Konu | Değer |
 |---|---|
 | Veritabanı | `baserow`, ID 263856 |
-| Tablo | 41 (23 operasyonel + 6 senaryo + 11 SYS + 1 eski `Table`) |
-| Alan / ilişki alanı / formül | 845 / 219 / 91 (`02_DATABASE_SCHEMA/INVENTORY.json`) |
+| Tablo | 44 (23 operasyonel + 6 senaryo + 11 SYS + 3 CHAT + 1 eski `Table`) |
+| Alan / ilişki alanı / formül | 881 / 223 / 91 (`02_DATABASE_SCHEMA/INVENTORY.json`, 2026-11-07 CHAT tabloları eklendi) |
 | SYS-009 protokol | v1.5 (canlı doğrulandı 2026-11-07; `Girişte Zorunlu Adımlar` alanı sürüm numarası anmayacak şekilde düzeltildi, bkz. `PROTOCOL_MIRROR.md`) |
-| SYS-010 oturum kaydı | 9 (ID 4–7 2026-11-07 06:51'de kullanıcı onayıyla "Kapatıldı – iş TAMAMLANMADI" yapıldı; ID 9 = `CLAUDE-20261107-001`) |
+| SYS-010 oturum kaydı | 10 (ID 10 = `CLAUDE-20261107-002`, claude.ai, "Devam ediyor"; ID 4–7 2026-11-07 06:51'de kullanıcı onayıyla "Kapatıldı – iş TAMAMLANMADI" yapıldı; ID 9 = `CLAUDE-20261107-001`) |
 | SYS-008 görev | 15 |
 | Makineler / Belgeler satır | 57 / 52 |
 | SYS-007, Senaryolar | 0 satır (boş) |

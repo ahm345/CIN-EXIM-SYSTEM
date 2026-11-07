@@ -126,7 +126,7 @@ def check_md_tables():
 def check_reachable():
     start = rd("AI_START.md")
     want = []
-    for d in ("02_DATABASE_SCHEMA", "05_AI_PROTOCOLS", "06_TASKS_AND_HANDOVER"):
+    for d in ("02_DATABASE_SCHEMA", "05_AI_PROTOCOLS", "06_TASKS_AND_HANDOVER", "08_INBOX", "08_RESEARCH", "09_CHAT_ARCHIVE"):
         want += [os.path.basename(p) for p in glob.glob(os.path.join(ROOT, d, "*")) if os.path.isfile(p)]
     want += [os.path.basename(p) for p in glob.glob(os.path.join(ROOT, "tools", "*.py"))]
     want += [os.path.basename(os.path.dirname(p)) for p in glob.glob(os.path.join(ROOT, ".claude", "skills", "*", "SKILL.md"))]
@@ -135,6 +135,53 @@ def check_reachable():
         rep("UYARI", "ai_start_kapsam", "AI_START.md şu dosyalardan/araçlardan hiç söz etmiyor, yeni AI bunları bulamaz: " + ", ".join(missing))
     else:
         rep("TAMAM", "ai_start_kapsam", f"AI_START.md {len(set(want))} belge/araç/skill'in hepsine yol gösteriyor")
+
+
+CHAT_IDS = {1306063: "CHAT-001", 1306064: "CHAT-002", 1306065: "CHAT-003"}
+CHAT_FIELDS = {
+    1306063: ["Konu Kodu", "Konu Başlığı", "Durum", "Güncel Özet", "Açık Noktalar", "Arşiv Yolu"],
+    1306064: ["Not Kodu", "Konu", "Yazan", "Not Türü", "Onay Durumu", "İçerik"],
+    1306065: ["Soru Kodu", "Konu", "Soru", "Soru Durumu", "Kullanıcı Kararı", "Sentez"],
+}
+
+
+def check_chat(inv):
+    """CHAT tabloları envanterde var mı, beklenen alanlar duruyor mu; arşiv dosyaları tutarlı mı."""
+    by = {t["id"]: t for t in inv["tables"]}
+    missing = [n for i, n in CHAT_IDS.items() if i not in by]
+    if missing:
+        rep("HATA", "chat_sema", "envanterde CHAT tablosu yok: " + ", ".join(missing) + " (build_schema_docs --base ile ekle)")
+        return
+    bad = []
+    for i, want in CHAT_FIELDS.items():
+        have = {f["name"] for f in by[i]["fields"]}
+        bad += [f"{CHAT_IDS[i]}.{w}" for w in want if w not in have]
+    if bad:
+        rep("HATA", "chat_sema", "CHAT şemasında beklenen alan yok: " + ", ".join(bad))
+    else:
+        rep("TAMAM", "chat_sema", "CHAT-001/002/003 envanterde ve beklenen alanlar var")
+    arch = os.path.join(ROOT, "09_CHAT_ARCHIVE")
+    if not os.path.isdir(arch):
+        rep("UYARI", "chat_arsiv", "09_CHAT_ARCHIVE/ klasörü yok")
+        return
+    probs = []
+    for jp in sorted(glob.glob(os.path.join(arch, "KONU-*.json"))):
+        base = os.path.basename(jp)[:-5]
+        if not os.path.exists(os.path.join(arch, base + ".md")):
+            probs.append(f"{base}.md eksik")
+        try:
+            d = json.load(open(jp, encoding="utf-8"))
+            if not d.get("konu") or "notlar" not in d or "sorular" not in d:
+                probs.append(f"{base}.json bozuk")
+        except ValueError:
+            probs.append(f"{base}.json okunamıyor")
+    for mp in glob.glob(os.path.join(arch, "KONU-*.md")):
+        if not os.path.exists(mp[:-3] + ".json"):
+            probs.append(os.path.basename(mp) + " için .json eksik")
+    if probs:
+        rep("HATA", "chat_arsiv", "arşiv tutarsız: " + "; ".join(probs))
+    else:
+        rep("TAMAM", "chat_arsiv", f"CHAT arşivi tutarlı ({len(glob.glob(os.path.join(arch, 'KONU-*.json')))} konu)")
 
 
 def check_versions():
@@ -220,6 +267,7 @@ def main():
     inv = json.loads(rd("02_DATABASE_SCHEMA/INVENTORY.json"))
     got = check_inventory(inv, X)
     check_xray(got)
+    check_chat(inv)
     check_md_tables()
     check_reachable()
     check_versions()

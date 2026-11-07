@@ -17,7 +17,7 @@ CIN EXIM
 │   └── Senaryo motoru ...... Senaryolar · Senaryo Finansman Dilimleri · Senaryo Ödeme Planı
 │                             · Senaryo Varsayımları · Senaryo Değerlendirme · Senaryo Gelir Gider Akışı
 │
-├── 02 – SYS Yönetim Sistemi (Baserow içinde, 11 tablo)
+├── 02 – SYS Yönetim Sistemi (Baserow içinde, 11 tablo) + CHAT-001/002/003 (konu ve sohbet hafızası, 3 tablo; 05_AI_PROTOCOLS/CHAT_PROTOCOL.md)
 │   ├── SYS-001 Ana indeks          ├── SYS-007 Geri yükleme / klonlama
 │   ├── SYS-002 Sürüm kayıtları     ├── SYS-008 Görev ve geliştirme takibi
 │   ├── SYS-003 Yedek paketleri     ├── SYS-009 AI işletim protokolü  ← protokolün TEK KAYNAĞI
@@ -58,7 +58,8 @@ CIN-EXIM-SYSTEM/
 ├── 06_TASKS_AND_HANDOVER/         CURRENT_STATE.md · HANDOVER_TEMPLATE.md · BLOCKED_BY_MISSING_INFO.md · LOG_ARCHIVE/
 ├── 07_TESTS_AND_RELEASES/         KNOWN_ISSUES · TEST_CHECKLISTS · RELEASES
 ├── 08_INBOX/ · 08_RESEARCH/       yazamayan AI çıktıları · ortak web araştırma havuzu (INDEX.md)
-├── tools/                         build_schema_docs · build_xray · schema_diff · build_field_dictionary · handover_check · archive_log
+├── 09_CHAT_ARCHIVE/               biten CHAT konularının arşivi (archive_chat.py)
+├── tools/                         build_schema_docs · build_xray · schema_diff · build_field_dictionary · handover_check · archive_log · archive_chat
 └── .claude/skills/                cin-exim · cin-exim-schema-refresh · cin-exim-handover-check
 ```
 

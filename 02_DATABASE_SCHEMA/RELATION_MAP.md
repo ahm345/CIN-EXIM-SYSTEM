@@ -1,6 +1,6 @@
 # Tablo İlişki Haritası
 
-> Otomatik üretildi (`tools/build_schema_docs.py`), kaynak: canlı şema 2026-11-06T08:57:59+03:00. Kenar etiketi = iki tablo arasındaki ilişki alanı sayısı (çift yönlü alanlar tek sayılır).
+> Otomatik üretildi (`tools/build_schema_docs.py`), kaynak: canlı şema 2026-11-07T15:09:04+03:00. Kenar etiketi = iki tablo arasındaki ilişki alanı sayısı (çift yönlü alanlar tek sayılır).
 
 ## 1. Grup düzeyinde harita
 
@@ -13,6 +13,7 @@ flowchart LR
     G05["05 Senaryo Motoru (6 tablo)"]
     G06["06 SYS Yönetim (11 tablo)"]
     G07["07 Eski / Referans (1 tablo)"]
+    G08["08 CHAT (konu ve sohbet hafızası) (3 tablo)"]
     G01 ---|11| G02
     G01 ---|6| G03
     G01 ---|13| G04
@@ -221,6 +222,9 @@ Parantez içindeki sayı, o tablodan hedefe giden ilişki alanı sayısıdır. H
 | SYS-010 | SYS-002 (1), SYS-005 (1), SYS-006 (1), SYS-008 (1), SYS-011 (1) |
 | SYS-011 | SYS-010 (1) |
 | Table | SYS-006 (1) |
+| CHAT-001 \| Konular | CHAT-002 \| Notlar (1), CHAT-003 \| Sorular (1) |
+| CHAT-002 \| Notlar | CHAT-001 \| Konular (1) |
+| CHAT-003 \| Sorular | CHAT-001 \| Konular (1) |
 
 ## 6. Firmalar rol alanları (mülkiyet ve sorumluluk zinciri)
 

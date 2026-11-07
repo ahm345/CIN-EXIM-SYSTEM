@@ -22,13 +22,13 @@ Protokolün **tek kaynağı** Baserow'daki `SYS-009` kaydıdır; bu depodaki dos
 | Klasör | İçerik |
 |---|---|
 | [`01_SYSTEM_TREE/`](01_SYSTEM_TREE/) | Ana sistem ağacı, modül → tablo haritası |
-| [`02_DATABASE_SCHEMA/`](02_DATABASE_SCHEMA/) | 41 tablonun envanteri, tablo kartları, ilişki haritası (Mermaid), tüm formüller, röntgen, etki analizi, alan sözlüğü, şema anlık görüntüleri (otomatik üretilir) |
+| [`02_DATABASE_SCHEMA/`](02_DATABASE_SCHEMA/) | 44 tablonun envanteri, tablo kartları, ilişki haritası (Mermaid), tüm formüller, röntgen, etki analizi, alan sözlüğü, şema anlık görüntüleri (otomatik üretilir) |
 | [`03_BUSINESS_RULES/`](03_BUSINESS_RULES/) | İş kuralları ve hesap mantıkları (kanıtlı / karar bekleyen ayrımıyla) |
 | [`04_CHANGE_HISTORY/`](04_CHANGE_HISTORY/) | Değişiklik günlüğü, kayıt şablonu ve otomatik şema farkı (`SCHEMA_DIFFS.md`) |
 | [`05_AI_PROTOCOLS/`](05_AI_PROTOCOLS/) | SYS-009 yansıması, eksik bilgi protokolü, log arşiv kuralı, SYS ↔ Git bağlantı standardı, Git erişim kılavuzu, geliştirme isteği akışı, platform kurulum metni |
 | [`06_TASKS_AND_HANDOVER/`](06_TASKS_AND_HANDOVER/) | Güncel durum özeti, devir şablonu, bilgi yüzünden duran işler, log arşivi |
 | [`07_TESTS_AND_RELEASES/`](07_TESTS_AND_RELEASES/) | Bilinen sorunlar, test kontrol listeleri, sürüm politikası |
-| [`08_INBOX/`](08_INBOX/) · [`08_RESEARCH/`](08_RESEARCH/) | Yazamayan AI çıktıları; ortak web araştırma havuzu |
+| [`08_INBOX/`](08_INBOX/) · [`08_RESEARCH/`](08_RESEARCH/) · [`09_CHAT_ARCHIVE/`](09_CHAT_ARCHIVE/) | Yazamayan AI çıktıları; ortak web araştırma havuzu; biten CHAT konularının arşivi |
 | [`tools/`](tools/) | Şema belgelerini üreten, şema farkını yazan, devri ve tutarlılığı kontrol eden, log arşivleyen betikler (komut listesi: `AI_START.md` bölüm 7) |
 | [`.claude/skills/`](.claude/skills/) | Claude Code için CIN EXIM skill'leri (başlangıç/devir, şema yenileme, devir doğrulama) |
 

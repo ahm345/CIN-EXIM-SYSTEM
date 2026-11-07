@@ -33,6 +33,7 @@ GROUPS = {
     "05": "05 Senaryo Motoru",
     "06": "06 SYS Yönetim",
     "07": "07 Eski / Referans",
+    "08": "08 CHAT (konu ve sohbet hafızası)",
 }
 
 META = {
@@ -75,6 +76,9 @@ META = {
     1301805: ("06", "SYS-008 Görev ve Geliştirme Takibi: öncelik, durum, sorumlu, tamamlanma kriteri."),
     1301819: ("06", "SYS-009 AI İşletim Protokolü: giriş, çalışma, çıkış, yasaklar. Protokolün TEK KAYNAĞI."),
     1301820: ("06", "SYS-010 AI Oturum ve Devir Kayıtları: her oturum için tek kayıt; sonraki AI için talimat."),
+    1306063: ("08", "CHAT-001 Konular: her konu bir satır (durum, güncel özet, açık noktalar, kararlar, arşiv yolu). Kural: 05_AI_PROTOCOLS/CHAT_PROTOCOL.md."),
+    1306064: ("08", "CHAT-002 Notlar: konunun içindeki temizlenmiş kayıtlar (kullanıcı sözü, AI görüşü, karar adayı, karar); her not bir konuya bağlıdır."),
+    1306065: ("08", "CHAT-003 Sorular: aynı soruya her AI'nın bağımsız cevabı (ayrı kolon), sentez ve iş emri taslağı, kullanıcı kararı."),
     1301821: ("06", "SYS-011 AI Çalışma ve Olay Günlüğü: yalnızca hata, geri alma, beklenmedik durum, kullanıcı talebi."),
     620460: ("07", "Eski AI denetim raporu kaydı (SYS-006 ile bağlı). Korunur, silinmez."),
 }
@@ -339,10 +343,17 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("raw", nargs="+", help="get_table_schema ham JSON dosyaları")
     ap.add_argument("--out", default="02_DATABASE_SCHEMA")
+    ap.add_argument("--base", help="Mevcut INVENTORY.json; ham dosyadaki tablolar bunun üzerine eklenir/değiştirilir (tüm şemayı yeniden dökmeden tablo eklemek için)")
     ap.add_argument("--generated-at", required=True, help="ISO zaman damgası (araç saatinden; uydurmayın)")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     tables = normalize(load(a.raw))
+    if a.base:
+        with open(a.base, encoding="utf-8") as fh:
+            base = {t["id"]: t for t in json.load(fh)["tables"]}
+        for t in tables:
+            base[t["id"]] = t
+        tables = [base[k] for k in sorted(base)]
     undefined = [t["name"] for t in tables if t["purpose"].startswith("TANIMSIZ")]
     meta = write_inventory(tables, a.out, a.generated_at)
     write_tables_md(tables, a.out, meta)

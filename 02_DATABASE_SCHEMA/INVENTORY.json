@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-11-06T08:57:59+03:00",
+  "generated_at": "2026-11-07T15:09:04+03:00",
   "source": "Baserow veritabanı 263856 (canlı şema, salt okunur)",
-  "table_count": 41,
-  "field_count": 845,
-  "link_field_count": 219,
+  "table_count": 44,
+  "field_count": 881,
+  "link_field_count": 223,
   "formula_count": 91,
   "note": "Satır sayıları ve satır verisi burada YOKTUR; canlı okunmalıdır."
  },
@@ -6031,6 +6031,265 @@
      "type": "formula",
      "formula": "if(field('Borç Servisi') = 0, 0, field('Net Nakit Akışı') / field('Borç Servisi'))",
      "formula_type": "number"
+    }
+   ]
+  },
+  {
+   "id": 1306063,
+   "name": "CHAT-001 | Konular",
+   "group": "08",
+   "group_name": "08 CHAT (konu ve sohbet hafızası)",
+   "purpose": "CHAT-001 Konular: her konu bir satır (durum, güncel özet, açık noktalar, kararlar, arşiv yolu). Kural: 05_AI_PROTOCOLS/CHAT_PROTOCOL.md.",
+   "field_count": 14,
+   "primary_field": "Konu Kodu",
+   "fields": [
+    {
+     "id": 12132362,
+     "name": "Konu Kodu",
+     "type": "text",
+     "primary": true
+    },
+    {
+     "id": 12132365,
+     "name": "Konu Başlığı",
+     "type": "text"
+    },
+    {
+     "id": 12132366,
+     "name": "Durum",
+     "type": "single_select",
+     "options": [
+      "Açık",
+      "Yarım",
+      "Bitti",
+      "Arşivlendi"
+     ]
+    },
+    {
+     "id": 12132367,
+     "name": "Amaç",
+     "type": "long_text"
+    },
+    {
+     "id": 12132368,
+     "name": "Güncel Özet",
+     "type": "long_text"
+    },
+    {
+     "id": 12132369,
+     "name": "Açık Noktalar",
+     "type": "long_text"
+    },
+    {
+     "id": 12132370,
+     "name": "Alınan Kararlar",
+     "type": "long_text"
+    },
+    {
+     "id": 12132371,
+     "name": "Son Konuşan AI",
+     "type": "text"
+    },
+    {
+     "id": 12132372,
+     "name": "Son Güncelleme",
+     "type": "date"
+    },
+    {
+     "id": 12132373,
+     "name": "Kaynak Sohbetler",
+     "type": "long_text"
+    },
+    {
+     "id": 12132374,
+     "name": "Arşiv Yolu",
+     "type": "text"
+    },
+    {
+     "id": 12132375,
+     "name": "İlgili SYS Kodları",
+     "type": "text"
+    },
+    {
+     "id": 12132383,
+     "name": "CHAT-002 | Notlar",
+     "type": "link_row",
+     "target_id": 1306064,
+     "target": "CHAT-002 | Notlar"
+    },
+    {
+     "id": 12132397,
+     "name": "CHAT-003 | Sorular",
+     "type": "link_row",
+     "target_id": 1306065,
+     "target": "CHAT-003 | Sorular"
+    }
+   ]
+  },
+  {
+   "id": 1306064,
+   "name": "CHAT-002 | Notlar",
+   "group": "08",
+   "group_name": "08 CHAT (konu ve sohbet hafızası)",
+   "purpose": "CHAT-002 Notlar: konunun içindeki temizlenmiş kayıtlar (kullanıcı sözü, AI görüşü, karar adayı, karar); her not bir konuya bağlıdır.",
+   "field_count": 8,
+   "primary_field": "Not Kodu",
+   "fields": [
+    {
+     "id": 12132363,
+     "name": "Not Kodu",
+     "type": "text",
+     "primary": true
+    },
+    {
+     "id": 12132376,
+     "name": "Yazan",
+     "type": "text"
+    },
+    {
+     "id": 12132377,
+     "name": "Not Türü",
+     "type": "single_select",
+     "options": [
+      "Kullanıcı sözü",
+      "AI görüşü",
+      "Soru",
+      "Öneri",
+      "Karar adayı",
+      "Karar",
+      "Test sonucu",
+      "Özet"
+     ]
+    },
+    {
+     "id": 12132378,
+     "name": "Onay Durumu",
+     "type": "single_select",
+     "options": [
+      "Onaysız",
+      "Kullanıcı onayladı",
+      "Reddedildi"
+     ]
+    },
+    {
+     "id": 12132379,
+     "name": "İçerik",
+     "type": "long_text"
+    },
+    {
+     "id": 12132380,
+     "name": "Tarih",
+     "type": "date"
+    },
+    {
+     "id": 12132381,
+     "name": "Kaynak Sohbet",
+     "type": "text"
+    },
+    {
+     "id": 12132382,
+     "name": "Konu",
+     "type": "link_row",
+     "target_id": 1306063,
+     "target": "CHAT-001 | Konular"
+    }
+   ]
+  },
+  {
+   "id": 1306065,
+   "name": "CHAT-003 | Sorular",
+   "group": "08",
+   "group_name": "08 CHAT (konu ve sohbet hafızası)",
+   "purpose": "CHAT-003 Sorular: aynı soruya her AI'nın bağımsız cevabı (ayrı kolon), sentez ve iş emri taslağı, kullanıcı kararı.",
+   "field_count": 14,
+   "primary_field": "Soru Kodu",
+   "fields": [
+    {
+     "id": 12132364,
+     "name": "Soru Kodu",
+     "type": "text",
+     "primary": true
+    },
+    {
+     "id": 12132384,
+     "name": "Soru",
+     "type": "long_text"
+    },
+    {
+     "id": 12132385,
+     "name": "Soru Durumu",
+     "type": "single_select",
+     "options": [
+      "Açık",
+      "Cevaplar toplanıyor",
+      "Sentezlendi",
+      "Onaylandı",
+      "İptal"
+     ]
+    },
+    {
+     "id": 12132386,
+     "name": "GPT Cevabı",
+     "type": "long_text"
+    },
+    {
+     "id": 12132387,
+     "name": "Claude Cevabı",
+     "type": "long_text"
+    },
+    {
+     "id": 12132388,
+     "name": "Perplexity Cevabı",
+     "type": "long_text"
+    },
+    {
+     "id": 12132389,
+     "name": "Diğer AI Cevabı",
+     "type": "long_text"
+    },
+    {
+     "id": 12132390,
+     "name": "Bağımsızlık Notu",
+     "type": "text"
+    },
+    {
+     "id": 12132391,
+     "name": "Sentez",
+     "type": "long_text"
+    },
+    {
+     "id": 12132392,
+     "name": "Sentezi Yazan",
+     "type": "text"
+    },
+    {
+     "id": 12132393,
+     "name": "İş Emri / Prompt",
+     "type": "long_text"
+    },
+    {
+     "id": 12132394,
+     "name": "Kullanıcı Kararı",
+     "type": "single_select",
+     "options": [
+      "Bekliyor",
+      "Uygula",
+      "Geliştir",
+      "Beklet",
+      "Reddet"
+     ]
+    },
+    {
+     "id": 12132395,
+     "name": "Soru Tarihi",
+     "type": "date"
+    },
+    {
+     "id": 12132396,
+     "name": "Konu",
+     "type": "link_row",
+     "target_id": 1306063,
+     "target": "CHAT-001 | Konular"
     }
    ]
   }

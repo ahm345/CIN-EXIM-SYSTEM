@@ -101,7 +101,8 @@ Adımlar ve etki analizi şablonu: `05_AI_PROTOCOLS/FEATURE_REQUEST_WORKFLOW.md`
 | `05_AI_PROTOCOLS/CHAT_PROTOCOL.md` | CHAT komutları (`#chatrapor #kaydet #kapat #soru #sentez`), aktif konu ve bölüm kuralı (taslak v0.3; DEC-SYS-004) |
 | `05_AI_PROTOCOLS/REQUEST_BOARD.md` | GEÇERSİZ (yerine CHAT_PROTOCOL.md); tarihsel |
 | `05_AI_PROTOCOLS/AI_SETUP.md` | Hangi AI neyi okuyup yazar; kurulum ve rol dağılımı |
-| `08_INBOX/README.md` | Yazamayan AI'ların çıktısı; üzerine yazma yok |
+| `08_INBOX/README.md` (ve `ISLENDI.md`) | Yazamayan AI'ların çıktısı; üzerine yazma yok; işlenenler `ISLENDI.md`'de |
+| `09_CHAT_ARCHIVE/README.md` | Biten CHAT konularının Git arşivi (`archive_chat.py` üretir) |
 | `08_RESEARCH/README.md` | Ortak web araştırma havuzu; önce `INDEX.md`'ye bak, tekrar arama |
 | `05_AI_PROTOCOLS/GIT_ACCESS.md` | Bu depoya AI'lar nasıl girer, kim yazabilir (sır içermez); public/private durumu |
 | `06_TASKS_AND_HANDOVER/BLOCKED_BY_MISSING_INFO.md` | Bilgi yüzünden duran işler (anlık görüntü) |
@@ -109,11 +110,12 @@ Adımlar ve etki analizi şablonu: `05_AI_PROTOCOLS/FEATURE_REQUEST_WORKFLOW.md`
 
 | Komut (depo kökünden) | Ne yapar |
 |---|---|
-| `python3 -I tools/build_schema_docs.py …` | Canlı şema dökümünden `INVENTORY.json`, `TABLES.md`, `RELATION_MAP.md`, `FORMULAS.md` üretir (`cin-exim-schema-refresh`) |
+| `python3 -I tools/build_schema_docs.py …` | Canlı şema dökümünden (`--base INVENTORY.json` ile yalnızca yeni/değişen tabloları ekler; tüm şemayı yeniden dökmeye gerek kalmaz) `INVENTORY.json`, `TABLES.md`, `RELATION_MAP.md`, `FORMULAS.md` üretir (`cin-exim-schema-refresh`) |
 | `python3 -I tools/build_xray.py` | Röntgen, etki analizi, bağımlılık grafiği, şema özeti üretir; `--impact "Tablo.Alan"` tek alanın etkisini yazar |
 | `python3 -I tools/schema_diff.py` | Son anlık görüntü ile güncel envanteri karşılaştırır, farkı yazar, yeni anlık görüntü alır |
 | `python3 -I tools/build_field_dictionary.py` | Alan sözlüğünü üretir |
 | `python3 -I tools/handover_check.py` | Depo tarafı tutarlılık/devir kontrolü (`cin-exim-handover-check` skill'inin parçası) |
+| `python3 -I tools/archive_chat.py archive …` ve `… verify …` | Biten CHAT konusunun notlarını/sorularını `09_CHAT_ARCHIVE/`'e arşivler, silmeden önce doğrular; **Baserow'dan silmez**, konu `Bitti` değilse reddeder (`CHAT_PROTOCOL.md` bölüm 9) |
 | `python3 -I tools/archive_log.py archive …` ve `… verify …` | SYS-010/011 satırlarını Git'e arşivler (`archive`) ve silmeden önce arşivin tam olduğunu doğrular (`verify`); **Baserow'dan silmez** |
 
 Skill'ler (`.claude/skills/`): `cin-exim` (başlangıç/çalışma/devir), `cin-exim-schema-refresh` (şema belgelerini yenileme), `cin-exim-handover-check` (devir doğrulama).

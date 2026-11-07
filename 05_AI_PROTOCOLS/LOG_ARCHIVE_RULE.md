@@ -29,7 +29,7 @@ Satır geçmişi/çöp kutusu kısadır (KI-17, beyan: ≈14 gün). **Baserow'da
 | Öncelikli | Toplam ≥ **2.550** (%85) | Arşivi P1 görev olarak SYS-008'e yazar (onayla). |
 | Kritik | Toplam ≥ **2.850** (%95) | Yeni log yazmadan önce kullanıcıya sorar; yazma başarısız olabilir, başarı iddia etme. |
 
-Toplam satır sayısını AI **doğrudan göremez**. İki yol: kullanıcıdan *Workspace usage* değerini iste, veya her tablodan `list_table_rows` (`size=1`) `count` değerini topla (41 tablo + yedek veritabanı). Sayılmayan yerleri ("yedek kopya sayılmadı") raporda açıkça yaz.
+Toplam satır sayısını AI **doğrudan göremez**. İki yol: kullanıcıdan *Workspace usage* değerini iste, veya her tablodan `list_table_rows` (`size=1`) `count` değerini topla (44 tablo + yedek veritabanı). Sayılmayan yerleri ("yedek kopya sayılmadı") raporda açıkça yaz.
 
 ## 4. Saklama (öneri)
 

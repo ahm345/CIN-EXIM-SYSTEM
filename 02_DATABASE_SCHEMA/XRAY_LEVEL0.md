@@ -1,8 +1,8 @@
 # Röntgen — Seviye 0 (tek sayfa harita)
 
-> Otomatik üretildi (`tools/build_xray.py`). Şema kaynağı: INVENTORY.json, 2026-11-06T08:57:59+03:00. Çelişkide canlı Baserow geçerlidir. Satır verisi yoktur.
+> Otomatik üretildi (`tools/build_xray.py`). Şema kaynağı: INVENTORY.json, 2026-11-07T15:09:04+03:00. Çelişkide canlı Baserow geçerlidir. Satır verisi yoktur.
 
-**41 tablo · 845 alan · 219 ilişki alanı · 91 formül**
+**44 tablo · 881 alan · 223 ilişki alanı · 91 formül**
 
 Okuma sırası: bu sayfa → `01_SYSTEM_TREE/MODULES.md` (iş → tablo) → `TABLES.md` (tam kart) → `IMPACT.md` (değişiklik öncesi).
 
@@ -83,6 +83,14 @@ Sütunlar: **Bağlı olduğu** = bu tablodan çıkan ilişki alanı sayısıyla 
 | ID | Tablo | Amaç | Alan/İlişki/Formül | Bağlı olduğu | Formül girdisi | Okunma |
 |---|---|---|---|---|---|---|
 | 620460 | Table | Eski AI denetim raporu kaydı (SYS-006 ile bağlı). Korunur, silinmez. | 8/1/0 | SYS-006 \| Sistem Denetim ve Testleri | — | 0 |
+
+## 08 CHAT (konu ve sohbet hafızası)
+
+| ID | Tablo | Amaç | Alan/İlişki/Formül | Bağlı olduğu | Formül girdisi | Okunma |
+|---|---|---|---|---|---|---|
+| 1306063 | CHAT-001 \| Konular | CHAT-001 Konular: her konu bir satır (durum, güncel özet, açık noktalar, kararlar, arşiv yolu). Kural: 05_A... | 14/2/0 | CHAT-002 \| Notlar, CHAT-003 \| Sorular | — | 0 |
+| 1306064 | CHAT-002 \| Notlar | CHAT-002 Notlar: konunun içindeki temizlenmiş kayıtlar (kullanıcı sözü, AI görüşü, karar adayı, karar); her... | 8/1/0 | CHAT-001 \| Konular | — | 0 |
+| 1306065 | CHAT-003 \| Sorular | CHAT-003 Sorular: aynı soruya her AI'nın bağımsız cevabı (ayrı kolon), sentez ve iş emri taslağı, kullanıcı... | 14/1/0 | CHAT-001 \| Konular | — | 0 |
 
 ## Merkez tablolar (en çok okunan)
 

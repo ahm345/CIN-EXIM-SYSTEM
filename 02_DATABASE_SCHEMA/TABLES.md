@@ -1,8 +1,8 @@
 # Tablo Kartları
 
-> Otomatik üretildi (`tools/build_schema_docs.py`). Kaynak: canlı Baserow şeması, 2026-11-06T08:57:59+03:00. **Elle düzenlemeyin**; şemayı yeniden okuyup betiği çalıştırın.
+> Otomatik üretildi (`tools/build_schema_docs.py`). Kaynak: canlı Baserow şeması, 2026-11-07T15:09:04+03:00. **Elle düzenlemeyin**; şemayı yeniden okuyup betiği çalıştırın.
 
-**Özet:** 41 tablo, 845 alan, 219 ilişki alanı, 91 formül. Satır sayıları bu belgede yoktur (canlı okunmalı).
+**Özet:** 44 tablo, 881 alan, 223 ilişki alanı, 91 formül. Satır sayıları bu belgede yoktur (canlı okunmalı).
 
 ## Hızlı dizin
 
@@ -49,6 +49,9 @@
 | 06 SYS Yönetim | SYS-010 \| AI Oturum ve Devir Kayıtları | 1301820 | 24 | 5 | 0 |
 | 06 SYS Yönetim | SYS-011 \| AI Çalışma ve Olay Günlüğü | 1301821 | 18 | 1 | 0 |
 | 07 Eski / Referans | Table | 620460 | 8 | 1 | 0 |
+| 08 CHAT (konu ve sohbet hafızası) | CHAT-001 \| Konular | 1306063 | 14 | 2 | 0 |
+| 08 CHAT (konu ve sohbet hafızası) | CHAT-002 \| Notlar | 1306064 | 8 | 1 | 0 |
+| 08 CHAT (konu ve sohbet hafızası) | CHAT-003 \| Sorular | 1306065 | 14 | 1 | 0 |
 
 
 ---
@@ -1741,5 +1744,92 @@ Eski AI denetim raporu kaydı (SYS-006 ile bağlı). Korunur, silinmez.
 | veri tabanı  adı | long_text |
 | yz adı | text |
 | SYS-006 \| Sistem Denetim ve Testleri | link_row |
+
+</details>
+
+
+---
+
+## 08 CHAT (konu ve sohbet hafızası)
+
+### CHAT-001 | Konular  (ID 1306063)
+
+CHAT-001 Konular: her konu bir satır (durum, güncel özet, açık noktalar, kararlar, arşiv yolu). Kural: 05_AI_PROTOCOLS/CHAT_PROTOCOL.md.
+
+- Birincil alan: `Konu Kodu` | Alan sayısı: 14
+- İlişkiler (alan -> hedef tablo):
+  - `CHAT-002 | Notlar` -> **CHAT-002 \| Notlar** (1306064)
+  - `CHAT-003 | Sorular` -> **CHAT-003 \| Sorular** (1306065)
+
+<details><summary>Tüm alanlar</summary>
+
+| Alan | Tip |
+|---|---|
+| Konu Kodu | text |
+| Konu Başlığı | text |
+| Durum | single_select [Açık / Yarım / Bitti / Arşivlendi] |
+| Amaç | long_text |
+| Güncel Özet | long_text |
+| Açık Noktalar | long_text |
+| Alınan Kararlar | long_text |
+| Son Konuşan AI | text |
+| Son Güncelleme | date |
+| Kaynak Sohbetler | long_text |
+| Arşiv Yolu | text |
+| İlgili SYS Kodları | text |
+| CHAT-002 \| Notlar | link_row |
+| CHAT-003 \| Sorular | link_row |
+
+</details>
+
+### CHAT-002 | Notlar  (ID 1306064)
+
+CHAT-002 Notlar: konunun içindeki temizlenmiş kayıtlar (kullanıcı sözü, AI görüşü, karar adayı, karar); her not bir konuya bağlıdır.
+
+- Birincil alan: `Not Kodu` | Alan sayısı: 8
+- İlişkiler (alan -> hedef tablo):
+  - `Konu` -> **CHAT-001 \| Konular** (1306063)
+
+<details><summary>Tüm alanlar</summary>
+
+| Alan | Tip |
+|---|---|
+| Not Kodu | text |
+| Yazan | text |
+| Not Türü | single_select [Kullanıcı sözü / AI görüşü / Soru / Öneri / Karar adayı / Karar / Test sonucu / Özet] |
+| Onay Durumu | single_select [Onaysız / Kullanıcı onayladı / Reddedildi] |
+| İçerik | long_text |
+| Tarih | date |
+| Kaynak Sohbet | text |
+| Konu | link_row |
+
+</details>
+
+### CHAT-003 | Sorular  (ID 1306065)
+
+CHAT-003 Sorular: aynı soruya her AI'nın bağımsız cevabı (ayrı kolon), sentez ve iş emri taslağı, kullanıcı kararı.
+
+- Birincil alan: `Soru Kodu` | Alan sayısı: 14
+- İlişkiler (alan -> hedef tablo):
+  - `Konu` -> **CHAT-001 \| Konular** (1306063)
+
+<details><summary>Tüm alanlar</summary>
+
+| Alan | Tip |
+|---|---|
+| Soru Kodu | text |
+| Soru | long_text |
+| Soru Durumu | single_select [Açık / Cevaplar toplanıyor / Sentezlendi / Onaylandı / İptal] |
+| GPT Cevabı | long_text |
+| Claude Cevabı | long_text |
+| Perplexity Cevabı | long_text |
+| Diğer AI Cevabı | long_text |
+| Bağımsızlık Notu | text |
+| Sentez | long_text |
+| Sentezi Yazan | text |
+| İş Emri / Prompt | long_text |
+| Kullanıcı Kararı | single_select [Bekliyor / Uygula / Geliştir / Beklet / Reddet] |
+| Soru Tarihi | date |
+| Konu | link_row |
 
 </details>

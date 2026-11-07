@@ -1,25 +1,25 @@
 # Alan Sözlüğü
 
-> Otomatik üretildi (`tools/build_field_dictionary.py`). Şema kaynağı: INVENTORY.json, 2026-11-06T08:57:59+03:00. Çelişkide canlı Baserow geçerlidir. Satır verisi yoktur.
+> Otomatik üretildi (`tools/build_field_dictionary.py`). Şema kaynağı: INVENTORY.json, 2026-11-07T15:09:04+03:00. Çelişkide canlı Baserow geçerlidir. Satır verisi yoktur.
 
-**619 benzersiz alan adı · 102 tanesi ≥2 tabloda ortak · 6 tanesi farklı türlerde kullanılıyor · 80 seçmeli değer listesi**
+**649 benzersiz alan adı · 105 tanesi ≥2 tabloda ortak · 8 tanesi farklı türlerde kullanılıyor · 85 seçmeli değer listesi**
 
-**Anlamı kayıtlı alan adı: 2** (bunların 1 tanesi ortak alan; ortak alanların 101 tanesinin anlamı yok). Anlamı belgelerde kanıtlanmayan alan için `Bilinmiyor / Doğrulanmadı` yazılır; anlam uydurulmaz. Tablo bazında alan listesi: `TABLES.md`; formül metinleri: `FORMULAS.md`.
+**Anlamı kayıtlı alan adı: 2** (bunların 1 tanesi ortak alan; ortak alanların 104 tanesinin anlamı yok). Anlamı belgelerde kanıtlanmayan alan için `Bilinmiyor / Doğrulanmadı` yazılır; anlam uydurulmaz. Tablo bazında alan listesi: `TABLES.md`; formül metinleri: `FORMULAS.md`.
 
 ## 1. Ortak alanlar (aynı ad, ≥2 tablo)
 
 | Alan | Tür | Tablo | Tablolar | Anlam |
 |---|---|---|---|---|
 | Gerçek Veri | boolean | 26 | Bakım ve Yedek Parça, Belgeler, Ekipman Lotları, Firmalar, Geri Ödeme Planı, Giderler ve Vergiler (+20) | Kaydın DEMO mu gerçek mi olduğunu ayıran boolean işaret (DEMO / REFERENCE / REAL ayrımı). `false` = DEMO: Sözleşmeler `Sözleşme Kontrolü` formülü `Gerçek Veri = false` ise 'DEMO – HUKUKİ İNCELEME GEREKLİ' döndürür. REFERENCE kayıtların bu tek boolean ile nasıl ayrıldığı belgelenmemiştir: Doğrulanmadı. _(kaynak: 03_BUSINESS_RULES/BUSINESS_RULES.md R-01; 02_DATABASE_SCHEMA/FORMULAS.md (Sözleşme Kontrolü))_ |
-| Durum | formula, single_select, text | 16 | Bakım ve Yedek Parça, Belgeler, Ekipman Lotları, Geri Ödeme Planı, Gümrük İşlemleri, Kira ve Tahsilat Planı (+10) | Bilinmiyor / Doğrulanmadı |
+| Durum | formula, single_select, text | 17 | Bakım ve Yedek Parça, Belgeler, CHAT-001 \| Konular, Ekipman Lotları, Geri Ödeme Planı, Gümrük İşlemleri (+11) | Bilinmiyor / Doğrulanmadı |
 | Proje | link_row → Projeler | 14 | Bakım ve Yedek Parça, Belgeler, Ekipman Lotları, Gelir Gider Dengesi, Giderler ve Vergiler, Hizmet Kayıtları (+8) | İlişki alanı → Projeler. Anlam: Bilinmiyor / Doğrulanmadı |
 | Tür | single_select | 9 | Bakım ve Yedek Parça, Belgeler, Gümrük İşlemleri, Krediler, Muafiyetler ve Teşvikler, Sigortalar (+3) | Bilinmiyor / Doğrulanmadı |
+| Tarih | date | 7 | Bakım ve Yedek Parça, Belgeler, CHAT-002 \| Notlar, Giderler ve Vergiler, Hizmet Kayıtları, Kur Takibi (+1) | Bilinmiyor / Doğrulanmadı |
 | Not | long_text | 6 | Belgeler, Firmalar, Süreç Adımları, Tahsisler, Teminatlar, İmalat ve Tedarik | Bilinmiyor / Doğrulanmadı |
 | Notlar | long_text | 6 | Projeler, SYS-001 \| Sistem Ana İndeksi, Senaryo Finansman Dilimleri, Senaryo Gelir Gider Akışı, Senaryo Varsayımları, Senaryo Ödeme Planı | Bilinmiyor / Doğrulanmadı |
 | SYS-002 \| Sistem Sürüm Kayıtları | link_row → SYS-002 \\\| Sistem Sürüm Kayıtları | 6 | SYS-003 \| Sistem Yedek Paketleri, SYS-004 \| Sistem Değişiklik Günlüğü, SYS-005 \| Sistem Karar Kayıtları, SYS-006 \| Sistem Denetim ve Testleri, SYS-007 \| Sistem Geri Yükleme ve Klonlama, SYS-008 \| Sistem Görev ve Geliştirme Takibi | İlişki alanı → SYS-002 \/ Sistem Sürüm Kayıtları. Anlam: Bilinmiyor / Doğrulanmadı |
 | Senaryo | link_row, text → Senaryolar | 6 | Gelir Gider Dengesi, Senaryo Değerlendirme, Senaryo Finansman Dilimleri, Senaryo Gelir Gider Akışı, Senaryo Varsayımları, Senaryo Ödeme Planı | İlişki alanı → Senaryolar. Anlam: Bilinmiyor / Doğrulanmadı |
 | Süreç Adımları | link_row → Süreç Adımları | 6 | Belgeler, Firmalar, Makineler, Projeler, Sözleşmeler, Tahsisler | İlişki alanı → Süreç Adımları. Anlam: Bilinmiyor / Doğrulanmadı |
-| Tarih | date | 6 | Bakım ve Yedek Parça, Belgeler, Giderler ve Vergiler, Hizmet Kayıtları, Kur Takibi, Yazışmalar | Bilinmiyor / Doğrulanmadı |
 | Belgeler | link_row → Belgeler | 5 | Krediler, Projeler, Sevkiyatlar, Sözleşmeler, Teminatlar | İlişki alanı → Belgeler. Anlam: Bilinmiyor / Doğrulanmadı |
 | Makine | link_row → Makineler | 5 | Bakım ve Yedek Parça, Hizmet Kayıtları, Sigortalar, Süreç Adımları, Tahsisler | İlişki alanı → Makineler. Anlam: Bilinmiyor / Doğrulanmadı |
 | Para Birimi | single_select | 5 | Giderler ve Vergiler, Senaryo Finansman Dilimleri, Senaryo Gelir Gider Akışı, Senaryolar, Sözleşmeler | Bilinmiyor / Doğrulanmadı |
@@ -38,6 +38,7 @@
 | Gümrük İşlemleri | link_row → Gümrük İşlemleri | 3 | Firmalar, Muafiyetler ve Teşvikler, Sevkiyatlar | İlişki alanı → Gümrük İşlemleri. Anlam: Bilinmiyor / Doğrulanmadı |
 | Incoterm | single_select | 3 | Projeler, Senaryolar, Sevkiyatlar | Bilinmiyor / Doğrulanmadı |
 | Kira ve Tahsilat Planı | link_row → Kira ve Tahsilat Planı | 3 | Firmalar, Geri Ödeme Planı, Projeler | İlişki alanı → Kira ve Tahsilat Planı. Anlam: Bilinmiyor / Doğrulanmadı |
+| Konu | link_row, text → CHAT-001 \\\| Konular | 3 | CHAT-002 \| Notlar, CHAT-003 \| Sorular, Yazışmalar | İlişki alanı → CHAT-001 \/ Konular. Anlam: Bilinmiyor / Doğrulanmadı |
 | Kredi | link_row → Krediler | 3 | Belgeler, Geri Ödeme Planı, Teminatlar | İlişki alanı → Krediler. Anlam: Bilinmiyor / Doğrulanmadı |
 | Lot | link_row → Ekipman Lotları | 3 | Bakım ve Yedek Parça, Makineler, İmalat ve Tedarik | İlişki alanı → Ekipman Lotları. Anlam: Bilinmiyor / Doğrulanmadı |
 | Makineler | link_row → Makineler | 3 | Belgeler, Ekipman Lotları, Firmalar | İlişki alanı → Makineler. Anlam: Bilinmiyor / Doğrulanmadı |
@@ -50,6 +51,7 @@
 | İmalat ve Tedarik | link_row → İmalat ve Tedarik | 3 | Belgeler, Ekipman Lotları, Firmalar | İlişki alanı → İmalat ve Tedarik. Anlam: Bilinmiyor / Doğrulanmadı |
 | İthalatçı Firma | link_row → Firmalar | 3 | Makineler, Projeler, Senaryolar | İlişki alanı → Firmalar. Anlam: Bilinmiyor / Doğrulanmadı |
 | AI / Model | text | 2 | SYS-010 \| AI Oturum ve Devir Kayıtları, SYS-011 \| AI Çalışma ve Olay Günlüğü | Bilinmiyor / Doğrulanmadı |
+| Alınan Kararlar | long_text | 2 | CHAT-001 \| Konular, SYS-010 \| AI Oturum ve Devir Kayıtları | Bilinmiyor / Doğrulanmadı |
 | Anapara Ödeme Tipi | single_select | 2 | Krediler, Senaryo Finansman Dilimleri | Bilinmiyor / Doğrulanmadı |
 | Aşama | single_select | 2 | Projeler, Süreç Adımları | Bilinmiyor / Doğrulanmadı |
 | Belge Sayısı | formula | 2 | Krediler, Sevkiyatlar | Bilinmiyor / Doğrulanmadı |
@@ -79,6 +81,7 @@
 | Lotlar | link_row → Ekipman Lotları | 2 | Sevkiyatlar, Sözleşmeler | İlişki alanı → Ekipman Lotları. Anlam: Bilinmiyor / Doğrulanmadı |
 | Mülkiyet Modeli | single_select | 2 | Projeler, Senaryolar | Bilinmiyor / Doğrulanmadı |
 | Olay Tarihi | date | 2 | SYS-011 \| AI Çalışma ve Olay Günlüğü, Süreç Adımları | Bilinmiyor / Doğrulanmadı |
+| Onay Durumu | single_select, text | 2 | CHAT-002 \| Notlar, SYS-004 \| Sistem Değişiklik Günlüğü | Bilinmiyor / Doğrulanmadı |
 | Onaylayan | text | 2 | SYS-004 \| Sistem Değişiklik Günlüğü, SYS-007 \| Sistem Geri Yükleme ve Klonlama | Bilinmiyor / Doğrulanmadı |
 | Oturum Kodu | text | 2 | SYS-010 \| AI Oturum ve Devir Kayıtları, SYS-011 \| AI Çalışma ve Olay Günlüğü | Bilinmiyor / Doğrulanmadı |
 | Proje Incoterm | lookup | 2 | Belgeler, Süreç Adımları | Bilinmiyor / Doğrulanmadı |
@@ -119,7 +122,9 @@ Aynı adlı alanın tablolar arasında farklı türde olması bakım riski taş�
 
 | Alan | Tür → tablolar |
 |---|---|
-| Durum | **formula** → Sigortalar; **single_select** → Bakım ve Yedek Parça, Belgeler, Ekipman Lotları, Geri Ödeme Planı (+10); **text** → SYS-009 \| AI İşletim Protokolü |
+| Durum | **formula** → Sigortalar; **single_select** → Bakım ve Yedek Parça, Belgeler, CHAT-001 \| Konular, Ekipman Lotları (+11); **text** → SYS-009 \| AI İşletim Protokolü |
+| Konu | **link_row** → CHAT-002 \| Notlar, CHAT-003 \| Sorular; **text** → Yazışmalar |
+| Onay Durumu | **single_select** → CHAT-002 \| Notlar; **text** → SYS-004 \| Sistem Değişiklik Günlüğü |
 | Senaryo | **link_row** → Senaryo Değerlendirme, Senaryo Finansman Dilimleri, Senaryo Gelir Gider Akışı, Senaryo Varsayımları (+1); **text** → Gelir Gider Dengesi |
 | Tahsis | **link_row** → Süreç Adımları; **text** → Tahsisler |
 | Teminat | **link_row** → Belgeler; **long_text** → Senaryo Finansman Dilimleri |
@@ -137,6 +142,7 @@ Aynı ad ve aynı değer listesi birlikte gruplanır. Liste farklıysa aynı ala
 | Anapara Ödeme Tipi | single_select | Krediler | Eşit anapara · Eşit taksit (annuity) · Grace + amortisman · Bullet – vade sonunda · Balloon – balon ödemeli · Özel plan |
 | Aşama | single_select | Projeler, Süreç Adımları | 1 Yapılandırma · 2 Eximbank / Sinosure Onayı · 3 Rehin ve Bridge · 4 İmalat · 5 Sevkiyat · 6 Gümrük ve Mülkiyet Devri · 7 İpotek Tescili · 8 Sahada İşletme |
 | Doğrulama Durumu | single_select | Senaryo Varsayımları | Varsayım · Demo · Kaynak Bekliyor · Belgeyle Doğrulandı · Hukuk / Vergi Görüşü Gerekli |
+| Durum | single_select | CHAT-001 \| Konular | Açık · Yarım · Bitti · Arşivlendi |
 | Durum | single_select | Krediler | Başvuru · Onay Bekliyor · Onaylandı · Kullandırıldı · Kapandı |
 | Durum | single_select | Muafiyetler ve Teşvikler | Başvurulacak · Başvuruda · Alındı · Reddedildi |
 | Durum | single_select | Süreç Adımları | Bekliyor · Devam Ediyor · Tamam · Engelli |
@@ -174,18 +180,22 @@ Aynı ad ve aynı değer listesi birlikte gruplanır. Liste farklıysa aynı ala
 | Incoterm | single_select | Senaryolar | EXW · FCA · FOB · CIF · CIP · DAP · DDP · Diğer |
 | Kategori | single_select | Senaryo Varsayımları | Finansman · Vergi / Gümrük · Kur · Lojistik · Mülkiyet · Kiralama / Satış · Operasyon · Hukuk / Uyum · Diğer |
 | Kategori | single_select | Giderler ve Vergiler | Navlun / Taşıma · Sigorta / Sinosure Primi · Gümrük Vergisi · KDV · Banka / Faiz / Komisyon · Noter / Tescil · Danışmanlık / Hukuk · Bakım / Yedek Parça · Diğer |
+| Kullanıcı Kararı | single_select | CHAT-003 \| Sorular | Bekliyor · Uygula · Geliştir · Beklet · Reddet |
 | Kur Çifti | single_select | Kur Takibi | USD/CNY · USD/KZT · USD/EUR |
 | Metrik | single_select | Senaryo Değerlendirme | Toplam Yatırım Maliyeti · Toplam Finansman Maliyeti · Toplam Vergi · İlk Nakit İhtiyacı · Toplam Gelir · Net Kâr · IRR · NPV · DSCR Min · DSCR Ortalama · Geri Ödeme Süresi · Hukuki Risk · Operasyonel Risk · Diğer |
 | Mülkiyet Durumu | single_select | Makineler | Tedarikçide · Transit / Taşımada · Gümrükte · SPC mülkiyetinde · TOO mülkiyetinde · Üçüncü taraf mülkiyetinde · Uyuşmazlıkta |
 | Mülkiyet Modeli | single_select | Senaryolar | SPC · TOO · Üçüncü Taraf · Ortak Mülkiyet · Diğer |
 | Mülkiyet Modeli | single_select | Projeler | SPC (Varsayılan) · TOO · Üçüncü Taraf · Ortak Mülkiyet · Diğer |
 | Mülkiyet Senaryosu | single_select | Makineler | A – SPC doğrudan ithalat ve mülkiyet · B – TOO ithalatı, sonra SPC devri · C – Üçüncü taraf mülkiyeti · D – Ortak mülkiyet · E – Diğer |
+| Not Türü | single_select | CHAT-002 \| Notlar | Kullanıcı sözü · AI görüşü · Soru · Öneri · Karar adayı · Karar · Test sonucu · Özet |
+| Onay Durumu | single_select | CHAT-002 \| Notlar | Onaysız · Kullanıcı onayladı · Reddedildi |
 | Para Birimi | single_select | Senaryo Finansman Dilimleri, Senaryo Gelir Gider Akışı | USD · CNY · EUR · KZT · TRY |
 | Para Birimi | single_select | Senaryolar | USD · CNY · EUR · KZT · TRY · Çoklu Para Birimi |
 | Para Birimi | single_select | Giderler ve Vergiler, Sözleşmeler | USD · EUR · CNY · KZT · TRY |
 | Rol | single_select | Firmalar | Alıcı / Nihai Gelir Kaynağı · Genel Yüklenici · SPC / Lessor · Operatör / Lessee (TOO) · Banka / Kreditör · Sigortacı · İmalatçı / Tedarikçi · Nakit Rehni Sahibi (Finansör) · Gümrük Müşaviri · Taşıyıcı / Lojistik · Servis / Bakım |
 | Senaryo Durumu | single_select | Senaryolar | Taslak · Hesaplanıyor · Test Bekliyor · Karşılaştırmaya Hazır · Seçildi · Reddedildi · Arşiv |
 | Senaryo Tipi | single_select | Senaryolar | Finansman · Mülkiyet / İthalat · Ticaret / Kiralama · Lojistik / Vergi · Birleşik Model · Kullanıcı Tanımlı |
+| Soru Durumu | single_select | CHAT-003 \| Sorular | Açık · Cevaplar toplanıyor · Sentezlendi · Onaylandı · İptal |
 | Taşıma Türü | single_select | Sevkiyatlar | Demiryolu · Karayolu · Deniz + Kara |
 | Tür | single_select | Muafiyetler ve Teşvikler | AIFC Muafiyeti · KZ İthalat Muafiyeti · Gümrük Teşviki · DTT · Diğer |
 | Tür | single_select | Krediler | Bridge Kredi (Peşinat) · Seller's Credit · Eximbank Destekli Kredi |

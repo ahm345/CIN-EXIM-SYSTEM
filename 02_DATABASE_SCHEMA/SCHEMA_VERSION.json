@@ -1,15 +1,18 @@
 {
  "counts": {
-  "field_count": 845,
+  "field_count": 881,
   "formula_count": 91,
-  "link_field_count": 219,
-  "table_count": 41
+  "link_field_count": 223,
+  "table_count": 44
  },
- "generated_at": "2026-11-06T08:57:59+03:00",
- "schema_hash": "a8068f47e2bc",
+ "generated_at": "2026-11-07T15:09:04+03:00",
+ "schema_hash": "e5a46f04b5d5",
  "tables": {
   "Bakım ve Yedek Parça": "9f3c20b2556d",
   "Belgeler": "141020bd12eb",
+  "CHAT-001 | Konular": "d173c1ad79a9",
+  "CHAT-002 | Notlar": "690f407da018",
+  "CHAT-003 | Sorular": "9b3b07578e54",
   "Ekipman Lotları": "03559a05d4ae",
   "Firmalar": "0d9fce480b77",
   "Gelir Gider Dengesi": "9a7945dc4bf9",
