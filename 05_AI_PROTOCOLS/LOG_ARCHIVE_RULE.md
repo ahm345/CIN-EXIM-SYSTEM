@@ -1,6 +1,6 @@
 # LOG_ARCHIVE_RULE — Log arşiv kuralı (Baserow satır limiti için)
 
-> **TASLAK — kullanıcı onayı bekliyor.** Eşikler ve saklama sayıları öneridir. Onaylanana kadar bağlayıcı karar sayılmaz; onaylanınca SYS-005'e **kalıcı karar** olarak yazılır ve bu not güncellenir. Protokolün tek kaynağı Baserow `SYS-009`'dur; bu dosya onun ayrıntısı olarak önerilmiştir (SYS-009'a işlenmedi).
+> **KABUL EDİLDİ — SYS-005 `DEC-SYS-003` (2026-11-07).** Kullanıcı, Claude'un önerisini devretti ("senin dediğini yapalım"); **eşikler ve saklama sayıları Claude önerisidir**, kullanıcı rakamları tek tek incelemedi. Rakamları değiştirmek istenirse DEC-SYS-003 yeni bir kararla yerine geçer. Protokolün tek kaynağı Baserow `SYS-009`'dur; bu kural SYS-009'a **işlenmedi**, SYS-005 kararı ve bu dosya ayrıntıdır. KI-16 (3.000 satır limiti) hâlâ bağımsız doğrulanmadı.
 
 ## 1. Neden
 
@@ -46,13 +46,14 @@ Toplam satır sayısını AI **doğrudan göremez**. İki yol: kullanıcıdan *W
 6. **Sil.** Yalnızca onaylanan ID'leri sil; başka satıra dokunma. Başarısızsa başarı iddia etme.
 7. **Kaydet.** SYS-010'a **tek satırlık özet**: tablo, ID aralığı, adet, arşiv dosyası, commit. (Silme yapısal değişiklik değildir; SYS-004'e yazılmaz.) Kaynak ve tarih bilgisi commit'tedir; saat uydurma.
 
-## 6. Kullanıcıdan beklenen kararlar
+## 6. Kararlar ve açık kalanlar
 
-1. Eşikler (§3) ve saklama sayıları (§4) uygun mu?
-2. DEMO oturum/olay satırları arşivlenip silinebilir mi?
-3. Gerçek limit: *Workspace usage* sayfasındaki toplam satır sayısı ve plan sınırı (KI-16 doğrulaması).
-4. `baserow yedek` kopyası CSV'ye alınıp küçültülsün mü? (Limitin asıl tüketicisi olabilir; sayılmadı.)
-5. Bu kural onaylanıp SYS-005'e kalıcı karar olarak yazılsın mı?
+Karara bağlandı (DEC-SYS-003, 2026-11-07): eşikler (§3), saklama sayıları (§4), kuralın kabulü. **Her silme yine tek tek açık kullanıcı onayı ister** (§5 adım 5); kural, silme izni değildir.
+
+Hâlâ kullanıcıda:
+1. Gerçek limit: Baserow *Workspace usage* sayfasındaki toplam satır sayısı ve plan sınırı (KI-16 doğrulaması).
+2. `baserow yedek` kopyası CSV'ye alınıp küçültülsün mü? (Limitin asıl tüketicisi olabilir; sayılmadı.)
+3. DEMO oturum/olay satırları (`DEMO-…`) arşivlenip silinebilir mi? (Silme için ayrıca açık onay gerekir.)
 
 ## 7. Yasaklar
 

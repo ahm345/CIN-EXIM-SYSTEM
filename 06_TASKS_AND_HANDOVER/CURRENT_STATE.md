@@ -4,6 +4,8 @@
 
 > **Güncelleme notu (2026-11-07 00:27 +03:00, Claude Code oturumu):** yalnızca şu satırlar canlı Baserow'dan yeniden okunarak düzeltildi: SYS-009 sürümü (1.5), SYS-010 kayıt sayısı (8), oturum tablosuna `CLAUDE-20261106-003`. Canlı sayılan satır sayıları: SYS-010 8, SYS-011 17, SYS-004 23, SYS-008 15. **Geri kalan içerik (açık görevler, kararlar, Makineler/Belgeler satır sayıları) 2026-11-06 anlık görüntüsüdür; bu oturumda yeniden doğrulanmadı.**
 
+> **Güncelleme notu 2 (2026-11-07, Claude Code):** SYS-005'e `DEC-SYS-003` (log arşiv kuralı kabulü, kullanıcı devri) yazıldı (SYS-005 3 karar); SYS-010 ID 4–7 kapatıldı; `GIT_ACCESS.md` eklendi; depo public durumda.
+
 ## Canlı doğrulanan sayılar
 
 | Konu | Değer |
@@ -12,7 +14,7 @@
 | Tablo | 41 (23 operasyonel + 6 senaryo + 11 SYS + 1 eski `Table`) |
 | Alan / ilişki alanı / formül | 845 / 219 / 91 (`02_DATABASE_SCHEMA/INVENTORY.json`) |
 | SYS-009 protokol | v1.5 (canlı doğrulandı 2026-11-07; `Girişte Zorunlu Adımlar` alanı sürüm numarası anmayacak şekilde düzeltildi, bkz. `PROTOCOL_MIRROR.md`) |
-| SYS-010 oturum kaydı | 8 (son: `CLAUDE-20261106-003`, durum "Tamamlandı"; ID 4, 5, 6, 7 hâlâ "Devam ediyor") |
+| SYS-010 oturum kaydı | 9 (ID 4–7 2026-11-07 06:51'de kullanıcı onayıyla "Kapatıldı – iş TAMAMLANMADI" yapıldı; ID 9 = `CLAUDE-20261107-001`) |
 | SYS-008 görev | 15 |
 | Makineler / Belgeler satır | 57 / 52 |
 | SYS-007, Senaryolar | 0 satır (boş) |
@@ -24,13 +26,14 @@
 | DEMO-AI-HANDOVER-20261105-001 | ChatGPT | Giriş/devir **simülasyonu** (gerçek iş değil) | Tamamlandı – DEMO |
 | CLAUDE-20261105-001 | Claude | SYS denetimi, simülasyon, düzeltme | Tamamlandı |
 | CLAUDE-20261105-002 | Claude | Çift ilişki alanları sadeleştirildi (9 çift silindi, çöp kutusunda), SYS-009 v1.3 | Tamamlandı – kullanıcı doğrulaması bekliyor |
-| CLAUDE-20261105-003 | Claude | Giriş protokolü, salt okunur özet | Devam ediyor |
-| GPT6-20261105-001 | ChatGPT / GPT-6 | SYS-009 v1.4 onayı ve uygulaması | Devam ediyor |
-| CLAUDE-20261106-001 | Claude | Aşama 1 canlı denetim, onaylı formül düzeltmeleri | Devam ediyor |
-| CLAUDE-20261106-002 | Claude | Giriş, yarım işlerin devri, SYS-008 durum alanları pilotu, Belgeler incelemesi | Devam ediyor |
+| CLAUDE-20261105-003 | Claude | Giriş protokolü, salt okunur özet | Kapatıldı – kullanıcı onayıyla; iş tamamlanmadı |
+| GPT6-20261105-001 | ChatGPT / GPT-6 | SYS-009 v1.4 onayı ve uygulaması | Kapatıldı – kullanıcı onayıyla; iş tamamlanmadı |
+| CLAUDE-20261106-001 | Claude | Aşama 1 canlı denetim, onaylı formül düzeltmeleri | Kapatıldı – kullanıcı onayıyla; iş tamamlanmadı |
+| CLAUDE-20261106-002 | Claude | Giriş, yarım işlerin devri, SYS-008 durum alanları pilotu, Belgeler incelemesi | Kapatıldı – kullanıcı onayıyla; iş tamamlanmadı |
 | CLAUDE-20261106-003 | Claude (Claude Code) | Git teknik hafızasının kurulması (`repo-v0.1.0`); kaydı claude.ai sohbeti yazdı | Tamamlandı – platform testi, yedek, formül işleri açık |
+| CLAUDE-20261107-001 | Claude (Claude Code) | `repo-v0.2.0`/`v0.2.1`: XRAY düzeltmesi, schema_diff, handover_check, log arşiv kuralı, GIT_ACCESS, DEC-SYS-003, ID 4–7 kapatma | Tamamlandı – açık kullanıcı kararları var |
 
-"Devam ediyor" yazan oturumlar (ID 4, 5, 6, 7) kapanmamıştır; yapılanları SYS-004/005/008 ile **doğrulayarak** devral (`cin-exim-handover-check` skill'i). Bu kayıtların hâlâ açık olup olmadığını yalnızca kullanıcı bilir; kullanıcı onayı olmadan kapatma. Bu kayıtlar yazan AI'ların beyanıdır.
+SYS-010 ID 4–7 2026-11-07 06:51'de kullanıcı onayıyla kapatıldı; kayıtlarında işlerin **tamamlanmadığı** yazılıdır. Bu kayıtlar yazan AI'ların beyanıdır; yapılanları SYS-004/005/008 ile doğrulayarak devral (`cin-exim-handover-check`).
 
 ## Açık görevler (SYS-008, kısa)
 

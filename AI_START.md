@@ -71,7 +71,7 @@ Adımlar ve etki analizi şablonu: `05_AI_PROTOCOLS/FEATURE_REQUEST_WORKFLOW.md`
 3. Git'te yapılan değişikliği SYS kayıtlarına bağla (`05_AI_PROTOCOLS/SYS_GIT_LINKING.md`).
 4. Yapısal değişiklik yaptıysan `02_DATABASE_SCHEMA/` belgelerini `cin-exim-schema-refresh` skill'iyle yenile (envanter → röntgen → **şema farkı** `04_CHANGE_HISTORY/SCHEMA_DIFFS.md` → alan sözlüğü); `04_CHANGE_HISTORY/CHANGELOG.md` ve `06_TASKS_AND_HANDOVER/CURRENT_STATE.md` dosyalarını güncelle.
 5. Devri bitirmeden `python3 -I tools/handover_check.py` çalıştır; HATA bırakma, UYARI'yı raporla.
-6. Baserow satır limiti için log arşivi gerekiyorsa `05_AI_PROTOCOLS/LOG_ARCHIVE_RULE.md` (taslak; **arşivsiz ve onaysız silme yok**).
+6. Baserow satır limiti için log arşivi gerekiyorsa `05_AI_PROTOCOLS/LOG_ARCHIVE_RULE.md` (kabul edildi, SYS-005 `DEC-SYS-003`; **arşivsiz ve onaysız silme yok**).
 7. Sonraki AI için ilk adımları açıkça yaz.
 
 ## 6. Git kuralları
@@ -95,8 +95,9 @@ Adımlar ve etki analizi şablonu: `05_AI_PROTOCOLS/FEATURE_REQUEST_WORKFLOW.md`
 | `02_DATABASE_SCHEMA/history/` | Her şema sürümünün anlık görüntüsü; farklar `04_CHANGE_HISTORY/SCHEMA_DIFFS.md` |
 | `02_DATABASE_SCHEMA/FIELD_DICTIONARY.md`, `FIELD_MEANINGS.json` | Ortak alanlar, tür tutarsızlıkları, seçmeli değerler; kaynaklı anlamlar |
 | `05_AI_PROTOCOLS/INFO_GAP_PROTOCOL.md` | Eksik bilgiyi tek listede sorma kuralı (SYS-009 `Eksik Bilgi Yönetimi`) |
-| `05_AI_PROTOCOLS/LOG_ARCHIVE_RULE.md` | Baserow satır limiti için log arşiv kuralı (**taslak**) |
+| `05_AI_PROTOCOLS/LOG_ARCHIVE_RULE.md` | Baserow satır limiti için log arşiv kuralı (kabul edildi, DEC-SYS-003) |
 | `05_AI_PROTOCOLS/PLATFORM_SETUP.md` | AI platformlarının kalıcı talimatına konacak başlangıç metni |
+| `05_AI_PROTOCOLS/GIT_ACCESS.md` | Bu depoya AI'lar nasıl girer, kim yazabilir (sır içermez); public/private durumu |
 | `06_TASKS_AND_HANDOVER/BLOCKED_BY_MISSING_INFO.md` | Bilgi yüzünden duran işler (anlık görüntü) |
 | `06_TASKS_AND_HANDOVER/LOG_ARCHIVE/` | Arşivlenmiş log satırları |
 

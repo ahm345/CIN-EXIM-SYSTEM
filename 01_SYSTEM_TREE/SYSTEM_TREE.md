@@ -54,7 +54,7 @@ CIN-EXIM-SYSTEM/
 │                                  FIELD_DICTIONARY.md · FIELD_MEANINGS.json (alan sözlüğü) · history/ (şema anlık görüntüleri)
 ├── 03_BUSINESS_RULES/             iş kuralları
 ├── 04_CHANGE_HISTORY/             CHANGELOG.md · CHANGE_TEMPLATE.md · SCHEMA_DIFFS.md (otomatik şema farkı)
-├── 05_AI_PROTOCOLS/               PROTOCOL_MIRROR · INFO_GAP_PROTOCOL · LOG_ARCHIVE_RULE · SYS_GIT_LINKING · FEATURE_REQUEST_WORKFLOW · PLATFORM_SETUP
+├── 05_AI_PROTOCOLS/               PROTOCOL_MIRROR · INFO_GAP_PROTOCOL · LOG_ARCHIVE_RULE · GIT_ACCESS · SYS_GIT_LINKING · FEATURE_REQUEST_WORKFLOW · PLATFORM_SETUP
 ├── 06_TASKS_AND_HANDOVER/         CURRENT_STATE.md · HANDOVER_TEMPLATE.md · BLOCKED_BY_MISSING_INFO.md · LOG_ARCHIVE/
 ├── 07_TESTS_AND_RELEASES/         KNOWN_ISSUES · TEST_CHECKLISTS · RELEASES
 ├── tools/                         build_schema_docs · build_xray · schema_diff · build_field_dictionary · handover_check · archive_log

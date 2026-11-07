@@ -19,10 +19,12 @@ veritabanına yazma.
 ## 2. GitHub erişimi olan platformlar için ek satır
 
 ```
-CIN EXIM'in teknik hafızası GitHub'da: ahm345/CIN-EXIM-SYSTEM (özel depo).
+CIN EXIM'in teknik hafızası GitHub'da: ahm345/CIN-EXIM-SYSTEM.
 Önce deponun AI_START.md dosyasını oku ve oradaki sırayı izle.
 Depo erişimi yoksa bunu bildir; okumuş gibi davranma.
 ```
+
+> Depo **şu an public**: URL okuyabilen bir AI giriş yapmadan okuyabilir (`https://raw.githubusercontent.com/ahm345/CIN-EXIM-SYSTEM/main/AI_START.md`). Private yapılırsa bu satır "depo erişimi yoksa bildir" kuralına bağlı kalır ve erişim yolu `GIT_ACCESS.md` bölüm 3'e göre ayrıca kurulmalıdır. Yazma yetkisi ayrıdır ve varsayılan olarak **yoktur** (`GIT_ACCESS.md`).
 
 ## 3. Nereye konur
 
@@ -46,7 +48,7 @@ Her ortamda **yeni bir sohbet** aç ve tek cümle yaz:
 
 Başarı ölçütü — AI şunları **doğru** raporlamalı:
 
-- [ ] SYS-009'u okuduğunu ve sürümünü söylüyor (ör. 1.4)
+- [ ] SYS-009'u okuduğunu ve sürümünü söylüyor (sürüm = SYS-009 `Protokol Sürümü` alanındaki güncel değer)
 - [ ] SYS-001, SYS-010 son kaydı, SYS-008 açık görevleri ve SYS-005 kararlarını okuduğunu söylüyor
 - [ ] Erişemediği kaynağı açıkça belirtiyor
 - [ ] Önceki oturumun bıraktığı işi ve DEMO kayıtlarını doğru ayırıyor

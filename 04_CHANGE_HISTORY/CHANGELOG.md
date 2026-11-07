@@ -4,12 +4,24 @@ Bu dosya **bu deponun** teknik değişikliklerini kronolojik tutar. Baserow yap�
 
 ---
 
+## repo-v0.2.1 — 2026-11-07 — Git erişim kılavuzu, log arşiv kuralının kabulü, açık oturumların kapatılması
+
+| Alan | Değer |
+|---|---|
+| Ne eklendi? | `05_AI_PROTOCOLS/GIT_ACCESS.md` (Claude Code'un depoya nasıl girdiği, diğer AI'ların okuma/yazma yolları, public/private önerisi; sır içermez). |
+| Ne değişti? | `LOG_ARCHIVE_RULE.md` ve ilgili belgelerde "taslak" ibaresi kaldırıldı (kabul: DEC-SYS-003). `PLATFORM_SETUP.md`: yanlış "özel depo" ifadesi düzeltildi (depo public), eski sürüm örneği kaldırıldı. `AI_START.md`, `README.md`, `SYSTEM_TREE.md`, `CURRENT_STATE.md` eşitlendi. |
+| Etkilenen Baserow | SYS-005'e `DEC-SYS-003` eklendi; SYS-010 ID 4–7 `Oturum Durumu` "Kapatıldı – kullanıcı onayıyla; iş TAMAMLANMADI" yapıldı; SYS-010'a bu oturumun kaydı eklendi. Şema değişmedi. |
+| Kullanıcı onayı | Evet — 2026-11-07 06:51: "tüm kararlarda senin dediğini yapalım" (eşik rakamları Claude önerisidir, tek tek incelenmedi). |
+| Yapılmadı | Depo private yapılmadı (okuyucu AI'ların erişim yolu kurulmadan yapılmamalı); Baserow'dan hiçbir satır silinmedi; gerçek 3.000 satır limiti doğrulanmadı. |
+
+---
+
 ## repo-v0.2.0 — 2026-11-07 — Röntgen eklerinin eksiklerini kapatma; şema farkı, devir doğrulama, log arşiv kuralı, alan sözlüğü
 
 | Alan | Değer |
 |---|---|
 | Ne vardı? | `repo-v0.1.0` üzerine, benden bağımsız oturumlarda "Add files via upload" ile eklenmiş dosyalar (kullanıcı beyanı: 8 commit, 31 dosya; bu oturumda yalnızca HEAD `661e220` ve dosya listesi doğrulandı): `XRAY_LEVEL0.md`, `IMPACT.md`, `DEPENDENCY_GRAPH.json`, `SCHEMA_VERSION.json`, `tools/build_xray.py`, `05_AI_PROTOCOLS/INFO_GAP_PROTOCOL.md`, `06_TASKS_AND_HANDOVER/BLOCKED_BY_MISSING_INFO.md`. Bu eklerin CHANGELOG kaydı yoktu. |
-| Ne eklendi? | `tools/schema_diff.py` + `02_DATABASE_SCHEMA/history/` (şema anlık görüntüleri) + `04_CHANGE_HISTORY/SCHEMA_DIFFS.md`; `tools/handover_check.py` + `.claude/skills/cin-exim-handover-check/`; `05_AI_PROTOCOLS/LOG_ARCHIVE_RULE.md` (**taslak**) + `tools/archive_log.py` + `06_TASKS_AND_HANDOVER/LOG_ARCHIVE/`; `tools/build_field_dictionary.py` + `02_DATABASE_SCHEMA/FIELD_DICTIONARY.md` + `FIELD_MEANINGS.json`; `.gitignore`. |
+| Ne eklendi? | `tools/schema_diff.py` + `02_DATABASE_SCHEMA/history/` (şema anlık görüntüleri) + `04_CHANGE_HISTORY/SCHEMA_DIFFS.md`; `tools/handover_check.py` + `.claude/skills/cin-exim-handover-check/`; `05_AI_PROTOCOLS/LOG_ARCHIVE_RULE.md` (v0.2.0'da taslak; v0.2.1'de kabul edildi) + `tools/archive_log.py` + `06_TASKS_AND_HANDOVER/LOG_ARCHIVE/`; `tools/build_field_dictionary.py` + `02_DATABASE_SCHEMA/FIELD_DICTIONARY.md` + `FIELD_MEANINGS.json`; `.gitignore`. |
 | Ne değişti? | **`XRAY_LEVEL0.md` tablosu bozuktu: 48 satırın 12'sinde sütun sayısı yanlıştı** (SYS tablolarının adı `SYS-001 \| Sistem Ana İndeksi` gibi `\|` içerir; komşu listelerinde de geçer). `tools/build_xray.py` artık tüm hücreleri kaçırır (`esc`), röntgen yeniden üretildi (48/48 satır sağlam; şema özeti değişmedi `a8068f47e2bc`). `build_xray.py --prev` kendi eksik `diff()` kodunu bırakıp `schema_diff.py`'ye devreder. `AI_START.md` yeni belge ve araçlara yol gösterir (bölüm 1, 2, 3, 4, 5, 7), sürüm numarası artık yazılmaz. `cin-exim-schema-refresh` skill'i röntgen, fark ve sözlük aşamalarını anlatır (önceden yalnızca `build_schema_docs.py` vardı; şema yenilenince röntgen dosyaları eski kalıyordu). `CLAUDE.md`, `SYSTEM_TREE.md`, `PROTOCOL_MIRROR.md`, `CURRENT_STATE.md` (SYS-009 sürümü 1.5, SYS-010 kayıt sayısı 8) güncellendi. |
 | Ne kaldırıldı? | `build_xray.py` içindeki eski `diff()` fonksiyonu (yalnızca tür/formül farkı görüyor, ilişki hedefi ve seçenek listesi değişikliğini görmüyordu). Başka bir şey yok. |
 | Neden? | Kullanıcının, başka bir AI'nın yazdığı kontrol listesini doğrulatıp eksikleri düzelttirmesi (2026-11-06 18:54 "bunların çözümlerini bul düzelt"; 2026-11-07 00:20 "kaldığın yerden devam et"). |
