@@ -6,6 +6,27 @@
 
 <!-- KAYITLAR (en yeni üstte) -->
 
+## 2026-11-07T20:44:51+03:00 → 2026-11-07T21:57:34+03:00
+
+Şema özeti: `148555a4be34` → `802b670adb80`
+
+| Sayı | Önce | Sonra |
+|---|---|---|
+| Tablo | 44 | 44 |
+| Alan | 891 | 893 |
+| İlişki alanı | 223 | 223 |
+| Formül | 91 | 91 |
+
+Özet: 2 alan eklendi
+
+### CHAT-001 | Konular
+
+- `Rapor Satırı`: **alan eklendi** — `text`
+- `Sıradaki Adım`: **alan eklendi** — `long_text`
+
+---
+
+
 ## 2026-11-07T15:09:04+03:00 → 2026-11-07T20:44:51+03:00
 
 Şema özeti: `e5a46f04b5d5` → `148555a4be34`

@@ -1,8 +1,8 @@
 # Alan Sözlüğü
 
-> Otomatik üretildi (`tools/build_field_dictionary.py`). Şema kaynağı: INVENTORY.json, 2026-11-07T20:44:51+03:00. Çelişkide canlı Baserow geçerlidir. Satır verisi yoktur.
+> Otomatik üretildi (`tools/build_field_dictionary.py`). Şema kaynağı: INVENTORY.json, 2026-11-07T21:57:34+03:00. Çelişkide canlı Baserow geçerlidir. Satır verisi yoktur.
 
-**653 benzersiz alan adı · 107 tanesi ≥2 tabloda ortak · 8 tanesi farklı türlerde kullanılıyor · 85 seçmeli değer listesi**
+**655 benzersiz alan adı · 107 tanesi ≥2 tabloda ortak · 8 tanesi farklı türlerde kullanılıyor · 85 seçmeli değer listesi**
 
 **Anlamı kayıtlı alan adı: 2** (bunların 1 tanesi ortak alan; ortak alanların 106 tanesinin anlamı yok). Anlamı belgelerde kanıtlanmayan alan için `Bilinmiyor / Doğrulanmadı` yazılır; anlam uydurulmaz. Tablo bazında alan listesi: `TABLES.md`; formül metinleri: `FORMULAS.md`.
 

@@ -1,16 +1,16 @@
 {
  "counts": {
-  "field_count": 891,
+  "field_count": 893,
   "formula_count": 91,
   "link_field_count": 223,
   "table_count": 44
  },
- "generated_at": "2026-11-07T20:44:51+03:00",
- "schema_hash": "148555a4be34",
+ "generated_at": "2026-11-07T21:57:34+03:00",
+ "schema_hash": "802b670adb80",
  "tables": {
   "Bakım ve Yedek Parça": "9f3c20b2556d",
   "Belgeler": "141020bd12eb",
-  "CHAT-001 | Konular": "321ad3cef40c",
+  "CHAT-001 | Konular": "9f2f51140604",
   "CHAT-002 | Notlar": "91c6923f7fbb",
   "CHAT-003 | Sorular": "0e879ff6e429",
   "Ekipman Lotları": "03559a05d4ae",

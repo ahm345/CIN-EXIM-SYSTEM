@@ -1,8 +1,8 @@
 # Tablo Kartları
 
-> Otomatik üretildi (`tools/build_schema_docs.py`). Kaynak: canlı Baserow şeması, 2026-11-07T20:44:51+03:00. **Elle düzenlemeyin**; şemayı yeniden okuyup betiği çalıştırın.
+> Otomatik üretildi (`tools/build_schema_docs.py`). Kaynak: canlı Baserow şeması, 2026-11-07T21:57:34+03:00. **Elle düzenlemeyin**; şemayı yeniden okuyup betiği çalıştırın.
 
-**Özet:** 44 tablo, 891 alan, 223 ilişki alanı, 91 formül. Satır sayıları bu belgede yoktur (canlı okunmalı).
+**Özet:** 44 tablo, 893 alan, 223 ilişki alanı, 91 formül. Satır sayıları bu belgede yoktur (canlı okunmalı).
 
 ## Hızlı dizin
 
@@ -49,7 +49,7 @@
 | 06 SYS Yönetim | SYS-010 \| AI Oturum ve Devir Kayıtları | 1301820 | 26 | 5 | 0 |
 | 06 SYS Yönetim | SYS-011 \| AI Çalışma ve Olay Günlüğü | 1301821 | 20 | 1 | 0 |
 | 07 Eski / Referans | Table | 620460 | 8 | 1 | 0 |
-| 08 CHAT (konu ve sohbet hafızası) | CHAT-001 \| Konular | 1306063 | 16 | 2 | 0 |
+| 08 CHAT (konu ve sohbet hafızası) | CHAT-001 \| Konular | 1306063 | 18 | 2 | 0 |
 | 08 CHAT (konu ve sohbet hafızası) | CHAT-002 \| Notlar | 1306064 | 10 | 1 | 0 |
 | 08 CHAT (konu ve sohbet hafızası) | CHAT-003 \| Sorular | 1306065 | 16 | 1 | 0 |
 
@@ -1760,7 +1760,7 @@ Eski AI denetim raporu kaydı (SYS-006 ile bağlı). Korunur, silinmez.
 
 CHAT-001 Konular: her konu bir satır (durum, güncel özet, açık noktalar, kararlar, arşiv yolu). Kural: 05_AI_PROTOCOLS/CHAT_PROTOCOL.md.
 
-- Birincil alan: `Konu Kodu` | Alan sayısı: 16
+- Birincil alan: `Konu Kodu` | Alan sayısı: 18
 - İlişkiler (alan -> hedef tablo):
   - `CHAT-002 | Notlar` -> **CHAT-002 \| Notlar** (1306064)
   - `CHAT-003 | Sorular` -> **CHAT-003 \| Sorular** (1306065)
@@ -1785,6 +1785,8 @@ CHAT-001 Konular: her konu bir satır (durum, güncel özet, açık noktalar, ka
 | CHAT-003 \| Sorular | link_row |
 | Oluşturulma Zamanı | created_on |
 | Son Değişiklik Zamanı | last_modified |
+| Rapor Satırı | text |
+| Sıradaki Adım | long_text |
 
 </details>
 

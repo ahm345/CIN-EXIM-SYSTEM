@@ -1,9 +1,9 @@
 {
  "meta": {
-  "generated_at": "2026-11-07T20:44:51+03:00",
+  "generated_at": "2026-11-07T21:57:34+03:00",
   "source": "Baserow veritabanı 263856 (canlı şema, salt okunur)",
   "table_count": 44,
-  "field_count": 891,
+  "field_count": 893,
   "link_field_count": 223,
   "formula_count": 91,
   "note": "Satır sayıları ve satır verisi burada YOKTUR; canlı okunmalıdır."
@@ -6060,7 +6060,7 @@
    "group": "08",
    "group_name": "08 CHAT (konu ve sohbet hafızası)",
    "purpose": "CHAT-001 Konular: her konu bir satır (durum, güncel özet, açık noktalar, kararlar, arşiv yolu). Kural: 05_AI_PROTOCOLS/CHAT_PROTOCOL.md.",
-   "field_count": 16,
+   "field_count": 18,
    "primary_field": "Konu Kodu",
    "fields": [
     {
@@ -6153,6 +6153,16 @@
      "id": 12137048,
      "name": "Son Değişiklik Zamanı",
      "type": "last_modified"
+    },
+    {
+     "id": 12137956,
+     "name": "Rapor Satırı",
+     "type": "text"
+    },
+    {
+     "id": 12137957,
+     "name": "Sıradaki Adım",
+     "type": "long_text"
     }
    ]
   },

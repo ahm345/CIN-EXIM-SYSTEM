@@ -18,6 +18,17 @@ Bu dosya **bu deponun** teknik değişikliklerini kronolojik tutar. Baserow yap�
 
 ---
 
+## repo-v0.4.1 — 2026-11-07 — CHAT-001'e Rapor Satırı ve Sıradaki Adım; main'e birleştirme
+
+| Alan | Değer |
+|---|---|
+| Ne değişti? | Baserow CHAT-001'e iki alan eklendi: `Rapor Satırı` (text), `Sıradaki Adım` (long_text); KONU-001 için ilk değerler yazıldı ve geri okundu. Şema 44 tablo, **893 alan** (`148555a4be34` → yeni hash, `SCHEMA_DIFFS.md`). `CHAT_PROTOCOL.md` açılış raporu ve YAPILACAK/YARIM KALAN/SENDEN BEKLENEN standardı. |
+| Kullanıcı onayı | Evet — 2026-11-07 21:57 "maine al ve ekle" (iki iş: alanları ekleme ve `main`'e birleştirme). |
+| Etkilenen Baserow | CHAT-001 şeması (+2 alan, Claude bağlayıcıyla oluşturdu), CHAT-001 ID 1 satırı (Açık Noktalar, Rapor Satırı, Sıradaki Adım, Son Konuşan AI, Son Güncelleme). SYS-004 `CHG-SYS-016`. |
+| Yapılmadı | Platform talimatı konmadı (kullanıcı); komutlar başka platformda sınanmadı; SYS-009'a işlenmedi. |
+
+---
+
 ## repo-v0.3.0 — 2026-11-07 — Gelen kutusu, araştırma havuzu, istek tahtası taslağı
 
 | Alan | Değer |
