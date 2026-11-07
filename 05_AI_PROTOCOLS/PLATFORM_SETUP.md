@@ -30,6 +30,8 @@ Depo erişimi yoksa bunu bildir; okumuş gibi davranma.
 ## 2b. CHAT komutları için ek metin (Claude ve ChatGPT proje talimatına yapıştır)
 
 ```
+Her yeni sohbetin İLK mesajında, kullanıcı ne yazarsa yazsın, önce CHAT açılış raporunu ver
+(CHAT_PROTOCOL.md bölüm 1b-0: konu listesi, son etkinlik, komut hatırlatması), sonra mesajına cevap ver.
 Kullanıcı #chatrapor yazarsa CHAT-001 ve CHAT-003 tablolarını oku ve çıktıyı CHAT_PROTOCOL.md
 bölüm 1b'deki SABİT biçimle ver: kısaltma, yorum ekleme, sıralamayı değiştirme.
 Tablolara erişemiyorsan "CHAT tablolarına erişemiyorum; okumadım." de, rapor uydurma.

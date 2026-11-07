@@ -20,6 +20,21 @@ Onay/karar komut değildir: `CHAT-003 Kullanıcı Kararı` alanıdır.
 
 Her AI `#chatrapor` ve konu seçimi çıktısını **aşağıdaki biçimle** verir. Kısaltmaz, sıralamayı değiştirmez, kendi yorumunu veya öneri listesini eklemez. Biçime uymayan çıktı hatalıdır; kullanıcı "CHAT protokolünü yeniden oku, biçimi uygula" der.
 
+**0) Açılış raporu (otomatik).** Platform talimatı konmuşsa AI, **her yeni sohbetin ilk mesajında**, kullanıcı ne yazarsa yazsın ("merhaba" bile olsa), önce açılış raporunu verir; sonra kullanıcının mesajına cevap verir. Bir hafta sonra açılan sohbette de aynı şekilde. AI konuşmayı kendisi başlatamaz; rapor kullanıcının ilk mesajıyla gelir. Açılış raporu = A) çıktısı + aşağıdaki iki blok:
+
+```
+SON ETKİNLİK: <CHAT-001/002/003'teki en yeni `Son Değişiklik Zamanı`, İstanbul saatiyle> (saat aracı varsa "n gün önce"; yoksa yalnızca tarih, tahmin yazılmaz)
+
+KOMUTLAR
+#chatrapor  konu listesini göster
+#kaydet     aktif konunun bu bölümünü ayıklayıp kaydet
+#soru <m>   tüm AI'lara bağımsız soru aç
+#sentez     cevapları karşılaştır, iş emri taslağı yaz
+#kapat      bölümü kaydet, konuyu bırak
+```
+
+Rapor kullanıcı komutu olmadan geldiği için A) çıktısının sonundaki seçim cümlesi aynen kalır. Tablolara erişilemiyorsa rapor yerine tek cümle: "CHAT tablolarına erişemiyorum; okumadım." ve komut listesi yine gösterilir. `#chatrapor` yazılırsa aynı rapor (komut listesi hariç) istenildiği an yeniden verilir.
+
 **A) `#chatrapor` çıktısı** (CHAT-001 ve CHAT-003 okunduktan sonra):
 
 ```
