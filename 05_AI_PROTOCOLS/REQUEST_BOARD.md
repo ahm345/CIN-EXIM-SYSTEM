@@ -1,73 +1,81 @@
-# İstek tahtası ve işaretler
+# Fikir / istek tahtası
 
-> **Durum: TASLAK — Baserow tabloları henüz oluşturulmadı.** Tablo yapısı (bölüm 3) kullanıcı onayına sunulmuştur. Onaya kadar işaretler çalışır ama kayıt yerine **hazır blok** üretilir (bölüm 2).
+> **Durum: TASLAK — Baserow tabloları henüz oluşturulmadı.** Tablo yapısı (bölüm 4) kullanıcı onayına sunulmuştur. Onaya kadar işaretler çalışır ama kayıt yerine **hazır blok** üretilir (bölüm 3).
 
-Amaç: kullanıcının sohbetlerde söylediği istek ve fikirler kaybolmasın, tek yerde toplansın; farklı AI'lar görüşünü ayrı satıra yazsın, sentez yapılsın, onaylananlar mevcut akışa (`FEATURE_REQUEST_WORKFLOW.md`) girsin.
+Amaç: kullanıcının sohbette aklına gelen fikir ve istekler **çöp sohbetten çıkıp tek yerde** toplanır; her fikrin kendi başlığı altında temiz bir konuşma geçmişi olur; hangi AI ne söyledi görünür; yeni gelen AI kaldığı yerden devam eder.
 
 ## 1. İşaretler (kullanıcı sohbette yazar)
 
-| İşaret | Anlamı | AI ne yapar |
-|---|---|---|
-| `#fikir …` | Henüz karar değil, düşünülecek fikir | Kayıt açar, tür=Fikir |
-| `#istek …` | Yapılmasını istediği şey | Kayıt açar, tür=İstek |
-| `#sorun …` | Bir şey yanlış / eksik | Kayıt açar, tür=Sorun |
-| `>>karar …` | Kullanıcı karar verdi | Kayıt açar veya mevcut isteğe bağlar; kalıcı karar ise SYS-005 için ayrı onay ister |
-| `#tartış REQ-…` | Bu istek için görüşünü yaz | AI isteği ve diğer görüşleri okur, kendi görüşünü ekler |
-| `#sentez REQ-…` | Görüşleri birleştir | AI tüm görüşleri okur, tek öneri yazar; **uygulamaz** |
+| İşaret | AI ne yapar |
+|---|---|
+| `#fikir …` | **Hemen** tahtaya yeni kayıt açar (tür=Fikir), kullanıcının sözünü aynen saklar, kodu söyler, sonra fikri kullanıcıyla geliştirir |
+| `#istek …` / `#sorun …` | Aynı, tür=İstek / Sorun |
+| `>>karar …` | Kullanıcının kararını ilgili fikre `Karar` notu olarak ekler (kalıcı karar ise SYS-005 için ayrıca onay ister) |
+| `#devam` | Başlıkları listeler (bölüm 2) |
+| `#sentez` | Fikrin tüm notlarını okur, `Güncel Özet`i ve `Açık Noktalar`ı yeniden yazar; **uygulamaz** |
+| `#yap` | Kullanıcı onayı: fikir `Uygulanıyor` olur → `FEATURE_REQUEST_WORKFLOW.md` → test → `Bitti` |
 
-İşaretin sonrası kullanıcının kendi sözleridir; AI bunu **yeniden yazmadan, çarpıtmadan** `Kullanıcı Metni` alanına koyar, kendi yorumunu ayrı alana yazar.
+İşaretten sonraki yazı kullanıcının sözüdür; AI onu **olduğu gibi** `Kullanıcı Sözü` notuna koyar, kendi yorumunu ayrı not olarak yazar.
 
-## 2. AI işareti görünce ne yapar
+## 2. İlk açılışta (her AI, her yeni sohbet)
 
-1. Baserow'a yazabiliyorsa **ve** tablolar onaylı/oluşturulmuşsa: `İstekler` tablosuna satır açar (yalnızca yeni satır; mevcut satırı değiştirmez), kodu ve ID'yi kullanıcıya bildirir.
-2. Yazamıyorsa (veya tablo yoksa): aşağıdaki **hazır bloğu** sohbette verir; kullanıcı yapıştırır. Yazmış gibi davranmaz.
-3. Onay almadan hiçbir Baserow şeması/operasyonel veri değişmez. İstek kaydı açmak onay yerine geçmez.
+1. Tahtayı okur (yalnızca başlık, tür, durum, son etkinlik).
+2. Kullanıcıya **başlık listesi** gösterir, üç grupta: **Açık** (Yeni / Tartışılıyor / Olgunlaştı / Uygulanıyor / Test), **Yarım kaldı**, **Bitti**.
+3. Kullanıcı birini seçer. AI o fikrin **tüm notlarını** (kim ne dedi) okur, `Güncel Özet` ve `Açık Noktalar` ile konuşmaya kaldığı yerden devam eder.
+4. Konuşma sonunda: yeni görüş/karar/soru notlarını ekler, `Güncel Özet`i günceller, tamamlanmayanı `Açık Noktalar`a yazar. Durum değişikliğini kullanıcıya söyler.
 
-Hazır blok:
+Sohbetin ham metni tahtaya taşınmaz. Tahtada yalnızca **temizlenmiş** kayıt durur: kullanıcının sözü aynen, AI'nın görüşü kısa ve imzalı, özet güncel. Selamlaşma, deneme-yanılma ve tekrar yazılmaz.
+
+## 3. Yazma yoksa (tablolar yok / AI yazamıyor)
+
+AI yazmış gibi davranmaz; hazır blok verir, kullanıcı yapıştırır:
 
 ```
 KOD: REQ-<AI kısa adı>-<tarih>-<n>   (saat yazma)
-TÜR: Fikir | İstek | Sorun | Karar
+TÜR: Fikir | İstek | Sorun
 BAŞLIK: <en çok 10 kelime>
-KULLANICI METNİ: <kullanıcının sözleri, olduğu gibi>
+KULLANICI SÖZÜ: <aynen>
+GÜNCEL ÖZET: <3-5 cümle>
+AÇIK NOKTALAR: <varsa>
 KAYNAK SOHBET: <AI adı / sohbet başlığı>
-İLGİLİ TABLOLAR: <bilinen varsa, yoksa Bilinmiyor>
 ```
 
-AI hiçbir sohbeti **otomatik izlemez**. İşaret yalnızca o an konuşulan AI için geçerlidir; başka sohbetlerdeki işaretleri başka AI'lar görmez. Bir AI açıldığında önce açık istekleri okumalıdır (`#tartış` ile veya başlangıçta).
+AI hiçbir sohbeti kendiliğinden izlemez; her AI yalnızca kendisiyle konuşulan sohbette işaret görür. İlk açılış kontrolü için platformun kalıcı talimatına satır eklenir (`PLATFORM_SETUP.md`).
 
-## 3. Önerilen Baserow tabloları (ONAY BEKLİYOR)
+## 4. Önerilen Baserow tabloları (ONAY BEKLİYOR)
 
-### SYS-012 İstekler
+### SYS-012 İstekler (her fikir bir satır)
 
 | Alan | Tür | Not |
 |---|---|---|
 | İstek Kodu | metin (birincil) | `REQ-…` |
 | Başlık | metin | |
-| Tür | seçmeli | Fikir / İstek / Sorun / Karar |
-| Kullanıcı Metni | uzun metin | aynen |
-| Kaynak Sohbet | metin | AI ve sohbet |
-| Durum | seçmeli | Yeni / Tartışılıyor / Sentez / Onay bekliyor / Uygulanıyor / Bitti / Reddedildi |
+| Tür | seçmeli | Fikir / İstek / Sorun |
+| Durum | seçmeli | Yeni / Tartışılıyor / Olgunlaştı / Uygulanıyor / Test / Bitti / Yarım kaldı / Reddedildi |
+| Kullanıcı Sözü | uzun metin | ilk söz, aynen |
+| Güncel Özet | uzun metin | temiz özet; kim, ne zaman güncelledi sonuna yazılır |
+| Açık Noktalar | uzun metin | tamamlanmayanlar, cevap bekleyen sorular |
+| Son Konuşan AI | metin | |
+| Son Etkinlik | tarih | saat aracından; yoksa boş |
+| Kaynak Sohbet | metin | |
 | İlgili Tablolar | metin | |
-| Sentez | uzun metin | tek öneri; kim yazdı belirtilir |
-| Kullanıcı Kararı | metin | onay/ret ve tarih (saat uydurma) |
-| İlgili Görev | ilişki → SYS-008 | onaylanınca açılır |
-| Görüşler | ters ilişki ← SYS-013 | |
+| Kullanıcı Kararı | metin | |
+| İlgili Görev | ilişki → SYS-008 | onaylanınca |
+| Notlar | ters ilişki ← SYS-013 | |
 
-### SYS-013 Görüşler (her AI ayrı satır; kimse başkasının satırını değiştirmez)
+### SYS-013 İstek Notları (konuşmanın temiz kaydı; her not ayrı satır, kimse başkasınınkini değiştirmez)
 
 | Alan | Tür | Not |
 |---|---|---|
-| Görüş Kodu | metin (birincil) | `OPN-…` |
+| Not Kodu | metin (birincil) | `NOT-…` |
 | İstek | ilişki → SYS-012 | |
-| AI / Model | metin | |
-| Görüş | uzun metin | |
-| Öneri | uzun metin | |
-| Riskler ve Etki | uzun metin | `IMPACT.md` kullanılır |
-| Kaynak | metin | `08_RESEARCH/R-…` veya URL |
+| Yazan | metin | Kullanıcı veya AI / model |
+| Not Türü | seçmeli | Kullanıcı sözü / Görüş / Soru / Öneri / Sentez / Karar / Test sonucu |
+| İçerik | uzun metin | |
+| Tarih | tarih | |
 
-## 4. Akış
+## 5. Akış
 
-Yeni → (kullanıcı `#tartış` der) Tartışılıyor → her AI kendi `Görüşler` satırını ekler → (`#sentez`) Sentez → kullanıcı onaylar → Uygulanıyor (SYS-008 görevi açılır; `FEATURE_REQUEST_WORKFLOW.md` 4.–10. adımlar) → Bitti.
+Yeni → Tartışılıyor (görüş ve sorular birikir) → `#sentez` → Olgunlaştı → kullanıcı `#yap` → Uygulanıyor (SYS-008 görevi; Baserow değişikliği için adım adım onay) → Test → Bitti. Yarıda kalan her fikir `Yarım kaldı` olur ve `Açık Noktalar` dolu kalır; kullanıcı onayı olmadan kapatılmaz.
 
-Tartışma **eşzamansızdır**: AI'lar birbirine kendiliğinden yazmaz; kullanıcı AI'yı açıp "açık istekleri oku" dediğinde görüş eklenir. Zamanlanmış otomasyon şu an yoktur.
+Tartışma **eşzamansızdır**: AI'lar birbirine kendiliğinden yazmaz; kullanıcı AI'yı açıp bir fikri seçtiğinde o AI tüm notları okur ve kendi notunu ekler. Zamanlanmış otomasyon şu an yoktur.

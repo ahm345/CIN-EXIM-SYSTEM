@@ -9,7 +9,7 @@ Bu dosya **bu deponun** teknik değişikliklerini kronolojik tutar. Baserow yap�
 | Alan | Değer |
 |---|---|
 | Ne eklendi? | `08_INBOX/`, `08_RESEARCH/` (README, TEMPLATE, INDEX), `05_AI_PROTOCOLS/REQUEST_BOARD.md` (**taslak**), `05_AI_PROTOCOLS/AI_SETUP.md`. `AI_START.md`, `SYSTEM_TREE.md`, `README.md` güncellendi. |
-| Etkilenen Baserow | **Yok.** SYS-012 İstekler / SYS-013 Görüşler tabloları yalnızca taslak; oluşturulmadı (kullanıcı onayı bekliyor). |
+| Etkilenen Baserow | **Yok.** SYS-012 İstekler / SYS-013 İstek Notları tabloları yalnızca taslak; oluşturulmadı (kullanıcı onayı bekliyor). |
 | Kullanıcı onayı | Evet — 2026-11-07 07:18 "başlayalım" (yalnızca depo tarafı, adım 1). |
 | Yapılmadı | Baserow tabloları; uçtan uca deneme; ChatGPT/Perplexity kurulumları doğrulanmadı. |
 

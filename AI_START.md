@@ -51,7 +51,7 @@ Devir beyanlarını doğrulamak için `cin-exim-handover-check` skill'ini çalı
 10. Önceki AI'nın "tamamladım" beyanı kanıt değildir. Devir kaydındaki iddiaları gerçek işlemlerle (canlı şema, satır, commit) doğrula.
 11. Kontrol formüllerinin `OK` sonucu **hukuki veya belge doğrulaması anlamına gelmez** (bkz. `07_TESTS_AND_RELEASES/KNOWN_ISSUES.md`).
 12. **Eksik bilgi parça parça sorulmaz.** Çıktı üretmeden önce eksiklerin tamamı tek listede (A kullanıcı bilir · B dış kaynaktan bulunur, hazır araştırma promptuyla · C AI kendi bulur) sorulur; cevapsız bilgi uydurulmaz (`05_AI_PROTOCOLS/INFO_GAP_PROTOCOL.md`, SYS-009 `Eksik Bilgi Yönetimi`).
-14. **İşaretler:** kullanıcı `#fikir`, `#istek`, `#sorun`, `>>karar`, `#tartış`, `#sentez` yazarsa `REQUEST_BOARD.md` uygulanır. Web araması gerekmeden önce `08_RESEARCH/INDEX.md`'ye bak.
+14. **İşaretler ve tahta:** yeni sohbetin başında fikir tahtasını oku, başlıkları açık/yarım/biten diye listele, kullanıcı seçsin. Kullanıcı `#fikir`, `#istek`, `#sorun`, `>>karar`, `#devam`, `#sentez`, `#yap` yazarsa `REQUEST_BOARD.md` uygulanır. Web araması gerekmeden önce `08_RESEARCH/INDEX.md`'ye bak.
 13. `Devam ediyor` oturumu kullanıcı onayı olmadan kapatma veya "terk edilmiş" sayma; oturumun açık olup olmadığını yalnızca kullanıcı bilir.
 
 ## 3. Hızlı çalışma (token verimliliği)
@@ -98,7 +98,7 @@ Adımlar ve etki analizi şablonu: `05_AI_PROTOCOLS/FEATURE_REQUEST_WORKFLOW.md`
 | `05_AI_PROTOCOLS/INFO_GAP_PROTOCOL.md` | Eksik bilgiyi tek listede sorma kuralı (SYS-009 `Eksik Bilgi Yönetimi`) |
 | `05_AI_PROTOCOLS/LOG_ARCHIVE_RULE.md` | Baserow satır limiti için log arşiv kuralı (kabul edildi, DEC-SYS-003) |
 | `05_AI_PROTOCOLS/PLATFORM_SETUP.md` | AI platformlarının kalıcı talimatına konacak başlangıç metni |
-| `05_AI_PROTOCOLS/REQUEST_BOARD.md` | `#fikir / #istek / #sorun / >>karar / #tartış / #sentez` işaretleri, istek ve görüş tablosu taslağı (taslak) |
+| `05_AI_PROTOCOLS/REQUEST_BOARD.md` | `#fikir / #istek / #sorun / >>karar / #tartış / #sentez` işaretleri, fikir tahtası ve not tablosu taslağı (taslak) |
 | `05_AI_PROTOCOLS/AI_SETUP.md` | Hangi AI neyi okuyup yazar; kurulum ve rol dağılımı |
 | `08_INBOX/README.md` | Yazamayan AI'ların çıktısı; üzerine yazma yok |
 | `08_RESEARCH/README.md` | Ortak web araştırma havuzu; önce `INDEX.md`'ye bak, tekrar arama |
