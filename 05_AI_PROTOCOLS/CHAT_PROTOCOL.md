@@ -33,6 +33,18 @@ KOMUTLAR
 #kapat      bölümü kaydet, konuyu bırak
 ```
 
+Konu listesinden hemen sonra, **her açık/yarım konu için** (en çok 5; fazlaysa en yeni değişenler) "nerede kaldık, neler yapıldı" bloğu gelir:
+
+```
+NEREDE KALDIK
+1) KONU-001 · <başlık>
+   Son durum: <`Rapor Satırı` alanı, en çok 200 karakter>
+   Son gelişmeler: <tarih · kim · ne> (CHAT-002'deki son 3 not, en yeni üstte)
+   Sıradaki adım: <`Sıradaki Adım` alanı>
+```
+
+`Rapor Satırı` ve `Sıradaki Adım` CHAT-001'de tutulan **hazır, kısa** metinlerdir: AI bunları her `#kaydet` ve `#kapat` sonunda günceller (bölüm 3-4). Böylece açılışta her AI aynı hazır metni gösterir, kendi kafasına göre özet uydurmaz. *(Bu iki alan Baserow'da henüz yok, kullanıcı onayı bekliyor; eklenene kadar AI `Güncel Özet`in ilk iki cümlesini "Son durum", `Açık Noktalar`ın ilk maddesini "Sıradaki adım" olarak gösterir ve bunu raporda belirtir.)*
+
 Rapor kullanıcı komutu olmadan geldiği için A) çıktısının sonundaki seçim cümlesi aynen kalır. Tablolara erişilemiyorsa rapor yerine tek cümle: "CHAT tablolarına erişemiyorum; okumadım." ve komut listesi yine gösterilir. `#chatrapor` yazılırsa aynı rapor (komut listesi hariç) istenildiği an yeniden verilir.
 
 **A) `#chatrapor` çıktısı** (CHAT-001 ve CHAT-003 okunduktan sonra):
@@ -91,13 +103,13 @@ Bir web sohbeti birden çok konuyu içerebilir. Karışmayı önlemek için:
 
 1. Aktif konunun bölümünü ayıklar: kullanıcı sözü **aynen** (`Kullanıcı sözü`), AI görüşü kısa ve imzalı (`AI görüşü`), kararlar önce `Karar adayı` (`Onay Durumu=Onaysız`); `Karar` yalnızca kullanıcı açıkça onaylarsa. Selamlaşma, deneme-yanılma ve tekrar yazılmaz.
 2. 5-8 satır **önizleme** gösterir. Kullanıcı onaylayınca yazar (kullanıcı "önizlemesiz kaydet" derse kalıcı olmayan oturum ayarı olarak atlanır; `Karar` yine onay ister).
-3. Yazar, **geri okur**, doğrular; konunun `Güncel Özet`, `Açık Noktalar`, `Son Konuşan AI`, `Son Güncelleme` alanlarını günceller (eski özet `Özet` notu olarak saklanır).
+3. Yazar, **geri okur**, doğrular; konunun `Güncel Özet`, `Açık Noktalar`, `Rapor Satırı`, `Sıradaki Adım`, `Son Konuşan AI`, `Son Güncelleme` alanlarını günceller (eski özet `Özet` notu olarak saklanır).
 4. Yazma başarısızsa "kaydettim" denmez; hazır blok verilir (bölüm 7).
 
 ## 4. `#kapat`
 
 - Aktif konu yoksa "aktif konu yok" der.
-- Kayıtsız bölüm varsa önce `#kaydet` akışı (önizleme dahil) çalışır; sonra aktif konu bırakılır.
+- Kayıtsız bölüm varsa önce `#kaydet` akışı (önizleme dahil) çalışır; sonra aktif konu bırakılır. `Rapor Satırı` ve `Sıradaki Adım` kapatma anındaki durumu yansıtır (bir sonraki sohbetin açılış raporu bunu gösterir).
 - `Açık Noktalar` korunur; konu `Durum` alanı **kullanıcı kararı olmadan** Bitti yapılmaz. Hiçbir şey silinmez.
 - Kapatmadan sonra yeni konuşma **konusuz** sayılır; bir sonraki `#chatrapor` yeni bölüm başlatır. Kapatmadan sonra yazılan içerik yeni konu seçilene kadar kaydedilmez.
 
