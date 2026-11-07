@@ -1,6 +1,8 @@
 # Fikir / istek tahtası
 
-> **Durum: TASLAK — Baserow tabloları henüz oluşturulmadı.** Tablo yapısı (bölüm 4) kullanıcı onayına sunulmuştur. Onaya kadar işaretler çalışır ama kayıt yerine **hazır blok** üretilir (bölüm 3).
+> **GEÇERSİZ — yerini `CHAT_PROTOCOL.md` ve CHAT-001/002/003 tabloları aldı (DEC-SYS-004). Tarihsel kayıt olarak durur; SYS-012/013 oluşturulmayacak.**
+>
+> ~~Durum: TASLAK — Baserow tabloları henüz oluşturulmadı.~~ Tablo yapısı (bölüm 4) kullanıcı onayına sunulmuştur. Onaya kadar işaretler çalışır ama kayıt yerine **hazır blok** üretilir (bölüm 3).
 
 Amaç: kullanıcının sohbette aklına gelen fikir ve istekler **çöp sohbetten çıkıp tek yerde** toplanır; her fikrin kendi başlığı altında temiz bir konuşma geçmişi olur; hangi AI ne söyledi görünür; yeni gelen AI kaldığı yerden devam eder.
 

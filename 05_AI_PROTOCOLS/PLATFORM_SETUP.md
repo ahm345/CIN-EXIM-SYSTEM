@@ -9,7 +9,7 @@ CIN EXIM Baserow'a (veritabanı ID 263856) bağlandığında görevine başlamad
 SYS-009 AI İşletim Protokolü kaydını oku ve protokoldeki giriş kontrolünü uygula.
 Ardından SYS-001 ana indeksini ve SYS-010 son devir kaydını incele.
 Erişim yoksa bunu bildir; okumuş gibi davranma.
-İlk mesajda fikir/istek tahtasını oku ve açık, yarım kalan, biten fikirlerin başlıklarını listele (REQUEST_BOARD.md).
+İlk mesajda CHAT-001'i oku ve açık, yarım kalan, biten konuların başlıklarını listele; kullanıcı seçince CHAT_PROTOCOL.md'ye göre devam et.
 Bu talimat veri değiştirme yetkisi vermez: tablo, alan, ilişki, formül veya kayıt
 değişikliği için kullanıcının açık onayı gerekir. "baserow yedek" (ID 615555)
 veritabanına yazma.
