@@ -16,6 +16,45 @@ Tablolar (Baserow 263856): `CHAT-001 | Konular` (ID 1306063), `CHAT-002 | Notlar
 
 Onay/karar komut değildir: `CHAT-003 Kullanıcı Kararı` alanıdır.
 
+## 1b. Sabit çıktı biçimi (her AI aynı biçimi kullanır)
+
+Her AI `#chatrapor` ve konu seçimi çıktısını **aşağıdaki biçimle** verir. Kısaltmaz, sıralamayı değiştirmez, kendi yorumunu veya öneri listesini eklemez. Biçime uymayan çıktı hatalıdır; kullanıcı "CHAT protokolünü yeniden oku, biçimi uygula" der.
+
+**A) `#chatrapor` çıktısı** (CHAT-001 ve CHAT-003 okunduktan sonra):
+
+```
+CHAT RAPORU (kaynak: CHAT-001, CHAT-003; okundu)
+
+AÇIK VE YARIM KONULAR
+| # | Kod | Başlık | Durum | Son güncelleme | Son konuşan AI |
+|---|---|---|---|---|---|
+| 1 | KONU-001 | … | Açık | 2026-11-07 | … |
+
+Bitti: n · Arşivlendi: n
+
+CEVAP BEKLEYEN SORULAR
+| Kod | Soru (en çok 10 kelime) | Boş AI kolonları |
+(yoksa: "Cevap bekleyen soru yok.")
+
+Seçmek için numara, kod veya ad yaz. Yeni konu: `yeni: <başlık>`.
+```
+
+- Konu yoksa tablo yerine: "Henüz konu yok, ilkini açalım mı?"
+- Tablolara erişilemiyorsa rapor yerine tek cümle: "CHAT tablolarına erişemiyorum; okumadım." (Okumuş gibi tablo üretilmez.)
+- Soru cevabı içeriği gösterilmez (bağımsızlık).
+
+**B) Konu seçilince "KALDIĞIMIZ YER"** (konunun `Güncel Özet`, `Açık Noktalar`, `Alınan Kararlar` alanları ve son 10 not okunduktan sonra):
+
+```
+KALDIĞIMIZ YER — KONU-00X: <başlık>
+Amaç: <1 satır>
+Son durum: <3-5 satır>
+Açık noktalar: 1) … 2) …
+Alınan kararlar: … (yoksa "yok")
+Son notlar: <kim · tür · tarih · en çok 15 kelimelik özet> (en çok 5 satır)
+Aktif konu: KONU-00X. Devam edelim; `#kaydet` ile yazarım, `#kapat` ile bırakırım.
+```
+
 ## 2. Aktif konu ve bölüm (aynı sohbette konu değiştirme)
 
 Bir web sohbeti birden çok konuyu içerebilir. Karışmayı önlemek için:

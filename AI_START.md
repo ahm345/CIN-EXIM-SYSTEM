@@ -115,6 +115,7 @@ Adımlar ve etki analizi şablonu: `05_AI_PROTOCOLS/FEATURE_REQUEST_WORKFLOW.md`
 | `python3 -I tools/schema_diff.py` | Son anlık görüntü ile güncel envanteri karşılaştırır, farkı yazar, yeni anlık görüntü alır |
 | `python3 -I tools/build_field_dictionary.py` | Alan sözlüğünü üretir |
 | `python3 -I tools/handover_check.py` | Depo tarafı tutarlılık/devir kontrolü (`cin-exim-handover-check` skill'inin parçası) |
+| `python3 -I tools/inbox_diff.py 08_INBOX/<paket> [--show]` | Gelen kutusu paketini depodakiyle karşılaştırır (yeni/değişmiş/aynı/belirsiz/üretilen; silinen satır uyarısı); **hiçbir şey yazmaz** |
 | `python3 -I tools/archive_chat.py archive …` ve `… verify …` | Biten CHAT konusunun notlarını/sorularını `09_CHAT_ARCHIVE/`'e arşivler, silmeden önce doğrular; **Baserow'dan silmez**, konu `Bitti` değilse reddeder (`CHAT_PROTOCOL.md` bölüm 9) |
 | `python3 -I tools/archive_log.py archive …` ve `… verify …` | SYS-010/011 satırlarını Git'e arşivler (`archive`) ve silmeden önce arşivin tam olduğunu doğrular (`verify`); **Baserow'dan silmez** |
 

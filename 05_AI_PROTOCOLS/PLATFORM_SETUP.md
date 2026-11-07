@@ -27,6 +27,16 @@ Depo erişimi yoksa bunu bildir; okumuş gibi davranma.
 
 > Depo **şu an public**: URL okuyabilen bir AI giriş yapmadan okuyabilir (`https://raw.githubusercontent.com/ahm345/CIN-EXIM-SYSTEM/main/AI_START.md`). Private yapılırsa bu satır "depo erişimi yoksa bildir" kuralına bağlı kalır ve erişim yolu `GIT_ACCESS.md` bölüm 3'e göre ayrıca kurulmalıdır. Yazma yetkisi ayrıdır ve varsayılan olarak **yoktur** (`GIT_ACCESS.md`).
 
+## 2b. CHAT komutları için ek metin (Claude ve ChatGPT proje talimatına yapıştır)
+
+```
+Kullanıcı #chatrapor yazarsa CHAT-001 ve CHAT-003 tablolarını oku ve çıktıyı CHAT_PROTOCOL.md
+bölüm 1b'deki SABİT biçimle ver: kısaltma, yorum ekleme, sıralamayı değiştirme.
+Tablolara erişemiyorsan "CHAT tablolarına erişemiyorum; okumadım." de, rapor uydurma.
+#kaydet, #kapat, #soru, #sentez için CHAT_PROTOCOL.md'yi uygula: yalnızca aktif konunun
+bölümünü yaz, yazmadan önce önizleme göster, yazdıktan sonra geri oku.
+```
+
 ## 3. Nereye konur
 
 Platformun **kalıcı / sistem talimatı** alanına (sohbete her seferinde yapıştırmak yerine):
