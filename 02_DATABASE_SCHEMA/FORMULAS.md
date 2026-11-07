@@ -1,6 +1,6 @@
 # Formüller
 
-> Otomatik üretildi, kaynak: canlı şema 2026-11-07T15:09:04+03:00. Toplam 91 formül. Bir formül değişince bu dosya yeniden üretilmeli ve `04_CHANGE_HISTORY/` altına kayıt düşülmelidir.
+> Otomatik üretildi, kaynak: canlı şema 2026-11-07T20:44:51+03:00. Toplam 91 formül. Bir formül değişince bu dosya yeniden üretilmeli ve `04_CHANGE_HISTORY/` altına kayıt düşülmelidir.
 
 ## Projeler  (ID 1299126)
 

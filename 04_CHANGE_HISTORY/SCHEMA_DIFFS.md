@@ -6,6 +6,47 @@
 
 <!-- KAYITLAR (en yeni üstte) -->
 
+## 2026-11-07T15:09:04+03:00 → 2026-11-07T20:44:51+03:00
+
+Şema özeti: `e5a46f04b5d5` → `148555a4be34`
+
+| Sayı | Önce | Sonra |
+|---|---|---|
+| Tablo | 44 | 44 |
+| Alan | 881 | 891 |
+| İlişki alanı | 223 | 223 |
+| Formül | 91 | 91 |
+
+Özet: 10 alan eklendi
+
+### CHAT-001 | Konular
+
+- `Oluşturulma Zamanı`: **alan eklendi** — `created_on`
+- `Son Değişiklik Zamanı`: **alan eklendi** — `last_modified`
+
+### CHAT-002 | Notlar
+
+- `Oluşturulma Zamanı`: **alan eklendi** — `created_on`
+- `Son Değişiklik Zamanı`: **alan eklendi** — `last_modified`
+
+### CHAT-003 | Sorular
+
+- `Oluşturulma Zamanı`: **alan eklendi** — `created_on`
+- `Son Değişiklik Zamanı`: **alan eklendi** — `last_modified`
+
+### SYS-010 | AI Oturum ve Devir Kayıtları
+
+- `Created on`: **alan eklendi** — `created_on`
+- `Last modified`: **alan eklendi** — `last_modified`
+
+### SYS-011 | AI Çalışma ve Olay Günlüğü
+
+- `Oluşturulma Zamanı`: **alan eklendi** — `created_on`
+- `Son Değişiklik Zamanı`: **alan eklendi** — `last_modified`
+
+---
+
+
 ## 2026-11-06T08:57:59+03:00 → 2026-11-07T15:09:04+03:00
 
 Şema özeti: `a8068f47e2bc` → `e5a46f04b5d5`

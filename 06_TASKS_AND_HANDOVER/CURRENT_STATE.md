@@ -14,7 +14,7 @@
 |---|---|
 | Veritabanı | `baserow`, ID 263856 |
 | Tablo | 44 (23 operasyonel + 6 senaryo + 11 SYS + 3 CHAT + 1 eski `Table`) |
-| Alan / ilişki alanı / formül | 881 / 223 / 91 (`02_DATABASE_SCHEMA/INVENTORY.json`, 2026-11-07 CHAT tabloları eklendi) |
+| Alan / ilişki alanı / formül | 891 / 223 / 91 (`02_DATABASE_SCHEMA/INVENTORY.json`; 2026-11-07 CHAT tabloları ve SYS-010/011, CHAT-001/002/003'e sistem zaman alanları eklendi) |
 | SYS-009 protokol | v1.5 (canlı doğrulandı 2026-11-07; `Girişte Zorunlu Adımlar` alanı sürüm numarası anmayacak şekilde düzeltildi, bkz. `PROTOCOL_MIRROR.md`) |
 | SYS-010 oturum kaydı | 10 (ID 10 = `CLAUDE-20261107-002`, claude.ai, "Devam ediyor"; ID 4–7 2026-11-07 06:51'de kullanıcı onayıyla "Kapatıldı – iş TAMAMLANMADI" yapıldı; ID 9 = `CLAUDE-20261107-001`) |
 | SYS-008 görev | 15 |

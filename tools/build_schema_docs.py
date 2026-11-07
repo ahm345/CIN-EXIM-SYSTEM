@@ -341,13 +341,15 @@ def write_formulas_md(tables, out_dir, meta):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("raw", nargs="+", help="get_table_schema ham JSON dosyaları")
+    ap.add_argument("raw", nargs="*", help="get_table_schema ham JSON dosyaları (--base ile verilirse boş olabilir: belgeler yalnızca envanterden yeniden üretilir)")
     ap.add_argument("--out", default="02_DATABASE_SCHEMA")
     ap.add_argument("--base", help="Mevcut INVENTORY.json; ham dosyadaki tablolar bunun üzerine eklenir/değiştirilir (tüm şemayı yeniden dökmeden tablo eklemek için)")
     ap.add_argument("--generated-at", required=True, help="ISO zaman damgası (araç saatinden; uydurmayın)")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
-    tables = normalize(load(a.raw))
+    if not a.raw and not a.base:
+        ap.error("ham JSON dosyası veya --base gerekli")
+    tables = normalize(load(a.raw)) if a.raw else []
     if a.base:
         with open(a.base, encoding="utf-8") as fh:
             base = {t["id"]: t for t in json.load(fh)["tables"]}

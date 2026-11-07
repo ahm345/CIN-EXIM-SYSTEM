@@ -1,8 +1,8 @@
 # Röntgen — Seviye 0 (tek sayfa harita)
 
-> Otomatik üretildi (`tools/build_xray.py`). Şema kaynağı: INVENTORY.json, 2026-11-07T15:09:04+03:00. Çelişkide canlı Baserow geçerlidir. Satır verisi yoktur.
+> Otomatik üretildi (`tools/build_xray.py`). Şema kaynağı: INVENTORY.json, 2026-11-07T20:44:51+03:00. Çelişkide canlı Baserow geçerlidir. Satır verisi yoktur.
 
-**44 tablo · 881 alan · 223 ilişki alanı · 91 formül**
+**44 tablo · 891 alan · 223 ilişki alanı · 91 formül**
 
 Okuma sırası: bu sayfa → `01_SYSTEM_TREE/MODULES.md` (iş → tablo) → `TABLES.md` (tam kart) → `IMPACT.md` (değişiklik öncesi).
 
@@ -75,8 +75,8 @@ Sütunlar: **Bağlı olduğu** = bu tablodan çıkan ilişki alanı sayısıyla 
 | 1301804 | SYS-007 \| Sistem Geri Yükleme ve Klonlama | SYS-007 Geri Yükleme ve Klonlama: yedekten kurulum işlemleri ve doğrulama sonuçları. | 19/2/0 | SYS-002 \| Sistem Sürüm Kayıtları, SYS-003 \| Sistem Yedek Paketleri | — | 0 |
 | 1301805 | SYS-008 \| Sistem Görev ve Geliştirme Takibi | SYS-008 Görev ve Geliştirme Takibi: öncelik, durum, sorumlu, tamamlanma kriteri. | 21/5/0 | SYS-002 \| Sistem Sürüm Kayıtları, SYS-004 \| Sistem Değişiklik Günlüğü, SYS-005 \| Sistem Karar Kayıtları, SYS-006 \| Sistem Denetim ve Testleri, SYS-010 \| AI Oturum ve Devir Kayıtları | — | 0 |
 | 1301819 | SYS-009 \| AI İşletim Protokolü | SYS-009 AI İşletim Protokolü: giriş, çalışma, çıkış, yasaklar. Protokolün TEK KAYNAĞI. | 13/0/0 | — | — | 0 |
-| 1301820 | SYS-010 \| AI Oturum ve Devir Kayıtları | SYS-010 AI Oturum ve Devir Kayıtları: her oturum için tek kayıt; sonraki AI için talimat. | 24/5/0 | SYS-002 \| Sistem Sürüm Kayıtları, SYS-005 \| Sistem Karar Kayıtları, SYS-006 \| Sistem Denetim ve Testleri, SYS-008 \| Sistem Görev ve Geliştirme Takibi, SYS-011 \| AI Çalışma ve Olay Günlüğü | — | 0 |
-| 1301821 | SYS-011 \| AI Çalışma ve Olay Günlüğü | SYS-011 AI Çalışma ve Olay Günlüğü: yalnızca hata, geri alma, beklenmedik durum, kullanıcı talebi. | 18/1/0 | SYS-010 \| AI Oturum ve Devir Kayıtları | — | 0 |
+| 1301820 | SYS-010 \| AI Oturum ve Devir Kayıtları | SYS-010 AI Oturum ve Devir Kayıtları: her oturum için tek kayıt; sonraki AI için talimat. | 26/5/0 | SYS-002 \| Sistem Sürüm Kayıtları, SYS-005 \| Sistem Karar Kayıtları, SYS-006 \| Sistem Denetim ve Testleri, SYS-008 \| Sistem Görev ve Geliştirme Takibi, SYS-011 \| AI Çalışma ve Olay Günlüğü | — | 0 |
+| 1301821 | SYS-011 \| AI Çalışma ve Olay Günlüğü | SYS-011 AI Çalışma ve Olay Günlüğü: yalnızca hata, geri alma, beklenmedik durum, kullanıcı talebi. | 20/1/0 | SYS-010 \| AI Oturum ve Devir Kayıtları | — | 0 |
 
 ## 07 Eski / Referans
 
@@ -88,9 +88,9 @@ Sütunlar: **Bağlı olduğu** = bu tablodan çıkan ilişki alanı sayısıyla 
 
 | ID | Tablo | Amaç | Alan/İlişki/Formül | Bağlı olduğu | Formül girdisi | Okunma |
 |---|---|---|---|---|---|---|
-| 1306063 | CHAT-001 \| Konular | CHAT-001 Konular: her konu bir satır (durum, güncel özet, açık noktalar, kararlar, arşiv yolu). Kural: 05_A... | 14/2/0 | CHAT-002 \| Notlar, CHAT-003 \| Sorular | — | 0 |
-| 1306064 | CHAT-002 \| Notlar | CHAT-002 Notlar: konunun içindeki temizlenmiş kayıtlar (kullanıcı sözü, AI görüşü, karar adayı, karar); her... | 8/1/0 | CHAT-001 \| Konular | — | 0 |
-| 1306065 | CHAT-003 \| Sorular | CHAT-003 Sorular: aynı soruya her AI'nın bağımsız cevabı (ayrı kolon), sentez ve iş emri taslağı, kullanıcı... | 14/1/0 | CHAT-001 \| Konular | — | 0 |
+| 1306063 | CHAT-001 \| Konular | CHAT-001 Konular: her konu bir satır (durum, güncel özet, açık noktalar, kararlar, arşiv yolu). Kural: 05_A... | 16/2/0 | CHAT-002 \| Notlar, CHAT-003 \| Sorular | — | 0 |
+| 1306064 | CHAT-002 \| Notlar | CHAT-002 Notlar: konunun içindeki temizlenmiş kayıtlar (kullanıcı sözü, AI görüşü, karar adayı, karar); her... | 10/1/0 | CHAT-001 \| Konular | — | 0 |
+| 1306065 | CHAT-003 \| Sorular | CHAT-003 Sorular: aynı soruya her AI'nın bağımsız cevabı (ayrı kolon), sentez ve iş emri taslağı, kullanıcı... | 16/1/0 | CHAT-001 \| Konular | — | 0 |
 
 ## Merkez tablolar (en çok okunan)
 

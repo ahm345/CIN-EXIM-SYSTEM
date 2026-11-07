@@ -1,9 +1,9 @@
 {
  "meta": {
-  "generated_at": "2026-11-07T15:09:04+03:00",
+  "generated_at": "2026-11-07T20:44:51+03:00",
   "source": "Baserow veritabanı 263856 (canlı şema, salt okunur)",
   "table_count": 44,
-  "field_count": 881,
+  "field_count": 891,
   "link_field_count": 223,
   "formula_count": 91,
   "note": "Satır sayıları ve satır verisi burada YOKTUR; canlı okunmalıdır."
@@ -4856,7 +4856,7 @@
    "group": "06",
    "group_name": "06 SYS Yönetim",
    "purpose": "SYS-010 AI Oturum ve Devir Kayıtları: her oturum için tek kayıt; sonraki AI için talimat.",
-   "field_count": 24,
+   "field_count": 26,
    "primary_field": "Oturum Kodu",
    "fields": [
     {
@@ -4989,6 +4989,16 @@
      "type": "link_row",
      "target_id": 1301821,
      "target": "SYS-011 | AI Çalışma ve Olay Günlüğü"
+    },
+    {
+     "id": 12136865,
+     "name": "Created on",
+     "type": "created_on"
+    },
+    {
+     "id": 12136868,
+     "name": "Last modified",
+     "type": "last_modified"
     }
    ]
   },
@@ -4998,7 +5008,7 @@
    "group": "06",
    "group_name": "06 SYS Yönetim",
    "purpose": "SYS-011 AI Çalışma ve Olay Günlüğü: yalnızca hata, geri alma, beklenmedik durum, kullanıcı talebi.",
-   "field_count": 18,
+   "field_count": 20,
    "primary_field": "Olay Kodu",
    "fields": [
     {
@@ -5093,6 +5103,16 @@
      "type": "link_row",
      "target_id": 1301820,
      "target": "SYS-010 | AI Oturum ve Devir Kayıtları"
+    },
+    {
+     "id": 12136966,
+     "name": "Oluşturulma Zamanı",
+     "type": "created_on"
+    },
+    {
+     "id": 12137007,
+     "name": "Son Değişiklik Zamanı",
+     "type": "last_modified"
     }
    ]
   },
@@ -6040,7 +6060,7 @@
    "group": "08",
    "group_name": "08 CHAT (konu ve sohbet hafızası)",
    "purpose": "CHAT-001 Konular: her konu bir satır (durum, güncel özet, açık noktalar, kararlar, arşiv yolu). Kural: 05_AI_PROTOCOLS/CHAT_PROTOCOL.md.",
-   "field_count": 14,
+   "field_count": 16,
    "primary_field": "Konu Kodu",
    "fields": [
     {
@@ -6123,6 +6143,16 @@
      "type": "link_row",
      "target_id": 1306065,
      "target": "CHAT-003 | Sorular"
+    },
+    {
+     "id": 12137037,
+     "name": "Oluşturulma Zamanı",
+     "type": "created_on"
+    },
+    {
+     "id": 12137048,
+     "name": "Son Değişiklik Zamanı",
+     "type": "last_modified"
     }
    ]
   },
@@ -6132,7 +6162,7 @@
    "group": "08",
    "group_name": "08 CHAT (konu ve sohbet hafızası)",
    "purpose": "CHAT-002 Notlar: konunun içindeki temizlenmiş kayıtlar (kullanıcı sözü, AI görüşü, karar adayı, karar); her not bir konuya bağlıdır.",
-   "field_count": 8,
+   "field_count": 10,
    "primary_field": "Not Kodu",
    "fields": [
     {
@@ -6192,6 +6222,16 @@
      "type": "link_row",
      "target_id": 1306063,
      "target": "CHAT-001 | Konular"
+    },
+    {
+     "id": 12137124,
+     "name": "Oluşturulma Zamanı",
+     "type": "created_on"
+    },
+    {
+     "id": 12137125,
+     "name": "Son Değişiklik Zamanı",
+     "type": "last_modified"
     }
    ]
   },
@@ -6201,7 +6241,7 @@
    "group": "08",
    "group_name": "08 CHAT (konu ve sohbet hafızası)",
    "purpose": "CHAT-003 Sorular: aynı soruya her AI'nın bağımsız cevabı (ayrı kolon), sentez ve iş emri taslağı, kullanıcı kararı.",
-   "field_count": 14,
+   "field_count": 16,
    "primary_field": "Soru Kodu",
    "fields": [
     {
@@ -6290,6 +6330,16 @@
      "type": "link_row",
      "target_id": 1306063,
      "target": "CHAT-001 | Konular"
+    },
+    {
+     "id": 12137144,
+     "name": "Oluşturulma Zamanı",
+     "type": "created_on"
+    },
+    {
+     "id": 12137146,
+     "name": "Son Değişiklik Zamanı",
+     "type": "last_modified"
     }
    ]
   }

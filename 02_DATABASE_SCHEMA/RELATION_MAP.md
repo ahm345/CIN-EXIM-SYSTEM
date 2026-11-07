@@ -1,6 +1,6 @@
 # Tablo İlişki Haritası
 
-> Otomatik üretildi (`tools/build_schema_docs.py`), kaynak: canlı şema 2026-11-07T15:09:04+03:00. Kenar etiketi = iki tablo arasındaki ilişki alanı sayısı (çift yönlü alanlar tek sayılır).
+> Otomatik üretildi (`tools/build_schema_docs.py`), kaynak: canlı şema 2026-11-07T20:44:51+03:00. Kenar etiketi = iki tablo arasındaki ilişki alanı sayısı (çift yönlü alanlar tek sayılır).
 
 ## 1. Grup düzeyinde harita
 

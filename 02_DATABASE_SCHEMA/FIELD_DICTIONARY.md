@@ -1,10 +1,10 @@
 # Alan Sözlüğü
 
-> Otomatik üretildi (`tools/build_field_dictionary.py`). Şema kaynağı: INVENTORY.json, 2026-11-07T15:09:04+03:00. Çelişkide canlı Baserow geçerlidir. Satır verisi yoktur.
+> Otomatik üretildi (`tools/build_field_dictionary.py`). Şema kaynağı: INVENTORY.json, 2026-11-07T20:44:51+03:00. Çelişkide canlı Baserow geçerlidir. Satır verisi yoktur.
 
-**649 benzersiz alan adı · 105 tanesi ≥2 tabloda ortak · 8 tanesi farklı türlerde kullanılıyor · 85 seçmeli değer listesi**
+**653 benzersiz alan adı · 107 tanesi ≥2 tabloda ortak · 8 tanesi farklı türlerde kullanılıyor · 85 seçmeli değer listesi**
 
-**Anlamı kayıtlı alan adı: 2** (bunların 1 tanesi ortak alan; ortak alanların 104 tanesinin anlamı yok). Anlamı belgelerde kanıtlanmayan alan için `Bilinmiyor / Doğrulanmadı` yazılır; anlam uydurulmaz. Tablo bazında alan listesi: `TABLES.md`; formül metinleri: `FORMULAS.md`.
+**Anlamı kayıtlı alan adı: 2** (bunların 1 tanesi ortak alan; ortak alanların 106 tanesinin anlamı yok). Anlamı belgelerde kanıtlanmayan alan için `Bilinmiyor / Doğrulanmadı` yazılır; anlam uydurulmaz. Tablo bazında alan listesi: `TABLES.md`; formül metinleri: `FORMULAS.md`.
 
 ## 1. Ortak alanlar (aynı ad, ≥2 tablo)
 
@@ -28,7 +28,9 @@
 | Bitiş | date | 4 | Sigortalar, Sözleşmeler, Tahsisler, Teminatlar | Bilinmiyor / Doğrulanmadı |
 | Dönem | text | 4 | Gelir Gider Dengesi, Geri Ödeme Planı, Kira ve Tahsilat Planı, Senaryo Değerlendirme | Bilinmiyor / Doğrulanmadı |
 | Hizmet Kayıtları | link_row → Hizmet Kayıtları | 4 | Firmalar, Makineler, Projeler, Sözleşmeler | İlişki alanı → Hizmet Kayıtları. Anlam: Bilinmiyor / Doğrulanmadı |
+| Oluşturulma Zamanı | created_on | 4 | CHAT-001 \| Konular, CHAT-002 \| Notlar, CHAT-003 \| Sorular, SYS-011 \| AI Çalışma ve Olay Günlüğü | Bilinmiyor / Doğrulanmadı |
 | SYS-010 \| AI Oturum ve Devir Kayıtları | link_row → SYS-010 \\\| AI Oturum ve Devir Kayıtları | 4 | SYS-002 \| Sistem Sürüm Kayıtları, SYS-005 \| Sistem Karar Kayıtları, SYS-006 \| Sistem Denetim ve Testleri, SYS-008 \| Sistem Görev ve Geliştirme Takibi | İlişki alanı → SYS-010 \/ AI Oturum ve Devir Kayıtları. Anlam: Bilinmiyor / Doğrulanmadı |
+| Son Değişiklik Zamanı | last_modified | 4 | CHAT-001 \| Konular, CHAT-002 \| Notlar, CHAT-003 \| Sorular, SYS-011 \| AI Çalışma ve Olay Günlüğü | Bilinmiyor / Doğrulanmadı |
 | Sözleşmeler | link_row → Sözleşmeler | 4 | Belgeler, Ekipman Lotları, Firmalar, Projeler | İlişki alanı → Sözleşmeler. Anlam: Bilinmiyor / Doğrulanmadı |
 | Bakım ve Yedek Parça | link_row → Bakım ve Yedek Parça | 3 | Ekipman Lotları, Makineler, Projeler | İlişki alanı → Bakım ve Yedek Parça. Anlam: Bilinmiyor / Doğrulanmadı |
 | Başlangıç Tarihi | date | 3 | Projeler, SYS-007 \| Sistem Geri Yükleme ve Klonlama, SYS-010 \| AI Oturum ve Devir Kayıtları | Bilinmiyor / Doğrulanmadı |

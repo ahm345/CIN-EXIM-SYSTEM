@@ -1,8 +1,8 @@
 # Tablo Kartları
 
-> Otomatik üretildi (`tools/build_schema_docs.py`). Kaynak: canlı Baserow şeması, 2026-11-07T15:09:04+03:00. **Elle düzenlemeyin**; şemayı yeniden okuyup betiği çalıştırın.
+> Otomatik üretildi (`tools/build_schema_docs.py`). Kaynak: canlı Baserow şeması, 2026-11-07T20:44:51+03:00. **Elle düzenlemeyin**; şemayı yeniden okuyup betiği çalıştırın.
 
-**Özet:** 44 tablo, 881 alan, 223 ilişki alanı, 91 formül. Satır sayıları bu belgede yoktur (canlı okunmalı).
+**Özet:** 44 tablo, 891 alan, 223 ilişki alanı, 91 formül. Satır sayıları bu belgede yoktur (canlı okunmalı).
 
 ## Hızlı dizin
 
@@ -46,12 +46,12 @@
 | 06 SYS Yönetim | SYS-007 \| Sistem Geri Yükleme ve Klonlama | 1301804 | 19 | 2 | 0 |
 | 06 SYS Yönetim | SYS-008 \| Sistem Görev ve Geliştirme Takibi | 1301805 | 21 | 5 | 0 |
 | 06 SYS Yönetim | SYS-009 \| AI İşletim Protokolü | 1301819 | 13 | 0 | 0 |
-| 06 SYS Yönetim | SYS-010 \| AI Oturum ve Devir Kayıtları | 1301820 | 24 | 5 | 0 |
-| 06 SYS Yönetim | SYS-011 \| AI Çalışma ve Olay Günlüğü | 1301821 | 18 | 1 | 0 |
+| 06 SYS Yönetim | SYS-010 \| AI Oturum ve Devir Kayıtları | 1301820 | 26 | 5 | 0 |
+| 06 SYS Yönetim | SYS-011 \| AI Çalışma ve Olay Günlüğü | 1301821 | 20 | 1 | 0 |
 | 07 Eski / Referans | Table | 620460 | 8 | 1 | 0 |
-| 08 CHAT (konu ve sohbet hafızası) | CHAT-001 \| Konular | 1306063 | 14 | 2 | 0 |
-| 08 CHAT (konu ve sohbet hafızası) | CHAT-002 \| Notlar | 1306064 | 8 | 1 | 0 |
-| 08 CHAT (konu ve sohbet hafızası) | CHAT-003 \| Sorular | 1306065 | 14 | 1 | 0 |
+| 08 CHAT (konu ve sohbet hafızası) | CHAT-001 \| Konular | 1306063 | 16 | 2 | 0 |
+| 08 CHAT (konu ve sohbet hafızası) | CHAT-002 \| Notlar | 1306064 | 10 | 1 | 0 |
+| 08 CHAT (konu ve sohbet hafızası) | CHAT-003 \| Sorular | 1306065 | 16 | 1 | 0 |
 
 
 ---
@@ -1647,7 +1647,7 @@ SYS-009 AI İşletim Protokolü: giriş, çalışma, çıkış, yasaklar. Protok
 
 SYS-010 AI Oturum ve Devir Kayıtları: her oturum için tek kayıt; sonraki AI için talimat.
 
-- Birincil alan: `Oturum Kodu` | Alan sayısı: 24
+- Birincil alan: `Oturum Kodu` | Alan sayısı: 26
 - İlişkiler (alan -> hedef tablo):
   - `İlgili Sürüm` -> **SYS-002 \| Sistem Sürüm Kayıtları** (1301799)
   - `İlgili Görevler` -> **SYS-008 \| Sistem Görev ve Geliştirme Takibi** (1301805)
@@ -1683,6 +1683,8 @@ SYS-010 AI Oturum ve Devir Kayıtları: her oturum için tek kayıt; sonraki AI 
 | İlgili Kararlar | link_row |
 | İlgili Denetimler | link_row |
 | SYS-011 \| AI Çalışma ve Olay Günlüğü | link_row |
+| Created on | created_on |
+| Last modified | last_modified |
 
 </details>
 
@@ -1690,7 +1692,7 @@ SYS-010 AI Oturum ve Devir Kayıtları: her oturum için tek kayıt; sonraki AI 
 
 SYS-011 AI Çalışma ve Olay Günlüğü: yalnızca hata, geri alma, beklenmedik durum, kullanıcı talebi.
 
-- Birincil alan: `Olay Kodu` | Alan sayısı: 18
+- Birincil alan: `Olay Kodu` | Alan sayısı: 20
 - İlişkiler (alan -> hedef tablo):
   - `Oturum Kaydı` -> **SYS-010 \| AI Oturum ve Devir Kayıtları** (1301820)
 
@@ -1716,6 +1718,8 @@ SYS-011 AI Çalışma ve Olay Günlüğü: yalnızca hata, geri alma, beklenmedi
 | İlgili Karar Kodu | text |
 | Kanıt / Kaynak | text |
 | Oturum Kaydı | link_row |
+| Oluşturulma Zamanı | created_on |
+| Son Değişiklik Zamanı | last_modified |
 
 </details>
 
@@ -1756,7 +1760,7 @@ Eski AI denetim raporu kaydı (SYS-006 ile bağlı). Korunur, silinmez.
 
 CHAT-001 Konular: her konu bir satır (durum, güncel özet, açık noktalar, kararlar, arşiv yolu). Kural: 05_AI_PROTOCOLS/CHAT_PROTOCOL.md.
 
-- Birincil alan: `Konu Kodu` | Alan sayısı: 14
+- Birincil alan: `Konu Kodu` | Alan sayısı: 16
 - İlişkiler (alan -> hedef tablo):
   - `CHAT-002 | Notlar` -> **CHAT-002 \| Notlar** (1306064)
   - `CHAT-003 | Sorular` -> **CHAT-003 \| Sorular** (1306065)
@@ -1779,6 +1783,8 @@ CHAT-001 Konular: her konu bir satır (durum, güncel özet, açık noktalar, ka
 | İlgili SYS Kodları | text |
 | CHAT-002 \| Notlar | link_row |
 | CHAT-003 \| Sorular | link_row |
+| Oluşturulma Zamanı | created_on |
+| Son Değişiklik Zamanı | last_modified |
 
 </details>
 
@@ -1786,7 +1792,7 @@ CHAT-001 Konular: her konu bir satır (durum, güncel özet, açık noktalar, ka
 
 CHAT-002 Notlar: konunun içindeki temizlenmiş kayıtlar (kullanıcı sözü, AI görüşü, karar adayı, karar); her not bir konuya bağlıdır.
 
-- Birincil alan: `Not Kodu` | Alan sayısı: 8
+- Birincil alan: `Not Kodu` | Alan sayısı: 10
 - İlişkiler (alan -> hedef tablo):
   - `Konu` -> **CHAT-001 \| Konular** (1306063)
 
@@ -1802,6 +1808,8 @@ CHAT-002 Notlar: konunun içindeki temizlenmiş kayıtlar (kullanıcı sözü, A
 | Tarih | date |
 | Kaynak Sohbet | text |
 | Konu | link_row |
+| Oluşturulma Zamanı | created_on |
+| Son Değişiklik Zamanı | last_modified |
 
 </details>
 
@@ -1809,7 +1817,7 @@ CHAT-002 Notlar: konunun içindeki temizlenmiş kayıtlar (kullanıcı sözü, A
 
 CHAT-003 Sorular: aynı soruya her AI'nın bağımsız cevabı (ayrı kolon), sentez ve iş emri taslağı, kullanıcı kararı.
 
-- Birincil alan: `Soru Kodu` | Alan sayısı: 14
+- Birincil alan: `Soru Kodu` | Alan sayısı: 16
 - İlişkiler (alan -> hedef tablo):
   - `Konu` -> **CHAT-001 \| Konular** (1306063)
 
@@ -1831,5 +1839,7 @@ CHAT-003 Sorular: aynı soruya her AI'nın bağımsız cevabı (ayrı kolon), se
 | Kullanıcı Kararı | single_select [Bekliyor / Uygula / Geliştir / Beklet / Reddet] |
 | Soru Tarihi | date |
 | Konu | link_row |
+| Oluşturulma Zamanı | created_on |
+| Son Değişiklik Zamanı | last_modified |
 
 </details>
