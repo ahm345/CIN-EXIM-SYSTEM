@@ -43,7 +43,7 @@ NEREDE KALDIK
    Sıradaki adım: <`Sıradaki Adım` alanı>
 ```
 
-`Rapor Satırı` ve `Sıradaki Adım` CHAT-001'de tutulan **hazır, kısa** metinlerdir: AI bunları her `#kaydet` ve `#kapat` sonunda günceller (bölüm 3-4). Böylece açılışta her AI aynı hazır metni gösterir, kendi kafasına göre özet uydurmaz. *(Bu iki alan Baserow'da henüz yok, kullanıcı onayı bekliyor; eklenene kadar AI `Güncel Özet`in ilk iki cümlesini "Son durum", `Açık Noktalar`ın ilk maddesini "Sıradaki adım" olarak gösterir ve bunu raporda belirtir.)*
+`Rapor Satırı` ve `Sıradaki Adım` CHAT-001'de tutulan **hazır, kısa** metinlerdir: AI bunları her `#kaydet` ve `#kapat` sonunda günceller (bölüm 3-4). Böylece açılışta her AI aynı hazır metni gösterir, kendi kafasına göre özet uydurmaz. *(Bu iki alan 2026-11-07'de CHAT-001'e eklendi, CHG-SYS-016. Bir konuda alan boşsa AI `Güncel Özet`in ilk iki cümlesini "Son durum", `Açık Noktalar`ın ilk maddesini "Sıradaki adım" olarak gösterir ve bunu raporda belirtir.)*
 
 **Yapılacaklar ve yarım kalanlar (açılış raporunda zorunlu).** Her açık/yarım konunun `Açık Noktalar` alanı **üç etiketli bölümden** oluşur; hiçbir AI başka biçim kullanmaz:
 
