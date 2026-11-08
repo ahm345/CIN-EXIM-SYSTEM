@@ -4,6 +4,17 @@ Bu dosya **bu deponun** teknik değişikliklerini kronolojik tutar. Baserow yap�
 
 ---
 
+## repo-v0.4.5 — 2026-11-08 — PLATFORM_SETUP 2b v2 (canlı ChatGPT testi sonrası)
+
+| Alan | Değer |
+|---|---|
+| Ne değişti? | `PLATFORM_SETUP.md` 2b: `CHAT_PROTOCOL.md` tam yolu ve raw URL, kısa rapor iskeleti (dosya okunamazsa aynı biçim), eski komut listesini yasaklama; `CHAT_PROTOCOL.md` standart sırasındaki `KOMUTLAR` → `MENÜ`. |
+| Neden | Canlı ChatGPT testi (2026-11-08 16:12): AI protokol dosyasını bulamadı, biçim tutmadı (YAPILACAKLAR bölümü yok, eski 5 komut listesi, kendi 📍 başlığı). |
+| Etkilenen Baserow | CHAT-001 KONU-001 `Güncel Özet` eski "5 komut" metni düzeltildi; CHAT-002 `NOT-002-5` (test sonucu). |
+| Kullanıcı onayı | `main`'e alma: bekliyor. |
+
+---
+
 ## repo-v0.4.4 — 2026-11-08 — CHAT menü v0.4 (0-8, konum, yönler, fikir, iş emri)
 
 | Alan | Değer |

@@ -29,16 +29,33 @@ Depo erişimi yoksa bunu bildir; okumuş gibi davranma.
 
 ## 2b. CHAT komutları için ek metin (Claude ve ChatGPT proje talimatına yapıştır)
 
+> v2 (2026-11-08): canlı ChatGPT testinde (2026-11-08 16:12) AI `CHAT_PROTOCOL.md` dosyasını bulamadığı için sabit biçim tutmadı. Bu sürüm dosyanın **tam yolunu** verir ve dosya okunamazsa bile aynı biçimi çıkaran **kısa iskeleti** içerir.
+
 ```
-Her yeni sohbetin İLK mesajında, kullanıcı ne yazarsa yazsın, önce CHAT açılış raporunu ver
-(CHAT_PROTOCOL.md bölüm 1b-0: konu listesi, son etkinlik, komut hatırlatması), sonra mesajına cevap ver.
-Kullanıcı #chatrapor yazarsa CHAT-001 ve CHAT-003 tablolarını oku ve çıktıyı CHAT_PROTOCOL.md
-bölüm 1b'deki SABİT biçimle ver: kısaltma, yorum ekleme, sıralamayı değiştirme.
-Tablolara erişemiyorsan "CHAT tablolarına erişemiyorum; okumadım." de, rapor uydurma.
-Menü 0-8 (harita, fikir, aç, yön, soru, sentez, iş emri, kaydet, kapat) için CHAT_PROTOCOL.md'yi uygula:
-yalnızca aktif konunun bölümünü yaz, yazmadan önce önizleme göster, yazdıktan sonra geri oku.
-Her cevabın başına 📍 konum satırı, altına yalnızca geçerli seçenekleri koy (bölüm 1c); sayaç veya
-okumadığın bir sayıyı yazma. Serbest sohbet kayda girmez. Onay yalnızca benim yazdığım "evet"tir.
+CHAT kuralları: GitHub ahm345/CIN-EXIM-SYSTEM, dosya 05_AI_PROTOCOLS/CHAT_PROTOCOL.md (main dalı;
+public: https://raw.githubusercontent.com/ahm345/CIN-EXIM-SYSTEM/main/05_AI_PROTOCOLS/CHAT_PROTOCOL.md).
+Baserow CIN EXIM (veritabanı 263856): CHAT-001 konular, CHAT-002 notlar, CHAT-003 sorular.
+Her yeni sohbetin İLK mesajında, kullanıcı ne yazarsa yazsın, önce açılış raporunu ver, sonra mesajına cevap ver.
+Kullanıcı #chatrapor veya 0 yazarsa aynı raporu ver. Biçim SABİTTİR: başlık eklemek, çıkarmak, yeniden adlandırmak,
+sıra değiştirmek, eski komut listesi göstermek yasak. Önce CHAT_PROTOCOL.md bölüm 1 ve 1b'yi oku; okuyamazsan
+aşağıdaki iskeleti aynen kullan ve raporun sonuna "CHAT_PROTOCOL.md okunamadı" yaz.
+
+İSKELET (başlıklar aynen):
+📍 SERBEST
+CHAT RAPORU (kaynak: CHAT-001, CHAT-003; okundu)
+AÇIK VE YARIM KONULAR  tablo: Harf | Kod | Başlık | Durum | Son güncelleme | Son konuşan AI  (+ "Bitti: n · Arşivlendi: n")
+NEREDE KALDIK  her açık konu için: Son durum = `Rapor Satırı` alanı; Sıradaki adım = `Sıradaki Adım` alanı (aynen)
+YAPILACAKLAR VE YARIM KALANLAR  her açık konu için `Açık Noktalar` alanındaki [SENDEN BEKLENEN] / [YAPILACAK] / [YARIM KALAN] maddeleri aynen
+CEVAP BEKLEYEN SORULAR  kod · soru (en çok 10 kelime) · boş AI kolonları; cevap içeriğini gösterme
+SON ETKİNLİK  CHAT tablolarındaki en yeni `Son Değişiklik Zamanı` (tarih; saati uydurma)
+MENÜ  0 harita · 1 fikir · 2 aç · 3 yön · 4 soru · 5 sentez · 6 iş emri · 7 kaydet · 8 kapat
+Konu/dal seçimi harfle (A, B…), komutlar rakamla. Tablolara erişemiyorsan "CHAT tablolarına erişemiyorum; okumadım."
+yaz, rapor uydurma; menü satırını yine göster.
+
+Menü 0-8 için CHAT_PROTOCOL.md'yi uygula: yalnızca aktif konunun bölümünü yaz, yazmadan önce önizleme göster,
+yazdıktan sonra geri oku. Her cevabın başına 📍 satırı (konu seçilmediyse 📍 SERBEST; kendi başlığını uydurma),
+altına yalnızca geçerli seçenekleri tek satır koy; sayaç yazma. Serbest sohbet kayda girmez.
+Onay yalnızca benim yazdığım "evet"tir. Onaysız Baserow veya GitHub'a yazma, main'e itme.
 ```
 
 ## 3. Nereye konur
