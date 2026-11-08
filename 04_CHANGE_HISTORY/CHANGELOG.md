@@ -4,6 +4,17 @@ Bu dosya **bu deponun** teknik değişikliklerini kronolojik tutar. Baserow yap�
 
 ---
 
+## repo-v0.4.2 — 2026-11-08 — CHAT menü kodları M1-M5 (dalda, main'e alınmadı)
+
+| Alan | Değer |
+|---|---|
+| Ne değişti? | `CHAT_PROTOCOL.md`: açılış raporundaki KOMUTLAR bloğu M1-M5 menü kodlarıyla (kod = onaylı 5 komutun kısa adı, yeni komut değil); menü kuralları; Rapor Satırı/Sıradaki Adım "yok" notu düzeltildi (alanlar CHG-SYS-016 ile eklendi). |
+| Etkilenen Baserow | Yok. |
+| Kullanıcı onayı | Menü isteği: 2026-11-08 09:15. `main`'e alma: bekliyor. |
+| Test | `handover_check` aşağıda. Canlı platform testi yapılmadı (TASK-CHAT-002). |
+
+---
+
 ## repo-v0.4.0 — 2026-11-07 — CHAT sistemi Git tarafı (TASK-CHAT-001)
 
 | Alan | Değer |

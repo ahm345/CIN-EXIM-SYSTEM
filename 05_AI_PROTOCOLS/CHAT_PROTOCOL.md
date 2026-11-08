@@ -25,13 +25,16 @@ Her AI `#chatrapor` ve konu seçimi çıktısını **aşağıdaki biçimle** ver
 ```
 SON ETKİNLİK: <CHAT-001/002/003'teki en yeni `Son Değişiklik Zamanı`, İstanbul saatiyle> (saat aracı varsa "n gün önce"; yoksa yalnızca tarih, tahmin yazılmaz)
 
-KOMUTLAR
-#chatrapor  konu listesini göster
-#kaydet     aktif konunun bu bölümünü ayıklayıp kaydet
-#soru <m>   tüm AI'lara bağımsız soru aç
-#sentez     cevapları karşılaştır, iş emri taslağı yaz
-#kapat      bölümü kaydet, konuyu bırak
+KOMUTLAR (menü: kodu veya komutu yaz, ikisi aynı işi yapar)
+M1  #chatrapor  konu listesini göster
+M2  #kaydet     aktif konunun bu bölümünü ayıklayıp kaydet
+M3  #soru <m>   tüm AI'lara bağımsız soru aç (M3 yazarsan AI soru metnini sorar)
+M4  #sentez     cevapları karşılaştır, iş emri taslağı yaz
+M5  #kapat      bölümü kaydet, konuyu bırak
+Konu seçmek için listedeki numarayı yaz (1, 2, ...). M harfi komutlar içindir.
 ```
+
+**Menü kuralları.** (a) Menü yeni komut değildir: M1-M5 onaylı 5 komutun (DEC-SYS-004) kısa kodudur; M koduyla komut aynı işlemi yapar. Başka kod veya komut AI tarafından üretilmez. (b) Menü bloğu aynen yukarıdaki gibi gösterilir: açılış raporunda, her `#chatrapor` çıktısının sonunda ve her `#kaydet`/`#kapat` bittikten sonra (AI "şimdi ne yapabilirsin" diye ayrı liste uydurmaz). (c) Menüyü yalnızca bu protokol değiştirir; sürüm notu CHANGELOG'a yazılır. (d) Bu, platform sohbet ekranında tıklanabilir menü değildir; AI'nın yazdığı sabit metindir ve platform talimatı konmuşsa tutarlı gelir, kod ile zorlanmaz.
 
 Konu listesinden hemen sonra, **her açık/yarım konu için** (en çok 5; fazlaysa en yeni değişenler) "nerede kaldık, neler yapıldı" bloğu gelir:
 
