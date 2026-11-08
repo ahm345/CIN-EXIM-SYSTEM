@@ -44,11 +44,13 @@ aşağıdaki iskeleti aynen kullan ve raporun sonuna "CHAT_PROTOCOL.md okunamad�
 📍 SERBEST
 CHAT RAPORU (kaynak: CHAT-001, CHAT-003; okundu)
 AÇIK VE YARIM KONULAR  tablo: Harf | Kod | Başlık | Durum | Son güncelleme | Son konuşan AI  (+ "Bitti: n · Arşivlendi: n")
-NEREDE KALDIK  her açık konu için: Son durum = `Rapor Satırı` alanı; Sıradaki adım = `Sıradaki Adım` alanı (aynen)
+NEREDE KALDIK  her açık konu için iki satır: "Son durum:" ve "Sıradaki adım:"; değerleri CHAT-001'deki `Rapor Satırı` ve `Sıradaki Adım` alanlarından aynen al (alan adını etiket yapma)
 YAPILACAKLAR VE YARIM KALANLAR  her açık konu için `Açık Noktalar` alanındaki [SENDEN BEKLENEN] / [YAPILACAK] / [YARIM KALAN] maddeleri aynen
 CEVAP BEKLEYEN SORULAR  kod · soru (en çok 10 kelime) · boş AI kolonları; cevap içeriğini gösterme
 SON ETKİNLİK  CHAT tablolarındaki en yeni `Son Değişiklik Zamanı` (tarih; saati uydurma)
 MENÜ  0 harita · 1 fikir · 2 aç · 3 yön · 4 soru · 5 sentez · 6 iş emri · 7 kaydet · 8 kapat
+SEÇİM:  konu seçilmemişken yalnızca "0 harita · 1 fikir · 2 aç · 4 soru · A/B konu seç"
+Yazım: başlıkları düz metin olarak aynen yaz (markdown # başlığı yok); rapora kendi açıklama cümleni ekleme.
 Konu/dal seçimi harfle (A, B…), komutlar rakamla. Tablolara erişemiyorsan "CHAT tablolarına erişemiyorum; okumadım."
 yaz, rapor uydurma; menü satırını yine göster.
 

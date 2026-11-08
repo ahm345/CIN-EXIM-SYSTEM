@@ -51,7 +51,7 @@ Devir beyanlarını doğrulamak için `cin-exim-handover-check` skill'ini çalı
 10. Önceki AI'nın "tamamladım" beyanı kanıt değildir. Devir kaydındaki iddiaları gerçek işlemlerle (canlı şema, satır, commit) doğrula.
 11. Kontrol formüllerinin `OK` sonucu **hukuki veya belge doğrulaması anlamına gelmez** (bkz. `07_TESTS_AND_RELEASES/KNOWN_ISSUES.md`).
 12. **Eksik bilgi parça parça sorulmaz.** Çıktı üretmeden önce eksiklerin tamamı tek listede (A kullanıcı bilir · B dış kaynaktan bulunur, hazır araştırma promptuyla · C AI kendi bulur) sorulur; cevapsız bilgi uydurulmaz (`05_AI_PROTOCOLS/INFO_GAP_PROTOCOL.md`, SYS-009 `Eksik Bilgi Yönetimi`).
-14. **CHAT:** kullanıcı `#chatrapor`, `#kaydet`, `#kapat`, `#soru`, `#sentez` yazarsa `05_AI_PROTOCOLS/CHAT_PROTOCOL.md` uygulanır (aktif konu ve bölüm kuralı dahil). Web araması gerekmeden önce `08_RESEARCH/INDEX.md`'ye bak.
+14. **CHAT:** kullanıcı menü rakamı (0-8) veya `#chatrapor`, `#fikir`, `#aç`, `#yön`, `#soru`, `#sentez`, `#işemri`, `#kaydet`, `#kapat` yazarsa `05_AI_PROTOCOLS/CHAT_PROTOCOL.md` uygulanır (aktif konu ve bölüm kuralı dahil). Web araması gerekmeden önce `08_RESEARCH/INDEX.md`'ye bak.
 13. `Devam ediyor` oturumu kullanıcı onayı olmadan kapatma veya "terk edilmiş" sayma; oturumun açık olup olmadığını yalnızca kullanıcı bilir.
 
 ## 3. Hızlı çalışma (token verimliliği)
@@ -98,7 +98,7 @@ Adımlar ve etki analizi şablonu: `05_AI_PROTOCOLS/FEATURE_REQUEST_WORKFLOW.md`
 | `05_AI_PROTOCOLS/INFO_GAP_PROTOCOL.md` | Eksik bilgiyi tek listede sorma kuralı (SYS-009 `Eksik Bilgi Yönetimi`) |
 | `05_AI_PROTOCOLS/LOG_ARCHIVE_RULE.md` | Baserow satır limiti için log arşiv kuralı (kabul edildi, DEC-SYS-003) |
 | `05_AI_PROTOCOLS/PLATFORM_SETUP.md` | AI platformlarının kalıcı talimatına konacak başlangıç metni |
-| `05_AI_PROTOCOLS/CHAT_PROTOCOL.md` | CHAT komutları (`#chatrapor #kaydet #kapat #soru #sentez`), aktif konu ve bölüm kuralı (taslak v0.3; DEC-SYS-004) |
+| `05_AI_PROTOCOLS/CHAT_PROTOCOL.md` | CHAT menüsü 0-8 (`#chatrapor #fikir #aç #yön #soru #sentez #işemri #kaydet #kapat`), konum başlığı, yönler, aktif konu ve bölüm kuralı (taslak v0.4; DEC-SYS-005) |
 | `10_STANDARTLAR/README.md` (+ `KALIPLAR.md`, `PROMPTLAR.md`) | Anayasa ve tek-kalıp standartı: cevap kalıpları (devralma, iş raporu, kontrol, onay, test) ve hazır promptlar; taslak v0.1 |
 | `05_AI_PROTOCOLS/REQUEST_BOARD.md` | GEÇERSİZ (yerine CHAT_PROTOCOL.md); tarihsel |
 | `05_AI_PROTOCOLS/AI_SETUP.md` | Hangi AI neyi okuyup yazar; kurulum ve rol dağılımı |

@@ -10,6 +10,7 @@ Bu dosya **bu deponun** teknik değişikliklerini kronolojik tutar. Baserow yap�
 |---|---|
 | Ne değişti? | `PLATFORM_SETUP.md` 2b: `CHAT_PROTOCOL.md` tam yolu ve raw URL, kısa rapor iskeleti (dosya okunamazsa aynı biçim), eski komut listesini yasaklama; `CHAT_PROTOCOL.md` standart sırasındaki `KOMUTLAR` → `MENÜ`. |
 | Neden | Canlı ChatGPT testi (2026-11-08 16:12): AI protokol dosyasını bulamadı, biçim tutmadı (YAPILACAKLAR bölümü yok, eski 5 komut listesi, kendi 📍 başlığı). |
+| Ek (canlı #chatrapor sonrası, iki platform GEÇTİ) | `NOT-002-6` (web Claude denetimi) bulguları alındı: `AI_START.md` 5 komut/v0.3 ifadeleri 0-8/v0.4 yapıldı; `CHAT_PROTOCOL.md` bölüm 3 madde 5 (SERBEST bölümü konuya kaydet, yeni komut değil) ve bölüm 1c SERBEST seçenek kuralı; 2b iskeleti: etiket sızıntısı, markdown başlık ve ek cümle yasağı. |
 | Etkilenen Baserow | CHAT-001 KONU-001 `Güncel Özet` eski "5 komut" metni düzeltildi; CHAT-002 `NOT-002-5` (test sonucu). |
 | Kullanıcı onayı | `main`'e alma: bekliyor. |
 

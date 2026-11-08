@@ -146,7 +146,7 @@ YÖNLER: <bölüm aşağıda, yalnızca geçerli olanlar>
 | Yan | Aynı bölgedeki diğer açık konular | `Bölge` |
 | Sıradaki | Bu konunun sıradaki işi | `Sıradaki Adım` metnini gösterir; yeni iş açmaz |
 
-`Üst Konu Kodu` ve `Bölge` alanları Baserow'da vardır (2026-11-08). Bir konuda `Üst Konu Kodu`/`Bölge` **boşsa** o konu için Yukarı/Aşağı/Yan gösterilmez; alanlar Baserow'da hiç yoksa yalnızca Geri ve Sıradaki olur. Geçerli olmayan yön listelenmez.
+`Üst Konu Kodu` ve `Bölge` alanları Baserow'da vardır (2026-11-08). Bir konuda `Üst Konu Kodu`/`Bölge` **boşsa** o konu için Yukarı/Aşağı/Yan gösterilmez; alanlar Baserow'da hiç yoksa yalnızca Geri ve Sıradaki olur. Geçerli olmayan yön listelenmez. **Alt satırın geçerli seçenekleri:** `📍 SERBEST` iken yalnızca `0 · 1 · 2 · 4` ve konu harfleri (A, B…) gösterilir (3, 5, 6, 7, 8 aktif konu ister); bir konu aktifken tam menü gösterilir. Açılış raporunda `MENÜ` satırı 9 komutun tamamını, sonraki `SEÇİM:` satırı yalnızca o an geçerlileri içerir.
 
 **Geçiş kuralları:** (a) Yönle konu değiştirirken kayıtsız bölüm varsa AI önce "kaydedelim mi?" sorar (7). (b) Bırakılan konunun "kaldığımız yer" notu **CHAT-002'ye `Özet` notu** olarak yazılır (onayla); `Sıradaki Adım` alanının üzerine **yazılmaz**. (c) Kullanıcı "kayboldum" derse AI `0`'ı çalıştırır. (d) AI hangi konuda olduğunu bilemiyorsa **sorar**, tahmin etmez; iki konu aynı anda açık görünüyorsa durur.
 
@@ -181,6 +181,7 @@ Bir web sohbeti birden çok konuyu içerebilir. Karışmayı önlemek için:
 2. 5-8 satır **önizleme** gösterir. Kullanıcı onaylayınca yazar (kullanıcı "önizlemesiz kaydet" derse kalıcı olmayan oturum ayarı olarak atlanır; `Karar` yine onay ister).
 3. Yazar, **geri okur**, doğrular; konunun `Güncel Özet`, `Açık Noktalar`, `Rapor Satırı`, `Sıradaki Adım`, `Son Konuşan AI`, `Son Güncelleme` alanlarını günceller (eski özet `Özet` notu olarak saklanır).
 4. Yazma başarısızsa "kaydettim" denmez; hazır blok verilir (bölüm 7).
+5. **SERBEST bölümü bir konuya kaydetme:** kullanıcı SERBEST konuşmayı bir konuya kaydet derse (örn. "bunu KONU-002'ye kaydet") o konu aktif sayılır ve yalnızca istenen kısım önizlemeyle yazılır; hangi konu olduğu belirsizse AI sorar. Yeni komut değildir, menü 0-8 değişmez.
 
 ## 4. `#kapat`
 
