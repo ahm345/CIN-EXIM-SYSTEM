@@ -4,6 +4,18 @@ Bu dosya **bu deponun** teknik değişikliklerini kronolojik tutar. Baserow yap�
 
 ---
 
+## repo-v0.4.4 — 2026-11-08 — CHAT menü v0.4 (0-8, konum, yönler, fikir, iş emri; dalda, main'e alınmadı)
+
+| Alan | Değer |
+|---|---|
+| Ne değişti? | `CHAT_PROTOCOL.md` v0.4: menü M1-M5 yerine 0-8; bölüm 1c (konum başlığı, harita, yönler: geri/yukarı/aşağı/yan/sıradaki), 2c (fikir ve dal), 5b (iş emri hattı, VS Code zorunlu değil); konu seçimi harfle; sayaç yasak; onay = kullanıcının "evet"i. `10_STANDARTLAR`: K7, P8. `PLATFORM_SETUP.md` 2b metni güncellendi. |
+| Neden | Kullanıcı web sohbetinde konuları karıştırıyor (2026-11-08): harita, kavşak ve yön istedi; VS Code zorunlu olmasın. |
+| Etkilenen Baserow | Yok. Fikir/Üst Konu Kodu/Bölge alanları **eklenmedi**; protokol bu alanlar yokken yedek davranış tanımlar. |
+| Kullanıcı onayı | Başlama: 2026-11-08 15:21 ("sen yapmaya başla"). Komut sayısı 5→9 için yeni karar kaydı ve `main`'e alma: bekliyor. |
+| Test | `handover_check` aşağıda. Canlı platform testi yok. |
+
+---
+
 ## repo-v0.4.3 — 2026-11-08 — 10_STANDARTLAR (taslak v0.1; dalda, main'e alınmadı)
 
 | Alan | Değer |

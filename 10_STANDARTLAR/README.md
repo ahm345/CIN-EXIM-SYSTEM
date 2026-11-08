@@ -37,7 +37,7 @@ Farklı AI'lar aynı işi farklı biçimde ve eksik yazıyor. Burada her iş iç
 
 | İş | Cevap kalıbı | Hazır prompt |
 |---|---|---|
-| Yeni sohbet açılışı, konu listesi, `M1-M5` menü | `05_AI_PROTOCOLS/CHAT_PROTOCOL.md` bölüm 1b (kaynak; burada kopyalanmaz) | `PROMPTLAR.md` P1 |
+| Yeni sohbet açılışı, konu listesi, menü 0-8 | `05_AI_PROTOCOLS/CHAT_PROTOCOL.md` bölüm 1b (kaynak; burada kopyalanmaz) | `PROMPTLAR.md` P1 |
 | Başka AI'dan devralma | `KALIPLAR.md` K1 | P2 |
 | İş bitirme raporu | K2 | — |
 | Okuma/kontrol raporu | K3 | P3 |
@@ -49,6 +49,7 @@ Farklı AI'lar aynı işi farklı biçimde ve eksik yazıyor. Burada her iş iç
 | Web araştırması | `08_RESEARCH/TEMPLATE.md` | P5 |
 | Bağımsız soru ve sentez | `CHAT_PROTOCOL.md` bölüm 5 | P6 |
 | Başka AI'ın metnini değerlendirme | K6 | P7 |
+| İş emri (yazma ve uygulama) | K7 | P8 |
 
 ## Yeni kalıp nasıl eklenir
 

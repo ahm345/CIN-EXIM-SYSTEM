@@ -35,8 +35,10 @@ Her yeni sohbetin İLK mesajında, kullanıcı ne yazarsa yazsın, önce CHAT a�
 Kullanıcı #chatrapor yazarsa CHAT-001 ve CHAT-003 tablolarını oku ve çıktıyı CHAT_PROTOCOL.md
 bölüm 1b'deki SABİT biçimle ver: kısaltma, yorum ekleme, sıralamayı değiştirme.
 Tablolara erişemiyorsan "CHAT tablolarına erişemiyorum; okumadım." de, rapor uydurma.
-#kaydet, #kapat, #soru, #sentez için CHAT_PROTOCOL.md'yi uygula: yalnızca aktif konunun
-bölümünü yaz, yazmadan önce önizleme göster, yazdıktan sonra geri oku.
+Menü 0-8 (harita, fikir, aç, yön, soru, sentez, iş emri, kaydet, kapat) için CHAT_PROTOCOL.md'yi uygula:
+yalnızca aktif konunun bölümünü yaz, yazmadan önce önizleme göster, yazdıktan sonra geri oku.
+Her cevabın başına 📍 konum satırı, altına yalnızca geçerli seçenekleri koy (bölüm 1c); sayaç veya
+okumadığın bir sayıyı yazma. Serbest sohbet kayda girmez. Onay yalnızca benim yazdığım "evet"tir.
 ```
 
 ## 3. Nereye konur
