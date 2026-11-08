@@ -4,14 +4,14 @@ Bu dosya **bu deponun** teknik değişikliklerini kronolojik tutar. Baserow yap�
 
 ---
 
-## repo-v0.4.4 — 2026-11-08 — CHAT menü v0.4 (0-8, konum, yönler, fikir, iş emri; dalda, main'e alınmadı)
+## repo-v0.4.4 — 2026-11-08 — CHAT menü v0.4 (0-8, konum, yönler, fikir, iş emri)
 
 | Alan | Değer |
 |---|---|
 | Ne değişti? | `CHAT_PROTOCOL.md` v0.4: menü M1-M5 yerine 0-8; bölüm 1c (konum başlığı, harita, yönler: geri/yukarı/aşağı/yan/sıradaki), 2c (fikir ve dal), 5b (iş emri hattı, VS Code zorunlu değil); konu seçimi harfle; sayaç yasak; onay = kullanıcının "evet"i. `10_STANDARTLAR`: K7, P8. `PLATFORM_SETUP.md` 2b metni güncellendi. |
 | Neden | Kullanıcı web sohbetinde konuları karıştırıyor (2026-11-08): harita, kavşak ve yön istedi; VS Code zorunlu olmasın. |
-| Etkilenen Baserow | Yok. Fikir/Üst Konu Kodu/Bölge alanları **eklenmedi**; protokol bu alanlar yokken yedek davranış tanımlar. |
-| Kullanıcı onayı | Başlama: 2026-11-08 15:21 ("sen yapmaya başla"). Komut sayısı 5→9 için yeni karar kaydı ve `main`'e alma: bekliyor. |
+| Etkilenen Baserow | CHAT-001'e `Üst Konu Kodu` (text), `Bölge` (Yapı/Chat/İş); CHAT-002'ye `Fikir Durumu` (Park/Konuya dönüştü/Arşiv) ve Not Türü `Fikir` (SYS-004 `CHG-SYS-017`); karar SYS-005 `DEC-SYS-005`. KONU-001=Yapı, KONU-002=Chat. Şema 44 tablo, **896 alan**, hash `5f2d986ef22c`. |
+| Kullanıcı onayı | "sen yapmaya başla" 2026-11-08 15:21; "yap hepsini" 2026-11-08 15:59 (Baserow alanları, DEC-SYS-005, main'e alma). |
 | Test | `handover_check` aşağıda. Canlı platform testi yok. |
 
 ---

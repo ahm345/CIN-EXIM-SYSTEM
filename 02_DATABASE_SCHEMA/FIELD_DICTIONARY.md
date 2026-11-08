@@ -1,8 +1,8 @@
 # Alan Sözlüğü
 
-> Otomatik üretildi (`tools/build_field_dictionary.py`). Şema kaynağı: INVENTORY.json, 2026-11-07T21:57:34+03:00. Çelişkide canlı Baserow geçerlidir. Satır verisi yoktur.
+> Otomatik üretildi (`tools/build_field_dictionary.py`). Şema kaynağı: INVENTORY.json, 2026-11-08T16:01:05+03:00. Çelişkide canlı Baserow geçerlidir. Satır verisi yoktur.
 
-**655 benzersiz alan adı · 107 tanesi ≥2 tabloda ortak · 8 tanesi farklı türlerde kullanılıyor · 85 seçmeli değer listesi**
+**658 benzersiz alan adı · 107 tanesi ≥2 tabloda ortak · 8 tanesi farklı türlerde kullanılıyor · 87 seçmeli değer listesi**
 
 **Anlamı kayıtlı alan adı: 2** (bunların 1 tanesi ortak alan; ortak alanların 106 tanesinin anlamı yok). Anlamı belgelerde kanıtlanmayan alan için `Bilinmiyor / Doğrulanmadı` yazılır; anlam uydurulmaz. Tablo bazında alan listesi: `TABLES.md`; formül metinleri: `FORMULAS.md`.
 
@@ -143,6 +143,7 @@ Aynı ad ve aynı değer listesi birlikte gruplanır. Liste farklıysa aynı ala
 | Anapara Ödeme Tipi | single_select | Senaryo Finansman Dilimleri | Eşit Anapara · Eşit Taksit · Balloon · Tek Ödeme · Düzensiz / Özel |
 | Anapara Ödeme Tipi | single_select | Krediler | Eşit anapara · Eşit taksit (annuity) · Grace + amortisman · Bullet – vade sonunda · Balloon – balon ödemeli · Özel plan |
 | Aşama | single_select | Projeler, Süreç Adımları | 1 Yapılandırma · 2 Eximbank / Sinosure Onayı · 3 Rehin ve Bridge · 4 İmalat · 5 Sevkiyat · 6 Gümrük ve Mülkiyet Devri · 7 İpotek Tescili · 8 Sahada İşletme |
+| Bölge | single_select | CHAT-001 \| Konular | Yapı · Chat · İş |
 | Doğrulama Durumu | single_select | Senaryo Varsayımları | Varsayım · Demo · Kaynak Bekliyor · Belgeyle Doğrulandı · Hukuk / Vergi Görüşü Gerekli |
 | Durum | single_select | CHAT-001 \| Konular | Açık · Yarım · Bitti · Arşivlendi |
 | Durum | single_select | Krediler | Başvuru · Onay Bekliyor · Onaylandı · Kullandırıldı · Kapandı |
@@ -167,6 +168,7 @@ Aynı ad ve aynı değer listesi birlikte gruplanır. Liste farklıysa aynı ala
 | Faiz Ödeme Sıklığı | single_select | Senaryo Finansman Dilimleri | Aylık · Üç Aylık · Altı Aylık · Yıllık · Vade Sonu · Özel |
 | Fatura Durumu | single_select | Hizmet Kayıtları | Bekliyor · Faturalandı · Tahsil Edildi · İtirazlı |
 | Fesih / İhtar Durumu | single_select | Sözleşmeler | Yok · İhtar Gönderildi · Temerrüt · Fesih Sürecinde · Feshedildi |
+| Fikir Durumu | single_select | CHAT-002 \| Notlar | Park · Konuya dönüştü · Arşiv |
 | Finansman Aracı | single_select | Senaryo Finansman Dilimleri | Eximbank Kredisi · Seller's Credit · Banka Nakit Kredisi · Bridge Kredi · Leasing · LC · SBLC · Banka Garantisi · Yuan Blokesi · Müşteri Avansı · Öz Kaynak · Varlık Rehni · Diğer / Kullanıcı Tanımlı |
 | Geri Alma Aşaması | single_select | Makineler | Uygulanmaz · Ödeme Takibi · İhtar · Temerrüt Tespiti · Fesih / Hukuki İnceleme · Geri Alma Talebi · Teslim Alındı · İtiraz / Dava |
 | Geri Alma Sonrası Durum | single_select | Makineler | Kontrol Bekliyor · Bakım Gerekli · Kiralamaya Hazır · Satışa Hazır · Hukuki Blokaj |
@@ -189,7 +191,7 @@ Aynı ad ve aynı değer listesi birlikte gruplanır. Liste farklıysa aynı ala
 | Mülkiyet Modeli | single_select | Senaryolar | SPC · TOO · Üçüncü Taraf · Ortak Mülkiyet · Diğer |
 | Mülkiyet Modeli | single_select | Projeler | SPC (Varsayılan) · TOO · Üçüncü Taraf · Ortak Mülkiyet · Diğer |
 | Mülkiyet Senaryosu | single_select | Makineler | A – SPC doğrudan ithalat ve mülkiyet · B – TOO ithalatı, sonra SPC devri · C – Üçüncü taraf mülkiyeti · D – Ortak mülkiyet · E – Diğer |
-| Not Türü | single_select | CHAT-002 \| Notlar | Kullanıcı sözü · AI görüşü · Soru · Öneri · Karar adayı · Karar · Test sonucu · Özet |
+| Not Türü | single_select | CHAT-002 \| Notlar | Kullanıcı sözü · AI görüşü · Soru · Öneri · Karar adayı · Karar · Test sonucu · Özet · Fikir |
 | Onay Durumu | single_select | CHAT-002 \| Notlar | Onaysız · Kullanıcı onayladı · Reddedildi |
 | Para Birimi | single_select | Senaryo Finansman Dilimleri, Senaryo Gelir Gider Akışı | USD · CNY · EUR · KZT · TRY |
 | Para Birimi | single_select | Senaryolar | USD · CNY · EUR · KZT · TRY · Çoklu Para Birimi |

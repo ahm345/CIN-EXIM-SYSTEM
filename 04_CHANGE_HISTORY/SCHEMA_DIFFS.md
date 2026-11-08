@@ -6,6 +6,32 @@
 
 <!-- KAYITLAR (en yeni üstte) -->
 
+## 2026-11-07T21:57:34+03:00 → 2026-11-08T16:01:05+03:00
+
+Şema özeti: `802b670adb80` → `5f2d986ef22c`
+
+| Sayı | Önce | Sonra |
+|---|---|---|
+| Tablo | 44 | 44 |
+| Alan | 893 | 896 |
+| İlişki alanı | 223 | 223 |
+| Formül | 91 | 91 |
+
+Özet: 3 alan eklendi, 1 seçenek listesi değişti
+
+### CHAT-001 | Konular
+
+- `Bölge`: **alan eklendi** — `single_select`
+- `Üst Konu Kodu`: **alan eklendi** — `text`
+
+### CHAT-002 | Notlar
+
+- `Fikir Durumu`: **alan eklendi** — `single_select`
+- `Not Türü`: **seçenek listesi değişti** — eklenen: `Fikir`
+
+---
+
+
 ## 2026-11-07T20:44:51+03:00 → 2026-11-07T21:57:34+03:00
 
 Şema özeti: `148555a4be34` → `802b670adb80`

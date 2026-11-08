@@ -2,7 +2,7 @@
 
 > **TASLAK — kullanıcı onayı ve canlı testten sonra SYS-009'a v1.6 olarak işlenecek; işlenene kadar SYS-009 geçerlidir.** Kaynak karar: SYS-005 `DEC-SYS-004` (5 komut). Ayrıntı görevi: SYS-008 `TASK-CHAT-001`. Bu dosya `REQUEST_BOARD.md` (SYS-012/013 önerisi) yerine geçer.
 
-> **v0.4 (2026-11-08):** menü 0-8, konum başlığı, yönler (harita), fikir/dal, iş emri komutu. Komut sayısı 5 → 9 olduğu için **yeni karar gerekir** (`DEC-SYS-004` yerine geçecek karar adayı); kullanıcı onayı bekliyor. Kullanıcı isteği: 2026-11-08 "harita, kavşaklar ve yönler lazım". Kaynak taslaklar: kullanıcının yüklediği AI metni (değerlendirme: CHAT-002 `NOT-002-4`) ve bu dosyadaki düzeltmeler.
+> **v0.4 (2026-11-08):** menü 0-8, konum başlığı, yönler (harita), fikir/dal, iş emri komutu. Komut sayısı 5 → 9: **kabul edildi, SYS-005 `DEC-SYS-005`** (2026-11-08; `DEC-SYS-004`'ün yalnızca komut setini değiştirir). Baserow'a `Üst Konu Kodu`, `Bölge`, `Fikir Durumu` ve Not Türü `Fikir` eklendi (`CHG-SYS-017`). SYS-009'a v1.6 olarak işleme ve canlı platform testi **bekliyor**. Kullanıcı isteği: 2026-11-08 "harita, kavşaklar ve yönler lazım". Kaynak taslaklar: kullanıcının yüklediği AI metni (değerlendirme: CHAT-002 `NOT-002-4`) ve bu dosyadaki düzeltmeler.
 
 Tablolar (Baserow 263856): `CHAT-001 | Konular` (ID 1306063), `CHAT-002 | Notlar` (1306064), `CHAT-003 | Sorular` (1306065).
 
@@ -146,7 +146,7 @@ YÖNLER: <bölüm aşağıda, yalnızca geçerli olanlar>
 | Yan | Aynı bölgedeki diğer açık konular | `Bölge` |
 | Sıradaki | Bu konunun sıradaki işi | `Sıradaki Adım` metnini gösterir; yeni iş açmaz |
 
-`Üst Konu Kodu` ve `Bölge` alanları Baserow'a eklenene kadar **Yukarı/Aşağı/Yan gösterilmez**, yalnızca Geri ve Sıradaki olur. Geçerli olmayan yön listelenmez.
+`Üst Konu Kodu` ve `Bölge` alanları Baserow'da vardır (2026-11-08). Bir konuda `Üst Konu Kodu`/`Bölge` **boşsa** o konu için Yukarı/Aşağı/Yan gösterilmez; alanlar Baserow'da hiç yoksa yalnızca Geri ve Sıradaki olur. Geçerli olmayan yön listelenmez.
 
 **Geçiş kuralları:** (a) Yönle konu değiştirirken kayıtsız bölüm varsa AI önce "kaydedelim mi?" sorar (7). (b) Bırakılan konunun "kaldığımız yer" notu **CHAT-002'ye `Özet` notu** olarak yazılır (onayla); `Sıradaki Adım` alanının üzerine **yazılmaz**. (c) Kullanıcı "kayboldum" derse AI `0`'ı çalıştırır. (d) AI hangi konuda olduğunu bilemiyorsa **sorar**, tahmin etmez; iki konu aynı anda açık görünüyorsa durur.
 
@@ -171,7 +171,7 @@ Bir web sohbeti birden çok konuyu içerebilir. Karışmayı önlemek için:
 
 ## 2c. `#fikir` ve dal
 
-- **`1` / `#fikir <metin>`:** fikri CHAT-002'ye `Not Türü=Fikir`, `Fikir Durumu=Park` ile yazar. Bu iki değer Baserow'a eklenene kadar: `Not Türü=Öneri`, `Onay Durumu=Onaysız`, içerik `[FİKİR · Park]` ile başlar. Kullanıcı bir konunun içindeyse o konuya bağlanır; değilse konu boş bırakılır (genel fikir). Cevap yalnızca "NOT-xxx kaydedildi" olur; AI aynı konuya devam eder. Kullanıcının sözü aynen veya kısa özetle yazılır; konu dışı sohbet yazılmaz.
+- **`1` / `#fikir <metin>`:** fikri CHAT-002'ye `Not Türü=Fikir`, `Fikir Durumu=Park` ile yazar. Bu iki değer Baserow'da vardır (2026-11-08); yoksa (şema değişirse): `Not Türü=Öneri`, `Onay Durumu=Onaysız`, içerik `[FİKİR · Park]` ile başlar. Kullanıcı bir konunun içindeyse o konuya bağlanır; değilse konu boş bırakılır (genel fikir). Cevap yalnızca "NOT-xxx kaydedildi" olur; AI aynı konuya devam eder. Kullanıcının sözü aynen veya kısa özetle yazılır; konu dışı sohbet yazılmaz.
 - **Fikri açma (`2`):** kullanıcı bir park fikri seçerse AI sorar: A) **dal** (`Üst Konu Kodu` = aktif konu; en çok 2 seviye), B) **ayrı konu**. Genel fikir her zaman yeni konu olur. Fikir açıldığında `Fikir Durumu` "Konuya dönüştü" olur; **orijinal not silinmez**, konuyla bağı kalır.
 - **Dalı bırakırken:** AI dalın kısa özetini önizlemeyle kaydeder ve "nereye dönelim?" diye sorar (varsayılan: Yukarı).
 

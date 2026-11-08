@@ -1,9 +1,9 @@
 {
  "meta": {
-  "generated_at": "2026-11-07T21:57:34+03:00",
+  "generated_at": "2026-11-08T16:01:05+03:00",
   "source": "Baserow veritabanı 263856 (canlı şema, salt okunur)",
   "table_count": 44,
-  "field_count": 893,
+  "field_count": 896,
   "link_field_count": 223,
   "formula_count": 91,
   "note": "Satır sayıları ve satır verisi burada YOKTUR; canlı okunmalıdır."
@@ -6060,7 +6060,7 @@
    "group": "08",
    "group_name": "08 CHAT (konu ve sohbet hafızası)",
    "purpose": "CHAT-001 Konular: her konu bir satır (durum, güncel özet, açık noktalar, kararlar, arşiv yolu). Kural: 05_AI_PROTOCOLS/CHAT_PROTOCOL.md.",
-   "field_count": 18,
+   "field_count": 20,
    "primary_field": "Konu Kodu",
    "fields": [
     {
@@ -6163,6 +6163,21 @@
      "id": 12137957,
      "name": "Sıradaki Adım",
      "type": "long_text"
+    },
+    {
+     "id": 12147535,
+     "name": "Üst Konu Kodu",
+     "type": "text"
+    },
+    {
+     "id": 12147536,
+     "name": "Bölge",
+     "type": "single_select",
+     "options": [
+      "Yapı",
+      "Chat",
+      "İş"
+     ]
     }
    ]
   },
@@ -6172,7 +6187,7 @@
    "group": "08",
    "group_name": "08 CHAT (konu ve sohbet hafızası)",
    "purpose": "CHAT-002 Notlar: konunun içindeki temizlenmiş kayıtlar (kullanıcı sözü, AI görüşü, karar adayı, karar); her not bir konuya bağlıdır.",
-   "field_count": 10,
+   "field_count": 11,
    "primary_field": "Not Kodu",
    "fields": [
     {
@@ -6198,7 +6213,8 @@
       "Karar adayı",
       "Karar",
       "Test sonucu",
-      "Özet"
+      "Özet",
+      "Fikir"
      ]
     },
     {
@@ -6242,6 +6258,16 @@
      "id": 12137125,
      "name": "Son Değişiklik Zamanı",
      "type": "last_modified"
+    },
+    {
+     "id": 12147534,
+     "name": "Fikir Durumu",
+     "type": "single_select",
+     "options": [
+      "Park",
+      "Konuya dönüştü",
+      "Arşiv"
+     ]
     }
    ]
   },
