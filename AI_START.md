@@ -99,6 +99,7 @@ Adımlar ve etki analizi şablonu: `05_AI_PROTOCOLS/FEATURE_REQUEST_WORKFLOW.md`
 | `05_AI_PROTOCOLS/LOG_ARCHIVE_RULE.md` | Baserow satır limiti için log arşiv kuralı (kabul edildi, DEC-SYS-003) |
 | `05_AI_PROTOCOLS/PLATFORM_SETUP.md` | AI platformlarının kalıcı talimatına konacak başlangıç metni |
 | `05_AI_PROTOCOLS/CHAT_PROTOCOL.md` | CHAT komutları (`#chatrapor #kaydet #kapat #soru #sentez`), aktif konu ve bölüm kuralı (taslak v0.3; DEC-SYS-004) |
+| `10_STANDARTLAR/README.md` (+ `KALIPLAR.md`, `PROMPTLAR.md`) | Anayasa ve tek-kalıp standartı: cevap kalıpları (devralma, iş raporu, kontrol, onay, test) ve hazır promptlar; taslak v0.1 |
 | `05_AI_PROTOCOLS/REQUEST_BOARD.md` | GEÇERSİZ (yerine CHAT_PROTOCOL.md); tarihsel |
 | `05_AI_PROTOCOLS/AI_SETUP.md` | Hangi AI neyi okuyup yazar; kurulum ve rol dağılımı |
 | `08_INBOX/README.md` (ve `ISLENDI.md`) | Yazamayan AI'ların çıktısı; üzerine yazma yok; işlenenler `ISLENDI.md`'de |

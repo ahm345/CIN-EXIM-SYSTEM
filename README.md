@@ -29,6 +29,7 @@ Protokolün **tek kaynağı** Baserow'daki `SYS-009` kaydıdır; bu depodaki dos
 | [`06_TASKS_AND_HANDOVER/`](06_TASKS_AND_HANDOVER/) | Güncel durum özeti, devir şablonu, bilgi yüzünden duran işler, log arşivi |
 | [`07_TESTS_AND_RELEASES/`](07_TESTS_AND_RELEASES/) | Bilinen sorunlar, test kontrol listeleri, sürüm politikası |
 | [`08_INBOX/`](08_INBOX/) · [`08_RESEARCH/`](08_RESEARCH/) · [`09_CHAT_ARCHIVE/`](09_CHAT_ARCHIVE/) | Yazamayan AI çıktıları; ortak web araştırma havuzu; biten CHAT konularının arşivi |
+| [`10_STANDARTLAR/`](10_STANDARTLAR/) | Anayasa, cevap kalıpları ve hazır promptlar (tüm AI'lar aynı biçimde cevap versin; taslak v0.1) |
 | [`tools/`](tools/) | Şema belgelerini üreten, şema farkını yazan, devri ve tutarlılığı kontrol eden, log arşivleyen betikler (komut listesi: `AI_START.md` bölüm 7) |
 | [`.claude/skills/`](.claude/skills/) | Claude Code için CIN EXIM skill'leri (başlangıç/devir, şema yenileme, devir doğrulama) |
 

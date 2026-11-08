@@ -4,6 +4,17 @@ Bu dosya **bu deponun** teknik değişikliklerini kronolojik tutar. Baserow yap�
 
 ---
 
+## repo-v0.4.3 — 2026-11-08 — 10_STANDARTLAR (taslak v0.1; dalda, main'e alınmadı)
+
+| Alan | Değer |
+|---|---|
+| Ne eklendi? | `10_STANDARTLAR/` (README = anayasa ve öncelik sırası; `KALIPLAR.md` K1-K6; `PROMPTLAR.md` P1-P7). Mevcut şablonlara (HANDOVER, CHANGE, INFO_GAP, 08_RESEARCH, CHAT_PROTOCOL) kopyalamadan bağlantı verir. `AI_START.md` ve `README.md` haritasına satır. |
+| Etkilenen Baserow | Yok (SYS-009'a işlenmedi). |
+| Kullanıcı onayı | İstek: 2026-11-08 09:18. Taslak içeriği ve `main`'e alma: bekliyor. |
+| Bilinen eksik | Kalıpların AI'lar tarafından uygulandığı canlı sınanmadı; platform talimatı bu klasörü henüz okutmuyor; teknik zorlama yok. |
+
+---
+
 ## repo-v0.4.2 — 2026-11-08 — CHAT menü kodları M1-M5 (dalda, main'e alınmadı)
 
 | Alan | Değer |
