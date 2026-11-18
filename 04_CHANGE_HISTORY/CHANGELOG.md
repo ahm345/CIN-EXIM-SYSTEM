@@ -4,6 +4,19 @@ Bu dosya **bu deponun** teknik değişikliklerini kronolojik tutar. Baserow yap�
 
 ---
 
+## repo-v0.4.5 — 2026-11-18 — Panel kaynağı depoya alındı (TASK-DASH-001 kısmi)
+
+| Alan | Değer |
+|---|---|
+| Ne değişti? | `panel/` eklendi: CIN EXIM Kontrol Paneli kaynağı (`panel/src`), derlenmiş v23 (`panel/dist`), derleme notu (`panel/README.md`). `build.py` gömülü veri dosyasını bağıl yoldan okur. Derleme tekrarlandı, çıktı artifact v23 ile birebir aynı. |
+| Neden? | Panel yalnız bir AI çalışma alanında ve artifact'ta duruyordu; kaybolma riski vardı (SYS-010 ID 14, SYS-008 TASK-DASH-001). |
+| Baserow / Drive bağlantısı | SYS-004 ID 30 (CHG-SYS-020: Belgeler'e Drive Linki, Format, Örnek). SYS-008 ID 27-29 (TASK-WEB-001, TASK-DRIVE-001, TASK-ORNEK-001). SYS-010 ID 14. Drive ana klasör ID `1QKDO1b9d1pPZhAwe3ImkN0LXTYFxwG1b`. |
+| Test | jsdom 67 geçti / 0 kaldı (2 not); build tekrarlanabilirliği doğrulandı. Canlı Baserow okuma düğmesi gerçek bağlantıyla denenmedi. |
+| Risk | Gömülü veri DEMO anlık görüntüsüdür. TASK-DASH-001 tamamlanmadı: otomatik yayın/sürümleme yok. |
+| Onay | Kullanıcı sohbette Git'te gereken işlerin yapılmasını istedi. Dal `ai/claude/TASK-DASH-001`; `main`'e birleştirme kullanıcı onayı bekliyor. |
+
+---
+
 ## repo-v0.4.4 — 2026-11-08 — CHAT menü v0.4 (0-8, konum, yönler, fikir, iş emri)
 
 | Alan | Değer |

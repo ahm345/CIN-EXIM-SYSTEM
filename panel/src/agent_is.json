@@ -1,0 +1,685 @@
+{
+ "makineler": {
+  "toplam": 57,
+  "operasyon_kontrolu": {
+   "OK": 25,
+   "HUKUKİ MALİK EKSİK": 32
+  },
+  "yasam_dongusu_kontrolu": {
+   "OK – kayıtlı kanıtlar tamam; hukuki doğrulama ayrıca gerekli": 25,
+   "HUKUKİ MALİK EKSİK": 32
+  },
+  "mulkiyet_durumu": {
+   "SPC mülkiyetinde": 25,
+   "Gümrükte": 20,
+   "Tedarikçide": 12
+  },
+  "aktif_tahsis_dagilimi": {
+   "1": 25,
+   "0": 32
+  },
+  "gecerli_sigorta_yok": 32,
+  "ornekler": {
+   "Operasyon: HUKUKİ MALİK EKSİK": [
+    "BUS-026",
+    "BUS-027",
+    "BUS-028",
+    "BUS-029",
+    "BUS-030",
+    "BUS-031"
+   ],
+   "Operasyon: OK": [
+    "BUS-001",
+    "BUS-002",
+    "BUS-003",
+    "BUS-004",
+    "BUS-005",
+    "BUS-006"
+   ],
+   "Yaşam: HUKUKİ MALİK EKSİK": [
+    "BUS-026",
+    "BUS-027",
+    "BUS-028",
+    "BUS-029",
+    "BUS-030",
+    "BUS-031"
+   ],
+   "Yaşam: OK – kayıtlı kanıtlar tamam; hukuki doğrulama ayrıca gerekli": [
+    "BUS-001",
+    "BUS-002",
+    "BUS-003",
+    "BUS-004",
+    "BUS-005",
+    "BUS-006"
+   ]
+  }
+ },
+ "sigortalar": {
+  "toplam": 51,
+  "durum": {
+   "Geçerli": 50,
+   "SÜRESİ DOLDU": 1
+  },
+  "sigorta_kontrolu": {
+   "TARİH GEÇERLİ – TEMİNAT KAPSAMI KONTROL EDİLMELİ": 50,
+   "SÜRESİ DOLDU": 1
+  },
+  "en_erken_bitis": "2026-06-30",
+  "90_gun_icinde_biten": 0,
+  "suresi_dolmus": 1
+ },
+ "tahsisler": {
+  "toplam": 26,
+  "durum": {
+   "Aktif": 25,
+   "Planlandı": 1
+  },
+  "tahsis_kontrolu": {
+   "KONTROL GEREKLİ": 26
+  }
+ },
+ "belgeler": {
+  "toplam": 52,
+  "durum": {
+   "İmzada": 3,
+   "Taslak": 4,
+   "Eksik": 45
+  },
+  "dosya_kontrolu": {
+   "DOSYA BEKLENİYOR": 52
+  },
+  "gecerli_sayi": 38,
+  "gecerli_eksik": 38,
+  "gecerli_tamam": 0,
+  "eksik_belge_adlari": [
+   {
+    "ad": "SINOMACH Satış Sözleşmesi (57 otobüs, DAP)",
+    "tur": "Satış Sözleşmesi"
+   },
+   {
+    "ad": "Hizmet Alım Sözleşmesi (ÖMG ↔ TOO)",
+    "tur": "Hizmet Alım Sözleşmesi"
+   },
+   {
+    "ad": "Eximbank Kredi Sözleşmesi",
+    "tur": "Kredi Sözleşmesi"
+   },
+   {
+    "ad": "Hukuki Görüş – Temlik ve İhbarname",
+    "tur": "Hukuki Görüş (Legal Opinion)"
+   },
+   {
+    "ad": "Üç Taraflı Nakit Rehin Sözleşmesi",
+    "tur": "Rehin Sözleşmesi"
+   },
+   {
+    "ad": "Sinosure Poliçesi",
+    "tur": "Sigorta Poliçesi"
+   },
+   {
+    "ad": "ÖMG Notice of Assignment",
+    "tur": "Notice of Assignment"
+   },
+   {
+    "ad": "SHP-001 Ticari Fatura",
+    "tur": "Ticari Fatura"
+   },
+   {
+    "ad": "SHP-001 Paketleme Listesi",
+    "tur": "Paketleme Listesi"
+   },
+   {
+    "ad": "SHP-001 Demiryolu Konşimentosu",
+    "tur": "Demiryolu Konşimentosu (CIM/SMGS)"
+   },
+   {
+    "ad": "SHP-001 Menşe Şahadetnamesi",
+    "tur": "Menşe Şahadetnamesi"
+   },
+   {
+    "ad": "SHP-001 Khorgos Teslim Tutanağı",
+    "tur": "Teslim Tutanağı"
+   },
+   {
+    "ad": "Ekipman İpotek Tescil Belgesi",
+    "tur": "İpotek Tescil Belgesi"
+   },
+   {
+    "ad": "Taşıma sigortası poliçesi (alıcı adına)",
+    "tur": "Taşıma Sigortası Poliçesi (Alıcı)"
+   },
+   {
+    "ad": "Seller's Credit Sözleşmesi (SINOMACH)",
+    "tur": "Kredi Sözleşmesi"
+   },
+   {
+    "ad": "Finance Lease Sözleşmesi (SPC → TOO, 5 yıl)",
+    "tur": "Finance Lease Sözleşmesi"
+   },
+   {
+    "ad": "Köprü (Bridge) Kredi Sözleşmesi",
+    "tur": "Kredi Sözleşmesi"
+   },
+   {
+    "ad": "SHP-002 Ticari Fatura",
+    "tur": "Ticari Fatura"
+   },
+   {
+    "ad": "SHP-002 Paketleme Listesi",
+    "tur": "Paketleme Listesi"
+   },
+   {
+    "ad": "SHP-002 Demiryolu Konşimentosu",
+    "tur": "Demiryolu Konşimentosu (CIM/SMGS)"
+   }
+  ]
+ },
+ "surec": {
+  "toplam": 48,
+  "durum": {
+   "Tamam": 1,
+   "Devam Ediyor": 2,
+   "Bekliyor": 45
+  },
+  "adim_kontrolu": {
+   "TAMAM – KANIT / NOT EKLENMELİ": 1,
+   "GEÇERLİ ADIM": 26,
+   "SEÇİLİ PROJE MODELİNE UYGUN DEĞİL": 21
+  },
+  "varlik_olay_kontrolu": {
+   "GENEL ADIM – VARLIK OLAYI DEĞİL": 40,
+   "OLAY TARİHİ EKSİK": 8
+  },
+  "engelli_adimlar": []
+ },
+ "kira": {
+  "donem_sayisi": 60,
+  "toplam_spc_kira_payi": 3794400.0,
+  "toplam_borc_servisi": 4384386.58,
+  "toplam_cfads": 3225240.0,
+  "min_dscr": 0.08,
+  "max_dscr": 0.95,
+  "dscr_1_alti_donem": 60,
+  "dscr_uyari_dagilimi": {
+   "KRİTİK: DSCR 1 altında": 60
+  },
+  "ilk_donem_ornek": {
+   "donem": "Proje Dönem 1",
+   "vade": null,
+   "durum": "Planlandı",
+   "ÖMG Hizmet Geliri USD": 95000.0,
+   "SPC Kira Payı USD": 63240.0,
+   "Tahsil Edilen USD": 0.0,
+   "Kalan USD": 63240.0,
+   "Stopaj USD": 9486.0,
+   "Net SPC'ye USD": 53754.0,
+   "DSCR": 0.74,
+   "Borç Servisi USD": 72485.0,
+   "SPC İşletme Gideri USD": 0.0,
+   "CFADS USD": 53754.0,
+   "dscr_uyarisi": "KRİTİK: DSCR 1 altında"
+  },
+  "son_donem_ornek": {
+   "donem": "Proje Dönem 60",
+   "vade": null,
+   "durum": "Planlandı",
+   "ÖMG Hizmet Geliri USD": 95000.0,
+   "SPC Kira Payı USD": 63240.0,
+   "Tahsil Edilen USD": 0.0,
+   "Kalan USD": 63240.0,
+   "Stopaj USD": 9486.0,
+   "Net SPC'ye USD": 53754.0,
+   "DSCR": 0.95,
+   "Borç Servisi USD": 56736.97,
+   "SPC İşletme Gideri USD": 0.0,
+   "CFADS USD": 53754.0,
+   "dscr_uyarisi": "KRİTİK: DSCR 1 altında"
+  }
+ },
+ "sozlesmeler": [
+  {
+   "ad": "SPC → TOO-1 Finance Lease (DEMO)",
+   "tur": "Finansal Leasing",
+   "durum": "Aktif",
+   "kontrol": "DEMO – HUKUKİ İNCELEME GEREKLİ",
+   "gercek_veri": false,
+   "hukuki_dogrulama": "Gerekli"
+  },
+  {
+   "ad": "TOO-1 ↔ ÖMG Hizmet Alım (DEMO)",
+   "tur": "Hizmet Alım (ÖMG–TOO)",
+   "durum": "Aktif",
+   "kontrol": "DEMO – HUKUKİ İNCELEME GEREKLİ",
+   "gercek_veri": false,
+   "hukuki_dogrulama": "Gerekli"
+  },
+  {
+   "ad": "TOO-1 → TOO-2 Alt Kiralama, Lot-3 (DEMO)",
+   "tur": "Alt Kiralama",
+   "durum": "Taslak",
+   "kontrol": "DEMO – HUKUKİ İNCELEME GEREKLİ (alt kiralama kontrolü: UYARI: ana sözleşmede alt kiralama izni yok)",
+   "gercek_veri": false,
+   "hukuki_dogrulama": "Gerekli"
+  }
+ ],
+ "firmalar": [
+  {
+   "ad": "Özenmunaygaz (ÖMG) / KMG Grubu",
+   "roller": [
+    "Alıcı / Nihai Gelir Kaynağı"
+   ],
+   "ulke": "Kazakistan"
+  },
+  {
+   "ad": "SINOMACH",
+   "roller": [
+    "Genel Yüklenici"
+   ],
+   "ulke": "Çin"
+  },
+  {
+   "ad": "AIFC SPC (Demo)",
+   "roller": [
+    "SPC / Lessor"
+   ],
+   "ulke": "Kazakistan (AIFC, Astana)"
+  },
+  {
+   "ad": "Kazakistan TOO (Operatör)",
+   "roller": [
+    "Operatör / Lessee (TOO)"
+   ],
+   "ulke": "Kazakistan"
+  },
+  {
+   "ad": "China Eximbank",
+   "roller": [
+    "Banka / Kreditör"
+   ],
+   "ulke": "Çin"
+  },
+  {
+   "ad": "Sinosure",
+   "roller": [
+    "Sigortacı"
+   ],
+   "ulke": "Çin"
+  },
+  {
+   "ad": "Köprü Finansörü (Demo)",
+   "roller": [
+    "Nakit Rehni Sahibi (Finansör)"
+   ],
+   "ulke": "Çin"
+  },
+  {
+   "ad": "Otobüs İmalatçısı A (Demo)",
+   "roller": [
+    "İmalatçı / Tedarikçi"
+   ],
+   "ulke": "Çin"
+  },
+  {
+   "ad": "Otobüs İmalatçısı B (Demo)",
+   "roller": [
+    "İmalatçı / Tedarikçi"
+   ],
+   "ulke": "Çin"
+  },
+  {
+   "ad": "Khorgos Gümrük Müşavirliği (Demo)",
+   "roller": [
+    "Gümrük Müşaviri"
+   ],
+   "ulke": "Kazakistan"
+  },
+  {
+   "ad": "Çin-Kazakistan Demiryolu Lojistik (Demo)",
+   "roller": [
+    "Taşıyıcı / Lojistik"
+   ],
+   "ulke": "Çin / Kazakistan"
+  },
+  {
+   "ad": "Servis ve Yedek Parça Ltd (Demo)",
+   "roller": [
+    "Servis / Bakım"
+   ],
+   "ulke": "Kazakistan"
+  },
+  {
+   "ad": "Kazakistan TOO-2 (Alt Kiracı, Demo)",
+   "roller": [
+    "Operatör / Lessee (TOO)"
+   ],
+   "ulke": "Kazakistan"
+  },
+  {
+   "ad": "Kazakistan Sigorta Şirketi (Demo)",
+   "roller": [
+    "Sigortacı"
+   ],
+   "ulke": "Kazakistan"
+  }
+ ],
+ "gumruk": [
+  {
+   "beyanname": "CN-EXP-001 (demo)",
+   "matrah": 1750000,
+   "gumruk_vergisi": 0,
+   "kdv": 0,
+   "toplam_vergi": 0,
+   "net_vergi": 0,
+   "durum": "Kapandı / Tamam",
+   "gumruk_vergisi_muafiyet": 0,
+   "kdv_muafiyet": 0,
+   "indirilebilir_kdv": 0,
+   "muafiyet_tesvik": []
+  },
+  {
+   "beyanname": "KZ-IMP-001 (demo)",
+   "matrah": 1750000,
+   "gumruk_vergisi": 87500,
+   "kdv": 294000,
+   "toplam_vergi": 381500,
+   "net_vergi": 381500,
+   "durum": "Kapandı / Tamam",
+   "gumruk_vergisi_muafiyet": 0,
+   "kdv_muafiyet": 0,
+   "indirilebilir_kdv": 0,
+   "muafiyet_tesvik": []
+  },
+  {
+   "beyanname": "CN-EXP-002 (demo)",
+   "matrah": 1400000,
+   "gumruk_vergisi": 0,
+   "kdv": 0,
+   "toplam_vergi": 0,
+   "net_vergi": 0,
+   "durum": "Kapandı / Tamam",
+   "gumruk_vergisi_muafiyet": 0,
+   "kdv_muafiyet": 0,
+   "indirilebilir_kdv": 0,
+   "muafiyet_tesvik": []
+  },
+  {
+   "beyanname": "KZ-IMP-002 (demo)",
+   "matrah": 1400000,
+   "gumruk_vergisi": 70000,
+   "kdv": 235200,
+   "toplam_vergi": 305200,
+   "net_vergi": 305200,
+   "durum": "Sunuldu",
+   "gumruk_vergisi_muafiyet": 0,
+   "kdv_muafiyet": 0,
+   "indirilebilir_kdv": 0,
+   "muafiyet_tesvik": []
+  },
+  {
+   "beyanname": "CN-EXP-003 (demo)",
+   "matrah": 840000,
+   "gumruk_vergisi": 0,
+   "kdv": 0,
+   "toplam_vergi": 0,
+   "net_vergi": 0,
+   "durum": "Hazırlanıyor",
+   "gumruk_vergisi_muafiyet": 0,
+   "kdv_muafiyet": 0,
+   "indirilebilir_kdv": 0,
+   "muafiyet_tesvik": []
+  },
+  {
+   "beyanname": "KZ-IMP-003 (demo)",
+   "matrah": 840000,
+   "gumruk_vergisi": 42000,
+   "kdv": 141120,
+   "toplam_vergi": 183120,
+   "net_vergi": 183120,
+   "durum": "Hazırlanıyor",
+   "gumruk_vergisi_muafiyet": 0,
+   "kdv_muafiyet": 0,
+   "indirilebilir_kdv": 0,
+   "muafiyet_tesvik": []
+  }
+ ],
+ "teminatlar": [
+  {
+   "ad": "Üçüncü Taraf Nakit Rehni – 10M USD karşılığı RMB (120 gün)",
+   "tur": "Üçüncü Taraf Nakit Rehni",
+   "tutar": 10000000,
+   "durum": "Hazırlanıyor",
+   "hukuki_dogrulama": "Gerekli",
+   "kontrol": "HUKUKİ DOĞRULAMA GEREKLİ"
+  },
+  {
+   "ad": "1. Derece Ekipman İpoteği (57 otobüs)",
+   "tur": "1. Derece Ekipman İpoteği",
+   "tutar": 3990000,
+   "durum": "Hazırlanıyor",
+   "hukuki_dogrulama": "Gerekli",
+   "kontrol": "HUKUKİ DOĞRULAMA GEREKLİ"
+  },
+  {
+   "ad": "TOO Tahsilat Hesabı Rehni / Account Control",
+   "tur": "Tahsilat Hesabı Rehni / Escrow",
+   "tutar": null,
+   "durum": "Hazırlanıyor",
+   "hukuki_dogrulama": "Gerekli",
+   "kontrol": "HUKUKİ DOĞRULAMA GEREKLİ"
+  },
+  {
+   "ad": "SPC Kira Alacağı Temliki → Eximbank",
+   "tur": "Kira Alacağı Temliki",
+   "tutar": null,
+   "durum": "Hazırlanıyor",
+   "hukuki_dogrulama": "Gerekli",
+   "kontrol": "HUKUKİ DOĞRULAMA GEREKLİ"
+  },
+  {
+   "ad": "ÖMG'ye Notice of Assignment (TOO alacağı)",
+   "tur": "Notice of Assignment",
+   "tutar": null,
+   "durum": "Hazırlanıyor",
+   "hukuki_dogrulama": "Gerekli",
+   "kontrol": "HUKUKİ DOĞRULAMA GEREKLİ"
+  },
+  {
+   "ad": "Sinosure Kredi Sigortası Poliçesi",
+   "tur": "Sinosure Poliçesi",
+   "tutar": 3391500,
+   "durum": "Hazırlanıyor",
+   "hukuki_dogrulama": "Gerekmiyor",
+   "kontrol": "OK – bağlantılar ve tarihler tamam; belge dosyası ve hukuki doğrulama ayrıca gerekli"
+  }
+ ],
+ "gelir_gider": [
+  {
+   "ad": "A İç Leasing – stopaj yok (iç işlem)",
+   "donem": "Proje Dönem 1",
+   "omg_hizmet_geliri": 95000,
+   "stopaj": 0,
+   "cfads": 63240,
+   "borc_servisi": 72485,
+   "dscr": 0.87,
+   "uyari": "KRİTİK: DSCR 1 altında",
+   "net_nakit": -9245
+  },
+  {
+   "ad": "B Operasyonel Kiralama – stopaj %15",
+   "donem": "Proje Dönem 1",
+   "omg_hizmet_geliri": 95000,
+   "stopaj": 9486,
+   "cfads": 53754,
+   "borc_servisi": 72485,
+   "dscr": 0.74,
+   "uyari": "KRİTİK: DSCR 1 altında",
+   "net_nakit": -18731
+  },
+  {
+   "ad": "B Operasyonel Kiralama – AIFC muafiyeti ile stopaj 0",
+   "donem": "Proje Dönem 1",
+   "omg_hizmet_geliri": 95000,
+   "stopaj": 0,
+   "cfads": 63240,
+   "borc_servisi": 72485,
+   "dscr": 0.87,
+   "uyari": "KRİTİK: DSCR 1 altında",
+   "net_nakit": -9245
+  },
+  {
+   "ad": "C Satış – devir bedeliyle krediyi erken kapat (tek seferlik)",
+   "donem": "Tek seferlik",
+   "omg_hizmet_geliri": 0,
+   "stopaj": 0,
+   "cfads": 3990000,
+   "borc_servisi": 3391500,
+   "dscr": 0.0,
+   "uyari": "DSCR UYGULANMAZ: tek seferlik satış / kredi kapama",
+   "net_nakit": 598500
+  }
+ ],
+ "lotlar": [
+  {
+   "ad": "Lot-1 Otobüs (25 adet)",
+   "adet": 25,
+   "birim_fiyat": 70000,
+   "toplam": 1750000,
+   "kontrol": "OK – bağlantılar ve tarihler tamam; belge dosyası ve hukuki doğrulama ayrıca gerekli",
+   "tedarikci": "Otobüs İmalatçısı A (Demo)"
+  },
+  {
+   "ad": "Lot-2 Otobüs (20 adet)",
+   "adet": 20,
+   "birim_fiyat": 70000,
+   "toplam": 1400000,
+   "kontrol": "OK – bağlantılar ve tarihler tamam; belge dosyası ve hukuki doğrulama ayrıca gerekli",
+   "tedarikci": "Otobüs İmalatçısı A (Demo)"
+  },
+  {
+   "ad": "Lot-3 Otobüs (12 adet)",
+   "adet": 12,
+   "birim_fiyat": 70000,
+   "toplam": 840000,
+   "kontrol": "OK – bağlantılar ve tarihler tamam; belge dosyası ve hukuki doğrulama ayrıca gerekli",
+   "tedarikci": "Otobüs İmalatçısı B (Demo)"
+  }
+ ],
+ "bakim": [
+  {
+   "ad": "Periyodik bakım – Lot-1 (ilk 10.000 km)",
+   "tarih": "2027-08-15",
+   "durum": "Planlandı",
+   "toplam": 11250,
+   "kontrol": "KONTROL GEREKLİ"
+  },
+  {
+   "ad": "Yedek parça stoku (fren, filtre, kayış seti)",
+   "tarih": "2027-06-01",
+   "durum": "Planlandı",
+   "toplam": 12000,
+   "kontrol": "KONTROL GEREKLİ"
+  },
+  {
+   "ad": "Periyodik bakım – Lot-2 (ilk 10.000 km)",
+   "tarih": "2027-08-20",
+   "durum": "Planlandı",
+   "toplam": 9000,
+   "kontrol": "KONTROL GEREKLİ"
+  },
+  {
+   "ad": "Periyodik bakım – Lot-3 (ilk 10.000 km)",
+   "tarih": "2027-08-25",
+   "durum": "Planlandı",
+   "toplam": 5400,
+   "kontrol": "KONTROL GEREKLİ"
+  }
+ ],
+ "giderler": [
+  {
+   "ad": "SHP-001 Demiryolu navlunu",
+   "tutar": 42000,
+   "para_birimi": "USD",
+   "usd": 42000,
+   "tur": "Navlun / Taşıma"
+  },
+  {
+   "ad": "SHP-002 Demiryolu navlunu",
+   "tutar": 34000,
+   "para_birimi": "USD",
+   "usd": 34000,
+   "tur": "Navlun / Taşıma"
+  },
+  {
+   "ad": "Sinosure prim ödemesi",
+   "tutar": 85000,
+   "para_birimi": "USD",
+   "usd": 85000,
+   "tur": "Sigorta / Sinosure Primi"
+  },
+  {
+   "ad": "Eximbank kredi açma komisyonu",
+   "tutar": 33915,
+   "para_birimi": "USD",
+   "usd": 33915,
+   "tur": "Banka / Faiz / Komisyon"
+  },
+  {
+   "ad": "Ekipman ipotek tescil ve noter giderleri",
+   "tutar": 12000,
+   "para_birimi": "USD",
+   "usd": 12000,
+   "tur": "Noter / Tescil"
+  },
+  {
+   "ad": "Hukuki görüş ve sözleşme danışmanlığı",
+   "tutar": 25000,
+   "para_birimi": "USD",
+   "usd": 25000,
+   "tur": "Danışmanlık / Hukuk"
+  },
+  {
+   "ad": "SHP-003 Demiryolu navlunu (DEMO tahmini)",
+   "tutar": 20280,
+   "para_birimi": "USD",
+   "usd": 20280,
+   "tur": "Navlun / Taşıma"
+  }
+ ],
+ "muafiyet": [
+  {
+   "ad": "AIFC stopaj muafiyeti / tax ruling (DEMO)",
+   "durum": "Başvurulacak",
+   "tur": "AIFC Muafiyeti"
+  },
+  {
+   "ad": "İthalatta gümrük vergisi muafiyeti araştırması (DEMO)",
+   "durum": "Başvurulacak",
+   "tur": "KZ İthalat Muafiyeti"
+  },
+  {
+   "ad": "İthalat KDV mahsup / iade takibi (DEMO)",
+   "durum": "Başvurulacak",
+   "tur": "Diğer"
+  }
+ ],
+ "imalat": [
+  {
+   "ad": "PO-001 (Lot-1)",
+   "uretim_durumu": "Teslim Edildi",
+   "kalite_kontrol_gecti": true,
+   "kontrol": "OK – bağlantılar ve tarihler tamam; belge dosyası ve hukuki doğrulama ayrıca gerekli"
+  },
+  {
+   "ad": "PO-002 (Lot-2)",
+   "uretim_durumu": "Sevkiyata Hazır",
+   "kalite_kontrol_gecti": true,
+   "kontrol": "OK – bağlantılar ve tarihler tamam; belge dosyası ve hukuki doğrulama ayrıca gerekli"
+  },
+  {
+   "ad": "PO-003 (Lot-3)",
+   "uretim_durumu": "Üretimde",
+   "kalite_kontrol_gecti": false,
+   "kontrol": "OK – bağlantılar ve tarihler tamam; belge dosyası ve hukuki doğrulama ayrıca gerekli"
+  }
+ ]
+}

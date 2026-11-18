@@ -1,0 +1,15 @@
+/* v23 görünüm cilası */
+:root{--r:12px}
+header{backdrop-filter:saturate(1.2)}
+#nav{display:flex;gap:6px;flex-wrap:wrap;padding:8px 0}
+#nav a{border-radius:999px;padding:7px 14px;font-weight:600;letter-spacing:.01em;transition:background .15s,box-shadow .15s}
+#nav a[aria-current="page"]{box-shadow:0 1px 0 rgba(0,0,0,.08),0 4px 14px -6px var(--accent)}
+#nav2{display:flex;gap:4px;flex-wrap:wrap;padding:6px 0 10px;border-bottom:1px solid var(--line,rgba(128,128,128,.25))}
+#nav2 a{border-radius:8px;padding:5px 11px;font-size:13px}
+.panel,.akd{border-radius:var(--r);box-shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px -16px rgba(0,0,0,.25)}
+.pkpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:10px 0}
+.pkpi>div{padding:10px 12px;border-radius:10px;background:var(--surface2)}
+.pkpi b{display:block;font-size:17px;margin-top:2px;font-variant-numeric:tabular-nums}
+.lnk{background:none;border:0;color:var(--accent);cursor:pointer;text-align:left;padding:0;font:inherit;text-decoration:underline}
+.rapor h2{margin:.2em 0}.rapor table{width:100%;border-collapse:collapse;margin:6px 0 14px}.rapor td,.rapor th{border:1px solid rgba(128,128,128,.3);padding:5px 8px;text-align:left;font-size:13px}
+@media print{header,#nav,#nav2,#projbar,.noprint,.demo,footer{display:none!important}body{background:#fff;color:#000}main{max-width:none;padding:0}.rapor{color:#000}}

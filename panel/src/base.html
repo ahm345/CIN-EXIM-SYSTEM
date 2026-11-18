@@ -1,0 +1,643 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>CIN EXIM Kontrol Paneli</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: üstte başlık + sekme şeridi, altında tek sütun içerik; geniş ekranda iki sütunlu bölümler.
+   Dil: gümrük defteri gibi sıkı, tablo ağırlıklı; vurgu rengi tek (deniz yeşili), durum renkleri ayrı. */
+:root{
+  --bg:#f2f4f1; --surface:#ffffff; --surface2:#e9ede8; --line:#d3d9d2; --fg:#16201e; --muted:#58665f;
+  --accent:#0d6b63; --accent-ink:#ffffff; --accent-soft:#d7ebe7;
+  --ok:#1d7a3e; --ok-bg:#dcf0e2; --warn:#8a5a00; --warn-bg:#f8ebc8; --crit:#a3262a; --crit-bg:#f7dcdc; --info:#25598f; --info-bg:#dce9f6;
+  --sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif; --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1514; --surface:#172120; --surface2:#1e2b29; --line:#2b3a37; --fg:#e4ece9; --muted:#97a8a2;
+  --accent:#4fbfb2; --accent-ink:#06211e; --accent-soft:#17403b;
+  --ok:#6fd08c; --ok-bg:#173a25; --warn:#e8b94f; --warn-bg:#3d3112; --crit:#f08a8d; --crit-bg:#431a1c; --info:#8dbcf0; --info-bg:#172b40; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1514; --surface:#172120; --surface2:#1e2b29; --line:#2b3a37; --fg:#e4ece9; --muted:#97a8a2;
+  --accent:#4fbfb2; --accent-ink:#06211e; --accent-soft:#17403b;
+  --ok:#6fd08c; --ok-bg:#173a25; --warn:#e8b94f; --warn-bg:#3d3112; --crit:#f08a8d; --crit-bg:#431a1c; --info:#8dbcf0; --info-bg:#172b40; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:14px/1.5 var(--sans)}
+.wrap{max-width:1120px;margin:0 auto;padding-block:20px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between;margin-bottom:14px}
+h1{font:600 22px/1.2 var(--sans);margin:0;letter-spacing:-.01em;text-wrap:balance}
+.sub{color:var(--muted);font-size:12.5px;margin-top:4px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+button,input{font:inherit;color:inherit}
+.btn{background:var(--accent);color:var(--accent-ink);border:0;border-radius:6px;padding:8px 14px;font-weight:500;cursor:pointer}
+.btn:disabled{opacity:.55;cursor:default}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);display:flex;gap:2px;overflow-x:auto;margin-bottom:18px}
+nav a{padding:10px 14px;color:var(--muted);text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;font-weight:500}
+nav a[aria-current="page"]{color:var(--fg);border-bottom-color:var(--accent)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+h2{font:600 15px/1.3 var(--sans);margin:0 0 10px}
+h3{font:500 12px/1.3 var(--sans);margin:0 0 6px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px;min-width:0}
+.tiles{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));margin-bottom:16px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 14px}
+.tile b{display:block;font:500 26px/1.15 var(--mono);font-variant-numeric:tabular-nums}
+.tile span{color:var(--muted);font-size:12px}
+.tile.warn b{color:var(--warn)} .tile.crit b{color:var(--crit)} .tile.ok b{color:var(--ok)}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%}
+th{font:500 11.5px/1.3 var(--sans);text-align:left;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;padding:6px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.pill{display:inline-block;border-radius:999px;padding:1px 9px;font-size:12px;font-weight:500;white-space:nowrap}
+.pill.ok{background:var(--ok-bg);color:var(--ok)} .pill.warn{background:var(--warn-bg);color:var(--warn)} .pill.crit{background:var(--crit-bg);color:var(--crit)} .pill.info{background:var(--info-bg);color:var(--info)} .pill.mute{background:var(--surface2);color:var(--muted)}
+.code{font-family:var(--mono);font-size:12.5px;color:var(--muted);white-space:nowrap}
+.bars{display:grid;gap:7px}
+.bar{display:grid;grid-template-columns:minmax(110px,150px) 1fr 44px;gap:10px;align-items:center;font-size:13px}
+.bar i{display:block;height:10px;background:var(--accent);border-radius:2px;min-width:2px}
+.bar .tr{background:var(--surface2);border-radius:2px}
+.attn{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.attn li{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+details{background:var(--surface);border:1px solid var(--line);border-radius:8px;margin-bottom:12px}
+summary{cursor:pointer;padding:10px 16px;font-weight:600;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline}
+summary small{font-weight:400;color:var(--muted);font-family:var(--mono)}
+details>.tablewrap{padding:0 8px 8px}
+.filter{width:100%;max-width:360px;padding:8px 12px;border:1px solid var(--line);border-radius:6px;background:var(--surface);margin-bottom:14px}
+.status{font-size:12.5px;color:var(--muted);min-height:1.4em}
+.chk{display:grid;grid-template-columns:auto 1fr;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.chk:last-child{border-bottom:0}
+.chk input{margin-top:3px;accent-color:var(--accent);width:16px;height:16px}
+.chk.done span{color:var(--muted);text-decoration:line-through}
+.menu{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.menu div{border:1px solid var(--line);border-radius:6px;padding:8px 10px;background:var(--surface2)}
+.menu b{font-family:var(--mono);color:var(--accent);margin-right:6px}
+.note{color:var(--muted);font-size:12.5px}
+.delta-up{color:var(--ok)} .delta-down{color:var(--crit)}
+@media (max-width:560px){h1{font-size:19px} .bar{grid-template-columns:100px 1fr 40px}}
+@media (prefers-reduced-motion:no-preference){.bar i{transition:width .3s}}
+/* ---- ilişki haritaları ---- */
+.sc{overflow-x:auto}
+svg text{fill:var(--fg);font:12px var(--sans)} svg .mu{fill:var(--muted);font-size:11px} svg .elb{font:600 11px var(--mono);paint-order:stroke;stroke:var(--surface);stroke-width:3px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface2);color:var(--fg);border-radius:999px;padding:3px 11px;font-size:12.5px;cursor:pointer}
+.chip i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.chip:hover{border-color:var(--accent)} .chip.sel{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.fx{margin:6px 0;font-size:12.5px} .fx code{display:block;background:var(--surface2);border:1px solid var(--line);border-radius:6px;padding:5px 9px;margin-top:3px;overflow-x:auto;white-space:pre-wrap;word-break:break-word;font:12px var(--mono)}
+.nd,.nd2{cursor:pointer;outline:none;transition:opacity .25s} .nd:focus-visible circle.dot,.nd2:focus-visible rect{stroke:var(--accent);stroke-width:3}
+.nd:hover circle.dot{stroke:var(--fg);stroke-width:2} .nd2:hover rect{stroke:var(--accent)!important}
+.ed{fill:none;stroke-dasharray:2 8;transition:opacity .25s} .ed.on{stroke-dasharray:7 5}
+.pulse{fill:none;stroke:var(--accent);stroke-width:2}
+@media (prefers-reduced-motion:no-preference){
+  .ed{animation:flow 2.6s linear infinite} .ed.on{animation-duration:.9s}
+  @keyframes flow{to{stroke-dashoffset:-30}}
+  .nd circle.dot{transform-box:fill-box;transform-origin:center;animation:breathe 4s ease-in-out infinite}
+  @keyframes breathe{50%{transform:scale(1.22)}}
+  .pulse{transform-box:fill-box;transform-origin:center;animation:pulse 1.6s ease-out infinite}
+  @keyframes pulse{from{transform:scale(1);opacity:.9}to{transform:scale(2.6);opacity:0}}
+  .stp rect{animation:glow 12.6s linear infinite;animation-delay:var(--d)}
+  @keyframes glow{0%,7%{stroke:var(--accent);stroke-width:3.6}10%,100%{stroke-width:1.6}}
+}
+.tcard{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--muted);border-radius:8px;padding:11px 14px;margin-bottom:10px}
+.tcard.crit{border-left-color:var(--crit)}.tcard.warn{border-left-color:var(--warn)}.tcard.info{border-left-color:var(--info)}.tcard.ok{border-left-color:var(--ok)}
+.tcard .th{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px}.why{font-size:13px;margin:3px 0}.why b{color:var(--muted);font-weight:500;margin-right:4px}
+.chk2{border-bottom:1px solid var(--line);padding:2px 0}.chk2:last-child{border-bottom:0}.chk2 details{border:0;margin:0 0 6px 26px;background:none}.chk2 summary{padding:2px 0;font-weight:400;color:var(--accent);font-size:12.5px}
+#nav2{display:flex;gap:2px;overflow-x:auto;margin:-8px 0 16px;border-bottom:1px solid var(--line)}
+#nav2 a{padding:6px 12px;font-size:13px;color:var(--muted);text-decoration:none;white-space:nowrap;border-radius:6px 6px 0 0}
+#nav2 a[aria-current="page"]{background:var(--accent-soft);color:var(--fg)}
+.rq{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}.rqc{display:flex;gap:6px;flex-wrap:wrap}
+.rqb{font:inherit;font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--fg);cursor:pointer}
+.rqb.on{color:#fff;border-color:transparent}.rqb.on[data-o=yap]{background:var(--ok)}.rqb.on[data-o=yapma]{background:var(--crit)}.rqb.on[data-o=sonra]{background:var(--warn)}.rqb.on[data-o=soru]{background:var(--info)}.rqb.on[data-o=guncelle]{background:var(--accent)}
+.rqn{width:100%;margin-top:6px;min-height:34px;resize:vertical;background:transparent;color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:5px 8px;font:inherit;font-size:13px}
+#rqout{width:100%;min-height:240px;font:12px ui-monospace,Menlo,monospace;background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:10px}
+.rqf{display:grid;gap:6px}.rqf input,.rqf select{background:transparent;color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:6px 8px;font:inherit}.tablewrap .rq{min-width:190px;margin:0;padding:0;border:0}
+.rcards{display:grid;gap:10px}.rel{display:flex;gap:10px;align-items:center;margin-top:8px;padding-top:6px;border-top:1px dashed var(--line)}.rel svg{flex:none}.rl{color:var(--accent);text-decoration:none;border-bottom:1px dotted var(--accent)}
+.accs{display:block}.acc{border:1px solid var(--line);border-radius:10px;background:var(--surface);margin:0 0 10px}
+.acch{width:100%;display:flex;justify-content:space-between;align-items:center;text-align:left;padding:12px 14px;font:600 15px/1.3 inherit;color:var(--fg);background:none;border:0;cursor:pointer}
+.acch::after{content:"▸";color:var(--muted);transition:transform .2s}.acc.open .acch::after{transform:rotate(90deg)}
+.accb{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s ease}.acc.open .accb{grid-template-rows:1fr}
+.accb>div{overflow:hidden;padding:0 14px;visibility:hidden}.acc.open .accb>div{padding:0 14px 14px;visibility:visible}
+@media (prefers-reduced-motion:reduce){.accb,.acch::after{transition:none}}
+</style>
+
+<div class="wrap">
+<header>
+  <div>
+    <h1>CIN EXIM Kontrol Paneli</h1>
+    <div class="sub" id="stamp"></div>
+  </div>
+  <div>
+    <button class="btn" id="liveBtn" type="button" hidden>Baserow'dan canlı say</button>
+    <div class="status" id="liveStatus" role="status"></div>
+  </div>
+</header>
+<nav id="nav" aria-label="Bölümler"></nav>
+<main id="view"></main>
+</div>
+
+<script id="data" type="application/json">{"snap": "2026-11-09T03:45:53.901550+03:00", "inv": {"generated_at": "2026-11-08T16:01:05+03:00", "source": "Baserow veritabanı 263856 (canlı şema, salt okunur)", "table_count": 44, "field_count": 896, "link_field_count": 223, "formula_count": 91, "note": "Satır sayıları ve satır verisi burada YOKTUR; canlı okunmalıdır."}, "tables": [{"id": 620460, "n": "Table", "g": "07 Eski / Referans", "f": 8, "l": 1, "fx": 0, "r": 4, "p": "Eski AI denetim raporu kaydı (SYS-006 ile bağlı). Korunur, silinmez."}, {"id": 1299125, "n": "Firmalar", "g": "01 İş Çekirdeği", "f": 44, "l": 38, "fx": 0, "r": 14, "p": "Tüm taraflar için ortak firma kaydı (tedarikçi, imalatçı, kreditör, kiracı, sigortacı, taşıyıcı vb.). Mülkiyet zincirindeki roller buradan b"}, {"id": 1299126, "n": "Projeler", "g": "01 İş Çekirdeği", "f": 55, "l": 20, "fx": 17, "r": 2, "p": "Ana proje kaydı. Maliyet, kredi, kira, vergi ve süreç ilerleme özetlerini toplayan formüller içerir."}, {"id": 1299127, "n": "Ekipman Lotları", "g": "01 İş Çekirdeği", "f": 17, "l": 7, "fx": 2, "r": 3, "p": "Projedeki ekipman lotları (tedarikçi, tutar). Makineleri ve sevkiyatları gruplar."}, {"id": 1299128, "n": "İmalat ve Tedarik", "g": "01 İş Çekirdeği", "f": 15, "l": 3, "fx": 2, "r": 3, "p": "Lot bazlı sipariş ve üretim takibi; FAT raporu belgesi bağlanır."}, {"id": 1299129, "n": "Krediler", "g": "02 Finansman ve Nakit Akışı", "f": 39, "l": 6, "fx": 10, "r": 2, "p": "Finansman kredileri (kreditör, borçlu); teminat, belge ve geri ödeme planı özetleri."}, {"id": 1299130, "n": "Teminatlar", "g": "02 Finansman ve Nakit Akışı", "f": 15, "l": 5, "fx": 1, "r": 6, "p": "Kredi teminatları (veren, lehtar, bildirim yapılan taraf)."}, {"id": 1299131, "n": "Sevkiyatlar", "g": "03 Lojistik ve Gümrük", "f": 27, "l": 8, "fx": 7, "r": 3, "p": "Sevkiyat kayıtları; taşıyıcı, gümrük, belge ve taşıma sigortası bağlantıları."}, {"id": 1299132, "n": "Gümrük İşlemleri", "g": "03 Lojistik ve Gümrük", "f": 20, "l": 3, "fx": 7, "r": 6, "p": "Beyanname bazlı gümrük vergisi ve KDV hesapları; muafiyet bağlantısı."}, {"id": 1299133, "n": "Belgeler", "g": "04 Belge ve Süreç", "f": 31, "l": 10, "fx": 5, "r": 52, "p": "Belge kayıtları ve dosya ekleri. Pek çok tablonun kanıt belgesidir; Dosya Kontrolü formülü burada."}, {"id": 1299134, "n": "Kira ve Tahsilat Planı", "g": "02 Finansman ve Nakit Akışı", "f": 18, "l": 3, "fx": 7, "r": 60, "p": "Dönemsel kira ve tahsilat planı; stopaj, borç servisi, CFADS ve DSCR."}, {"id": 1299135, "n": "Giderler ve Vergiler", "g": "02 Finansman ve Nakit Akışı", "f": 12, "l": 3, "fx": 1, "r": 7, "p": "Proje / sevkiyat giderleri ve vergiler; USD karşılığı."}, {"id": 1299136, "n": "Bakım ve Yedek Parça", "g": "01 İş Çekirdeği", "f": 12, "l": 3, "fx": 2, "r": 4, "p": "Lot ve makine bazlı bakım ve yedek parça kalemleri."}, {"id": 1299137, "n": "Süreç Adımları", "g": "04 Belge ve Süreç", "f": 27, "l": 6, "fx": 5, "r": 48, "p": "Süreç / olay adımları (varlık olayları dahil); kanıt belgesi ve sorumlu firma."}, {"id": 1299810, "n": "Geri Ödeme Planı", "g": "02 Finansman ve Nakit Akışı", "f": 17, "l": 3, "fx": 1, "r": 66, "p": "Kredi geri ödeme satırları; kira planı ve gelir-gider dengesiyle bağlıdır."}, {"id": 1299811, "n": "Yazışmalar", "g": "04 Belge ve Süreç", "f": 12, "l": 3, "fx": 0, "r": 3, "p": "Firmalar arası yazışma kayıtları."}, {"id": 1299812, "n": "Muafiyetler ve Teşvikler", "g": "03 Lojistik ve Gümrük", "f": 10, "l": 2, "fx": 0, "r": 3, "p": "Proje muafiyet ve teşvik kayıtları; gümrük işlemleriyle bağlıdır."}, {"id": 1299813, "n": "Makineler", "g": "01 İş Çekirdeği", "f": 46, "l": 16, "fx": 4, "r": 57, "p": "Makine (şasi / seri no) kaydı: hukuki malik, fiili kullanıcı, tahsis, sigorta ve yaşam döngüsü kontrolleri."}, {"id": 1299814, "n": "Hizmet Kayıtları", "g": "01 İş Çekirdeği", "f": 14, "l": 4, "fx": 1, "r": 2, "p": "Makine / sözleşme bazlı hizmet kayıtları."}, {"id": 1299815, "n": "Gelir Gider Dengesi", "g": "02 Finansman ve Nakit Akışı", "f": 19, "l": 2, "fx": 8, "r": 4, "p": "Proje gelir-gider dengesi; DSCR, CFADS ve geri ödeme satırlarıyla bağlıdır."}, {"id": 1299816, "n": "Kur Takibi", "g": "02 Finansman ve Nakit Akışı", "f": 5, "l": 0, "fx": 0, "r": 1, "p": "Kur kayıtları. Başka tabloyla bağlantısı yoktur (referans tablo)."}, {"id": 1301364, "n": "Sözleşmeler", "g": "01 İş Çekirdeği", "f": 24, "l": 9, "fx": 2, "r": 3, "p": "Sözleşmeler (satış, leasing, kira, alt kiralama, tahsis, teminat, hizmet vb.); ana sözleşme ile kendine bağlanabilir."}, {"id": 1301365, "n": "Tahsisler", "g": "01 İş Çekirdeği", "f": 11, "l": 4, "fx": 1, "r": 26, "p": "Makine - sözleşme - kullanan firma tahsisi; tarih ve durum. Çakışma kontrolü için kritik."}, {"id": 1301366, "n": "Sigortalar", "g": "01 İş Çekirdeği", "f": 14, "l": 3, "fx": 2, "r": 51, "p": "Sigorta poliçeleri (makine veya sevkiyat bazlı); geçerlilik formülü içerir."}, {"id": 1301798, "n": "SYS-001 | Sistem Ana İndeksi", "g": "06 SYS Yönetim", "f": 15, "l": 2, "fx": 0, "r": 1, "p": "SYS-001 Sistem Ana İndeksi: aktif sürüm, AI başlangıç talimatı, yedekleme politikası."}, {"id": 1301799, "n": "SYS-002 | Sistem Sürüm Kayıtları", "g": "06 SYS Yönetim", "f": 24, "l": 8, "fx": 0, "r": 1, "p": "SYS-002 Sistem Sürüm Kayıtları: sürüm kodu, tablo/alan/ilişki/formül sayıları, eklenen/değişen/kaldırılan."}, {"id": 1301800, "n": "SYS-003 | Sistem Yedek Paketleri", "g": "06 SYS Yönetim", "f": 18, "l": 2, "fx": 0, "r": 2, "p": "SYS-003 Sistem Yedek Paketleri: yedek türü, konum, bütünlük ve geri yükleme testi."}, {"id": 1301801, "n": "SYS-004 | Sistem Değişiklik Günlüğü", "g": "06 SYS Yönetim", "f": 17, "l": 3, "fx": 0, "r": 27, "p": "SYS-004 Sistem Değişiklik Günlüğü: yapısal / riskli değişikliklerin önceki-yeni durumu ve geri alma talimatı."}, {"id": 1301802, "n": "SYS-005 | Sistem Karar Kayıtları", "g": "06 SYS Yönetim", "f": 16, "l": 4, "fx": 0, "r": 5, "p": "SYS-005 Sistem Karar Kayıtları: kullanıcı onaylı kalıcı kararlar."}, {"id": 1301803, "n": "SYS-006 | Sistem Denetim ve Testleri", "g": "06 SYS Yönetim", "f": 21, "l": 5, "fx": 0, "r": 3, "p": "SYS-006 Sistem Denetim ve Testleri: denetim kapsamı, bulgu sayıları (P0-P3), rapor."}, {"id": 1301804, "n": "SYS-007 | Sistem Geri Yükleme ve Klonlama", "g": "06 SYS Yönetim", "f": 19, "l": 2, "fx": 0, "r": 0, "p": "SYS-007 Geri Yükleme ve Klonlama: yedekten kurulum işlemleri ve doğrulama sonuçları."}, {"id": 1301805, "n": "SYS-008 | Sistem Görev ve Geliştirme Takibi", "g": "06 SYS Yönetim", "f": 21, "l": 5, "fx": 0, "r": 17, "p": "SYS-008 Görev ve Geliştirme Takibi: öncelik, durum, sorumlu, tamamlanma kriteri."}, {"id": 1301819, "n": "SYS-009 | AI İşletim Protokolü", "g": "06 SYS Yönetim", "f": 13, "l": 0, "fx": 0, "r": 1, "p": "SYS-009 AI İşletim Protokolü: giriş, çalışma, çıkış, yasaklar. Protokolün TEK KAYNAĞI."}, {"id": 1301820, "n": "SYS-010 | AI Oturum ve Devir Kayıtları", "g": "06 SYS Yönetim", "f": 26, "l": 5, "fx": 0, "r": 11, "p": "SYS-010 AI Oturum ve Devir Kayıtları: her oturum için tek kayıt; sonraki AI için talimat."}, {"id": 1301821, "n": "SYS-011 | AI Çalışma ve Olay Günlüğü", "g": "06 SYS Yönetim", "f": 20, "l": 1, "fx": 0, "r": 17, "p": "SYS-011 AI Çalışma ve Olay Günlüğü: yalnızca hata, geri alma, beklenmedik durum, kullanıcı talebi."}, {"id": 1303465, "n": "Senaryolar", "g": "05 Senaryo Motoru", "f": 27, "l": 10, "fx": 0, "r": 0, "p": "Senaryo ana kaydı (finansman, mülkiyet, ithalat, çıkış modeli, kur varsayımı); alt senaryo tablolarını bağlar."}, {"id": 1303466, "n": "Senaryo Finansman Dilimleri", "g": "05 Senaryo Motoru", "f": 31, "l": 3, "fx": 0, "r": 0, "p": "Senaryonun finansman dilimleri (araç, anapara, faiz, vade, erteleme, balloon, komisyon)."}, {"id": 1303467, "n": "Senaryo Ödeme Planı", "g": "05 Senaryo Motoru", "f": 22, "l": 3, "fx": 1, "r": 0, "p": "Senaryo ödeme planı satırları; toplam borç servisi formülü."}, {"id": 1303468, "n": "Senaryo Varsayımları", "g": "05 Senaryo Motoru", "f": 12, "l": 1, "fx": 0, "r": 0, "p": "Senaryo varsayımları (parametre, değer, kaynak, doğrulama durumu)."}, {"id": 1303469, "n": "Senaryo Değerlendirme", "g": "05 Senaryo Motoru", "f": 10, "l": 1, "fx": 0, "r": 0, "p": "Senaryo değerlendirme metrikleri (IRR, NPV, DSCR, net kâr vb.)."}, {"id": 1303470, "n": "Senaryo Gelir Gider Akışı", "g": "05 Senaryo Motoru", "f": 25, "l": 2, "fx": 5, "r": 0, "p": "Senaryo gelir-gider akışı; toplam gelir/gider, net nakit akışı, borç servisi ve DSCR formülleri."}, {"id": 1306063, "n": "CHAT-001 | Konular", "g": "08 CHAT (konu ve sohbet hafızası)", "f": 20, "l": 2, "fx": 0, "r": 2, "p": "CHAT-001 Konular: her konu bir satır (durum, güncel özet, açık noktalar, kararlar, arşiv yolu). Kural: 05_AI_PROTOCOLS/CHAT_PROTOCOL.md."}, {"id": 1306064, "n": "CHAT-002 | Notlar", "g": "08 CHAT (konu ve sohbet hafızası)", "f": 11, "l": 1, "fx": 0, "r": 12, "p": "CHAT-002 Notlar: konunun içindeki temizlenmiş kayıtlar (kullanıcı sözü, AI görüşü, karar adayı, karar); her not bir konuya bağlıdır."}, {"id": 1306065, "n": "CHAT-003 | Sorular", "g": "08 CHAT (konu ve sohbet hafızası)", "f": 16, "l": 1, "fx": 0, "r": 1, "p": "CHAT-003 Sorular: aynı soruya her AI'nın bağımsız cevabı (ayrı kolon), sentez ve iş emri taslağı, kullanıcı kararı."}], "sys": {"tasks": [{"kod": "TASK-SYS-001", "baslik": "İkinci Baserow çalışma alanını hazırlama", "oncelik": "P1", "durum": "Bekliyor", "sorumlu": "Kullanıcı / Baserow hesabı sahibi", "hedef_tarih": null, "durum_detay": "Bekliyor – kullanıcı işlemi"}, {"kod": "TASK-SYS-002", "baslik": "Boş demo mimari yedek paketini oluşturma", "oncelik": "P1", "durum": "Bekliyor", "sorumlu": "ChatGPT / kullanıcı onayıyla", "hedef_tarih": null, "durum_detay": "Bekliyor – yedek çalışma alanına bağımlı"}, {"kod": "TASK-SYS-003", "baslik": "Klonlama ve geri yükleme testi", "oncelik": "P1", "durum": "Bekliyor", "sorumlu": "ChatGPT / kullanıcı onayıyla", "hedef_tarih": null, "durum_detay": "Bekliyor – TASK-SYS-002 sonrası"}, {"kod": "TASK-SYS-004", "baslik": "SYS alanları ve bağlantılarının ikinci kontrolü", "oncelik": "P2", "durum": "Açık", "sorumlu": "ChatGPT", "hedef_tarih": null, "durum_detay": "Açık"}, {"kod": "TASK-AI-BOOT-001", "baslik": "AI başlangıç yönergesini bağlantı ortamlarına yerleştirme", "oncelik": "P0", "durum": "Açık", "sorumlu": "Kullanıcı / ilgili AI platform yöneticisi", "hedef_tarih": null, "durum_detay": "Açık – platform ayarı gerekiyor"}, {"kod": "TASK-AI-HANDOVER-002", "baslik": "İkinci AI ile oturum devri testi", "oncelik": "P1", "durum": "Bekliyor", "sorumlu": "Kullanıcı + ikinci AI", "hedef_tarih": null, "durum_detay": "Bekliyor – TASK-AI-BOOT-001 sonrası"}, {"kod": "TASK-AI-AUTOLOG-003", "baslik": "Oturum kayıtlarının otomatikleştirilme imkânını değerlendirme", "oncelik": "P1", "durum": "Açık", "sorumlu": "Sistem mimarisi / AI entegrasyon sorumlusu", "hedef_tarih": null, "durum_detay": "Açık – teknik tasarım gerekli"}, {"kod": "TASK-SYS-005", "baslik": "Çift ilişki alanlarını eşleştirme ve sadeleştirme", "oncelik": "P1", "durum": "Uygulandı – doğrulama bekliyor", "sorumlu": "Claude / kullanıcı onayıyla", "hedef_tarih": null, "durum_detay": "Uygulandı – kullanıcı doğrulaması bekliyor (CHG-SYS-009, 2026-11-05)"}, {"kod": "TASK-SYS-006", "baslik": "Durum/öncelik alanlarını seçmeli yapma ve hedef tarih belirleme", "oncelik": "P2", "durum": "Açık", "sorumlu": "Claude / kullanıcı onayıyla", "hedef_tarih": null, "durum_detay": "Açık – kullanıcı onayı bekliyor (pilot SYS-008 tamam)"}, {"kod": "TASK-SYS-007", "baslik": "Zaman damgası standardı ve olay kaydı ayrıntısı", "oncelik": "P2", "durum": "Açık", "sorumlu": "Claude / kullanıcı onayıyla", "hedef_tarih": null, "durum_detay": "Açık – tasarım gerekli (öneri yazıldı, karar değil)"}, {"kod": "TASK-ASSET-001", "baslik": "Varlık Yaşam Döngüsü Kontrolü formülünü düzelt ve uçtan uca test et", "oncelik": "P1", "durum": "Açık", "sorumlu": "AI / Baserow geliştirici", "hedef_tarih": null, "durum_detay": "Açık – formül testi gerekli"}, {"kod": "TASK-ASSET-002", "baslik": "Kazakistan geri alma ve zilyetlik prosedürünü hukuk görüşüyle doğrula", "oncelik": "P0", "durum": "Açık", "sorumlu": "Kazakistan hukuk danışmanı / kullanıcı", "hedef_tarih": null, "durum_detay": "Açık – hukuk görüşü bekliyor"}, {"kod": "TASK-ASSET-003", "baslik": "Varlık olayları için kanıt belge kontrolünü tamamla", "oncelik": "P1", "durum": "Açık", "sorumlu": "AI / operasyon yöneticisi", "hedef_tarih": null, "durum_detay": "Açık – belge kontrolü gerekli"}, {"kod": "TASK-FIN-001", "baslik": "Seller's Credit için 12 ay anapara ertelemesi ve 5 yıl vade alternatiflerini oluştur", "oncelik": "P0", "durum": "Açık", "sorumlu": "AI / finans modelleme", "hedef_tarih": null, "durum_detay": "Açık – vade tanımı kesinleştirilmeli"}, {"kod": "TASK-FIN-002", "baslik": "Kullandırım ve ödeme tarihlerini gerçek term sheet ile doğrula", "oncelik": "P1", "durum": "Açık", "sorumlu": "Kullanıcı / finansör", "hedef_tarih": null, "durum_detay": "Açık – term sheet bekliyor"}, {"kod": "TASK-CHAT-001", "baslik": "CHAT sistemini Git'e ve protokole işle (Claude Code uygular)", "oncelik": "P1", "durum": "Açık", "sorumlu": "Claude Code (uygulama) / kullanıcı", "hedef_tarih": null, "durum_detay": "Kısmen yapıldı – Git tarafı main'de; kalan: SYS-009 v1.6 onayı, canlı platform testi, CHAT_PROTOCOL kesinleştirme"}, {"kod": "TASK-CHAT-002", "baslik": "CHAT protokolünü platform ayarlarına koy ve sına", "oncelik": "P1", "durum": "Bekliyor", "sorumlu": "Kullanıcı (ayar) + AI (test ve kayıt)", "hedef_tarih": null, "durum_detay": "Bekliyor – TASK-CHAT-001 sonrası, TASK-AI-BOOT-001 ile birlikte"}], "dec": [{"kod": "DEC-SYS-001", "baslik": "SYS yönetim katmanının ana veritabanında tutulması", "durum": "Kabul edildi – uygulama aşamalı", "tarih": "2026-11-05"}, {"kod": "DEC-SYS-002", "baslik": "AI işletim protokolünün v1.4 olarak kabul edilmesi", "durum": "Kabul edildi – uygulandı; platform testleri bekliyor", "tarih": "2026-11-05"}, {"kod": "DEC-SYS-003", "baslik": "Baserow log arşiv kuralının kabul edilmesi (SYS-010/SYS-011)", "durum": "Kabul edildi – eşikler Claude önerisi; 3.000 satır limiti doğrulanmadı (KI-16)", "tarih": "2026-11-07"}, {"kod": "DEC-SYS-004", "baslik": "CHAT komut seti (5 komut) ve CHAT tablolarının geçerliliği", "durum": "Kabul edildi – komut seti DEC-SYS-005 ile değişti", "tarih": "2026-11-07"}, {"kod": "DEC-SYS-005", "baslik": "CHAT komut seti 5 komuttan 9'luk menüye (0-8) genişletildi", "durum": "Kabul edildi – canlı platform testi ve SYS-009 v1.6 işleme bekliyor", "tarih": "2026-11-08"}], "chg": [{"kod": "CHG-2026-11-05-002", "baslik": "Geri Ödeme Dönemleri; Geri Ödeme Satırları; Borç Servisi USD; SPC İşletme Gideri USD", "tarih": "2026-11-05T00:00:00Z", "durum": "Uygulandı – formül testi devam ediyor"}, {"kod": "CHG-2026-11-05-003", "baslik": "CFADS USD; DSCR; KDV USD; Net vergi; Gider Toplamı; Operasyon Kontrolü; SHP-003 navlun demo kaydı; …", "tarih": "2026-11-05T00:00:00Z", "durum": "Uygulandı – kapsamlı test gerekli"}, {"kod": "CHG-2026-11-05-004", "baslik": "Sözleşme Kontrolü; Fesih/İhtar Durumu; Belge bağlantıları; Tahsis Kontrolü; tahsis bitiş tarihleri;…", "tarih": "2026-11-05T00:00:00Z", "durum": "Uygulandı – işlevsel test gerekli"}, {"kod": "CHG-2026-11-05-005", "baslik": "Gerçek Veri; Bakım Kontrolü; hizmet proje/firma/sözleşme bağlantıları; Fatura Durumu; Yanıt Durumu;…", "tarih": "2026-11-05T00:00:00Z", "durum": "Uygulandı – test gerekli"}, {"kod": "CHG-2026-11-05-006", "baslik": "FAT sorumlusu/tarihi/raporu; Tedarik Kontrolü; Lot Operasyon Kontrolü; Taşıma Sigortası Poliçesi; t…", "tarih": "2026-11-05T00:00:00Z", "durum": "Uygulandı – uçtan uca test gerekli"}, {"kod": "CHG-2026-11-06-001", "baslik": "Mülkiyet Senaryosu; Hedef Hukuki Malik; ithalatçı/gümrük beyan sahibi/tescil sahibi/zilyet; mülkiye…", "tarih": "2026-11-06T00:00:00Z", "durum": "Uygulandı – işlevsel test ve hukuki inceleme gerekli"}, {"kod": "CHG-2026-11-06-002", "baslik": "Grace dönemleri; vade tanımı; anapara ödeme tipi; faiz tipi; ödeme sıklığı; kullandırım; balon ödem…", "tarih": "2026-11-06T00:00:00Z", "durum": "Uygulandı – 12 ay erteleme senaryosu ayrıca kurulmalı"}, {"kod": "CHG-2026-11-06-003", "baslik": "Formül alanları: Sevkiyat Kontrolü (12088723), Varlık Olay Kontrolü (12094147), Tahsis Kontrolü (12…", "tarih": "2026-11-06T00:00:00Z", "durum": "Uygulandı – kullanıcı onaylı"}, {"kod": "CHG-2026-11-06-004", "baslik": "Formül alanları: Sevkiyat Kontrolü (12088723), Lot Operasyon Kontrolü (12088725), Tedarik Kontrolü …", "tarih": "2026-11-06T00:00:00Z", "durum": "Uygulandı – kullanıcı onaylı; Eksik Belge ve FAT Raporu ek kuralları kullanıcı …"}, {"kod": "CHG-SYS-012", "baslik": "Yeni alanlar: 'Öncelik (Seçmeli)' (alan ID 12096193; P0/P1/P2/P3) ve 'Durum (Seçmeli)' (alan ID 120…", "tarih": null, "durum": "Kullanıcı onayıyla uygulandı"}, {"kod": "CHG-SYS-013", "baslik": "'Eksik Bilgi Yönetimi' alanına v1.5 TOPLU SORU KURALI paragrafı eklendi (mevcut metin korundu, üzer…", "tarih": null, "durum": "Kullanıcı onayıyla uygulandı"}, {"kod": "CHG-SYS-014", "baslik": "3 yeni tablo ve aralarında 2 ilişki (Notlar->Konular, Sorular->Konular; ters alanlar Baserow tarafı…", "tarih": null, "durum": "Kullanıcı onayıyla uygulandı"}, {"kod": "CHG-SYS-015", "baslik": "Her tabloya 2 sistem alanı: created_on ve last_modified (toplam 10 alan). SYS-010: 'Created on', 'L…", "tarih": null, "durum": "Kullanıcı onayıyla uygulandı"}, {"kod": "CHG-SYS-016", "baslik": "2 yeni alan: 'Rapor Satırı' (text, ID 12137956) ve 'Sıradaki Adım' (long_text, ID 12137957).", "tarih": null, "durum": "Kullanıcı onayıyla uygulandı"}, {"kod": "CHG-SYS-017", "baslik": "CHAT-001: Üst Konu Kodu (text, ID 12147535), Bölge (single_select: Yapı/Chat/İş, ID 12147536); CHAT…", "tarih": "2026-11-08T12:59:56Z", "durum": "Onaylı"}], "ses": [{"kod": "DEMO-AI-HANDOVER-20261105-001", "ai": "ChatGPT – Baserow bağlantılı simülasyon", "tarih": "2026-11-05T10:22:00Z", "durum": "Tamamlandı – DEMO simülasyonu; gerçek operasyonel iş yapılmadı", "ozet": "DEMO – AI giriş, çalışma, kayıt ve devir simülasyonu"}, {"kod": "CLAUDE-20261105-001", "ai": "Claude (Anthropic) – claude.ai sohbeti, Baserow connector", "tarih": null, "durum": "Tamamlandı – düzeltmeler uygulandı; bağımsız doğrulama kullanıcıda", "ozet": "Claude – SYS yapısı canlı denetimi, simülasyon ve düzeltme"}, {"kod": "CLAUDE-20261105-002", "ai": "Claude (Anthropic) – claude.ai sohbeti, Baserow connector", "tarih": null, "durum": "Tamamlandı – 9 paralel ilişki çifti silindi (çöp kutusunda); kullanıcı doğrulaması bekliyor", "ozet": "Claude – TASK-SYS-005, satır limiti analizi ve SYS-009 v1.3 sadeleştirme"}, {"kod": "CLAUDE-20261105-003", "ai": "Claude (Anthropic) – claude.ai sohbeti, Baserow connector", "tarih": null, "durum": "Kapatıldı – kullanıcı onayıyla (2026-11-07 06:51); iş TAMAMLANMADI: oturum yalnızca giriş okuması v…", "ozet": "Claude – CIN EXIM sistem analizi, geliştirme ve test çalışması (oturum başlangıcı)"}, {"kod": "GPT6-20261105-001", "ai": "ChatGPT / GPT-6", "tarih": "2026-11-05T00:00:00Z", "durum": "Kapatıldı – kullanıcı onayıyla (2026-11-07 06:51); iş TAMAMLANMADI: platform talimatı yerleştirme/t…", "ozet": "SYS-009 v1.4 onayı ve uygulanması"}, {"kod": "CLAUDE-20261106-001", "ai": "Claude (Anthropic) – claude.ai sohbeti, Baserow connector", "tarih": null, "durum": "Kapatıldı – kullanıcı onayıyla (2026-11-07 06:51); iş TAMAMLANMADI: formül düzeltmeleri kısmen yapı…", "ozet": "Claude – Aşama 1 canlı denetim ve onaylı formül düzeltmeleri"}, {"kod": "CLAUDE-20261106-002", "ai": "Claude (Anthropic) – claude.ai sohbeti, Baserow connector", "tarih": null, "durum": "Kapatıldı – kullanıcı onayıyla (2026-11-07 06:51); iş TAMAMLANMADI: TASK-SYS-006 kısmi (yalnızca SY…", "ozet": "Claude – SYS-009 giriş protokolü, yarım kalan işlerin salt okunur devri ve analizi"}, {"kod": "CLAUDE-20261106-003", "ai": "Claude (Anthropic) – Claude Code oturumu (Git'e push eden). Bu kaydı yazan: claude.ai sohbeti.", "tarih": null, "durum": "Tamamlandı – commit canlı doğrulandı; platform testi, yedek ve formül işleri açık", "ozet": "Claude Code – Git teknik hafızasının kurulması (repo-v0.1.0); kayıt claude.ai sohbetinden, kullanıcı onayıyla sonradan yazıldı"}, {"kod": "CLAUDE-20261107-001", "ai": "Claude (Sonnet 5.5, Claude Code)", "tarih": "2026-11-06T15:54:00Z", "durum": "Tamamlandı – açık kullanıcı kararları var", "ozet": "repo-v0.2.0/v0.2.1: dış AI listesinin doğrulanması ve düzeltilmesi, Git erişim kılavuzu, DEC-SYS-003, ID 4–7 kapatma"}, {"kod": "CLAUDE-20261107-002", "ai": "Claude (Sonnet 5.5) – claude.ai sohbeti, Baserow connector, Git yalnızca okuma (klon)", "tarih": null, "durum": "Devam ediyor", "ozet": "Claude – Git+SYS durum denetimi, CHAT tablolarının kurulması ve CHAT protokol taslak görevi"}, {"kod": "CLAUDE-20261107-003", "ai": "Claude (Sonnet 5.5, Claude Code)", "tarih": null, "durum": "Tamamlandı – açık kullanıcı onayları var", "ozet": "Claude Code: CHAT sistemi Git tarafı (TASK-CHAT-001 kısmi), 08_INBOX/08_RESEARCH, istek tahtası tasarımı"}], "aud": [{"kod": "AUD-2026-11-05-001", "baslik": "Tarihsel salt okunur denetim (24 tablo)", "durum": "Tarihsel rapor kaydedildi; güncel durum için yeniden denetim gerekli"}, {"kod": "AUD-2026-11-05-002", "baslik": "Canlı şema + kayıt denetimi SYS-001–011 (10 bulgu: P0 2, P1 3, P2 3, P3 2)", "durum": "Yapı doğru yönde, güvenilirlik eksik; bir kısmı düzeltildi, kalanlar SYS-008'de"}, {"kod": "AUD-2026-11-06-001", "baslik": "GPT-6 geliştirme sonrası işlevsel kontrol (3 bulgu: P0 1, P1 2)", "durum": "Kısmi – kritik kontroller açık, sürüm kabul edilmedi"}], "evt": [{"kod": "GPT6-EVT-2026-11-06-002", "baslik": "Finansman şeması ve plan güncellemesi", "tarih": "2026-11-06T00:00:00Z"}, {"kod": "GPT6-EVT-2026-11-06-001", "baslik": "Şema ve veri güncellemesi", "tarih": "2026-11-06T00:00:00Z"}, {"kod": "CLAUDE-EVT-012", "baslik": "Alan silme – 9 paralel ilişki çifti (TASK-SYS-005 aşama 2)", "tarih": null}, {"kod": "CLAUDE-EVT-011", "baslik": "Test tablosunda alan silme denemesi", "tarih": null}, {"kod": "CLAUDE-EVT-010", "baslik": "Salt okunur simülasyon – TASK-SYS-005 aşama 2 ön kontrolü", "tarih": null}, {"kod": "CLAUDE-EVT-009", "baslik": "Salt okunur eşleştirme + SYS-008 güncelleme (TASK-SYS-005 aşama 1)", "tarih": null}, {"kod": "CLAUDE-EVT-008", "baslik": "Kayıt güncelleme – protokol sürümü 1.1 → 1.2", "tarih": null}, {"kod": "CLAUDE-EVT-007", "baslik": "Oturum kapanışı – devir kaydı", "tarih": null}, {"kod": "CLAUDE-EVT-006", "baslik": "Yeni kayıt ekleme", "tarih": null}, {"kod": "CLAUDE-EVT-005", "baslik": "Alan ekleme + satır bağlama", "tarih": null}], "ki": [{"kod": "SYS-002/Bilinen Sorunlar (2)", "baslik": "SYS-004/010/011 zaman damgaları tutarsız", "onem": "P2", "durum": "Açık (TASK-SYS-007; öneri yazıldı, karar bekliyor)"}, {"kod": "SYS-002/Bilinen Sorunlar (3)", "baslik": "Durum/öncelik/sonuç alanları serbest metin", "onem": "P3", "durum": "Kısmi (TASK-SYS-006, pilot SYS-008)"}, {"kod": "SYS-002/Bilinen Sorunlar (4)", "baslik": "SYS-011 olaylarında işlem öncesi/sonrası boş; eski olaylarda kapanış yok", "onem": "P2", "durum": "Büyük ölçüde geçerliliğini yitirdi (v1.4 SYS-011 isteğe bağlı)"}, {"kod": "SYS-002/Bilinen Sorunlar (5)", "baslik": "Görev hedef tarihleri boş", "onem": null, "durum": "Açık (hedef tarihi kullanıcı belirler)"}, {"kod": "SYS-002/Bilinen Sorunlar (6)", "baslik": "Yedek aynı çalışma alanında ('baserow yedek' 615555), ayrı çalışma alanı yok", "onem": null, "durum": "Açık (TASK-SYS-001)"}, {"kod": "KI-16", "baslik": "Baserow 3.000 satır limiti bağımsız doğrulanmadı", "onem": null, "durum": "Doğrulanmadı (yalnızca atıf; kayıt metni Git'te)"}, {"kod": "KI-17", "baslik": "Silinen satırın geri gelmesi çöp kutusunun kısa süresine bağlı", "onem": null, "durum": "Atıf (kayıt metni Git'te)"}, {"kod": "AUD-2026-11-06-001/P0", "baslik": "Varlık Yaşam Döngüsü Kontrolü formülü boş dizi döndürdü", "onem": "P0", "durum": "Açık (TASK-ASSET-001)"}]}, "chat": {"topics": [{"kod": "KONU-001", "baslik": "CHAT sistemi ve Git+SYS+CHAT yapılandırması", "durum": "Açık", "bolge": "Yapı", "rapor_satiri": "#chatrapor ChatGPT ve Claude'da GEÇTİ (NOT-002-6); #kaydet/7, #kapat/8, 1 fikir testleri kaldı.", "siradaki_adim": "İki platformda sırayla 1 (fikir), 7 (kaydet), 8 (kapat) dene; sonucu getir; Claude Code Baserow'da geri okuyup doğrulasın (TASK-CHAT-002).", "son_guncelleme": "2026-11-08"}, {"kod": "KONU-002", "baslik": "CHAT geliştirme", "durum": "Açık", "bolge": "Chat", "rapor_satiri": "P0-1 kapandı; #chatrapor iki platformda GEÇTİ (NOT-002-6); kaydet/kapat/fikir testleri ve SYS-009 v1.6 kaldı.", "siradaki_adim": "1, 7, 8 komutlarını iki platformda test et; sonuç NOT olarak yazılsın; sonra SYS-009 v1.6 kararı ve tek yetkili kaynak (KIRMIZI-02).", "son_guncelleme": "2026-11-08"}], "notes": {"toplam": 12, "notlar": [{"kod": "NOT-001-1", "tur": "Kullanıcı sözü", "konu": "KONU-001", "ozet": "ban bunu sen yaparsun dedikleriın bnaa neden yptiriyorsun sistem kendisi yapacagi seyleri sistem ypsin nedn ben yapiyru…"}, {"kod": "NOT-001-2", "tur": "Kullanıcı sözü", "konu": "KONU-001", "ozet": "Chat sistemi ihtiyacı: farklı AI'larla chat yapıyorum; sohbetin çöpleri ayrılıp chat sistemine yazılmalı, konu devam et…"}, {"kod": "NOT-001-3", "tur": "Karar", "konu": "KONU-001", "ozet": "Tablolar aynı veritabanında 'CHAT-' önekiyle; kapanan konular Git/Drive arşivine; 3.000 satır kuralı aşılmasın; komut s…"}, {"kod": "NOT-001-4", "tur": "AI görüşü", "konu": "KONU-001", "ozet": "Gateway servisi, web paneli ve webhook çalışan sunucu ister; şu an erken. Önce platform talimatı testi, yedek/geri yükl…"}, {"kod": "NOT-001-5", "tur": "Öneri", "konu": "KONU-001", "ozet": "Sıra: (1) CHAT komutlarını canlı test et; (2) SYS-009 v1.6; (3) Claude Code TASK-CHAT-001; (4) platform talimatı; (5) y…"}, {"kod": "NOT-001-6", "tur": "Özet", "konu": "KONU-001", "ozet": "YAPILDI (2026-11-07): chat-v0.4.0 main'e alındı; CHAT-001'e Rapor Satırı/Sıradaki Adım; açılış raporu standardı; sistem…"}, {"kod": "NOT-002-1", "tur": "AI görüşü", "konu": "KONU-002", "ozet": "CHAT modülü denetim ve simülasyon raporu (ChatGPT, masa başı): 4 kırmızı bayrak, 10 turuncu, 10 gri alan; tablolar koru…"}, {"kod": "NOT-002-2", "tur": "Öneri", "konu": "KONU-002", "ozet": "CHAT modülü geliştirme görev listesi (P0/P1/P2); kayıt onayı uygulama onayı değildir."}, {"kod": "NOT-002-3", "tur": "AI görüşü", "konu": "KONU-002", "ozet": "SOR-001'e GPT-6 bağımsız cevabı: tek otorite, komut sözleşmeleri, geri okuma doğrulaması, bağımsızlık sınırı, kod çakış…"}, {"kod": "NOT-002-4", "tur": "AI görüşü", "konu": "KONU-002", "ozet": "CHAT V2 önerisi (ChatGPT) ve Claude değerlendirmesi: CHAT silinmesin, 14 komut ve ham mesaj deposu reddedildi; yapılanl…"}, {"kod": "NOT-002-5", "tur": "Test sonucu", "konu": "KONU-002", "ozet": "İlk canlı #chatrapor (ChatGPT): dürüstlük ve menü GEÇTİ, sabit biçim KALDI; sonuç KISMEN; 2b v2 metni dalda."}, {"kod": "NOT-002-6", "tur": "AI görüşü", "konu": "KONU-002", "ozet": "CHAT denetimi ve test sırası: şema v0.4 ile uyumlu; #chatrapor iki platformda geçti; GPT sapmaları; canlı testi olmayan…"}]}, "q": [{"kod": "SOR-001", "soru": "CHAT modülü için hangi geliştirmeler yapılmalıdır?", "durum": "Cevaplar toplanıyor"}]}, "git": {"main": "0aa3447", "log": [["0aa3447", "2026-11-08", "CHAT menü v0.4 kabul edildi (DEC-SYS-005); Baserow alanları eklendi (CHG-SYS-017); şema 896 alan"], ["44b6f38", "2026-11-08", "CHAT menü v0.4: menü 0-8, konum başlığı, yönler, fikir/dal, iş emri hattı (taslak, onay bekliyor)"], ["b46aa30", "2026-11-08", "10_STANDARTLAR: anayasa, cevap kalıpları (K1-K6) ve hazır promptlar (P1-P7), taslak v0.1"], ["cfe8484", "2026-11-08", "CHAT_PROTOCOL: sabit numaralı menü (M1-M5) açılış raporuna eklendi"], ["6cee860", "2026-11-08", "CHAT_PROTOCOL: Rapor Satırı/Sıradaki Adım alanları artık Baserow'da var (eski not düzeltildi)"], ["ab066ca", "2026-11-07", "repo-v0.4.1: CHAT-001 Rapor Satırı ve Sıradaki Adım alanları (893 alan şema)"], ["c22f59b", "2026-11-07", "CHAT: açılış raporunda zorunlu YAPILACAK / YARIM KALAN / SENDEN BEKLENEN standardı"], ["e2b9861", "2026-11-07", "CHAT açılış raporu: 'nerede kaldık / neler yapıldı' bloğu (Rapor Satırı, Sıradaki Adım alanları onay bekliyor)"]], "branches": [{"n": "ai/claude/chat-menu-v0.4", "sha": "0aa3447", "d": "2026-11-08", "merged": true}, {"n": "ai/claude/chat-protocol-fix", "sha": "b46aa30", "d": "2026-11-08", "merged": true}, {"n": "ai/claude/chat-v0.4.0", "sha": "ab066ca", "d": "2026-11-07", "merged": true}, {"n": "ai/claude/inbox-v0.3.0", "sha": "e6e7c50", "d": "2026-11-07", "merged": true}, {"n": "ai/claude/platform-2b-fix", "sha": "20f8399", "d": "2026-11-08", "merged": false}, {"n": "ai/claude/repo-v0.2.0", "sha": "7f27221", "d": "2026-11-07", "merged": true}], "commits": 19, "ho": [0, 0, 12], "tools": [{"n": "archive_chat.py", "d": "CHAT konu arşivleme yardımcısı (salt dosya; Baserow'a bağlanmaz ve HİÇBİR ŞEY SİLMEZ)."}, {"n": "archive_log.py", "d": "Log arşivleme yardımcısı (salt dosya; Baserow'a bağlanmaz ve HİÇBİR ŞEY SİLMEZ)."}, {"n": "build_field_dictionary.py", "d": "Alan sözlüğü üreticisi (salt dosya okur/yazar, Baserow'a bağlanmaz)."}, {"n": "build_schema_docs.py", "d": "Baserow şema dokümanlarını üretir."}, {"n": "build_xray.py", "d": "Röntgen haritası üreticisi (salt dosya okur/yazar, Baserow'a bağlanmaz)."}, {"n": "handover_check.py", "d": "Devir / tutarlılık kontrolü (depo tarafı; salt okunur, Baserow'a bağlanmaz)."}, {"n": "inbox_diff.py", "d": "Gelen kutusu paketini depodakiyle karşılaştırır (salt okunur; depoya HİÇBİR ŞEY YAZMAZ)."}, {"n": "schema_diff.py", "d": "Şema fark aracı (salt dosya okur/yazar, Baserow'a bağlanmaz)."}]}}</script>
+<script>
+const D = JSON.parse(document.getElementById('data').textContent);
+const SERVER = 'Baserow';
+const live = {};            // table id -> canlı satır sayısı
+let liveAt = null;
+const TABS = [['bugun','Bugün'],['genel','Genel'],['saglik','Sağlık'],['hatirla','Sistemi hatırla'],['yapi','Yapı'],['ag','İlişki ağı'],['sysmap','SYS haritası'],['akis','SYS akışı'],['gorev','Görev bağı'],['sys','SYS'],['chat','CHAT'],['git','Git ve araçlar'],['test','Test listesi']];
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const dash = v => (v === null || v === undefined || v === '') ? '<span class="note">—</span>' : esc(v);
+
+function pill(txt){
+  const t = String(txt ?? '');
+  let c = 'mute';
+  if (/^(tamam|kapand|kabul|uygulandı – kayıt|geçti|ok)/i.test(t) || /geçerliliğini yitirdi/i.test(t)) c = 'ok';
+  else if (/devam ediyor/i.test(t)) c = 'info';
+  else if (/bekliyor|açık|doğrulanmadı|kısmi|toplan|gerekli|taslak|atıf|doğrulama/i.test(t)) c = 'warn';
+  if (/^P0$/.test(t)) c = 'crit'; else if (/^P1$/.test(t)) c = 'warn'; else if (/^P[23]$/.test(t)) c = 'mute';
+  return `<span class="pill ${c}">${esc(t || '—')}</span>`;
+}
+const isDone = d => /^(tamam|tamamlandı|kapandı)/i.test(d || '');
+function fmtDate(iso){
+  try { return new Date(iso).toLocaleString('tr-TR',{day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'}); } catch(e){ return iso; }
+}
+function table(cols, rows){
+  if (!rows.length) return '<div class="note">Kayıt yok.</div>';
+
+  return `<div class="tablewrap"><table><thead><tr>${cols.map(c=>`<th class="${c.n?'n':''}">${esc(c.h)}</th>`).join('')}</tr></thead><tbody>${
+    rows.map(r=>`<tr>${cols.map(c=>`<td class="${c.n?'n':''}">${c.f(r)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+}
+function rowsOf(t){ return live[t.id] ?? t.r; }
+
+/* ---- hesaplar ---- */
+const groups = (() => {
+  const m = {};
+  D.tables.forEach(t => { (m[t.g] ||= {name:t.g, t:[], f:0, l:0, fx:0}); const g=m[t.g]; g.t.push(t); g.f+=t.f; g.l+=t.l; g.fx+=t.fx; });
+  return Object.values(m).sort((a,b)=>a.name.localeCompare(b.name,'tr'));
+})();
+const totals = D.tables.reduce((a,t)=>({f:a.f+t.f,l:a.l+t.l,fx:a.fx+t.fx}),{f:0,l:0,fx:0});
+const openTasks = D.sys.tasks.filter(t=>!isDone(t.durum));
+const running = D.sys.ses.filter(s=>/devam ediyor/i.test(s.durum||''));
+const unmerged = D.git.branches.filter(b=>!b.merged);
+
+/* ---- test listesi (yalnızca bu tarayıcıda saklanır) ---- */
+const TESTS = [
+  ['ChatGPT','gpt-1','1 fikir: bir fikir yaz, KONU\'ya bağlanıp kaydolduğunu gör'],
+  ['ChatGPT','gpt-7','7 kaydet: önce özet gösteriyor mu, "evet" yazınca kaydediyor mu'],
+  ['ChatGPT','gpt-8','8 kapat: konuyu Bitti yapmadan oturumu kapatıyor mu'],
+  ['ChatGPT','gpt-2','2 aç ve 3 yön: konu seçimi ve Geri/Yukarı/Aşağı/Yan/Sıradaki'],
+  ['Claude','cl-1','1 fikir'],
+  ['Claude','cl-7','7 kaydet + "evet"'],
+  ['Claude','cl-8','8 kapat'],
+  ['Claude','cl-2','2 aç ve 3 yön'],
+  ['Karar bekleyen','k-merge','platform-2b-fix dalını main\'e alma onayı'],
+  ['Karar bekleyen','k-paste','Merge sonrası 2b metnini platform ayarlarına yeniden yapıştır'],
+  ['Karar bekleyen','k-sys009','SYS-009 v1.6 kararı'],
+  ['Karar bekleyen','k-gh','ChatGPT\'nin GitHub izinlerini kontrol et'],
+  ['Karar bekleyen','k-ki16','KI-16: Baserow satır limitini doğrula (Workspace kullanımı)'],
+  ['Karar bekleyen','k-ses','SYS-010 açık oturumu için kapatma kararı'],
+  ['Karar bekleyen','k-inbox','İlk 08_INBOX yüklemesini dene'],
+];
+let checks = {};
+try { checks = JSON.parse(localStorage.getItem('cin-tests') || '{}'); } catch(e){}
+function saveChecks(){ try { localStorage.setItem('cin-tests', JSON.stringify(checks)); } catch(e){} }
+const pendingTests = () => TESTS.filter(t=>!checks[t[1]]).length;
+
+/* ---- talepler: Yap/Yapma/Sonra/Soru/Güncelle + not ---- */
+let REQ={};try{REQ=JSON.parse(localStorage.getItem('cin-req')||'{}')}catch(e){}
+const RQO=[['yap','Yap'],['yapma','Yapma'],['sonra','Sonra'],['soru','Soru'],['guncelle','Güncelle']];
+const saveReq=()=>{try{localStorage.setItem('cin-req',JSON.stringify(REQ))}catch(e){}};
+const plain=h=>{const d=document.createElement('div');d.innerHTML=h;return (d.textContent||'').replace(/\s+/g,' ').trim()};
+const rqN=()=>Object.values(REQ).filter(r=>r.s||r.n).length;
+const OPS={task:[['kapat','Kapat (bitti)'],['yap','Yap / başlat'],['beklet','Beklet'],['iptal','İptal'],['soru','Soru'],['guncelle','Güncelle']],taskDone:[['yenidenac','Yeniden aç'],['soru','Soru']],ki:[['coz','Çözüldü'],['yap','Çöz'],['sonra','Ertele'],['soru','Soru'],['guncelle','Güncelle']],ses:[['kapat','Oturumu kapat'],['acik','Açık kalsın'],['soru','Soru']],sesDone:[['soru','Soru']],dec:[['onay','Onayla'],['red','Reddet'],['gozden','Gözden geçir'],['soru','Soru']],aud:[['kapat','Kapat'],['tekrar','Yeniden denetle'],['soru','Soru']],chg:[['soru','Soru'],['not','Not düş']],evt:[['soru','Soru'],['not','Not düş']],topic:[['devam','Devam et'],['kapat','Kapat'],['dal','Dal aç'],['soru','Soru']],note:[['gorev','Göreve çevir'],['soru','Soru'],['gec','Gerek yok']],q:[['cevap','Cevap iste'],['sentez','Sentezle'],['kapat','Kapat'],['soru','Soru']]};
+const rqCol=k=>({h:'Talep',kind:k,f:r=>rq('s:'+r.kod,r.kod+' '+(r.baslik||r.soru||r.ozet||''),k,r)});
+const KT={task:36,ses:38,dec:33,aud:34,chg:32,evt:39,topic:41,note:42,q:43};
+function relStrip(k,r){const i=KT[k];if(i==null||!TD[i])return '';const out=TD[i].o.filter(p=>p[0]!==i).slice(0,5),inn=incoming(i).slice(0,4);
+const a=j=>`<a class="rl" data-t="${j}" href="#ag">${esc(lab(TD[j].n))}</a>`;
+let svg=`<svg viewBox="0 0 220 44" width="220" height="44" aria-hidden="true">`;const L=inn.length,R=out.length;
+inn.forEach((p,n)=>{const y=6+n*(32/Math.max(L-1,1));svg+=`<line x1="14" y1="${y}" x2="110" y2="22" stroke="${GC[TD[p[0]].g]}" stroke-width="1.4"/><circle cx="14" cy="${y}" r="4" fill="${GC[TD[p[0]].g]}"/>`});
+out.forEach((p,n)=>{const y=6+n*(32/Math.max(R-1,1));svg+=`<line x1="110" y1="22" x2="206" y2="${y}" stroke="${GC[TD[p[0]].g]}" stroke-width="1.4"/><circle cx="206" cy="${y}" r="4" fill="${GC[TD[p[0]].g]}"/>`});
+svg+=`<circle cx="110" cy="22" r="7" fill="${GC[TD[i].g]}"/></svg>`;
+let t='';if(k==='task'&&r){const q=Object.keys(KN).find(x=>KN[x][0]===r.kod);if(q){const P=KE.filter(e=>e[1]===q).map(e=>KN[e[0]][0]),N=KE.filter(e=>e[0]===q).map(e=>KN[e[1]][0]);if(P.length)t+=` · Öncesi: <a href="#gorev">${esc(P.join(', '))}</a>`;if(N.length)t+=` · Sonrası: <a href="#gorev">${esc(N.join(', '))}</a>`}}
+return `<div class="rel">${svg}<div class="note"><b>${a(i)}</b>${inn.length?' ← '+inn.map(p=>a(p[0])).join(', '):''}${out.length?' → '+out.map(p=>a(p[0])).join(', '):''}${t}</div></div>`}
+document.addEventListener('click',e=>{const a=e.target.closest('.rl');if(a){e.preventDefault();SEL=+a.dataset.t;location.hash='#ag';if(location.hash==='#ag')route()}});
+function rq(key,title,kind,row){const r=REQ[key]||{};const O=kind?(OPS[kind+(row&&isDone(row.durum||'')?'Done':'')]||OPS[kind]):RQO;return `<div class="rq" data-rk="${esc(key)}" data-rt="${esc(plain(title))}"><div class="rqc">${O.map(o=>`<button type="button" class="rqb${r.s===o[0]?' on':''}" data-o="${o[0]}">${o[1]}</button>`).join('')}</div><textarea class="rqn" placeholder="Ne istiyorsun? Örn: bunu şöyle güncelle…" aria-label="Not">${esc(r.n||'')}</textarea></div>`}
+function rqText(){const L=[];let k=0;Object.entries(REQ).forEach(([key,r])=>{if(!(r.s||r.n))return;k++;const g=key.startsWith('t:')?'Test listesi':key.startsWith('s:')?'Kayıt':key.startsWith('n:')?'Yeni konu taslağı':'Bugün';L.push(`${k}) [${g}] ${r.t||key}\n   Karar: ${(r.l||(RQO.find(o=>o[0]===r.s)||['','(seçilmemiş)'])[1]).toUpperCase()}${r.n?'\n   Not: '+r.n:''}`)});return L.length?`PANEL TALEPLERİ (talep; onay değildir) · ${new Date().toLocaleDateString('tr-TR')}\nVeri: ${fmtDate(D.snap)} anlık görüntü\n\n`+L.join('\n\n'):'(henüz seçim yok)'}
+document.addEventListener('click',e=>{const b=e.target.closest('.rqb');if(!b)return;const w=b.closest('.rq'),k=w.dataset.rk,r=REQ[k]||(REQ[k]={t:w.dataset.rt,s:'',n:''});r.s=r.s===b.dataset.o?'':b.dataset.o;r.l=r.s?b.textContent:'';saveReq();document.querySelectorAll('.rq').forEach(x=>{if(x.dataset.rk===k)x.querySelectorAll('.rqb').forEach(y=>y.classList.toggle('on',y.dataset.o===r.s))});rqRefresh()});
+document.addEventListener('input',e=>{const t=e.target.closest('.rqn');if(!t)return;const w=t.closest('.rq'),k=w.dataset.rk,r=REQ[k]||(REQ[k]={t:w.dataset.rt,s:'',n:''});r.n=t.value;saveReq();rqRefresh()});
+function rqRefresh(){const o=document.getElementById('rqout');if(o)o.value=rqText();const c=document.getElementById('rqcount');if(c)c.textContent=rqN()}
+const nkList=()=>Object.entries(REQ).filter(([k])=>k.startsWith('n:')).map(([k,r])=>`<div class="note" style="margin-top:6px">• ${esc(r.t.replace('YENİ KONU TASLAĞI: ',''))} <button type="button" class="rqb" data-del="${esc(k)}">sil</button></div>`).join('');
+document.addEventListener('click',e=>{if(e.target.id==='nkAdd'){const b=document.getElementById('nkB').value.trim();if(!b)return;const R=document.getElementById('nkR').value,A=document.getElementById('nkA').value.trim(),Q=document.getElementById('nkS').value.trim();REQ['n:'+Date.now()]={t:`YENİ KONU TASLAĞI: ${b} [${R}]`+(A?` · Amaç: ${A}`:''),s:'yap',n:Q?'Sorular/notlar:\n'+Q:''};saveReq();route()}
+const d=e.target.dataset&&e.target.dataset.del;if(d){delete REQ[d];saveReq();route()}});
+let ACC={},SCR={},NAVF=false;try{ACC=JSON.parse(sessionStorage.getItem('cin-acc')||'{}')}catch(e){}
+try{history.scrollRestoration='manual'}catch(e){}
+const KIND=[['Görev','task'],['AI oturum','ses'],['Karar','dec'],['Denetim','aud'],['Son değişiklik','chg'],['Son olay','evt'],['Konular','topic'],['Son notlar','note'],['Sorular','q']];
+function pageFx(key,h){if(key!=='sys'&&key!=='chat')return h;let n=0;
+ h=h.replace('<div class="grid">','<div class="accs">');
+ return h.replace(/<section class="panel"[^>]*><h2>([^<]*)<\/h2>([\s\S]*?)<\/section>/g,(m,t,b)=>{const id=key+':'+t,open=id in ACC?ACC[id]:n===0;n++;const k=(KIND.find(x=>t.startsWith(x[0]))||[])[1];
+  return `<div class="acc${open?' open':''}" data-id="${esc(id)}"><button type="button" class="acch" aria-expanded="${open}">${t}</button><div class="accb"><div>${k?relStrip(k,null):''}${b}</div></div></div>`})}
+document.addEventListener('click',e=>{const b=e.target.closest('.acch');if(b){const a=b.parentNode,o=!a.classList.contains('open');a.classList.toggle('open',o);b.setAttribute('aria-expanded',o);ACC[a.dataset.id]=o;try{sessionStorage.setItem('cin-acc',JSON.stringify(ACC))}catch(x){}}
+ if(e.target.closest('a[href^="#"]'))NAVF=true},true);
+window.addEventListener('scroll',()=>{SCR[location.hash||'#bugun']=window.scrollY},{passive:true});
+/* ---- sekmeler ---- */
+const views = {
+genel(){
+  const attn = [];
+  openTasks.filter(t=>t.oncelik==='P0').forEach(t=>attn.push(['crit',`${esc(t.kod)} ${esc(t.baslik)}`]));
+  D.sys.ki.filter(k=>k.onem==='P0').forEach(k=>attn.push(['crit',`${esc(k.kod)} ${esc(k.baslik)}`]));
+  unmerged.forEach(b=>attn.push(['warn',`<span class="mono">${esc(b.n)}</span> main'e alınmadı (onay bekliyor)`]));
+  running.forEach(s=>attn.push(['info',`${esc(s.kod)} oturumu "Devam ediyor"`]));
+  attn.push(['warn',`${pendingTests()} test/karar maddesi açık (Test listesi)`]);
+  D.sys.ki.filter(k=>/doğrulanmadı/i.test(k.durum||'')).forEach(k=>attn.push(['warn',`${esc(k.kod)} ${esc(k.baslik)}`]));
+  const max = Math.max(...groups.map(g=>g.f));
+  return `
+  <div class="tiles">
+    <div class="tile"><b>${D.inv.table_count}</b><span>tablo</span></div>
+    <div class="tile"><b>${totals.f}</b><span>alan</span></div>
+    <div class="tile"><b>${totals.l}</b><span>ilişki alanı</span></div>
+    <div class="tile"><b>${totals.fx}</b><span>formül</span></div>
+    <div class="tile ${openTasks.length?'warn':'ok'}"><b>${openTasks.length}</b><span>açık SYS görevi</span></div>
+    <div class="tile ${unmerged.length?'warn':'ok'}"><b>${unmerged.length}</b><span>merge bekleyen dal</span></div>
+    <div class="tile ${D.git.ho[0]||D.git.ho[1]?'crit':'ok'}"><b>${D.git.ho[0]}/${D.git.ho[1]}</b><span>devir kontrolü hata/uyarı</span></div>
+  </div>
+  <div class="grid">
+    <section class="panel"><h2>Dikkat gerektirenler</h2>
+      <ul class="attn">${attn.map(a=>`<li><span class="pill ${a[0]}">${a[0]==='crit'?'Kritik':a[0]==='warn'?'Bekliyor':'Bilgi'}</span><span>${a[1]}</span></li>`).join('')}</ul>
+    </section>
+    <section class="panel"><h2>Gruplara göre alan sayısı</h2>
+      <div class="bars">${groups.map(g=>`<div class="bar"><span>${esc(g.name.replace(/^\d+\s*/,''))}</span><span class="tr"><i style="width:${(g.f/max*100).toFixed(1)}%"></i></span><span class="mono" style="text-align:right">${g.f}</span></div>`).join('')}</div>
+      <p class="note" style="margin:10px 0 0">${groups.map(g=>`${esc(g.name.replace(/^\d+\s*/,''))}: ${g.t.length} tablo`).join(' · ')}</p>
+    </section>
+  </div>
+  <p class="note" style="margin-top:14px">Rakamlar ${esc(fmtDate(D.snap))} tarihli anlık görüntüdür. Sağ üstteki düğme satır sayılarını Baserow'dan yeniden okur. Yapı sayıları (alan, ilişki, formül) şema dosyasından gelir ve satır okumasıyla değişmez.</p>`;
+},
+yapi(){
+  const q = ($('#flt')?.value || '').toLowerCase();
+  const cols = [
+    {h:'Tablo', f:t=>`${esc(t.n)}<div class="code">${t.id}</div>`},
+    {h:'Alan', n:1, f:t=>t.f}, {h:'İlişki', n:1, f:t=>t.l}, {h:'Formül', n:1, f:t=>t.fx},
+    {h:'Satır', n:1, f:t=>{ const v=rowsOf(t); if(live[t.id]===undefined) return v; const d=live[t.id]-t.r; return d? `${v} <span class="${d>0?'delta-up':'delta-down'}">${d>0?'+':''}${d}</span>` : String(v); }}
+  ];
+  return `<input id="flt" class="filter" type="search" placeholder="Tablo ara (ad veya kimlik)" value="${esc(q)}" aria-label="Tablo ara">` +
+    groups.map(g=>{
+      if(YF&&!YF.includes(g.name.slice(0,2)))return '';
+      const rows = g.t.filter(t=>!q || t.n.toLowerCase().includes(q) || String(t.id).includes(q));
+      if(!rows.length) return '';
+      return `<details open><summary>${esc(g.name)} <small>${g.t.length} tablo · ${g.f} alan · ${g.l} ilişki · ${g.fx} formül</small></summary>${table(cols, rows)}</details>`;
+    }).join('');
+},
+sys(){
+  const order = {P0:0,P1:1,P2:2,P3:3};
+  const tasks = [...D.sys.tasks].sort((a,b)=>(order[a.oncelik]??9)-(order[b.oncelik]??9));
+  return `
+  <div class="tiles">
+    <div class="tile"><b>${D.sys.tasks.length}</b><span>görev (SYS-008)</span></div>
+    <div class="tile"><b>${D.sys.dec.length}</b><span>karar (SYS-005)</span></div>
+    <div class="tile"><b>${D.sys.chg.length}</b><span>değişiklik listelendi</span></div>
+    <div class="tile ${running.length?'warn':'ok'}"><b>${running.length}</b><span>devam eden oturum</span></div>
+  </div>
+  <section class="panel" style="margin-bottom:16px"><h2>Görevler</h2>${table([
+    {h:'Kod',f:t=>`<span class="code">${esc(t.kod)}</span>`},{h:'Öncelik',f:t=>pill(t.oncelik)},{h:'Görev',f:t=>esc(t.baslik)},
+    {h:'Durum',f:t=>pill(t.durum)},{h:'Sorumlu',f:t=>dash(t.sorumlu)},rqCol('task')],tasks)}</section>
+  <div class="grid">
+    <section class="panel"><h2>Bilinen sorunlar</h2>${table([
+      {h:'Kayıt',f:r=>`<span class="code">${esc(r.kod)}</span>`},{h:'Sorun',f:r=>esc(r.baslik)},{h:'Önem',f:r=>pill(r.onem)},{h:'Durum',f:r=>esc(r.durum)},rqCol('ki')],D.sys.ki)}</section>
+    <section class="panel"><h2>AI oturumları (SYS-010)</h2>${table([
+      {h:'Oturum',f:r=>`<span class="code">${esc(r.kod)}</span>`},{h:'AI',f:r=>dash(r.ai)},{h:'Durum',f:r=>pill(r.durum)},{h:'Özet',f:r=>dash(r.ozet)},rqCol('ses')],D.sys.ses)}</section>
+    <section class="panel"><h2>Kararlar (SYS-005)</h2>${table([
+      {h:'Kod',f:r=>`<span class="code">${esc(r.kod)}</span>`},{h:'Karar',f:r=>esc(r.baslik)},{h:'Durum',f:r=>pill(r.durum)},rqCol('dec')],D.sys.dec)}</section>
+    <section class="panel"><h2>Denetimler (SYS-006)</h2>${table([
+      {h:'Kod',f:r=>`<span class="code">${esc(r.kod)}</span>`},{h:'Denetim',f:r=>esc(r.baslik)},{h:'Durum',f:r=>esc(r.durum)},rqCol('aud')],D.sys.aud)}</section>
+    <section class="panel"><h2>Son değişiklikler (SYS-004)</h2>${table([
+      {h:'Kod',f:r=>`<span class="code">${esc(r.kod)}</span>`},{h:'Değişiklik',f:r=>esc(r.baslik)},rqCol('chg')],D.sys.chg)}</section>
+    <section class="panel"><h2>Son olaylar (SYS-011)</h2>${table([
+      {h:'Kod',f:r=>`<span class="code">${esc(r.kod)}</span>`},{h:'Olay',f:r=>esc(r.baslik)},rqCol('evt')],D.sys.evt)}</section>
+  </div>`;
+},
+chat(){
+  const notes = D.chat.notes.notlar || [];
+  return `
+  <div class="tiles">
+    <div class="tile"><b>${D.chat.topics.length}</b><span>konu</span></div>
+    <div class="tile"><b>${D.chat.notes.toplam ?? notes.length}</b><span>not</span></div>
+    <div class="tile"><b>${D.chat.q.length}</b><span>soru</span></div>
+  </div>
+  <section class="panel" style="margin-bottom:16px"><h2>Yeni konu taslağı</h2><p class="note" style="margin-top:0">Konuyu ve sorularını burada hazırla; “Toplam talepler” metnine girer. Baserow’a AI açar (önizleme ve senin “evet”inle). Mevcut konu, not veya soruya istek için aşağıdaki tablolarda Talep sütununu kullan.</p><div class="rqf"><input id="nkB" placeholder="Konu başlığı" aria-label="Konu başlığı"><select id="nkR" aria-label="Bölge"><option>Yapı</option><option>Chat</option><option>İş</option></select><textarea id="nkA" class="rqn" placeholder="Amaç (1-2 cümle)"></textarea><textarea id="nkS" class="rqn" placeholder="Sorular veya notlar (her satıra bir tane)"></textarea><button type="button" class="btn" id="nkAdd">Taslağa ekle</button></div><div id="nkL">${nkList()}</div></section>
+  <section class="panel" style="margin-bottom:16px"><h2>Menü (protokol v0.4)</h2>
+    <div class="menu">${[['0','harita (#chatrapor)'],['1','fikir'],['2','aç'],['3','yön'],['4','soru'],['5','sentez'],['6','iş emri'],['7','kaydet'],['8','kapat']].map(m=>`<div><b>${m[0]}</b>${m[1]}</div>`).join('')}</div>
+    <p class="note" style="margin:10px 0 0">Konu veya dal seçmek için harf: A, B, C. Onay yalnızca senin yazdığın "evet" ile verilir.</p>
+  </section>
+  <div class="grid">
+    <section class="panel"><h2>Konular (CHAT-001)</h2>${table([
+      {h:'Kod',f:r=>`<span class="code">${esc(r.kod)}</span>`},{h:'Konu',f:r=>`${esc(r.baslik)}<div class="note">${esc(r.rapor_satiri||'')}</div>`},
+      {h:'Sıradaki adım',f:r=>dash(r.siradaki_adim)},{h:'Durum',f:r=>pill(r.durum)},rqCol('topic')],D.chat.topics)}</section>
+    <section class="panel"><h2>Son notlar (CHAT-002)</h2>${table([
+      {h:'Kod',f:r=>`<span class="code">${esc(r.kod)}</span>`},{h:'Tür',f:r=>dash(r.tur)},{h:'Özet',f:r=>dash(r.ozet)},rqCol('note')],notes)}
+      <p class="note" style="margin:8px 0 0">Son ${notes.length} not gösteriliyor, toplam ${D.chat.notes.toplam ?? notes.length}.</p></section>
+    <section class="panel"><h2>Sorular (CHAT-003)</h2>${table([
+      {h:'Kod',f:r=>`<span class="code">${esc(r.kod)}</span>`},{h:'Soru',f:r=>esc(r.soru)},{h:'Durum',f:r=>pill(r.durum)},rqCol('q')],D.chat.q)}</section>
+  </div>`;
+},
+git(){
+  const g = D.git;
+  return `
+  <div class="tiles">
+    <div class="tile"><b class="mono">${esc(g.main)}</b><span>main son kayıt</span></div>
+    <div class="tile"><b>${g.commits}</b><span>commit</span></div>
+    <div class="tile ${g.ho[0]||g.ho[1]?'crit':'ok'}"><b>${g.ho[2]}</b><span>devir kontrolü tamam (${g.ho[0]} hata, ${g.ho[1]} uyarı)</span></div>
+  </div>
+  <div class="grid">
+    <section class="panel"><h2>Dallar</h2>${table([
+      {h:'Dal',f:b=>`<span class="code">${esc(b.n)}</span>`},{h:'Kayıt',f:b=>`<span class="code">${esc(b.sha)}</span>`},
+      {h:'Durum',f:b=>b.merged?pill('Tamam – main\'de'):pill('Onay bekliyor')}],g.branches)}</section>
+    <section class="panel"><h2>Son commit'ler</h2>${table([
+      {h:'Kayıt',f:r=>`<span class="code">${esc(r[0])}</span>`},{h:'Tarih',f:r=>`<span class="code">${esc(r[1])}</span>`},{h:'Mesaj',f:r=>esc(r[2])}],g.log)}</section>
+    <section class="panel"><h2>Araçlar (tools/)</h2>${table([
+      {h:'Dosya',f:t=>`<span class="code">${esc(t.n)}</span>`},{h:'Ne yapar',f:t=>esc(t.d)}],g.tools)}
+      <p class="note" style="margin:8px 0 0">Şema belgeleri sırayla build_schema_docs → build_xray → schema_diff → build_field_dictionary ile üretilir.</p></section>
+    <section class="panel"><h2>Skill'ler</h2>${table([
+      {h:'Ad',f:t=>`<span class="code">${esc(t[0])}</span>`},{h:'Ne zaman',f:t=>esc(t[1])}],[
+      ['cin-exim','Çalışmaya başlarken, işi devralırken, oturumu bitirirken'],
+      ['cin-exim-handover-check','Önceki AI\'nın devir beyanını kanıtla karşılaştırırken'],
+      ['cin-exim-schema-refresh','Baserow şeması değiştiğinde şema belgelerini yenilerken']])}</section>
+  </div>`;
+},
+test(){
+  const sections = [...new Set(TESTS.map(t=>t[0]))];
+  return `<p class="note" style="margin-top:0">İşaretlerin yalnızca bu tarayıcıda saklanır. Başka cihazda ve Claude tarafında görünmez. Sonucu sohbete yaz, Baserow'a ben işlerim.</p><div class="grid">` +
+    sections.map(s=>`<section class="panel"><h2>${esc(s)}</h2>${TESTS.filter(t=>t[0]===s).map(t=>`<label class="chk${checks[t[1]]?' done':''}"><input type="checkbox" data-k="${t[1]}" ${checks[t[1]]?'checked':''}><span>${esc(t[2])}</span></label>`).join('')}</section>`).join('') + '</div>';
+}
+};
+
+/* ===== İLİŞKİ HARİTALARI (hareketli) ===== */
+const TD=[{"i":1299125,"n":"Firmalar","g":0,"gn":"İş Çekirdeği","p":"Tüm taraflar için ortak firma kaydı (tedarikçi, imalatçı, kreditör, kiracı, sigortacı, taşıyıcı vb.). Mülkiyet zincirindeki roller buradan bağlanır.","f":44,"l":38,"m":0,"r":14,"o":[[1,6],[2,1],[3,1],[5,8],[6,1],[7,2],[8,1],[9,1],[10,2],[11,3],[12,1],[13,1],[17,1],[18,1],[21,1],[22,2],[23,4],[24,1]],"x":[]},{"i":1299126,"n":"Projeler","g":0,"gn":"İş Çekirdeği","p":"Ana proje kaydı. Maliyet, kredi, kira, vergi ve süreç ilerleme özetlerini toplayan formüller içerir.","f":55,"l":20,"m":17,"r":2,"o":[[0,6],[2,1],[4,1],[6,1],[7,1],[10,1],[12,1],[13,1],[15,1],[17,1],[19,1],[20,1],[21,1],[22,1],[23,1]],"x":[["Peşinat USD","number","field('Toplam Değer USD') * field('Peşinat Oranı') / 100"],["Kredi Tutarı USD","number","field('Toplam Değer USD') - field('Peşinat USD')"],["Lot Toplamı USD","number","sum(lookup('Ekipman Lotları', 'Toplam USD'))"],["Toplam Kredi USD","number","sum(lookup('Krediler', 'Tutar USD'))"],["Sevkiyat Sayısı","number","count(field('Sevkiyatlar'))"],["Gerekli Belge Sayısı","number","sum(lookup('Belgeler', 'Gerekli Sayı'))"],["Eksik Belge Sayısı","number","sum(lookup('Belgeler', 'Gerekli Eksik'))"],["Toplam Gider USD (vergisiz)","number","sum(lookup('Giderler ve Vergiler', 'USD Karşılığı'))"],["Kira Planı SPC Payı USD","number","sum(lookup('Kira ve Tahsilat Planı', 'SPC Kira Payı USD'))"],["Gerekli Adım","number","sum(lookup('Süreç Adımları', 'Geçerli Sayı'))"],["Tamamlanan Adım","number","sum(lookup('Süreç Adımları', 'Geçerli Tamam Sayı'))"],["Süreç İlerleme","number","if(field('Gerekli Adım') = 0, 0, round(field('Tamamlanan Adım') / field('Gerekli Adım') * 100, 0))"],["Etkin Stopaj Oranı","number","if(field('AIFC Muafiyeti Onaylandı (belge var)'), 0, field('Stopaj Oranı'))"],["Toplam Vergi USD (Gümrük)","number","sum(lookup('Sevkiyatlar', 'Toplam Vergi USD'))"],["Bakım ve Yedek Parça USD","number","sum(lookup('Bakım ve Yedek Parça', 'Toplam USD'))"],["Kira Toplamı − Varlık Bedeli USD","number","field('Kira Planı SPC Payı USD') - field('Toplam Değer USD')"],["Toplam Maliyet USD (vergi dahil)","number","field('Lot Toplamı USD') + field('Toplam Gider USD (vergisiz)') + field('Toplam Vergi USD (Gümrük)') + field('Bakım ve Yedek Parça USD')"]]},{"i":1299127,"n":"Ekipman Lotları","g":0,"gn":"İş Çekirdeği","p":"Projedeki ekipman lotları (tedarikçi, tutar). Makineleri ve sevkiyatları gruplar.","f":17,"l":7,"m":2,"r":3,"o":[[0,1],[1,1],[3,1],[4,1],[5,1],[7,1],[17,1]],"x":[["Toplam USD","number","field('Adet') * field('Birim Fiyat USD')"],["Lot Operasyon Kontrolü","text","if(count(field('Proje')) = 0, 'PROJE BAĞLANTISI EKSİK', if(count(field('Tedarikçi')) = 0, 'TEDARİKÇİ EKSİK', if(count(field('İmalat ve Tedarik')) = 0, 'ÜRETİM SİPARİŞİ EKSİK', if(field('İpotek Tescil Edildi') = true && isblank(field('Teslim Tarihi')), 'TESLİM …"]]},{"i":1299128,"n":"İmalat ve Tedarik","g":0,"gn":"İş Çekirdeği","p":"Lot bazlı sipariş ve üretim takibi; FAT raporu belgesi bağlanır.","f":15,"l":3,"m":2,"r":3,"o":[[0,1],[2,1],[20,1]],"x":[["Üretim Süresi (Gün)","number","date_diff('dd', field('Sipariş Tarihi'), field('Planlanan Bitiş'))"],["Tedarik Kontrolü","text","if(count(field('İmalatçı')) = 0, 'İMALATÇI EKSİK', if(totext(field('Üretim Durumu')) = 'Kalite Kontrol (FAT)' && field('Kalite Kontrol Geçti') = false, 'FAT ONAYI BEKLİYOR', if(totext(field('Üretim Durumu')) = 'Sevkiyata Hazır' && field('Kalite Kontrol Geçti')…"]]},{"i":1299136,"n":"Bakım ve Yedek Parça","g":0,"gn":"İş Çekirdeği","p":"Lot ve makine bazlı bakım ve yedek parça kalemleri.","f":12,"l":3,"m":2,"r":4,"o":[[1,1],[2,1],[5,1]],"x":[["Toplam USD","number","field('Miktar') * field('Birim Maliyet USD')"],["Bakım Kontrolü","text","if(count(field('Makine')) = 0, 'HATA: makine bağlantısı yok', if(isblank(field('Tarih')), 'TARİH EKSİK', if(totext(field('Durum')) = 'Yapıldı' && field('Toplam USD') = 0, 'MALİYET KONTROLÜ', 'KONTROL GEREKLİ')))"]]},{"i":1299813,"n":"Makineler","g":0,"gn":"İş Çekirdeği","p":"Makine (şasi / seri no) kaydı: hukuki malik, fiili kullanıcı, tahsis, sigorta ve yaşam döngüsü kontrolleri.","f":46,"l":16,"m":4,"r":57,"o":[[0,8],[2,1],[4,1],[6,1],[8,1],[9,1],[20,2],[21,1]],"x":[["Aktif Tahsis Sayısı","number","count(filter(lookup('Tahsisler', 'Durum'), totext(lookup('Tahsisler', 'Durum')) = 'Aktif'))"],["Geçerli Sigorta Sayısı","number","count(filter(lookup('Sigortalar', 'Durum'), totext(lookup('Sigortalar', 'Durum')) = 'Geçerli'))"],["Operasyon Kontrolü","text","if(count(field('Hukuki Malik')) = 0, 'HUKUKİ MALİK EKSİK', if(field('Aktif Tahsis Sayısı') > 1, 'ÇAKIŞMA: birden fazla aktif tahsis', if(field('Aktif Tahsis Sayısı') > 0 && count(field('Fiili Kullanıcı')) = 0, 'FİİLİ KULLANICI EKSİK', if(field('Geçerli Sigorta…"],["Varlık Yaşam Döngüsü Kontrolü","text","if(count(field('Hukuki Malik')) = 0, 'HUKUKİ MALİK EKSİK', if(isblank(totext(field('Mülkiyet Durumu'))), 'MÜLKİYET DURUMU EKSİK', if(totext(field('Mülkiyet Durumu')) = 'SPC mülkiyetinde' && count(field('Mülkiyet Devir Belgesi')) = 0, 'SPC MÜLKİYET KANITI EKSİK…"]]},{"i":1299814,"n":"Hizmet Kayıtları","g":0,"gn":"İş Çekirdeği","p":"Makine / sözleşme bazlı hizmet kayıtları.","f":14,"l":4,"m":1,"r":2,"o":[[0,1],[1,1],[5,1],[7,1]],"x":[["Tutar USD","number","field('Saat veya Km') * field('Birim Ücret USD')"]]},{"i":1301364,"n":"Sözleşmeler","g":0,"gn":"İş Çekirdeği","p":"Sözleşmeler (satış, leasing, kira, alt kiralama, tahsis, teminat, hizmet vb.); ana sözleşme ile kendine bağlanabilir.","f":24,"l":9,"m":2,"r":3,"o":[[0,2],[1,1],[2,1],[6,1],[7,1],[8,1],[20,1],[21,1]],"x":[["Alt Kiralama Kontrolü","text","if(totext(field('Tür')) = 'Alt Kiralama', if(count(filter(lookup('Ana Sözleşme', 'Alt Kiralama / Yeniden Satış İzni Var'), lookup('Ana Sözleşme', 'Alt Kiralama / Yeniden Satış İzni Var'))) = 0, 'UYARI: ana sözleşmede alt kiralama izni yok', 'İzin var'), '-')"],["Sözleşme Kontrolü","text","if(field('Gerçek Veri') = false && field('Hukuki Doğrulama') != 'Yapıldı', 'DEMO – HUKUKİ İNCELEME GEREKLİ', if(field('Durum') = 'Aktif' && isblank(field('Başlangıç')), 'HATA: başlangıç tarihi yok', if(field('Durum') = 'Aktif' && isblank(field('Bitiş')), 'BİTİ…"]]},{"i":1301365,"n":"Tahsisler","g":0,"gn":"İş Çekirdeği","p":"Makine - sözleşme - kullanan firma tahsisi; tarih ve durum. Çakışma kontrolü için kritik.","f":11,"l":4,"m":1,"r":26,"o":[[0,1],[5,1],[7,1],[21,1]],"x":[["Tahsis Kontrolü","text","if(count(field('Makine')) = 0, 'HATA: makine bağlantısı yok', if(count(field('Kullanan Firma')) = 0, 'HATA: kullanan firma yok', if(count(field('Sözleşme')) = 0, 'UYARI: sözleşme bağlantısı yok', if(isblank(field('Başlangıç')), 'HATA: başlangıç tarihi yok', if…"]]},{"i":1301366,"n":"Sigortalar","g":0,"gn":"İş Çekirdeği","p":"Sigorta poliçeleri (makine veya sevkiyat bazlı); geçerlilik formülü içerir.","f":14,"l":3,"m":2,"r":51,"o":[[0,1],[5,1],[17,1]],"x":[["Durum","text","if(isblank(field('Bitiş')), 'Tarih yok', if(field('Bitiş') < today(), 'SÜRESİ DOLDU', if(isblank(field('Başlangıç')), 'Tarih yok', if(field('Başlangıç') > today(), 'HENÜZ BAŞLAMADI', 'Geçerli'))))"],["Sigorta Kontrolü","text","if(count(field('Makine')) = 0 && count(field('Sevkiyatlar')) = 0, 'HATA: makine veya sevkiyat bağlantısı yok', if(isblank(field('Poliçe No')), 'POLİÇE NUMARASI EKSİK', if(isblank(field('Başlangıç')) || isblank(field('Bitiş')), 'POLİÇE TARİHLERİ EKSİK', if(fiel…"]]},{"i":1299129,"n":"Krediler","g":1,"gn":"Finansman ve Nakit Akışı","p":"Finansman kredileri (kreditör, borçlu); teminat, belge ve geri ödeme planı özetleri.","f":39,"l":6,"m":10,"r":2,"o":[[0,2],[1,1],[11,1],[14,1],[20,1]],"x":[["Teminat Sayısı","number","count(field('Teminatlar'))"],["İpotek Teminatı USD","number","sum(filter(lookup('Teminatlar', 'Tutar USD'), totext(lookup('Teminatlar', 'Tür')) = '1. Derece Ekipman İpoteği'))"],["Belge Sayısı","number","count(field('Belgeler'))"],["Eksik Belge","number","count(filter(lookup('Belgeler', 'Durum'), totext(lookup('Belgeler', 'Durum')) = 'Eksik'))"],["Nakit Rehni USD","number","sum(filter(lookup('Teminatlar', 'Tutar USD'), totext(lookup('Teminatlar', 'Tür')) = 'Üçüncü Taraf Nakit Rehni'))"],["İpotek / Kredi Oranı","number","if(field('Tutar USD') = 0, 0, round(field('İpotek Teminatı USD') / field('Tutar USD'), 2))"],["Planlanan Anapara Toplamı USD","number","sum(lookup('Geri Ödeme Planı', 'Anapara USD'))"],["Planlanan Faiz Toplamı USD","number","sum(lookup('Geri Ödeme Planı', 'Faiz USD'))"],["Planlanan Toplam Borç Servisi USD","number","sum(lookup('Geri Ödeme Planı', 'Taksit USD'))"],["Anapara Mutabakatı","text","if(round(field('Planlanan Anapara Toplamı USD'), 2) = round(field('Tutar USD'), 2), 'OK – anapara eşleşiyor', 'HATA – anapara planı kredi tutarıyla eşleşmiyor')"]]},{"i":1299130,"n":"Teminatlar","g":1,"gn":"Finansman ve Nakit Akışı","p":"Kredi teminatları (veren, lehtar, bildirim yapılan taraf).","f":15,"l":5,"m":1,"r":6,"o":[[0,3],[10,1],[20,1]],"x":[["Teminat Kontrolü","text","if(isblank(totext(field('Tür'))), 'HATA: teminat türü yok', if(count(field('Veren')) = 0, 'VEREN TARAF EKSİK', if(count(field('Lehtar')) = 0, 'LEHTAR EKSİK', if(totext(field('Hukuki Doğrulama')) = 'Gerekli', 'HUKUKİ DOĞRULAMA GEREKLİ', if(totext(field('Durum')…"]]},{"i":1299134,"n":"Kira ve Tahsilat Planı","g":1,"gn":"Finansman ve Nakit Akışı","p":"Dönemsel kira ve tahsilat planı; stopaj, borç servisi, CFADS ve DSCR.","f":18,"l":3,"m":7,"r":60,"o":[[0,1],[1,1],[14,1]],"x":[["Kalan USD","number","field('SPC Kira Payı USD') - field('Tahsil Edilen USD')"],["Stopaj USD","number","field('SPC Kira Payı USD') * sum(lookup('Proje', 'Etkin Stopaj Oranı')) / 100"],["Net SPC'ye USD","number","field('SPC Kira Payı USD') - field('Stopaj USD')"],["DSCR","number","if(field('Borç Servisi USD') = 0, 0, round(field('CFADS USD') / field('Borç Servisi USD'), 2))"],["DSCR Uyarısı","text","if(field('Borç Servisi USD') = 0, 'Borç servisi plana bağlı değil', if(field('DSCR') < 1, 'KRİTİK: DSCR 1 altında', 'Yeterli'))"],["Borç Servisi USD","number","sum(lookup('Geri Ödeme Dönemleri', 'Taksit USD'))"],["CFADS USD","number","field('Net SPC\\'ye USD') - field('SPC İşletme Gideri USD')"]]},{"i":1299135,"n":"Giderler ve Vergiler","g":1,"gn":"Finansman ve Nakit Akışı","p":"Proje / sevkiyat giderleri ve vergiler; USD karşılığı.","f":12,"l":3,"m":1,"r":7,"o":[[0,1],[1,1],[17,1]],"x":[["USD Karşılığı","number","if(totext(field('Para Birimi')) = 'USD', field('Tutar'), field('Tutar') * field('Kur Çarpanı (USD)'))"]]},{"i":1299810,"n":"Geri Ödeme Planı","g":1,"gn":"Finansman ve Nakit Akışı","p":"Kredi geri ödeme satırları; kira planı ve gelir-gider dengesiyle bağlıdır.","f":17,"l":3,"m":1,"r":66,"o":[[10,1],[12,1],[15,1]],"x":[["Taksit USD","number","field('Anapara USD') + field('Faiz USD')"]]},{"i":1299815,"n":"Gelir Gider Dengesi","g":1,"gn":"Finansman ve Nakit Akışı","p":"Proje gelir-gider dengesi; DSCR, CFADS ve geri ödeme satırlarıyla bağlıdır.","f":19,"l":2,"m":8,"r":4,"o":[[1,1],[14,1]],"x":[["Stopaj USD","number","field('TOO SPC Ödemesi') * field('Stopaj Oranı') / 100"],["SPC Net USD","number","field('TOO SPC Ödemesi') - field('Stopaj USD')"],["Net Nakit USD","number","field('CFADS USD') - field('Borç Servisi USD')"],["DSCR","number","if(field('Dönem') = 'Tek seferlik', 0, if(field('Borç Servisi USD') = 0, 0, round(field('CFADS USD') / field('Borç Servisi USD'), 2)))"],["Uyarı","text","if(field('Dönem') = 'Tek seferlik', 'DSCR UYGULANMAZ: tek seferlik satış / kredi kapama', if(field('Borç Servisi USD') = 0, 'Borç servisi plana bağlı değil', if(field('DSCR') < 1, 'KRİTİK: DSCR 1 altında', 'Yeterli')))"],["Borç Servisi USD","number","if(count(field('Geri Ödeme Satırları')) > 0, sum(lookup('Geri Ödeme Satırları', 'Taksit USD')), field('Kredi Taksiti USD (elle, plan yoksa)'))"],["TOO Net Ödeme Gücü USD","number","field('ÖMG Hizmet Geliri') - field('TOO Operasyon Gideri') - field('TOO SPC Ödemesi')"],["CFADS USD","number","field('SPC Net USD') - field('SPC İşletme Gideri USD')"]]},{"i":1299816,"n":"Kur Takibi","g":1,"gn":"Finansman ve Nakit Akışı","p":"Kur kayıtları. Başka tabloyla bağlantısı yoktur (referans tablo).","f":5,"l":0,"m":0,"r":1,"o":[],"x":[]},{"i":1299131,"n":"Sevkiyatlar","g":2,"gn":"Lojistik ve Gümrük","p":"Sevkiyat kayıtları; taşıyıcı, gümrük, belge ve taşıma sigortası bağlantıları.","f":27,"l":8,"m":7,"r":3,"o":[[0,1],[1,1],[2,1],[9,1],[13,1],[18,1],[20,2]],"x":[["Otobüs Adedi","number","sum(lookup('Lotlar', 'Adet'))"],["Mal Değeri USD","number","sum(lookup('Lotlar', 'Toplam USD'))"],["Toplam Vergi USD","number","sum(lookup('Gümrük İşlemleri', 'Net Vergi USD'))"],["Belge Sayısı","number","count(field('Belgeler'))"],["Eksik Belge","number","count(filter(lookup('Belgeler', 'Durum'), totext(lookup('Belgeler', 'Durum')) = 'Eksik'))"],["Gider Toplamı","number","sum(lookup('Giderler ve Vergiler', 'USD Karşılığı'))"],["Sevkiyat Kontrolü","text","if(count(field('Proje')) = 0, 'PROJE BAĞLANTISI EKSİK', if(count(field('Lotlar')) = 0, 'LOT BAĞLANTISI EKSİK', if(count(field('Taşıyıcı')) = 0, 'TAŞIYICI EKSİK', if(totext(field('Durum')) = 'Teslim Edildi' && isblank(field('Teslim Alım Tarihi')), 'TESLİM TARİH…"]]},{"i":1299132,"n":"Gümrük İşlemleri","g":2,"gn":"Lojistik ve Gümrük","p":"Beyanname bazlı gümrük vergisi ve KDV hesapları; muafiyet bağlantısı.","f":20,"l":3,"m":7,"r":6,"o":[[0,1],[17,1],[19,1]],"x":[["KDV USD","number","field('Net KDV Tahakkuk USD')"],["Toplam Vergi USD","number","field('Net Vergi USD')"],["Net Gümrük Vergisi USD","number","if(field('Gümrük Vergisi USD') - field('Gümrük Vergisi Muafiyet USD') < 0, 0, field('Gümrük Vergisi USD') - field('Gümrük Vergisi Muafiyet USD'))"],["Net KDV Matrahı USD","number","field('Gümrük Matrahı USD') + field('Net Gümrük Vergisi USD')"],["Net KDV Tahakkuk USD","number","if((field('Net KDV Matrahı USD') * field('KDV Oranı') / 100) - field('KDV Muafiyet USD') < 0, 0, (field('Net KDV Matrahı USD') * field('KDV Oranı') / 100) - field('KDV Muafiyet USD'))"],["Net Vergi USD","number","field('Net Gümrük Vergisi USD') + field('Net KDV Tahakkuk USD')"],["KDV Maliyeti USD","number","if(field('Net KDV Tahakkuk USD') - field('İndirilebilir KDV USD') < 0, 0, field('Net KDV Tahakkuk USD') - field('İndirilebilir KDV USD'))"]]},{"i":1299812,"n":"Muafiyetler ve Teşvikler","g":2,"gn":"Lojistik ve Gümrük","p":"Proje muafiyet ve teşvik kayıtları; gümrük işlemleriyle bağlıdır.","f":10,"l":2,"m":0,"r":3,"o":[[1,1],[18,1]],"x":[]},{"i":1299133,"n":"Belgeler","g":3,"gn":"Belge ve Süreç","p":"Belge kayıtları ve dosya ekleri. Pek çok tablonun kanıt belgesidir; Dosya Kontrolü formülü burada.","f":31,"l":10,"m":5,"r":52,"o":[[1,1],[3,1],[5,2],[7,1],[10,1],[11,1],[17,2],[21,1]],"x":[["Geçerli mi","boolean","(isblank(totext(field('Geçerli Incoterm'))) || contains(totext(field('Geçerli Incoterm')), join(totext(field('Proje Incoterm')), ''))) && (isblank(totext(field('Geçerli Ödeme Yöntemi'))) || contains(totext(field('Geçerli Ödeme Yöntemi')), join(totext(field('Pr…"],["Gerekli Sayı","number","if(field('Geçerli mi'), 1, 0)"],["Gerekli Eksik","number","if(field('Geçerli mi') && (totext(field('Durum')) != 'Tamam' || count(field('Dosya')) = 0), 1, 0)"],["Gerekli Tamam","number","if(field('Geçerli mi') && totext(field('Durum')) = 'Tamam' && count(field('Dosya')) > 0, 1, 0)"],["Dosya Kontrolü","text","if(count(field('Dosya')) = 0, if(totext(field('Durum')) = 'Tamam', 'HATA: Tamam ama dosya yok', 'DOSYA BEKLENİYOR'), if(totext(field('Durum')) = 'Tamam', 'OK', 'DOSYA VAR – DURUM TAMAMLANMADI'))"]]},{"i":1299137,"n":"Süreç Adımları","g":3,"gn":"Belge ve Süreç","p":"Süreç / olay adımları (varlık olayları dahil); kanıt belgesi ve sorumlu firma.","f":27,"l":6,"m":5,"r":48,"o":[[0,1],[1,1],[5,1],[7,1],[8,1],[20,1]],"x":[["Geçerli mi","boolean","(isblank(totext(field('Geçerli Incoterm'))) || contains(totext(field('Geçerli Incoterm')), join(totext(field('Proje Incoterm')), ''))) && (isblank(totext(field('Geçerli Ödeme Yöntemi'))) || contains(totext(field('Geçerli Ödeme Yöntemi')), join(totext(field('Pr…"],["Geçerli Sayı","number","if(field('Geçerli mi'), 1, 0)"],["Geçerli Tamam Sayı","number","if(field('Geçerli mi') && totext(field('Durum')) = 'Tamam', 1, 0)"],["Adım Kontrolü","text","if(field('Geçerli mi') = false, 'SEÇİLİ PROJE MODELİNE UYGUN DEĞİL', if(field('Durum') = 'Tamam' && isblank(field('Not')), 'TAMAM – KANIT / NOT EKLENMELİ', if(field('Durum') = 'Engelli', 'ENGEL VAR – AÇIKLAMA GEREKLİ', 'GEÇERLİ ADIM')))"],["Varlık Olay Kontrolü","text","if(isblank(totext(field('Varlık Olayı'))), 'GENEL ADIM – VARLIK OLAYI DEĞİL', if(count(field('Makine')) = 0, 'MAKİNE BAĞLANTISI EKSİK', if(totext(field('Durum')) = 'Tamam' && count(field('Kanıt Belgesi')) = 0, 'TAMAM AMA KANIT BELGESİ YOK', if(isblank(field('O…"]]},{"i":1299811,"n":"Yazışmalar","g":3,"gn":"Belge ve Süreç","p":"Firmalar arası yazışma kayıtları.","f":12,"l":3,"m":0,"r":3,"o":[[0,2],[1,1]],"x":[]},{"i":1303465,"n":"Senaryolar","g":4,"gn":"Senaryo Motoru","p":"Senaryo ana kaydı (finansman, mülkiyet, ithalat, çıkış modeli, kur varsayımı); alt senaryo tablolarını bağlar.","f":27,"l":10,"m":0,"r":0,"o":[[0,4],[1,1],[24,1],[25,1],[26,1],[27,1],[28,1]],"x":[]},{"i":1303466,"n":"Senaryo Finansman Dilimleri","g":4,"gn":"Senaryo Motoru","p":"Senaryonun finansman dilimleri (araç, anapara, faiz, vade, erteleme, balloon, komisyon).","f":31,"l":3,"m":0,"r":0,"o":[[0,1],[23,1],[25,1]],"x":[]},{"i":1303467,"n":"Senaryo Ödeme Planı","g":4,"gn":"Senaryo Motoru","p":"Senaryo ödeme planı satırları; toplam borç servisi formülü.","f":22,"l":3,"m":1,"r":0,"o":[[23,1],[24,1],[28,1]],"x":[["Toplam Borç Servisi","number","field('Anapara Ödemesi') + field('Faiz Ödemesi') + field('Komisyon / Ücret') + field('Balloon Ödemesi')"]]},{"i":1303468,"n":"Senaryo Varsayımları","g":4,"gn":"Senaryo Motoru","p":"Senaryo varsayımları (parametre, değer, kaynak, doğrulama durumu).","f":12,"l":1,"m":0,"r":0,"o":[[23,1]],"x":[]},{"i":1303469,"n":"Senaryo Değerlendirme","g":4,"gn":"Senaryo Motoru","p":"Senaryo değerlendirme metrikleri (IRR, NPV, DSCR, net kâr vb.).","f":10,"l":1,"m":0,"r":0,"o":[[23,1]],"x":[]},{"i":1303470,"n":"Senaryo Gelir Gider Akışı","g":4,"gn":"Senaryo Motoru","p":"Senaryo gelir-gider akışı; toplam gelir/gider, net nakit akışı, borç servisi ve DSCR formülleri.","f":25,"l":2,"m":5,"r":0,"o":[[23,1],[25,1]],"x":[["Toplam Gelir","number","field('Kira Geliri') + field('Hizmet Geliri') + field('Satış Geliri') + field('Diğer Gelir')"],["Toplam Gider","number","field('Operasyon Gideri') + field('Bakım Gideri') + field('Sigorta Gideri') + field('Vergi ve Harç') + field('Lojistik ve Gümrük') + field('Yatırım Harcaması') + field('Diğer Gider')"],["Net Nakit Akışı","number","field('Toplam Gelir') - field('Toplam Gider')"],["Borç Servisi","number","sum(lookup('Borç Servisi Satırları', 'Toplam Borç Servisi'))"],["DSCR","number","if(field('Borç Servisi') = 0, 0, field('Net Nakit Akışı') / field('Borç Servisi'))"]]},{"i":1301798,"n":"SYS-001 | Sistem Ana İndeksi","g":5,"gn":"SYS Yönetim","p":"SYS-001 Sistem Ana İndeksi: aktif sürüm, AI başlangıç talimatı, yedekleme politikası.","f":15,"l":2,"m":0,"r":1,"o":[[30,1],[34,1]],"x":[]},{"i":1301799,"n":"SYS-002 | Sistem Sürüm Kayıtları","g":5,"gn":"SYS Yönetim","p":"SYS-002 Sistem Sürüm Kayıtları: sürüm kodu, tablo/alan/ilişki/formül sayıları, eklenen/değişen/kaldırılan.","f":24,"l":8,"m":0,"r":1,"o":[[29,1],[31,1],[32,1],[33,1],[34,1],[35,1],[36,1],[38,1]],"x":[]},{"i":1301800,"n":"SYS-003 | Sistem Yedek Paketleri","g":5,"gn":"SYS Yönetim","p":"SYS-003 Sistem Yedek Paketleri: yedek türü, konum, bütünlük ve geri yükleme testi.","f":18,"l":2,"m":0,"r":2,"o":[[30,1],[35,1]],"x":[]},{"i":1301801,"n":"SYS-004 | Sistem Değişiklik Günlüğü","g":5,"gn":"SYS Yönetim","p":"SYS-004 Sistem Değişiklik Günlüğü: yapısal / riskli değişikliklerin önceki-yeni durumu ve geri alma talimatı.","f":17,"l":3,"m":0,"r":27,"o":[[30,1],[33,1],[36,1]],"x":[]},{"i":1301802,"n":"SYS-005 | Sistem Karar Kayıtları","g":5,"gn":"SYS Yönetim","p":"SYS-005 Sistem Karar Kayıtları: kullanıcı onaylı kalıcı kararlar.","f":16,"l":4,"m":0,"r":5,"o":[[30,1],[32,1],[36,1],[38,1]],"x":[]},{"i":1301803,"n":"SYS-006 | Sistem Denetim ve Testleri","g":5,"gn":"SYS Yönetim","p":"SYS-006 Sistem Denetim ve Testleri: denetim kapsamı, bulgu sayıları (P0-P3), rapor.","f":21,"l":5,"m":0,"r":3,"o":[[29,1],[30,1],[36,1],[38,1],[40,1]],"x":[]},{"i":1301804,"n":"SYS-007 | Sistem Geri Yükleme ve Klonlama","g":5,"gn":"SYS Yönetim","p":"SYS-007 Geri Yükleme ve Klonlama: yedekten kurulum işlemleri ve doğrulama sonuçları.","f":19,"l":2,"m":0,"r":0,"o":[[30,1],[31,1]],"x":[]},{"i":1301805,"n":"SYS-008 | Sistem Görev ve Geliştirme Takibi","g":5,"gn":"SYS Yönetim","p":"SYS-008 Görev ve Geliştirme Takibi: öncelik, durum, sorumlu, tamamlanma kriteri.","f":21,"l":5,"m":0,"r":17,"o":[[30,1],[32,1],[33,1],[34,1],[38,1]],"x":[]},{"i":1301819,"n":"SYS-009 | AI İşletim Protokolü","g":5,"gn":"SYS Yönetim","p":"SYS-009 AI İşletim Protokolü: giriş, çalışma, çıkış, yasaklar. Protokolün TEK KAYNAĞI.","f":13,"l":0,"m":0,"r":1,"o":[],"x":[]},{"i":1301820,"n":"SYS-010 | AI Oturum ve Devir Kayıtları","g":5,"gn":"SYS Yönetim","p":"SYS-010 AI Oturum ve Devir Kayıtları: her oturum için tek kayıt; sonraki AI için talimat.","f":26,"l":5,"m":0,"r":11,"o":[[30,1],[33,1],[34,1],[36,1],[39,1]],"x":[]},{"i":1301821,"n":"SYS-011 | AI Çalışma ve Olay Günlüğü","g":5,"gn":"SYS Yönetim","p":"SYS-011 AI Çalışma ve Olay Günlüğü: yalnızca hata, geri alma, beklenmedik durum, kullanıcı talebi.","f":20,"l":1,"m":0,"r":17,"o":[[38,1]],"x":[]},{"i":620460,"n":"Table","g":6,"gn":"Eski / Referans","p":"Eski AI denetim raporu kaydı (SYS-006 ile bağlı). Korunur, silinmez.","f":8,"l":1,"m":0,"r":4,"o":[[34,1]],"x":[]},{"i":1306063,"n":"CHAT-001 | Konular","g":7,"gn":"CHAT (konu ve sohbet hafızası)","p":"CHAT-001 Konular: her konu bir satır (durum, güncel özet, açık noktalar, kararlar, arşiv yolu). Kural: 05_AI_PROTOCOLS/CHAT_PROTOCOL.md.","f":20,"l":2,"m":0,"r":2,"o":[[42,1],[43,1]],"x":[]},{"i":1306064,"n":"CHAT-002 | Notlar","g":7,"gn":"CHAT (konu ve sohbet hafızası)","p":"CHAT-002 Notlar: konunun içindeki temizlenmiş kayıtlar (kullanıcı sözü, AI görüşü, karar adayı, karar); her not bir konuya bağlıdır.","f":11,"l":1,"m":0,"r":12,"o":[[41,1]],"x":[]},{"i":1306065,"n":"CHAT-003 | Sorular","g":7,"gn":"CHAT (konu ve sohbet hafızası)","p":"CHAT-003 Sorular: aynı soruya her AI'nın bağımsız cevabı (ayrı kolon), sentez ve iş emri taslağı, kullanıcı kararı.","f":16,"l":1,"m":0,"r":1,"o":[[41,1]],"x":[]}];
+const SYSN=[['SYS-001','Ana indeks','Sistem ve tablo dizini, aktif sürüm. İlk bakılan yer.',90,60],['SYS-002','Sürüm kayıtları','Sürüm kodu; tablo, alan, ilişki, formül sayıları. En çok bağlantısı olan merkez tablo.',380,120],['SYS-003','Yedek paketleri','Yedek türü, konum, bütünlük, geri yükleme testi. Git yedek değildir.',90,190],['SYS-007','Geri yükleme ve klonlama','Yedekten kurulum işlemleri. Şu an 0 satır.',90,310],['SYS-004','Değişiklik günlüğü','Yapısal veya riskli değişiklik; önceki ve yeni durum; geri alma.',380,280],['SYS-005','Karar kayıtları','Kullanıcının onayladığı kalıcı kararlar.',680,190],['SYS-008','Görev takibi','17 görev. Görev durumunun tek kaynağı burası.',680,360],['SYS-006','Denetim ve testler','Denetim kapsamı ve bulgular.',250,440],['SYS-010','Oturum ve devir','Her AI oturumu için bir kayıt; sonraki AI buradan devralır.',520,470],['SYS-011','Olay günlüğü','Yalnızca hata, geri alma, beklenmedik durum.',800,470],['Table','Eski denetim raporu','Eski AI denetim raporu. SYS-006 ile bağlı, korunuyor.',70,460],['SYS-009','AI işletim protokolü','Protokolün TEK kaynağı. İlişki alanı yok; her oturum başında okunur.',780,60]];
+const SYSE=[[0,1],[0,7],[1,2],[1,4],[1,5],[1,7],[1,3],[1,6],[2,3],[4,5],[4,6],[5,6],[7,6],[1,8],[5,8],[7,8],[6,8],[8,9],[7,10]];
+const KN={a:['TASK-SYS-001',100,50,'P1'],b:['TASK-SYS-002',300,50,'P1'],c:['TASK-SYS-003',500,50,'P1'],d:['TASK-SYS-004',100,120,'P2'],e:['TASK-SYS-005',300,120,'P1','v'],f:['TASK-SYS-006',500,120,'P2'],g:['TASK-AI-BOOT-001',100,230,'P0'],h:['TASK-AI-HANDOVER-002',300,190,'P1'],i:['TASK-AI-AUTOLOG-003',300,260,'P1'],j:['TASK-CHAT-001',300,330,'P1'],k:['TASK-CHAT-002',520,295,'P1'],l:['TASK-ASSET-001',100,410,'P1'],m:['TASK-ASSET-003',300,410,'P1'],n:['TASK-ASSET-002',520,410,'P0'],o:['TASK-FIN-002',760,100,'P1'],p:['TASK-FIN-001',760,190,'P0'],q:['TASK-SYS-007',760,300,'P2']};
+const KE=[['a','b'],['b','c'],['d','e',1],['e','f'],['g','h'],['g','i'],['g','k'],['j','k'],['l','m'],['o','p',1]];
+const GC=['#3b82c4','#2e9e6b','#d98a1f','#8b5cc9','#c9477a','#6b7a86','#a0702d','#1aa3a3'];
+const lab=n=>n.indexOf(' | ')>0?n.split(' | ')[0]:n;
+let SEL=null,FG=null,ALW=null,NT='İlişki ağı',YF=null;const MS={sysmap:null,gorev:null};
+const curKey=()=>{const h=(location.hash||'#bugun').slice(1);return views[h]?h:'genel'};
+const incoming=i=>{const o=[];TD.forEach((t,j)=>t.o.forEach(p=>{if(p[0]===i&&j!==i)o.push([j,p[1]])}));return o};
+const chip=p=>`<button type="button" class="chip" data-s="${p[0]}"><i style="background:${GC[TD[p[0]].g]}"></i>${esc(lab(TD[p[0]].n))}${p[1]>1?` ×${p[1]}`:''}</button>`;
+const gpill=t=>`<span class="pill" style="border:1px solid ${GC[t.g]};background:transparent;color:var(--fg)">${esc(t.gn)}</span>`;
+function tdetail(i){
+  const t=TD[i],o=t.o.filter(p=>p[0]!==i),me=t.o.find(p=>p[0]===i),n=incoming(i);
+  return `<section class="panel" id="det" style="margin-top:14px;border-color:var(--accent)">
+  <h2>${esc(t.n)} ${gpill(t)}</h2><p class="note" style="margin:0 0 10px">${esc(t.p)}</p>
+  <div class="tiles"><div class="tile"><b>${t.r}</b><span>satır</span></div><div class="tile"><b>${t.f}</b><span>alan</span></div><div class="tile"><b>${t.l}</b><span>ilişki alanı</span></div><div class="tile"><b>${t.m}</b><span>formül</span></div></div>
+  <h3>Bu tablodan çıkan bağlar (${o.length} tablo)</h3><div class="chips">${o.map(chip).join('')||'<span class="note">yok</span>'}</div>
+  ${me?`<p class="note" style="margin:6px 0 0">Kendine bağ: ${me[1]} alan</p>`:''}
+  <h3 style="margin-top:14px">Bu tabloya bağlananlar (${n.length} tablo)</h3><div class="chips">${n.map(chip).join('')||'<span class="note">yok</span>'}</div>
+  <h3 style="margin-top:14px">Formüller (${t.m})</h3>${t.x.length?t.x.map(x=>`<div class="fx"><b>${esc(x[0])}</b> <span class="note">${esc(x[1])}</span><code>${esc(x[2])}</code></div>`).join(''):'<span class="note">Formül yok.</span>'}</section>`;
+}
+const svgBox=(h,body,mw)=>`<div class="sc"><svg viewBox="0 0 1000 ${h}" style="min-width:${mw||820}px;width:100%;display:block" role="group">${body}</svg></div>`;
+const MK='<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--muted)"/></marker></defs>';
+const gnode=(x,y,w,h,t,sub,col,dim,sel,idx,cls)=>`<g class="nd2 ${cls||''}" data-n="${idx}" tabindex="0" role="button" aria-label="${esc(t)}" style="opacity:${dim?.25:1}"><rect x="${x-w/2}" y="${y-h/2}" width="${w}" height="${h}" rx="7" style="fill:var(--surface);stroke:${col||'var(--line)'};stroke-width:${sel?3.2:1.6}"/><text x="${x}" y="${sub?y-3:y+4}" text-anchor="middle" style="font-weight:600">${esc(t)}</text>${sub?`<text x="${x}" y="${y+13}" text-anchor="middle" class="mu">${esc(sub)}</text>`:''}</g>`;
+const gedge=(a,b,on,dim,dsh,arrow)=>`<line class="ed${on?' on':''}" x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" style="stroke:${on?'var(--accent)':'var(--muted)'};stroke-width:${on?2.4:1.3};opacity:${dim?.08:on?.95:.5}${dsh?';stroke-dasharray:3 6':''}"${arrow?' marker-end="url(#ar)"':''}/>`;
+const nchip=(arr,i)=>`<button type="button" class="chip" data-n="${i}">${esc(arr)}</button>`;
+
+/* 1) Tablo ilişki ağı */
+views.ag=function(){
+  const ok=i=>!ALW||ALW(i),n=TD.filter((t,i)=>ok(i)).length,cx=550,cy=450,R=300,GAP=.08;
+  const order=TD.map((t,i)=>i).filter(ok).sort((a,b)=>TD[a].g-TD[b].g||a-b);
+  let gaps=0;order.forEach((i,k)=>{if(k&&TD[i].g!==TD[order[k-1]].g)gaps++});
+  const step=(2*Math.PI-gaps*GAP)/n;let a=-Math.PI/2;const P={};
+  order.forEach((i,k)=>{if(k&&TD[i].g!==TD[order[k-1]].g)a+=GAP;P[i]=[cx+R*Math.cos(a),cy+R*Math.sin(a),a];a+=step});
+  const E=[],deg=TD.map(()=>0),pairs=new Set();
+  TD.forEach((t,i)=>t.o.forEach(p=>{if(p[0]!==i&&ok(i)&&ok(p[0])){E.push([i,p[0],p[1]]);deg[i]++;deg[p[0]]++;pairs.add(Math.min(i,p[0])+'_'+Math.max(i,p[0]))}}));
+  const nb=new Set();if(SEL!=null){nb.add(SEL);E.forEach(e=>{if(e[0]===SEL)nb.add(e[1]);if(e[1]===SEL)nb.add(e[0])})}
+  const inG=i=>FG==null||TD[i].g===FG;
+  let s='',lbl='';
+  E.forEach(([i,j,c])=>{
+    const A=P[i],B=P[j],mx=(A[0]+B[0])/2,my=(A[1]+B[1])/2,dx=B[0]-A[0],dy=B[1]-A[1],L=Math.hypot(dx,dy)||1,off=(i<j?1:-1)*11;
+    const qx=cx+(mx-cx)*.12-dy/L*off,qy=cy+(my-cy)*.12+dx/L*off;
+    const on=SEL!=null&&(i===SEL||j===SEL);
+    const dim=SEL!=null?!on:(FG!=null&&!(inG(i)||inG(j)));
+    const hi=SEL==null&&FG!=null&&(inG(i)||inG(j));
+    const w=on?1.5+Math.min(c,6)*.5:.7+Math.min(c,8)*.28;
+    s+=`<path class="ed${on||hi?' on':''}" d="M${A[0].toFixed(1)} ${A[1].toFixed(1)} Q${qx.toFixed(1)} ${qy.toFixed(1)} ${B[0].toFixed(1)} ${B[1].toFixed(1)}" style="stroke:${GC[TD[i].g]};stroke-width:${w};opacity:${dim?.05:on?.95:hi?.75:.34}"><title>${esc(lab(TD[i].n))} → ${esc(lab(TD[j].n))}: ${c} ilişki alanı</title></path>`;
+    if(on){lbl+=`<text x="${(.25*A[0]+.5*qx+.25*B[0]).toFixed(1)}" y="${(.25*A[1]+.5*qy+.25*B[1]).toFixed(1)}" text-anchor="middle" class="elb">${c}</text>`}
+  });
+  order.forEach((i,k)=>{
+    const p=P[i],t=TD[i],right=Math.cos(p[2])>=0,on=SEL!=null?nb.has(i):inG(i),r=5+Math.sqrt(deg[i])*.9;
+    const lx=p[0]+(right?1:-1)*(r+8),ly=p[1]+Math.sin(p[2])*6+4;
+    s+=`<g class="nd" data-s="${i}" tabindex="0" role="button" aria-label="${esc(t.n)}" style="opacity:${on?1:.25}">${i===SEL?`<circle class="pulse" cx="${p[0]}" cy="${p[1]}" r="${r+2}"/>`:''}<circle class="dot" cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="${i===SEL?r+3:r}" style="fill:${GC[t.g]};animation-delay:${((k*.17)%3).toFixed(2)}s"/><text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="${right?'start':'end'}" style="font-size:10.5px${i===SEL?';font-weight:700':''}">${esc(lab(t.n))} (${t.r})</text></g>`;
+  });
+  const groups=[...new Set(TD.filter((t,i)=>ok(i)).map(t=>t.g))].sort((a,b)=>a-b);
+  const lg=`<div class="chips" style="margin:10px 0 12px"><button type="button" class="chip${FG==null?' sel':''}" data-g="-1">Tümü</button>${groups.map(g=>`<button type="button" class="chip${FG===g?' sel':''}" data-g="${g}"><i style="background:${GC[g]}"></i>${esc(TD.find(t=>t.g===g).gn)}</button>`).join('')}</div>`;
+  const top=[...TD.keys()].filter(ok).sort((a,b)=>deg[b]-deg[a]).slice(0,1)[0];
+  return `<div class="tiles"><div class="tile"><b>${n}</b><span>tablo (düğüm)</span></div><div class="tile"><b>${pairs.size}</b><span>bağlı tablo çifti</span></div><div class="tile"><b>${totals.l}</b><span>ilişki alanı</span></div><div class="tile"><b style="font-size:17px;padding:5px 0">${esc(lab(TD[top].n))}</b><span>en çok bağı olan (${deg[top]})</span></div></div>
+  <section class="panel"><h2>${NT}: hangi tablo kiminle bağlı</h2>
+  <p class="note" style="margin:0">Her akan çizgi en az bir ilişki alanı demek; kalın çizgi çok alan demek. Çizginin renği çıkış tablosunun grubudur, akış yönü hedef tabloyu gösterir. Büyük nokta çok bağlantılı tablo. Parantez içindeki sayı satır sayısı. Bir tabloya tıkla: bağları vurgulanır, altında detay açılır. Gruba tıklayarak SYS veya CHAT gibi bir grubun bağlarını öne çıkar.</p>${lg}
+  ${svgBox(900,s+lbl,820)}</section>${SEL!=null?tdetail(SEL):'<p class="note">Bir tabloya tıkla.</p>'}`;
+};
+
+/* 2) SYS haritası */
+views.sysmap=function(){
+  const sel=MS.sysmap;let s='';
+  SYSE.forEach(p=>{const a=SYSN[p[0]],b=SYSN[p[1]],on=sel!=null&&(sel===p[0]||sel===p[1]);s+=gedge([a[3],a[4]],[b[3],b[4]],on,sel!=null&&!on)});
+  SYSN.forEach((n,i)=>{const con=sel==null||sel===i||SYSE.some(p=>(p[0]===sel&&p[1]===i)||(p[1]===sel&&p[0]===i));
+    s+=gnode(n[3],n[4],160,48,n[0],n[1],n[0]==='SYS-002'?'var(--accent)':n[0]==='SYS-009'?'#8b5cc9':'',!con,sel===i,i)});
+  let det='<p class="note">Bir SYS düğümüne tıkla; bağlantıları ve görevi altta açılır.</p>';
+  if(sel!=null){const n=SYSN[sel],l=[];SYSE.forEach(p=>{if(p[0]===sel)l.push(p[1]);if(p[1]===sel)l.push(p[0])});
+    det=`<section class="panel" id="det" style="margin-top:14px;border-color:var(--accent)"><h2>${esc(n[0])} · ${esc(n[1])}</h2><p class="note" style="margin:0 0 10px">${esc(n[2])}</p><h3>Bağlı SYS kayıtları</h3><div class="chips">${l.map(i=>nchip(SYSN[i][0]+' · '+SYSN[i][1],i)).join('')||'<span class="note">Doğrudan bağlantı yok</span>'}</div></section>`}
+  return `<section class="panel"><h2>SYS haritası: sistem yönetim tabloları ve ilişkileri</h2><p class="note" style="margin:0 0 8px">Akan çizgiler tabloların birbirine bağlandığı yeri gösterir. SYS-002 (yeşil) merkez tablodur; mor kutu SYS-009 ilişkisizdir, protokolün tek kaynağıdır.</p>${svgBox(530,s,820)}</section>${det}`;
+};
+
+/* 3) SYS akışı */
+views.akis=function(){
+  const N={1:[100,50,'AI oturumu açılır'],2:[300,50,'SYS-009 oku|protokol'],3:[520,50,'SYS-001 + SYS-010|son devir'],4:[760,50,'SYS-008 görev al|Sorumlu alanına bak'],5:[760,170,'SYS-005 karar|kullanıcı “evet” der'],6:[520,170,'SYS-004|değişiklik kaydı'],7:[300,170,'Baserow’da uygula'],8:[100,170,'SYS-006|test ve denetim'],9:[100,290,'SYS-008|durumu güncelle'],10:[300,290,'Git: dal + commit|SYS:/Oturum: satırı'],11:[520,290,'Pull request|kullanıcı onayı → main'],12:[760,290,'SYS-010|devir kaydı'],13:[300,410,'SYS-011 olay|yalnızca hata / geri alma'],14:[620,410,'tools: build_schema_docs →|build_xray → schema_diff']};
+  let s=MK;
+  for(let k=1;k<12;k++){const a=N[k],b=N[k+1],c=(x,y,x2,y2,d)=>`<line class="ed on" x1="${x}" y1="${y}" x2="${x2}" y2="${y2}" style="stroke:var(--muted);stroke-width:1.5${d?';stroke-dasharray:4 5':''}" marker-end="url(#ar)"/>`;
+    if(a[1]===b[1]){const d=b[0]>a[0]?1:-1;s+=c(a[0]+d*75,a[1],b[0]-d*75,b[1])}else s+=c(a[0],a[1]+25,b[0],b[1]-25)}
+  s+=`<line class="ed" x1="300" y1="195" x2="300" y2="385" style="stroke:var(--muted);stroke-width:1.4;stroke-dasharray:4 5" marker-end="url(#ar)"/><line class="ed" x1="340" y1="195" x2="560" y2="385" style="stroke:var(--muted);stroke-width:1.4;stroke-dasharray:4 5" marker-end="url(#ar)"/>`;
+  Object.keys(N).forEach(k=>{const n=N[k],L=n[2].split('|'),col=k>=13?'#8b5cc9':(k>=5&&k<=7?'var(--accent)':'var(--line)');
+    s+=`<g class="stp" style="--d:${((k-1)*.9).toFixed(1)}s"><rect x="${n[0]-75}" y="${n[1]-25}" width="150" height="50" rx="6" style="fill:var(--surface);stroke:${col};stroke-width:1.6"${k>=13?' stroke-dasharray="4 3"':''}/>`+L.map((l,i)=>`<text x="${n[0]}" y="${n[1]-(L.length-1)*7+i*14+4}" text-anchor="middle"${i?' class="mu"':''}>${esc(l)}</text>`).join('')+'</g>'});
+  return `<section class="panel"><h2>Bir iş nasıl akar: kim kimi tetikliyor</h2><p class="note" style="margin:0 0 8px">Işık adım adım dolaşır. Düz çizgi = normal sıra, kesikli = koşullu (hata olursa; şema değişirse). Yeşil çerçeve = Baserow’da değişiklik yapılan adımlar.</p>${svgBox(460,s,780)}</section>
+  <section class="panel" style="margin-top:14px"><h2>Dikkat: tetikleme otomatik değil</h2><p class="note" style="margin:0">Bu akış bir kuraldır. Hiçbir adım bir sonrakini kendiliğinden başlatmaz. TASK-AI-AUTOLOG-003 (otomatik oturum kaydı) henüz test edilmedi. Git de Baserow’daki onayı teknik olarak zorlayamaz. Sırayı AI ve sen birlikte tutuyorsunuz.</p></section>`;
+};
+
+/* 4) Görev bağı */
+views.gorev=function(){
+  const sel=MS.gorev,ids=Object.keys(KN);let s='';
+  KE.forEach(r=>{const a=KN[r[0]],b=KN[r[1]],ai=ids.indexOf(r[0]),bi=ids.indexOf(r[1]),on=sel!=null&&(sel===ai||sel===bi);s+=gedge([a[1],a[2]],[b[1],b[2]],on,sel!=null&&!on,!!r[2],true)});
+  ids.forEach((k,i)=>{const n=KN[k],act=sel==null||sel===i||KE.some(r=>(r[0]===k&&ids.indexOf(r[1])===sel)||(r[1]===k&&ids.indexOf(r[0])===sel));
+    s+=gnode(n[1],n[2],172,42,n[0],n[3],n[3]==='P0'?'var(--crit)':n[3]==='P1'?'var(--warn)':'var(--muted)',!act,sel===i,i)});
+  let det='<p class="note">Bir görev düğümüne tıkla; durumu, sorumlusu ve bağımlılıkları altta açılır.</p>';
+  if(sel!=null){const k=ids[sel],n=KN[k],t=D.sys.tasks.find(x=>x.kod===n[0])||{},l=[];
+    KE.forEach(r=>{if(r[0]===k)l.push(['→ ',r[1]]);if(r[1]===k)l.push(['← ',r[0]])});
+    det=`<section class="panel" id="det" style="margin-top:14px;border-color:var(--accent)"><h2><span class="code">${esc(n[0])}</span> ${pill(n[3])} ${pill(t.durum)}</h2><p style="margin:0 0 8px">${esc(t.baslik||'')}</p><p class="note" style="margin:0 0 10px">Sorumlu: ${esc(t.sorumlu||'—')}</p><h3>Bağımlılıklar</h3><div class="chips">${l.map(x=>nchip(x[0]+KN[x[1]][0],ids.indexOf(x[1]))).join('')||'<span class="note">Bağımlılık yok</span>'}</div></section>`}
+  return `<section class="panel"><h2>Görev bağı: hangi görev hangisine bağlı</h2><p class="note" style="margin:0 0 8px">Ok yönü: önce yapılması gereken → sonra gelen. Kesikli ok koşullu bağ. Kırmızı P0, turuncu P1, gri P2.</p>${svgBox(460,MK+s,820)}</section>${det}`;
+};
+
+$('#view').addEventListener('click',x=>{
+  let b;
+  if(b=x.target.closest('[data-g]')){const g=+b.dataset.g;FG=(g<0||FG===g)?null:g;route();return}
+  if(b=x.target.closest('[data-n]')){const v=+b.dataset.n,k=curKey();MS[k]=(MS[k]===v&&b.closest('svg'))?null:v;route();return}
+  if(b=x.target.closest('[data-s]')){const v=+b.dataset.s;SEL=(SEL===v&&b.closest('svg'))?null:v;route();const d=document.getElementById('det');if(d&&!b.closest('svg'))d.scrollIntoView({block:'nearest',behavior:'smooth'})}
+});
+$('#view').addEventListener('keydown',x=>{if((x.key==='Enter'||x.key===' ')&&x.target.matches&&x.target.matches('g[data-s],g[data-n]')){x.preventDefault();x.target.dispatchEvent(new MouseEvent('click',{bubbles:true}))}});
+
+/* ===== BUGÜN / SAĞLIK / TEST (açıklamalı) / HATIRLA ===== */
+const rowsLine=(a)=>a.filter(x=>x[1]).map(x=>`<div class="why"><b>${esc(x[0])}</b> ${x[1]}</div>`).join('');
+const card=(sev,title,rows)=>`<div class="tcard ${sev}"><div class="th"><span class="pill ${sev}">${sev==='crit'?'Kritik':sev==='warn'?'Bekliyor':sev==='ok'?'Tamam':'Bilgi'}</span><b>${title}</b></div>${rowsLine(rows)}${rq('c:'+plain(title),title)}</div>`;
+const tcode=k=>`<span class="code">${esc(k)}</span>`;
+const succ=kod=>{const k=Object.keys(KN).find(x=>KN[x][0]===kod);if(!k)return '';const o=KE.filter(r=>r[0]===k).map(r=>KN[r[1]][0]);return o.join(', ')};
+const pre=kod=>{const k=Object.keys(KN).find(x=>KN[x][0]===kod);if(!k)return '';return KE.filter(r=>r[1]===k).map(r=>KN[r[0]][0]).join(', ')};
+const INFO={
+ 'gpt-1':['CHAT','CHAT-001 Konular, CHAT-002 Notlar','Fikirlerin sohbette kaybolmadan bir KONU’ya bağlanıp kalıcı olması CHAT’in temel işi.','CHAT’in ana işlevi doğrulanmamış kalır; fikirler yine kaybolabilir.','ChatGPT’ye bir fikir yaz. KONU’ya bağlandığını ve not satırının oluştuğunu gör.'],
+ 'gpt-7':['CHAT','CHAT-002 Notlar, kullanıcı onay kuralı','Hiçbir şey “evet” demeden Baserow’a yazılmamalı. Bu kuralın tutup tutmadığı burada görülür.','Onaysız yazma riski bilinmeden kalır.','“7” yaz. Önce özet geliyorsa ve ancak “evet” yazınca kayıt oluyorsa geçti.'],
+ 'gpt-8':['CHAT','CHAT-001 Konular','Oturum kapanırken konunun yanlışlıkla “Bitti” yapılmaması gerekir; yoksa yarım iş kapalı görünür.','Yarım konular sessizce kapanmış sayılabilir.','“8” yaz. Konu durumu değişmeden oturum kapanıyorsa geçti.'],
+ 'gpt-2':['CHAT','CHAT-001, protokol menüsü','Konu seçme ve Geri/Yukarı/Aşağı/Yan/Sıradaki gezintisi, uzun işte yolunu kaybetmemeni sağlar.','Gezinti bozuksa konular arasında geçiş zorlaşır.','“2” ile konu aç, sonra “3” ile yönleri dene.'],
+ 'k-merge':['Git','SYS-010 oturum, SYS-004 değişiklik günlüğü','Dalda yapılan düzeltme main’e girmedikçe resmi sürümde yok sayılır.','Düzeltme canlıya geçmez; sonraki AI eski sürümle çalışır.','Dalı incele, uygunsa onay ver (“evet”). Merge’i Claude Code yapar.'],
+ 'k-paste':['Platform','Platform ayarları (ChatGPT, Claude)','Merge sonrası 2b metni platform ayarlarına elle yapıştırılmazsa AI eski yönergeyle çalışır.','AI’lar yeni kurallara uymaz.','Merge’den sonra yönerge metnini her platformun ayar sayfasına yeniden yapıştır.'],
+ 'k-sys009':['SYS','SYS-009 AI İşletim Protokolü','Protokolün TEK kaynağı. v1.6 kararı bütün AI’ların davranışını belirler.','CHAT protokolü ile SYS-009 uyumsuz kalır.','Taslağı oku, “v1.6’ya işle” de ya da değişiklik iste.'],
+ 'k-gh':['Git','GitHub izinleri','ChatGPT’nin depoya erişimi yoksa Git kaydı tutamaz.','ChatGPT oturumları Git’e yansımaz.','GitHub uygulama izinlerini aç, ChatGPT’nin depoyu görüp göremediğine bak.'],
+ 'k-ki16':['Baserow','KI-16 bilinen sorun','Çalışma alanı 3.000 satırı aşmamalı. Gerçek toplam doğrulanmadı.','Limit aşılırsa Baserow yavaşlar veya yazmayı reddedebilir.','Baserow’da Workspace usage sayfasına bak, toplamı sohbete yaz.'],
+ 'k-ses':['SYS','SYS-010 Oturum ve Devir','“Devam ediyor” kalan oturum, sonraki AI’ya yanlış devir bilgisi verir.','Devir zinciri bozulur; iş iki kez yapılabilir.','Oturum bitmişse kapat de, ben SYS-010’a işlerim.'],
+ 'k-inbox':['Baserow','08_INBOX','Dosyaların sisteme alınma yolu henüz denenmedi.','Dosya alımı ilk gerçek ihtiyaçta bozuk çıkabilir.','Küçük bir dosyayla ilk yüklemeyi dene, sonucu yaz.']};
+const sevByTable=()=>TD.filter(t=>t.r===0);
+views.bugun=function(){
+  const c=[];
+  openTasks.filter(t=>t.oncelik==='P0').forEach(t=>c.push(card('crit',`${tcode(t.kod)} ${esc(t.baslik)}`,[['Kime kaldı',esc(t.sorumlu||'—')],['Neye bağlı','SYS-008 Görev takibi (görev durumunun tek kaynağı)'+(pre(t.kod)?'. Öncesi: '+esc(pre(t.kod)):'')],['Neden gerekli','P0 en yüksek önceliktir; sistemin güvenilirliğini veya riskini doğrudan ilgilendirir.'],['Yapmazsan',succ(t.kod)?'Şunlar ilerleyemez: '+esc(succ(t.kod)):'Açık kalır ve her oturumda yeniden gündeme gelir.'],['Durum',pill(t.durum)]])));
+  D.sys.ki.filter(k=>k.onem==='P0').forEach(k=>c.push(card('crit',`${tcode(k.kod)} ${esc(k.baslik)}`,[['Neye bağlı','Bilinen sorunlar (KI) listesi'],['Durum',esc(k.durum||'—')]])));
+  unmerged.forEach(b=>{const i=INFO['k-merge'];c.push(card('warn',`<span class="mono">${esc(b.n)}</span> main’e alınmadı`,[['Neye bağlı',i[1]],['Neden gerekli',i[2]],['Yapmazsan',i[3]],['Ne yapacaksın',i[4]]]))});
+  running.forEach(s=>{const i=INFO['k-ses'];c.push(card('info',`${tcode(s.kod)} oturumu “Devam ediyor”`,[['Neye bağlı',i[1]],['Neden gerekli',i[2]],['Yapmazsan',i[3]],['Ne yapacaksın',i[4]]]))});
+  D.sys.ki.filter(k=>/doğrulanmadı/i.test(k.durum||'')).forEach(k=>{const i=INFO['k-ki16'];c.push(card('warn',`${tcode(k.kod)} ${esc(k.baslik)}`,[['Neye bağlı',i[1]],['Neden gerekli',i[2]],['Yapmazsan',i[3]],['Ne yapacaksın',i[4]]]))});
+  const open=TESTS.filter(t=>!checks[t[1]]);
+  c.push(card(open.length?'warn':'ok',`${open.length} test/karar maddesi açık`,[['Nerede','<a href="#test">Test listesi</a>: her maddenin açıklaması orada'],['İlk sırada',open.slice(0,3).map(t=>esc(t[2].split(':')[0])).join(' · ')]]));
+  const z=sevByTable().length;
+  return `<div class="tiles"><div class="tile ${c.filter(x=>x.includes('tcard crit')).length?'crit':'ok'}"><b>${c.filter(x=>x.includes('tcard crit')).length}</b><span>kritik</span></div><div class="tile warn"><b>${c.filter(x=>x.includes('tcard warn')).length}</b><span>senden bekleyen</span></div><div class="tile"><b>${z}</b><span>boş tablo (<a href="#saglik">Sağlık</a>)</span></div></div>
+  <p class="note" style="margin-top:0">Bu sayfa sadece senden bir şey bekleyenleri ve sorunlu yerleri gösterir. Her kartta: neye bağlı, neden gerekli, yapmazsan ne olur, ne yapacaksın. “Neye bağlı” kısmını <a href="#ag">İlişki ağı</a>’nda tıklayıp görebilirsin.</p>${c.join('')}
+  <p class="note">Açıklamalar dosya verisinden ve sistem kayıtlarından çıkarılan ilk taslaktır; yanlış bulduğunu bana yaz, düzelteyim.</p>`;
+};
+views.test=function(){
+  const secs=[...new Set(TESTS.map(t=>t[0]))];
+  return `<p class="note" style="margin-top:0">İşaretler yalnızca bu tarayıcıda saklanır. Sonucu sohbete yaz, Baserow’a ben işlerim. CHAT testleri protokol menüsünü, “Karar bekleyen” maddeleri bütün sistemi ilgilendirir.</p>`+secs.map(s=>`<section class="panel" style="margin-bottom:14px"><h2>${esc(s)}</h2>${TESTS.filter(t=>t[0]===s).map(t=>{const i=INFO[t[1]]||[];return `<div class="chk2"><label class="chk${checks[t[1]]?' done':''}"><input type="checkbox" data-k="${t[1]}" ${checks[t[1]]?'checked':''}><span>${esc(t[2])}</span></label>${i.length?`<details><summary>Bu ne, neden gerekli?</summary>${rowsLine([['Modül',esc(i[0])],['Neye bağlı',esc(i[1])],['Neden gerekli',esc(i[2])],['Yapmazsan',esc(i[3])],['Nasıl yaparsın',esc(i[4])]])}</details>`:''}${rq('t:'+t[1],t[2])}</div>`}).join('')}</section>`).join('');
+};
+views.saglik=function(){
+  const tot=TD.reduce((a,t)=>a+t.r,0),z=sevByTable().map(t=>lab(t.n)),iso=TD.filter((t,i)=>!t.o.length&&!incoming(i).length).map(t=>t.n);
+  const diff=D.tables.filter(t=>live[t.id]!==undefined&&live[t.id]!==t.r);
+  const R=[
+   [unmerged.length?'warn':'ok','Merge bekleyen dal',unmerged.length?unmerged.map(b=>esc(b.n)).join(', '):'Yok','Onaylanmayan düzeltme resmi sürümde görünmez.'],
+   [openTasks.some(t=>t.oncelik==='P0')?'crit':'ok','Açık P0 görev',openTasks.filter(t=>t.oncelik==='P0').map(t=>esc(t.kod)).join(', ')||'Yok','En yüksek öncelikli işler bekliyor demektir.'],
+   [running.length?'warn':'ok','Açık kalmış AI oturumu',running.map(s=>esc(s.kod)).join(', ')||'Yok','Devir kaydı yanlış okunabilir.'],
+   [tot>2400?'warn':'ok','Satır limiti (KI-16: 3.000)',`${tot} satır (anlık görüntü)`,'Limit aşılırsa Baserow yazmayı reddedebilir. Gerçek toplam doğrulanmadı.'],
+   [z.length?'warn':'ok','Boş tablo',z.length?`${z.length} tablo: ${esc(z.join(', '))}`:'Yok','Senaryo ve geri yükleme tabloları henüz kullanılmıyor olabilir; beklenen mi, unutulmuş mu kontrol et.'],
+   [iso.length?'info':'ok','Hiçbir yerle bağlantısı olmayan tablo',esc(iso.join(', '))||'Yok','Referans tablolar bağsız olabilir (ör. Kur Takibi).'],
+   [D.git.ho[0]?'crit':D.git.ho[1]?'warn':'ok','Devir kontrolü',`${D.git.ho[0]} hata, ${D.git.ho[1]} uyarı, ${D.git.ho[2]} tamam`,'Önceki AI’nın devir beyanı kanıtla uyuşuyor mu.'],
+   [Object.keys(live).length?(diff.length?'warn':'ok'):'info','Canlı satır karşılaştırması',Object.keys(live).length?(diff.length?diff.map(t=>esc(t.n)+' '+t.r+'→'+live[t.id]).join(', '):'Anlık görüntüyle aynı'):'Henüz okunmadı: sağ üstteki “Baserow’dan canlı say” düğmesine bas.','Tablo birden değiştiyse kayıt hatası veya beklenmedik silme olabilir.']];
+  return `<p class="note" style="margin-top:0">Kurallar dosyadaki veriden hesaplanır. Canlı Baserow okuması için sağ üstteki düğmeyi kullan; Git’in canlı durumunu bu sayfa göremez, o anlık görüntüdür.</p><section class="panel">${table([{h:'Durum',f:r=>`<span class="pill ${r[0]}">${r[0]==='crit'?'Kritik':r[0]==='warn'?'Dikkat':r[0]==='ok'?'Tamam':'Bilgi'}</span>`},{h:'Kontrol',f:r=>esc(r[1])},{h:'Sonuç',f:r=>r[2]},{h:'Neden önemli',f:r=>esc(r[3])}],R)}</section>`;
+};
+views.hatirla=function(){
+  const desc={'İş':'Asıl iş: firmalar, projeler, makineler, sözleşmeler, tahsisler. Her şeyin merkezi burası.','Finans':'Para: krediler, teminatlar, geri ödeme, kira, giderler, kur.','Lojistik':'Malın yolculuğu: sevkiyat, gümrük, muafiyet.','Belge':'Kanıt ve iz: belgeler, süreç adımları, yazışmalar.','Senaryo':'“Ya şöyle olsaydı” hesapları. Şu an boş.','SYS':'Sistemin kendini yönetmesi: sürüm, yedek, karar, görev, AI oturumları.','Eski':'Korunan eski kayıtlar. Silinmez.','CHAT':'Sohbet ve konu hafızası: fikirler, notlar, sorular.'};
+  const gs=[...new Set(TD.map(t=>t.gn))];
+  return `<section class="panel" style="margin-bottom:14px"><h2>4 ay sonra döndüysen: ilk 5 dakika</h2><ol style="margin:0;padding-left:20px;line-height:1.8"><li><a href="#bugun">Bugün</a> sayfasını aç. Sadece senden bekleyenler orada.</li><li><a href="#saglik">Sağlık</a> sayfasında kırmızı veya sarı satır var mı bak.</li><li>Yeni AI oturumunda önce “SYS-009’u oku, SYS-010’daki son devri özetle” de.</li><li>Bir şey anlamazsan <a href="#ag">İlişki ağı</a>’nda tabloya tıkla: kime bağlı, neden var görürsün.</li><li>Her değişiklik: AI önerir, sen “evet” dersin, o zaman yazılır.</li></ol></section>
+  <div class="grid"><section class="panel"><h2>Sistem ne işe yarıyor?</h2><p style="margin:0">Makine ve ekipman ithalat-ihracat projesinin (firmalar, makineler, sözleşmeler, kredi, sevkiyat, gümrük, belge) tek veri tabanı. Baserow’da durur; kuralları ve geçmişi Git’te durur; AI’lar SYS tablolarından devralır.</p></section>
+  <section class="panel"><h2>Gruplar</h2>${gs.map(g=>{const n=TD.filter(t=>t.gn===g),k=Object.keys(desc).find(x=>g.includes(x));return `<p style="margin:0 0 8px"><b>${esc(g)}</b> <span class="note">(${n.length} tablo)</span><br><span class="note">${esc(desc[k]||'')}</span></p>`}).join('')}</section>
+  <section class="panel"><h2>Sözlük</h2>${[['SYS','Sistem yönetim tabloları (SYS-001…011)'],['CHAT','Konu ve sohbet hafızası tabloları'],['P0 / P1 / P2','Öncelik: P0 en acil'],['KI','Bilinen sorun kaydı (ör. KI-16)'],['Devir','Bir AI oturumunun sonrakine bıraktığı not (SYS-010)'],['Merge','Dalı ana sürüme (main) katmak'],['Ağ / ilişki alanı','Bir tablonun başka tabloya bağlandığı sütun']].map(x=>`<p style="margin:0 0 6px"><b class="mono">${esc(x[0])}</b> <span class="note">${esc(x[1])}</span></p>`).join('')}</section></div>`;
+};
+
+/* ===== BÖLÜMLER: İş / Sentez / Sistem ===== */
+views.toplam=function(){return `<p class="note" style="margin-top:0">Bugün ve Test listesi sayfalarında her maddede Yap, Yapma, Sonra, Soru, Güncelle seç ve notunu yaz. Seçtikçe burada metin toplanır. Metni kopyalayıp istediğin AI’ya yapıştır. Bu bir <b>talep</b>tir, onay değildir; kayıt bu tarayıcıda saklanır.</p><section class="panel"><h2>Toplanan talepler: <span id="rqcount">${rqN()}</span></h2><textarea id="rqout" readonly>${esc(rqText())}</textarea><p style="margin:8px 0 0"><button type="button" class="btn" id="rqcp">Panoya kopyala</button> <button type="button" class="btn" id="rqclr">Hepsini temizle</button> <span class="note" id="rqmsg"></span></p></section>`};
+document.addEventListener('click',e=>{const m=document.getElementById('rqmsg');if(e.target.id==='rqcp'){const v=document.getElementById('rqout');v.select();(navigator.clipboard?navigator.clipboard.writeText(v.value):Promise.reject()).then(()=>m.textContent='Kopyalandı',()=>{try{document.execCommand('copy');m.textContent='Kopyalandı'}catch(x){m.textContent='Metni elle seç ve kopyala'}})}
+if(e.target.id==='rqclr'){if(e.target.dataset.a){REQ={};saveReq();route()}else{e.target.dataset.a=1;e.target.textContent='Emin misin? Tekrar bas'}}});
+const SECT={is:[0,1,2,3],sentez:[4],sistem:[5,6,7]};
+const SECS=[['bugun','Bugün',[['bugun','Bugün'],['toplam','Toplam talepler'],['genel','Genel özet']]],
+ ['is','İş',[['isag','İş ilişki ağı'],['istablo','İş tabloları']]],
+ ['sentez','Senaryo',[['sentez','Senaryo tabloları']]],
+ ['sistem','Sistem',[['sysag','Sistem ilişki ağı'],['sysmap','SYS haritası'],['akis','SYS akışı'],['gorev','Görev bağı'],['sys','SYS kayıtları'],['chat','CHAT'],['git','Git ve araçlar'],['saglik','Sağlık'],['test','Test listesi'],['sistabl','Sistem tabloları']]],
+ ['hatirla','Hatırla',[['hatirla','Sistemi hatırla'],['ag','Tüm ilişki ağı']]]];
+function renderNav(key){
+  const sec=SECS.find(s=>s[2].some(t=>t[0]===key))||SECS[0];
+  $('#nav').innerHTML=SECS.map(s=>`<a href="#${s[2][0][0]}" ${s===sec?'aria-current="page"':''}>${s[1]}${s[0]==='sistem'&&pendingTests()?` <span class="pill warn">${pendingTests()}</span>`:''}</a>`).join('');
+  let n2=$('#nav2');if(!n2){n2=document.createElement('nav');n2.id='nav2';n2.setAttribute('aria-label','Alt bölümler');$('#nav').after(n2)}
+  n2.innerHTML=sec[2].map(t=>`<a href="#${t[0]}" ${t[0]===key?'aria-current="page"':''}>${t[1]}</a>`).join('');
+  n2.hidden=sec[2].length<2;
+}
+function netIn(grp,title){
+  ALW=i=>grp.includes(TD[i].g);NT=title;
+  if(SEL!=null&&!ALW(SEL))SEL=null;if(FG!=null&&!grp.includes(FG))FG=null;
+  const out=new Set();
+  TD.forEach((t,i)=>t.o.forEach(p=>{if(p[0]===i)return;if(ALW(i)&&!ALW(p[0]))out.add(p[0]);if(!ALW(i)&&ALW(p[0]))out.add(i)}));
+  const note=`<p class="note" style="margin-top:0">Bu bölümün dışındaki tablolarla ${out.size} bağ var${out.size?': '+[...out].map(i=>esc(lab(TD[i].n))).join(', '):''}. Hepsini birlikte görmek için <a href="#ag">Tüm ilişki ağı</a>.</p>`;
+  const h=views.ag();ALW=null;NT='İlişki ağı';return note+h;
+}
+views.isag=()=>netIn(SECT.is,'İş tabloları ağı (firma, makine, kredi, sevkiyat, belge)');
+views.sysag=()=>netIn(SECT.sistem,'Sistem tabloları ağı (SYS, CHAT, eski)');
+const secTab=pre=>{YF=pre;const r=views.yapi();YF=null;return r};
+views.istablo=()=>secTab(['01','02','03','04']);
+views.sistabl=()=>secTab(['06','07','08']);
+views.sentez=function(){
+  const idx=TD.map((t,i)=>i).filter(i=>SECT.sentez.includes(TD[i].g));
+  const fin=D.sys.tasks.filter(t=>/^TASK-FIN/.test(t.kod)),tot=idx.reduce((a,i)=>a+TD[i].r,0);
+  const nb=new Set();idx.forEach(i=>TD[i].o.forEach(p=>{if(!idx.includes(p[0]))nb.add(p[0])}));
+  return `<div class="tiles"><div class="tile"><b>${idx.length}</b><span>senaryo tablosu</span></div><div class="tile ${tot?'ok':'warn'}"><b>${tot}</b><span>toplam satır</span></div><div class="tile"><b>${idx.reduce((a,i)=>a+TD[i].l,0)}</b><span>ilişki alanı</span></div></div>
+  <section class="panel" style="margin-bottom:14px"><h2>Bu bölüm ne işe yarıyor?</h2><p style="margin:0 0 8px">Senaryo Motoru, “ya şöyle olsaydı” hesapları içindir: finansman alternatiflerini (örneğin 12 ay ertelemeli satıcı kredisi) gerçek kayıtlara dokunmadan denemek ve karşılaştırmak için kurulmuş tablolar. Sonuç, işin finansman kararına girdi olur.</p><p class="note" style="margin:0">Şu an hepsi boş. Kayıtlarda boş olmasının nedeni açıkça yazmıyor; ilgili açık işler aşağıda (finansman modeli kararları kullanıcıdan bekleniyor).</p></section>
+  <section class="panel" style="margin-bottom:14px"><h2>Okuma sırası: bir senaryo nasıl kurulur</h2>${[[23,'1. Ana kayıt','Bir senaryonun kimliği: finansman, mülkiyet, ithalat, çıkış modeli ve kur varsayımı. Diğer beş tablo bu kayda bağlanır; ayrıca Firmalar ve Projeler ile bağlıdır.'],[24,'2. Finansman dilimleri','Parayı kim, nasıl veriyor: araç, anapara, faiz, vade, erteleme, balloon ve komisyon.'],[25,'3. Ödeme planı','Dilimlerin dönem dönem geri ödeme satırları ve toplam borç servisi.'],[28,'4. Gelir gider akışı','Senaryoda toplam gelir ve gider, net nakit akışı, borç servisi ve DSCR.'],[26,'5. Varsayımlar','Hesapta kullanılan parametreler, değerleri, kaynakları ve doğrulama durumu. Hangi rakama ne kadar güvendiğini gösterir.'],[27,'6. Değerlendirme','Sonuç ölçüleri: IRR, NPV, DSCR, net kâr. Senaryoları karşılaştırmak için son durak.']].map(x=>`<div class="tcard info"><div class="th"><b>${x[1]}</b><button type="button" class="chip" data-s="${x[0]}">${esc(TD[x[0]].n)} (${TD[x[0]].r} satır)</button></div><div class="why">${x[2]}</div><div class="why"><b>Bağlandığı tablolar</b> ${TD[x[0]].o.filter(p=>p[0]!==x[0]).map(p=>esc(lab(TD[p[0]].n))).join(', ')||'—'}</div></div>`).join('')}</section>
+  <div class="grid">
+  <section class="panel"><h2>Bağlandığı iş tabloları</h2><div class="chips">${[...nb].map(i=>`<button type="button" class="chip" data-s="${i}"><i style="background:${GC[TD[i].g]}"></i>${esc(lab(TD[i].n))}</button>`).join('')||'<span class="note">Dış bağ yok</span>'}</div></section>
+  <section class="panel"><h2>İlgili açık işler</h2>${fin.map(t=>`<p style="margin:0 0 8px">${tcode(t.kod)} ${pill(t.oncelik)} ${pill(t.durum)}<br>${esc(t.baslik)} <span class="note">· ${esc(t.sorumlu||'—')}</span></p>`).join('')||'<span class="note">Kayıt yok</span>'}</section></div>
+  ${SEL!=null?tdetail(SEL):''}`;
+};
+
+function route(){
+  const h = (location.hash || '#bugun').slice(1);
+  const key = views[h] ? h : 'genel';
+  renderNav(key);
+  $('#view').innerHTML = pageFx(key, views[key]());
+  window.scrollTo(0, NAVF?0:(SCR[location.hash||'#bugun']||0)); NAVF=false;
+  bindFilter();
+  document.querySelectorAll('input[data-k]').forEach(i=>i.addEventListener('change',()=>{ checks[i.dataset.k]=i.checked; saveChecks(); route(); }));
+}
+function bindFilter(){ const f=$('#flt'); if(!f) return; f.addEventListener('input',()=>{ const p=f.selectionStart; $('#view').innerHTML=views[curKey()](); const n=$('#flt'); n.focus(); n.setSelectionRange(p,p); bindFilter(); }); }
+window.addEventListener('hashchange', route);
+$('#stamp').textContent = `Anlık görüntü: ${fmtDate(D.snap)} · Baserow 263856 ve CIN-EXIM-SYSTEM deposu · salt okunur`;
+route();
+
+/* ---- canlı satır sayısı (Baserow bağlayıcısı, izin gerekir) ---- */
+const MSG = {
+  server_not_connected:'Baserow bağlayıcısı bu hesapta bulunamadı. Claude ayarlarında Bağlayıcılar bölümünden ekle.',
+  needs_reauth:'Baserow bağlantısının süresi dolmuş. Bağlayıcıyı yeniden bağla.',
+  not_in_manifest:'Bu sayfa için Baserow izni verilmedi. Düğmeye tekrar basıp izin ver.',
+  approval_required:'Baserow okuması için onay gerekiyor. Düğmeye tekrar bas.',
+  blocked_by_policy:'Kuruluş politikası bu bağlayıcı çağrısını engelliyor.',
+  selection_required:'Birden fazla Baserow bağlayıcın var, Claude\'un sorduğu seçimi yap.'
+};
+async function liveRefresh(mcp){
+  const btn = $('#liveBtn'), st = $('#liveStatus');
+  btn.disabled = true; let ok = 0, fail = 0, stop = null;
+  const queue = [...D.tables];
+  const worker = async () => {
+    while (queue.length && !stop) {
+      const t = queue.shift();
+      try {
+        const res = await mcp.callTool(SERVER, 'list_table_rows', {table_id:t.id, size:1}, {cache:false});
+        let p = res.payload; if (typeof p === 'string') { try { p = JSON.parse(p); } catch(e){} }
+        if (p && typeof p.count === 'number') { live[t.id] = p.count; ok++; } else fail++;
+      } catch (e) {
+        if (['server_not_connected','needs_reauth','not_in_manifest','approval_required','blocked_by_policy','selection_required','not_granted','capability_disabled'].includes(e.code)) stop = e;
+        else fail++;
+      }
+      st.textContent = `Okunuyor… ${ok + fail}/${D.tables.length}`;
+    }
+  };
+  await Promise.all([worker(), worker(), worker()]);
+  btn.disabled = false;
+  if (stop) { st.textContent = MSG[stop.code] || `Canlı okuma yapılamadı (${stop.code}).`; }
+  else { liveAt = new Date(); st.textContent = `Canlı: ${ok} tablo okundu${fail?`, ${fail} okunamadı`:''} · ${liveAt.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'})}`; }
+  const changed = D.tables.filter(t=>live[t.id]!==undefined && live[t.id]!==t.r).length;
+  if (!stop && changed) st.textContent += ` · ${changed} tabloda fark var (Yapı sekmesi)`;
+  route();
+}
+(async () => {
+  try {
+    const mcp = window.claude && window.claude.use ? await window.claude.use('mcp') : null;
+    if (!mcp) return;
+    const b = $('#liveBtn'); b.hidden = false;
+    b.addEventListener('click', () => liveRefresh(mcp));
+  } catch (e) {}
+})();
+</script>
+
+</body></html>

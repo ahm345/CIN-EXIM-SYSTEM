@@ -1,0 +1,26 @@
+
+.rel{margin:10px 0 4px;border-top:1px dashed var(--line);padding-top:8px}
+.rlh{font-size:12px;margin-bottom:6px}.rlg{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:4px 0}
+.rlt{font:11px var(--mono);color:var(--muted);min-width:46px;text-transform:uppercase}
+.rc{font:inherit;font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--fg);cursor:pointer;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rc small{color:var(--muted)}
+.rc.t-f{border-color:var(--accent)}.rc.t-t{border-color:var(--info)}.rc.t-a{border-color:var(--warn)}.rc.t-s{border-color:var(--muted)}
+.rc.on{background:var(--accent-soft)}
+.rc[data-gt]:not(.on){opacity:.45;text-decoration:line-through}
+.relx{display:block}
+.relo{margin:8px 0 4px 10px;padding:8px 10px;border:1px solid var(--line);border-left:3px solid var(--muted);border-radius:8px;background:var(--surface2)}
+.relo.t-f{border-left-color:var(--accent)}.relo.t-t{border-left-color:var(--info)}.relo.t-a{border-left-color:var(--warn)}
+.rloh{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
+.gtools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
+.gtools input,.gtools select{background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:4px 6px;font:inherit;font-size:13px}
+.gsvg{width:100%;height:auto;aspect-ratio:3/2;max-height:62vh;background:var(--surface2);border:1px solid var(--line);border-radius:10px;touch-action:pan-y;cursor:grab;display:block}
+.gsvg .ln{stroke:var(--lc,var(--muted));stroke-opacity:.45;stroke-width:1}
+.gsvg .gn{cursor:pointer}.gsvg .gn circle{stroke:var(--surface);stroke-width:1.5}
+.gsvg .t-f circle{fill:var(--accent)}.gsvg .t-t circle{fill:var(--info)}.gsvg .t-a circle{fill:var(--warn)}.gsvg .t-s circle{fill:var(--muted)}
+.gsvg text{font:10px var(--sans);fill:var(--fg);text-anchor:middle;opacity:0;pointer-events:none;paint-order:stroke;stroke:var(--surface2);stroke-width:3px}
+.gsvg text.big,.gsvg .gn.sel text,.gsvg .gn.hl text,.gsvg .gn.mt text{opacity:1}
+.gsvg .gn.sel circle{stroke:var(--fg);stroke-width:2.5}
+.gsvg .gn.mt circle{stroke:var(--crit);stroke-width:3}
+.gsvg.dim .gn:not(.hl){opacity:.18}.gsvg.dim .ln{stroke-opacity:.08}.gsvg.dim .ln.hl{stroke-opacity:.9;stroke-width:1.6}
+.gsvg .hid{display:none}
+.gsvg .gn{touch-action:none}
