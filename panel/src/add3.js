@@ -130,6 +130,7 @@ views.paneltest = function () {
   t('Evrak ve kolon verisi tutarlı', () => window.EVTEST ? window.EVTEST() : true);
   t('Seçili proje kapsamı çalışıyor', () => window.SCTEST ? window.SCTEST() : true);
   t('v23 menü, canlı okuma, rapor ve Drive çalışıyor', () => window.V23TEST ? window.V23TEST() : true);
+  t('v24 LOI/Teklif adımları, Drive ve Evrak güncel', () => window.V24TEST ? window.V24TEST() : true);
   t('İş akışı şeması ve buğday şablonu çalışıyor', () => window.AKTEST ? window.AKTEST() : true);
   t('Ana veri, taraflar ve Incoterm ayrıntısı çalışıyor', () => window.XTEST ? window.XTEST() : true);
   t('Yerel kayıt kullanılabilir', () => { localStorage.setItem('cin-test', '1'); localStorage.removeItem('cin-test'); return true; });
