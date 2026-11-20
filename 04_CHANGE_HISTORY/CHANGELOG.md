@@ -4,6 +4,17 @@ Bu dosya **bu deponun** teknik değişikliklerini kronolojik tutar. Baserow yap�
 
 ---
 
+## repo-v0.4.6 — 2026-11-20 — Panel v24: LOI/Teklif adımları ve TPL düzeltmesi
+
+| Alan | Değer |
+|---|---|
+| Ne değişti? | Tüm süreç şablonlarına (boş hariç) başta "Niyet mektubu (LOI)" ve "Teklif" adımları eklendi; Evrak ve Drive sayfaları güncellendi (`panel/src/add16.js`). v24'ün ilk derlemesi (71062d0) gerçek tarayıcıda açılmıyordu: `add16.js` kapsam dışındaki `TPL` adını kullanıyordu. Düzeltme: `TAS.TPL` kullanılıyor. `add15.js` testi boş proje durumunu geçerli sayıyor. |
+| Neden? | Kullanıcı isteği (2026-11-19); başka AI'nın doğrulamasında "TPL is not defined" hatası bulundu, Chromium'da tekrarlandı. |
+| Baserow / Drive bağlantısı | SYS-004 ID 31 (CHG-SYS-021: Belgeler Tür'e LOI ve Teklif; satır 90-92). SYS-010 ID 14. Drive: 00_KALIPLAR'a LOI, Teklif, LC Belge Seti kalıpları. |
+| Test | jsdom 68/0; gerçek Chromium (Playwright): sayfa hatası yok, v23/v24 testleri geçti. jsdom ilk derlemedeki hatayı yakalamamıştı, bu yüzden artık Chromium ile de denenir. |
+
+---
+
 ## repo-v0.4.5 — 2026-11-18 — Panel kaynağı depoya alındı (TASK-DASH-001 kısmi)
 
 | Alan | Değer |

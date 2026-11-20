@@ -127,7 +127,7 @@
   window.V23TEST = () => {
     const f = [];
     SECS3.forEach(s => s[2].forEach(t => { if (!views[t[0]]) f.push('eksik:' + t[0]); }));
-    ['pkart', 'kontrol', 'rapor', 'drive', 'canli'].forEach(k => { try { const h = views[k](); if (typeof h !== 'string' || h.length < 40) f.push('boş:' + k); } catch (x) { f.push(k + ':' + x.message); } });
+    ['pkart', 'kontrol', 'rapor', 'drive', 'canli'].forEach(k => { try { const h = views[k](); if (typeof h !== 'string' || (h.length < 40 && !/Açık proje yok/.test(h))) f.push('boş:' + k); } catch (x) { f.push(k + ':' + x.message); } });
     LV.d = { proje: [{ id: 1, 'Proje Adı': 'T', 'Incoterm': { value: 'FOB' }, 'Aktif': true }], kredi: [{ id: 5, 'Kredi': 'K', 'Proje': [{ id: 1, value: 'T' }], 'Kredi Mutabakatı': 'FARK 10' }] }; LV.sel = 1;
     try { const h = views.kontrol(); if (!/FARK 10/.test(h)) f.push('kontrol sütunu görünmedi'); } catch (x) { f.push('kontrol:' + x.message); }
     LV.d = {}; LV.sel = null;

@@ -1,5 +1,6 @@
 /* v24: LOI + Teklif adımları tüm şablonlarda, canlı Evrak, güncel Drive sayfası */
 (function () {
+  const TPL = TAS.TPL;
   const LOI = 'Niyet mektubu (LOI)', TEK = 'Teklif';
   const shift = a => [a[0], a[1], a[2], a[3], (a[4] && a[4].length) ? a[4].map(x => x + 2) : [1]];
   TPL.forEach(t => {
