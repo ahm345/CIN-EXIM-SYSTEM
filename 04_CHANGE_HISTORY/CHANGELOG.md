@@ -4,6 +4,17 @@ Bu dosya **bu deponun** teknik değişikliklerini kronolojik tutar. Baserow yap�
 
 ---
 
+## repo-v0.4.7 — 2026-11-21 — Panel v25: Dosya ara sayfası
+
+| Alan | Değer |
+|---|---|
+| Ne değişti? | `panel/src/add17.js` ve `drive.json`: Çalışma ve Drive menüsünde "Dosya ara" sayfası. Drive SURECYONETIM klasöründeki 62 dosyanın anlık görüntüsü (gerçek klasör yoluyla); arama, Proje/Konu/Tür/Biçim/Kaynak/Baserow-kaydı süzgeçleri, çoklu seçim, seçili linkleri ve CSV'yi üretme/kopyalama. |
+| Neden? | Kullanıcı isteği (2026-11-20): tüm dosyaların seçilebildiği, süzülebildiği bir arama sayfası. |
+| Baserow / Drive bağlantısı | Baserow'a yazmaz. Drive listesi statik anlık görüntüdür (2026-11-20); yeni dosyada yenilenmesi gerekir. P02-P04 demo dosyaları Drive'dadır, Baserow Belgeler'de satırları henüz yoktur. |
+| Test | jsdom 70/0; Chromium (Playwright): sayfa hatası yok, 62 satır, arama, seçim ve CSV denendi. |
+
+---
+
 ## repo-v0.4.6 — 2026-11-20 — Panel v24: LOI/Teklif adımları ve TPL düzeltmesi
 
 | Alan | Değer |
