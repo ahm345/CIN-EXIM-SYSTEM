@@ -90,4 +90,3 @@
   window.V26TEST = () => { const f = [], C = cat(); if (C.length < 4) f.push('katalog'); if (!/Çalışılan proje/.test(pbarHtml())) f.push('çubuk'); return f.length ? f.join(', ') : true; };
 })();
 
-</script>

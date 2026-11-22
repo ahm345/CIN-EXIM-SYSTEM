@@ -3221,7 +3221,6 @@ window.SCTEST = () => { const f = [], p = scopeSel(); if (!p) return 'proje yok'
   window.V26TEST = () => { const f = [], C = cat(); if (C.length < 4) f.push('katalog'); if (!/Çalışılan proje/.test(pbarHtml())) f.push('çubuk'); return f.length ? f.join(', ') : true; };
 })();
 
-</script>
 
 window.addEventListener('hashchange', ()=>{CUR=null;route()});
 document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a||a.classList.contains('rl'))return;e.preventDefault();CUR=a.getAttribute('href').slice(1);try{history.replaceState(null,'','#'+CUR)}catch(x){}route()});
