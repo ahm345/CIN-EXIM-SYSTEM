@@ -3222,7 +3222,8 @@ window.SCTEST = () => { const f = [], p = scopeSel(); if (!p) return 'proje yok'
   const noProj = () => note(F.sinif === 'İş' ? 'İş (gerçek) sınıfında henüz proje yok. Baserow Projeler tablosunda “Gerçek Veri” işaretli proje açılınca burada görünür. Eğitim projeleri için üstten “Eğitim projeleri”ni seç.' : 'Bu sınıfta proje bulunamadı. Üstten proje seç.');
   SCV.forEach(k => { const o = views[k]; if (o) views[k] = () => wrongCls() ? noProj() : (BSEL ? bview(k) : o()); });
   const ob = views.bugun; views.bugun = () => wrongCls() ? noProj() : (BSEL ? bview('pkart') : ob());
-  PORT.forEach(k => { const o = views[k]; if (o) views[k] = () => scopeOne() ? note('Bu sayfa tüm projeleri veya sistem yapısını gösterir (proje verisi değildir); “Yalnız bu proje” kapsamında kapalıdır. Seçili projenin verisi için Çalışma menüsünü kullan.') : o(); });
+  const gBanner = '<div class="akd" style="border-left:4px solid #b7791f;margin:0 0 10px"><p><b>Genel / sistem sayfası.</b> Bu sayfa seçili projeye göre süzülmez; tüm projeleri veya sistem yapısını gösterir. İçindeki örnekler (otobüs, kiralama vb.) seçili projenin verisi değildir.</p></div>';
+  PORT.forEach(k => { const o = views[k]; if (o) views[k] = () => (scopeOne() ? gBanner : '') + o(); });
   BUSV.forEach(k => { const o = views[k]; if (o) views[k] = () => scopeOne() && !isBus() ? note('Bu sayfa yalnızca ilk (kiralama) projeye aittir; seçili proje o değil.') : o(); });
   setTimeout(() => { try { if (!BSEL || wrongCls()) autoPick(); } catch (e) {} live(true); }, 300);
   window.V26 = { list: () => cat().filter(match), cat, F, choose, live, sel: () => BSEL };
