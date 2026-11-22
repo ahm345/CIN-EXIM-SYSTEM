@@ -3131,7 +3131,8 @@ window.SCTEST = () => { const f = [], p = scopeSel(); if (!p) return 'proje yok'
 })();
 (function () {
   const SRV = 'Baserow', TB = { proje: 1299126, lot: 1299127, sevk: 1299131, bel: 1299133, adim: 1299137, kredi: 1299129, gider: 1299135 };
-  const F = { q: '', inc: '', ulke: '', mal: '', firma: '', kaynak: '', durum: '' };
+  const F = { q: '', sinif: 'Eğitim', inc: '', ulke: '', mal: '', firma: '', durum: '' };
+  try { const v = localStorage.getItem('cin-sinif'); if (v === 'Eğitim' || v === 'İş') F.sinif = v; } catch (e) {}
   let BSEL = null, D = {}, LV = null, ERRM = '';
   try { const v = localStorage.getItem('cin-psel'); if (v && v[0] === 'B') BSEL = +v.slice(1); } catch (e) {}
   const E = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -3146,16 +3147,15 @@ window.SCTEST = () => { const f = [], p = scopeSel(); if (!p) return 'proje yok'
   const ml = t => { const m = MAL.filter(x => t.toLowerCase().indexOf(x.toLowerCase()) > -1); return m.length ? m : ['Diğer']; };
   const pr = (k, id) => (D[k] || []).filter(r => ids(r, 'Proje').indexOf(id) > -1);
   const firms = id => { const s = new Set(); [['lot', 'Tedarikçi'], ['sevk', 'Taşıyıcı'], ['kredi', 'Kreditör'], ['kredi', 'Borçlu']].forEach(a => pr(a[0], id).forEach(r => V(r, a[1]).split(', ').forEach(x => x && s.add(x)))); return [...s]; };
-  const BP = () => D.proje ? D.proje.map(r => ({ id: r.id, ad: V(r, 'Proje Adı'), inc: V(r, 'Incoterm'), tp: V(r, 'Teslim Noktası'), aktif: r['Aktif'] === true, row: r })) : BSR.proje.map(b => ({ id: b.id, ad: b.ad, inc: b.inc, tp: '', aktif: b.aktif !== false, row: null }));
+  const BP = () => D.proje ? D.proje.map(r => ({ id: r.id, ad: V(r, 'Proje Adı'), inc: V(r, 'Incoterm'), tp: V(r, 'Teslim Noktası'), aktif: r['Aktif'] === true, gercek: r['Gerçek Veri'] === true, row: r })) : BSR.proje.map(b => ({ id: b.id, ad: b.ad, inc: b.inc, tp: '', aktif: b.aktif !== false, gercek: false, row: null }));
   const bp = id => BP().filter(b => b.id === id)[0];
   function cat() {
     const o = [];
-    TAS.PL.dm.forEach((p, i) => o.push({ k: 'L' + i, src: 'Örnek', ad: p.n, inc: p.inc || '', mal: mk(p.n + ' ' + ((p.em || {}).ad || ''), (p.em || {}).ad), ulke: ul(p.n), fr: Object.values(p.fr || {}).filter(Boolean), pasif: !!p.pasif }));
-    BP().forEach(b => { const lp = pr('lot', b.id).map(r => (/-Lot-\d+\s+(.*?)\s*[(]/.exec(V(r, 'Lot Adı')) || [])[1]).filter(Boolean); o.push({ k: 'B' + b.id, src: 'Baserow', ad: b.ad, inc: b.inc, mal: mk(lp.join(' ') + ' ' + b.ad, lp[0]), ulke: ul(b.ad + ' ' + b.tp), fr: firms(b.id), pasif: !b.aktif }); });
+    /* Yerel (gömülü) örnek projeler katalogdan çıkarıldı: yalnız Baserow projeleri listelenir. */
+    BP().forEach(b => { const lp = pr('lot', b.id).map(r => (/-Lot-\d+\s+(.*?)\s*[(]/.exec(V(r, 'Lot Adı')) || [])[1]).filter(Boolean); o.push({ k: 'B' + b.id, sinif: b.gercek ? 'İş' : 'Eğitim', src: 'Baserow', ad: b.ad, inc: b.inc, mal: mk(lp.join(' ') + ' ' + b.ad, lp[0]), ulke: ul(b.ad + ' ' + b.tp), fr: firms(b.id), pasif: !b.aktif }); });
     return o;
   }
-  const match = c => { const t = [c.ad, c.inc, c.mal.join(' '), c.ulke.join(' '), c.fr.join(' ')].join(' ').toLowerCase();
-    return (!F.q || t.indexOf(F.q.toLowerCase()) > -1) && (!F.inc || c.inc === F.inc) && (!F.ulke || c.ulke.indexOf(F.ulke) > -1) && (!F.mal || c.mal.indexOf(F.mal) > -1) && (!F.firma || c.fr.indexOf(F.firma) > -1) && (!F.kaynak || c.src === F.kaynak) && (!F.durum || (F.durum === 'Pasif') === c.pasif); };
+  const match = c => mtc(c, null);
   const curKey = () => BSEL ? 'B' + BSEL : 'L' + scopeSelIdx();
   const scopeSelIdx = () => { const p = scopeSel(); return Math.max(0, TAS.PL.dm.indexOf(p)); };
   function resOpts(R, cur, C) {
@@ -3163,17 +3163,17 @@ window.SCTEST = () => { const f = [], p = scopeSel(); if (!p) return 'proje yok'
     if (!R.some(c => c.k === cur)) { const c = C.filter(x => x.k === cur)[0]; if (c) h = `<option value="${c.k}" selected>• seçili: ${E(c.ad.slice(0, 60))} (süzgeç dışı)</option>` + h; }
     return h || '<option value="">Eşleşen proje yok</option>';
   }
-  const FK = { inc: c => [c.inc], ulke: c => c.ulke, mal: c => c.mal, firma: c => c.fr, kaynak: c => [c.src], durum: c => [c.pasif ? 'Pasif' : 'Aktif'] };
+  const FK = { sinif: c => [c.sinif], inc: c => [c.inc], ulke: c => c.ulke, mal: c => c.mal, firma: c => c.fr, durum: c => [c.pasif ? 'Pasif' : 'Aktif'] };
   const mtc = (c, skip) => { const t = [c.ad, c.inc, c.mal.join(' '), c.ulke.join(' '), c.fr.join(' ')].join(' ').toLowerCase();
     if (F.q && t.indexOf(F.q.toLowerCase()) < 0) return false;
     return Object.keys(FK).every(f => f === skip || !F[f] || FK[f](c).indexOf(F[f]) > -1); };
   const facet = (C, f) => { const v = [...new Set(C.filter(c => mtc(c, f)).flatMap(FK[f]))].filter(Boolean).sort(); if (F[f] && v.indexOf(F[f]) < 0) v.unshift(F[f]); return v; };
-  const LAB = { inc: 'Incoterm', ulke: 'Ülke', mal: 'Ürün', firma: 'Firma', kaynak: 'Kaynak', durum: 'Durum' };
+  const LAB = { inc: 'Incoterm', ulke: 'Ülke', mal: 'Ürün', firma: 'Firma', durum: 'Durum' };
   const optHtml = (C, f) => `<option value="">${LAB[f]}: tümü</option>` + facet(C, f).map(v => `<option${F[f] === v ? ' selected' : ''}>${E(v)}</option>`).join('');
   const sel = (C, f) => `<select data-v26="${f}" aria-label="${LAB[f]}">${optHtml(C, f)}</select>`;
   pbarHtml = function () {
     const C = cat(), R = C.filter(match);
-    return `<div class="pbar v26" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><b>Çalışılan proje</b><input id="v26q" type="search" placeholder="Ad, ürün, yer, firma" value="${E(F.q)}" aria-label="Proje ara">` + Object.keys(LAB).map(f => sel(C, f)).join('') + `<button type="button" class="btn ghost" data-v26="reset">Temizle</button><select id="v26res" data-v26="pick" aria-label="Proje listesi">${resOpts(R, curKey(), C)}</select><span class="note" id="v26n">${R.length}/${C.length} proje</span><button type="button" class="rc${scopeOne() ? ' on' : ''}" data-pb="one">Yalnız bu proje</button><button type="button" class="rc${scopeOne() ? '' : ' on'}" data-pb="all">Tüm projeler</button></div>`;
+    return `<div class="pbar v26" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><b>Veri</b><select data-v26="sinif" aria-label="Eğitim veya İş"><option value="Eğitim"${F.sinif === 'Eğitim' ? ' selected' : ''}>Eğitim projeleri</option><option value="İş"${F.sinif === 'İş' ? ' selected' : ''}>İş (gerçek) projeleri</option></select><b>Proje</b><input id="v26q" type="search" placeholder="Ad, ürün, yer, firma" value="${E(F.q)}" aria-label="Proje ara">` + Object.keys(LAB).map(f => sel(C, f)).join('') + `<button type="button" class="btn ghost" data-v26="reset">Temizle</button><select id="v26res" data-v26="pick" aria-label="Proje listesi">${resOpts(R, curKey(), C)}</select><span class="note" id="v26n">${R.length}/${C.length} proje</span><button type="button" class="rc${scopeOne() ? ' on' : ''}" data-pb="one">Yalnız bu proje</button><button type="button" class="rc${scopeOne() ? '' : ' on'}" data-pb="all">Tüm projeler</button></div>`;
   };
   function choose(k) { if (k[0] === 'B') BSEL = +k.slice(1); else { BSEL = null; TAS.PL.ds = +k.slice(1); PS.akN = null; } SCOPE = 'one'; try { localStorage.setItem('cin-psel', k); localStorage.setItem('cin-scope', 'one'); } catch (e) {} TAS.savePL(); route(); }
   function refresh() { const C = cat(), R = C.filter(match);
@@ -3181,13 +3181,17 @@ window.SCTEST = () => { const f = [], p = scopeSel(); if (!p) return 'proje yok'
     const r = document.getElementById('v26res'); if (r) r.innerHTML = resOpts(R, curKey(), C);
     const n = document.getElementById('v26n'); if (n) n.textContent = R.length + '/' + C.length + ' proje'; }
   document.addEventListener('input', e => { if (e.target.id === 'v26q') { F.q = e.target.value; refresh(); } }, true);
-  document.addEventListener('change', e => { const t = e.target, f = t.dataset && t.dataset.v26; if (!f) return; if (f === 'pick') { if (t.value) choose(t.value); } else { F[f] = t.value; refresh(); } }, true);
-  document.addEventListener('click', e => { const b = e.target.closest && e.target.closest('[data-v26]'); if (!b) return; if (b.dataset.v26 === 'reset') { Object.keys(F).forEach(k => F[k] = ''); const q = document.getElementById('v26q'); if (q) q.value = ''; refresh(); } if (b.dataset.v26 === 'live') live(); }, true);
-  async function live() {
+  const autoPick = () => { const R = cat().filter(match); if (R.length && !R.some(c => c.k === curKey())) choose(R[0].k); else route(); };
+  document.addEventListener('change', e => { const t = e.target, f = t.dataset && t.dataset.v26; if (t.id === 'v26q') { F.q = t.value; refresh(); autoPick(); return; } if (!f) return;
+    if (f === 'pick') { if (t.value) choose(t.value); return; }
+    F[f] = t.value; if (f === 'sinif') { try { localStorage.setItem('cin-sinif', t.value); } catch (x) {} }
+    refresh(); autoPick(); }, true);
+  document.addEventListener('click', e => { const b = e.target.closest && e.target.closest('[data-v26]'); if (!b) return; if (b.dataset.v26 === 'reset') { Object.keys(F).forEach(k => { if (k !== 'sinif') F[k] = ''; }); route(); } if (b.dataset.v26 === 'live') live(); }, true);
+  async function live(silent) {
     let m = null; try { m = await window.claude.use('mcp'); } catch (e) {}
-    if (!m) { ERRM = 'Baserow bağlantısı bu görünümde yok (claude.ai içindeki artifact’ta çalışır).'; route(); return; }
+    if (!m) { if (silent) return; ERRM = 'Baserow bağlantısı bu görünümde yok (claude.ai içindeki artifact’ta çalışır).'; route(); return; }
     for (const k of Object.keys(TB)) { try { const r = await m.callTool(SRV, 'list_table_rows', { table_id: TB[k], size: 200 }, { cache: false }); let p = r && r.payload; if (typeof p === 'string') { try { p = JSON.parse(p); } catch (x) {} } D[k] = (p && p.results) || []; } catch (e) { ERRM = 'Okuma hatası (' + k + '): ' + ((e && (e.code || e.message)) || 'bilinmiyor'); route(); return; } }
-    LV = new Date(); ERRM = ''; route();
+    LV = new Date(); ERRM = ''; autoPick();
   }
   const tb = (h, rows) => rows.length ? `<div style="overflow-x:auto"><table><thead><tr>${h.map(x => `<th>${E(x)}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>` : '<p class="note">Kayıt yok.</p>';
   const pl = t => `<span class="pill${/^(OK|TARİH GEÇERLİ|Tarih geçerli)/i.test(t) ? '' : ' warn'}">${E(t || '—')}</span>`;
@@ -3211,12 +3215,16 @@ window.SCTEST = () => { const f = [], p = scopeSel(); if (!p) return 'proje yok'
     return hd + RV[k](b, S);
   }
   const SCV = ['pkart', 'taraflar', 'surec', 'surec1', 'surec2', 'surec3', 'surec4', 'evrak', 'dosya', 'finans', 'kontrol', 'rapor'];
-  const BUSV = ['operasyon', 'teklif'], isBus = () => BSEL ? BSEL === 1 : scopeSelIdx() === 0;
+  const BUSV = ['operasyon', 'teklif'], isBus = () => { const b = BSEL && bp(BSEL); return !!b && /otob[uü]s|kiral|lease/i.test(b.ad); };
   const PORT = ['sys', 'git', 'akis', 'istablo', 'senaryo', 'giris', 'issoz', 'ortak', 'graf', 'sozluk', 'kolon', 'toplam', 'genel', 'projeler', 'canli', 'cikarim', 'departman', 'isdemo', 'tasarim1', 'tasarim2', 'tasarim3', 'tasarim4', 'tasarim5'];
-  SCV.forEach(k => { const o = views[k]; if (o) views[k] = () => scopeOne() && BSEL ? bview(k) : o(); });
-  const ob = views.bugun; views.bugun = () => scopeOne() ? (BSEL ? bview('pkart') : (views.pkart ? views.pkart() : ob())) : ob();
+  const selCat = () => cat().filter(c => c.k === curKey())[0];
+  const wrongCls = () => { const c = selCat(); return !c || c.sinif !== F.sinif; };
+  const noProj = () => note(F.sinif === 'İş' ? 'İş (gerçek) sınıfında henüz proje yok. Baserow Projeler tablosunda “Gerçek Veri” işaretli proje açılınca burada görünür. Eğitim projeleri için üstten “Eğitim projeleri”ni seç.' : 'Bu sınıfta proje bulunamadı. Üstten proje seç.');
+  SCV.forEach(k => { const o = views[k]; if (o) views[k] = () => wrongCls() ? noProj() : (BSEL ? bview(k) : o()); });
+  const ob = views.bugun; views.bugun = () => wrongCls() ? noProj() : (BSEL ? bview('pkart') : ob());
   PORT.forEach(k => { const o = views[k]; if (o) views[k] = () => scopeOne() ? note('Bu sayfa tüm projeleri veya sistem yapısını gösterir (proje verisi değildir); “Yalnız bu proje” kapsamında kapalıdır. Seçili projenin verisi için Çalışma menüsünü kullan.') : o(); });
   BUSV.forEach(k => { const o = views[k]; if (o) views[k] = () => scopeOne() && !isBus() ? note('Bu sayfa yalnızca ilk (kiralama) projeye aittir; seçili proje o değil.') : o(); });
+  setTimeout(() => { try { if (!BSEL || wrongCls()) autoPick(); } catch (e) {} live(true); }, 300);
   window.V26 = { list: () => cat().filter(match), cat, F, choose, live, sel: () => BSEL };
   window.V26TEST = () => { const f = [], C = cat(); if (C.length < 4) f.push('katalog'); if (!/Çalışılan proje/.test(pbarHtml())) f.push('çubuk'); return f.length ? f.join(', ') : true; };
 })();
