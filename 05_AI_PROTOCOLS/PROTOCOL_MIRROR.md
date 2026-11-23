@@ -1,6 +1,6 @@
 # SYS-009 Protokol Yansıması
 
-> **Bu dosya bir yansımadır, kaynak değildir.** Protokolün tek kaynağı Baserow `SYS-009` (`AI-BOOT-EXIT-001`) kaydıdır. Çelişki olursa SYS-009 geçerlidir. Yansıma, canlı SYS-009 kaydından çıkarılmıştır (v1.4 çıkarımı 2026-11-06 salt okunur; **v1.5 eki 2026-11-06 aynı gün SYS-009'a yazıldı, SYS-004 `CHG-SYS-013`**). Güncel protokol sürümü **1.5**. Sürüm değiştiyse bu dosya eskidir: SYS-009'u oku ve bu dosyayı güncelle.
+> **Bu dosya bir yansımadır, kaynak değildir.** Protokolün tek kaynağı Baserow `SYS-009` (`AI-BOOT-EXIT-001`) kaydıdır. Çelişki olursa SYS-009 geçerlidir. Yansıma, canlı SYS-009 kaydından çıkarılmıştır (v1.4 çıkarımı 2026-11-06 salt okunur; **v1.5 eki 2026-11-06 aynı gün SYS-009'a yazıldı, SYS-004 `CHG-SYS-013`**). Güncel protokol sürümü **1.6** (2026-11-22, KNW okuma/yazma kuralı; bu dosyanın v1.5'e kadar olan gövdesi aşağıdadır, v1.6 eki en sonda). Sürüm değiştiyse bu dosya eskidir: SYS-009'u oku ve bu dosyayı güncelle.
 
 **Protokol adı:** CIN EXIM AI Giriş, Çalışma, Kayıt ve Devir Protokolü  
 **Durum (kayıttaki):** Kullanıcı onayladı – Baserow'a uygulandı; platformlar arası test bekliyor
@@ -65,3 +65,12 @@ SYS-001 `AI Başlangıç Talimatı` alanı SYS-009'u tek kaynak olarak işaret e
 Belge, rapor, model veya başka bir çıktı üretmeden önce AI eksik bilgilerin **tamamını tek seferde, tek listede** sorar; parça parça sormaz. Liste üç gruba ayrılır: **(A)** yalnızca kullanıcının bilebileceği, **(B)** kullanıcının dış kaynaktan (ör. Perplexity) bulabileceği — bunlar için hazır araştırma promptu yazılır, **(C)** AI'nın kayıtlardan kendisinin bulabileceği — sorulmaz. Cevaplanmayan bilgi uydurulmaz; çıktıda `Bilinmiyor / Doğrulanmadı` yazılır. Ayrıntı ve şablon: `INFO_GAP_PROTOCOL.md`.
 
 > Not (2026-11-07): Baserow SYS-009 `Girişte Zorunlu Adımlar` alanı "v1.4'ü oku" diyordu; kullanıcı isteğiyle sürüm numarası anmayacak şekilde düzeltildi (artık "SYS-009'u oku; güncel sürüm bu kaydın `Protokol Sürümü` alanındadır"). Başka alan değiştirilmedi. `Çalışma Sırasında Kayıt Kuralları` alanı hâlâ "HAFİF KAYIT v1.4." etiketiyle başlar; bu, kuralın geldiği sürümü gösteren bir etikettir, kasten bırakıldı. Sürüm artık yalnızca `Protokol Sürümü` alanında tutulmalı; başka alana sürüm yazma.
+
+## v1.6 eki — KNW okuma/yazma kuralı (2026-11-22, SYS-004 `CHG-SYS-027`)
+Göreve başlamadan önce Baserow KNW-001'de ilgili konuyu ara; "Kaldığımız Yer" ve "Açık Noktalar" alanlarını oku; KNW-004 kaynaklarını Drive Dosya ID ile bul. Drive/Git erişimi yoksa söyle ve Baserow özetiyle devam et. Yeni satırlara uuid4 yaz. İş bitince KNW-001 "Kaldığımız Yer" ve "Son Yazan AI" alanlarını güncelle. İlişki kaydı resmî olarak KNW-003'tedir; MD `[[atıf]]` ile çelişirse Baserow geçerlidir. Mevcut KNW satırlarını silme. (Ham metin: canlı SYS-009 "Okuma Sırası" alanı.)
+
+## v1.7 ve v1.8 eki — kesilme önleme (Baserow SYS-009 geçerlidir)
+
+- **v1.7 (DEC-SYS-014):** R1 niyet satırı, R2 kısa nabız, R3 üç durum öneki (`Devam ediyor` / `Tamamlandı` / `Kesildi – devralındı`), R4 girişte kesilme kontrolü (salt okunur), R5 kapatma, R6 satırsız kesilme, R7 commit atfı, R8 "var" = yalnız Baserow/Drive/Git main, R9 kullanıcı komutu.
+- **v1.8 (DEC-SYS-015, CHG-SYS-031, 23.11.2026):** R10 sayaçlı nabız — her 5 soru-cevapta ya da büyük çıktıdan sonra SYS-010 `Oturum Durumu` kısa güncellenir, "sıradaki adım" dahil. R11 onaylı kapsamda devam — devralan YZ, kullanıcının daha önce açıkça onayladığı ve geri alınabilir işe devam eder; yapısal, onaysız, yedek ve gerçek ticari veri işlerinde rapor edip onay ister.
+- SYS-010 ID 10, 14, 17 kullanıcı onayıyla `Kesildi – devralındı` yapıldı (CLAUDE-20261123-003).
