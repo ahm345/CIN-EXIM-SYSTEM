@@ -3151,7 +3151,7 @@ window.SCTEST = () => { const f = [], p = scopeSel(); if (!p) return 'proje yok'
   const bp = id => BP().filter(b => b.id === id)[0];
   function cat() {
     const o = [];
-    /* Yerel (gömülü) örnek projeler katalogdan çıkarıldı: yalnız Baserow projeleri listelenir. */
+    TAS.PL.dm.forEach((p, i) => o.push({ k: 'L' + i, sinif: 'Eğitim', src: 'Örnek', ad: p.n, inc: p.inc || '', mal: mk(p.n + ' ' + ((p.em || {}).ad || ''), (p.em || {}).ad), ulke: ul(p.n), fr: Object.values(p.fr || {}).filter(Boolean), pasif: !!p.pasif }));
     BP().forEach(b => { const lp = pr('lot', b.id).map(r => (/-Lot-\d+\s+(.*?)\s*[(]/.exec(V(r, 'Lot Adı')) || [])[1]).filter(Boolean); o.push({ k: 'B' + b.id, sinif: b.gercek ? 'İş' : 'Eğitim', src: 'Baserow', ad: b.ad, inc: b.inc, mal: mk(lp.join(' ') + ' ' + b.ad, lp[0]), ulke: ul(b.ad + ' ' + b.tp), fr: firms(b.id), pasif: !b.aktif }); });
     return o;
   }
@@ -3215,7 +3215,7 @@ window.SCTEST = () => { const f = [], p = scopeSel(); if (!p) return 'proje yok'
     return hd + RV[k](b, S);
   }
   const SCV = ['pkart', 'taraflar', 'surec', 'surec1', 'surec2', 'surec3', 'surec4', 'evrak', 'dosya', 'finans', 'kontrol', 'rapor'];
-  const BUSV = ['operasyon', 'teklif'], isBus = () => { const b = BSEL && bp(BSEL); return !!b && /otob[uü]s|kiral|lease/i.test(b.ad); };
+  const BUSV = ['operasyon', 'teklif'], isBus = () => { const b = BSEL ? bp(BSEL) : null, n = b ? b.ad : ((scopeSel() || {}).n || ''); return /otob[uü]s|kiral|lease/i.test(n); };
   const PORT = ['sys', 'git', 'akis', 'istablo', 'senaryo', 'giris', 'issoz', 'ortak', 'graf', 'sozluk', 'kolon', 'toplam', 'genel', 'projeler', 'canli', 'cikarim', 'departman', 'isdemo', 'tasarim1', 'tasarim2', 'tasarim3', 'tasarim4', 'tasarim5'];
   const selCat = () => cat().filter(c => c.k === curKey())[0];
   const wrongCls = () => { const c = selCat(); return !c || c.sinif !== F.sinif; };
