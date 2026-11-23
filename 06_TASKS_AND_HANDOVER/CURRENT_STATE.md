@@ -9,6 +9,8 @@
 > **Güncelleme notu 3 (2026-11-07, Claude Code; şema dökümü 15:09 +03:00):** Baserow'da **CHAT-001/002/003** tabloları (ID 1306063/64/65) claude.ai'deki Claude tarafından kuruldu (SYS-004 `CHG-SYS-014`, SYS-005 `DEC-SYS-004`, SYS-008 `TASK-CHAT-001/002`); canlı okunarak doğrulandı. Git tarafı (şema 44 tablo, `CHAT_PROTOCOL.md` taslağı, `tools/archive_chat.py`, `09_CHAT_ARCHIVE/`, `handover_check` CHAT kontrolleri) dalda `ai/claude/chat-v0.4.0`; **`main`'e alınmadı**. Komut seti kabul edildi (DEC-SYS-004), protokol metni SYS-009'a **işlenmedi**, platform talimatı **konmadı** (TASK-CHAT-002, kullanıcı).
 > **Güncelleme notu 4 (2026-11-08, Claude Code):** `main` = CHAT sistemi, `10_STANDARTLAR/` ve menü kodları (kullanıcı onayıyla). Menü 0-8 (DEC-SYS-005) kabul edildi, `CHAT_PROTOCOL.md` v0.4 taslak; SYS-009'a **işlenmedi**; platform talimatı **konmadı**; canlı komut testi **yok**. CHAT-001/002 yeni alanları: CHG-SYS-017. CHAT-002 `NOT-002-4` (ChatGPT önerisi değerlendirmesi).
 
+> **Güncelleme notu 5 (2026-11-23, Claude, claude.ai):** Bu dosyadaki sayılar eskidir (44 tablo, SYS-009 v1.5). Canlı Baserow: **48 tablo** (KNW-001..004 eklendi, ID 1337015..1337018), SYS-009 **v1.6**, SYS-004 CHG-SYS-028'e kadar, SYS-005 13 karar (DEC-SYS-013), SYS-008 61 görev, SYS-010 16 oturum. Yeni giriş için `AI_DEVIR.md` ve Baserow KNW-001 "Kaldığımız Yer" kullan. Şema envanteri yenilenmedi (TASK-GIT-SCHEMA-001).
+
 ## Canlı doğrulanan sayılar
 
 | Konu | Değer |
