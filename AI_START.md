@@ -121,3 +121,7 @@ Adımlar ve etki analizi şablonu: `05_AI_PROTOCOLS/FEATURE_REQUEST_WORKFLOW.md`
 | `python3 -I tools/archive_log.py archive …` ve `… verify …` | SYS-010/011 satırlarını Git'e arşivler (`archive`) ve silmeden önce arşivin tam olduğunu doğrular (`verify`); **Baserow'dan silmez** |
 
 Skill'ler (`.claude/skills/`): `cin-exim` (başlangıç/çalışma/devir), `cin-exim-schema-refresh` (şema belgelerini yenileme), `cin-exim-handover-check` (devir doğrulama).
+
+## 4. Devir ve kesilme önleme dosyaları
+
+Kaldığın yerden devam için `06_TASKS_AND_HANDOVER/AI_DEVIR.md` (güncel durum notu), `05_AI_PROTOCOLS/AI_PLATFORM_TALIMATI.md` (ChatGPT/Gemini'ye konacak talimat), `05_AI_PROTOCOLS/AI_DEVIR_TESTI.md` (3 adımlı devir testi), `05_AI_PROTOCOLS/YEDEK_KONTROL_LISTESI.md` (yedek). Kesilme önleme kuralları (R1–R11) Baserow SYS-009 `Çalışma Sırasında Kayıt Kuralları` alanındadır.

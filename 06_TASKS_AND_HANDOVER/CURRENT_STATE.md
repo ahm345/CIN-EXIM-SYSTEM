@@ -18,7 +18,7 @@
 | Veritabanı | `baserow`, ID 263856 |
 | Tablo | 44 (23 operasyonel + 6 senaryo + 11 SYS + 3 CHAT + 1 eski `Table`) |
 | Alan / ilişki alanı / formül | 896 / 223 / 91 (`02_DATABASE_SCHEMA/INVENTORY.json`, hash `5f2d986ef22c`; 2026-11-08 CHAT-001'e `Üst Konu Kodu`, `Bölge`, CHAT-002'ye `Fikir Durumu` ve Not Türü `Fikir` eklendi, CHG-SYS-017) |
-| SYS-009 protokol | v1.5 (canlı doğrulandı 2026-11-07; `Girişte Zorunlu Adımlar` alanı sürüm numarası anmayacak şekilde düzeltildi, bkz. `PROTOCOL_MIRROR.md`) |
+| SYS-009 protokol | v1.8 (canlı 2026-11-23; önceki doğrulama 2026-11-07; `Girişte Zorunlu Adımlar` alanı sürüm numarası anmayacak şekilde düzeltildi, bkz. `PROTOCOL_MIRROR.md`) |
 | SYS-010 oturum kaydı | 10 (ID 10 = `CLAUDE-20261107-002`, claude.ai, "Devam ediyor"; ID 4–7 2026-11-07 06:51'de kullanıcı onayıyla "Kapatıldı – iş TAMAMLANMADI" yapıldı; ID 9 = `CLAUDE-20261107-001`) |
 | SYS-008 görev | 15 |
 | Makineler / Belgeler satır | 57 / 52 |

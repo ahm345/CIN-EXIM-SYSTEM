@@ -1,6 +1,6 @@
 # SYS-009 Protokol Yansıması
 
-> **Bu dosya bir yansımadır, kaynak değildir.** Protokolün tek kaynağı Baserow `SYS-009` (`AI-BOOT-EXIT-001`) kaydıdır. Çelişki olursa SYS-009 geçerlidir. Yansıma, canlı SYS-009 kaydından çıkarılmıştır (v1.4 çıkarımı 2026-11-06 salt okunur; **v1.5 eki 2026-11-06 aynı gün SYS-009'a yazıldı, SYS-004 `CHG-SYS-013`**). Güncel protokol sürümü **1.6** (2026-11-22, KNW okuma/yazma kuralı; bu dosyanın v1.5'e kadar olan gövdesi aşağıdadır, v1.6 eki en sonda). Sürüm değiştiyse bu dosya eskidir: SYS-009'u oku ve bu dosyayı güncelle.
+> **Bu dosya bir yansımadır, kaynak değildir.** Protokolün tek kaynağı Baserow `SYS-009` (`AI-BOOT-EXIT-001`) kaydıdır. Çelişki olursa SYS-009 geçerlidir. Yansıma, canlı SYS-009 kaydından çıkarılmıştır (v1.4 çıkarımı 2026-11-06 salt okunur; **v1.5 eki 2026-11-06 aynı gün SYS-009'a yazıldı, SYS-004 `CHG-SYS-013`**). Güncel protokol sürümü **1.8** (2026-11-22, KNW okuma/yazma kuralı; bu dosyanın v1.5'e kadar olan gövdesi aşağıdadır, v1.6 eki en sonda). Sürüm değiştiyse bu dosya eskidir: SYS-009'u oku ve bu dosyayı güncelle.
 
 **Protokol adı:** CIN EXIM AI Giriş, Çalışma, Kayıt ve Devir Protokolü  
 **Durum (kayıttaki):** Kullanıcı onayladı – Baserow'a uygulandı; platformlar arası test bekliyor
